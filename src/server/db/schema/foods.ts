@@ -137,10 +137,11 @@ export const foods = pgTable(
      * Weighted full-text document, maintained by Postgres (GENERATED … STORED):
      * A = name, B = brand, C = category. Built from the pre-normalized columns with the
      * `simple` config (no stemming, no stop words) because `unaccent()` is not IMMUTABLE and
-     * names are mixed German/English. Never written by the app.
+     * names are mixed German/English. `category` has no normalized twin, so it is folded
+     * inline with lower()/replace()/translate() (all IMMUTABLE). Never written by the app.
      */
     searchVector: tsvector("search_vector").generatedAlwaysAs(
-      sql`setweight(to_tsvector('simple'::regconfig, coalesce(name_normalized, '')), 'A') || setweight(to_tsvector('simple'::regconfig, coalesce(brand_normalized, '')), 'B') || setweight(to_tsvector('simple'::regconfig, coalesce(category, '')), 'C')`,
+      sql`setweight(to_tsvector('simple'::regconfig, coalesce(name_normalized, '')), 'A') || setweight(to_tsvector('simple'::regconfig, coalesce(brand_normalized, '')), 'B') || setweight(to_tsvector('simple'::regconfig, translate(replace(lower(coalesce(category, '')), 'ß', 'ss'), 'àáâãäåçèéêëìíîïñòóôõöøùúûüýÿ', 'aaaaaaceeeeiiiinoooooouuuuyy')), 'C')`,
     ),
     ...timestamps,
   },
@@ -158,9 +159,13 @@ export const foods = pgTable(
     index("foods_owner_idx")
       .on(t.ownerUserId, t.nameNormalized)
       .where(sql`${t.ownerUserId} is not null`),
-    /** "Popular foods" browsing and the popularity tie-breaker over public foods. */
+    /**
+     * "Popular foods" browsing and the top-N-by-popularity candidate branches of search.
+     * Deliberately ASC: a backward scan yields `ORDER BY popularity DESC` (NULLS FIRST);
+     * a `DESC NULLS LAST` index (drizzle's `.desc()`) would NOT match that ordering.
+     */
     index("foods_popularity_idx")
-      .on(t.popularity.desc())
+      .on(t.popularity)
       .where(PUBLIC_FOODS_PREDICATE),
 
     // --- Search (public foods only, see PUBLIC_FOODS_PREDICATE) ---------------------------
@@ -308,8 +313,9 @@ export const foodUsage = pgTable(
   },
   (t) => [
     primaryKey({ columns: [t.userId, t.foodId] }),
-    index("food_usage_recent_idx").on(t.userId, t.lastUsedAt.desc()),
-    index("food_usage_frequent_idx").on(t.userId, t.useCount.desc()),
+    /** ASC on purpose: backward scan serves `ORDER BY last_used_at DESC` / `use_count DESC`. */
+    index("food_usage_recent_idx").on(t.userId, t.lastUsedAt),
+    index("food_usage_frequent_idx").on(t.userId, t.useCount),
     /** FK support for food / serving deletes. */
     index("food_usage_food_idx").on(t.foodId),
     index("food_usage_last_serving_idx")

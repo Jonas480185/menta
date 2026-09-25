@@ -106,8 +106,7 @@ CREATE TABLE "daily_nutrition" (
 	CONSTRAINT "daily_nutrition_user_id_date_pk" PRIMARY KEY("user_id","date"),
 	CONSTRAINT "daily_nutrition_target_calories_positive" CHECK ("daily_nutrition"."target_calories" > 0),
 	CONSTRAINT "daily_nutrition_targets_non_negative" CHECK ("daily_nutrition"."target_protein_g" >= 0 and "daily_nutrition"."target_carbs_g" >= 0 and "daily_nutrition"."target_fat_g" >= 0
-        and coalesce("daily_nutrition"."target_fiber_g", 0) >= 0),
-	CONSTRAINT "daily_nutrition_override_has_profile" CHECK (not "daily_nutrition"."profile_overridden" or "daily_nutrition"."goal_profile_id" is not null)
+        and coalesce("daily_nutrition"."target_fiber_g", 0) >= 0)
 );
 --> statement-breakpoint
 CREATE TABLE "goal_profiles" (
@@ -232,7 +231,7 @@ CREATE TABLE "foods" (
 	"popularity" integer DEFAULT 0 NOT NULL,
 	"is_archived" boolean DEFAULT false NOT NULL,
 	"fetched_at" timestamp with time zone,
-	"search_vector" "tsvector" GENERATED ALWAYS AS (setweight(to_tsvector('simple'::regconfig, coalesce(name_normalized, '')), 'A') || setweight(to_tsvector('simple'::regconfig, coalesce(brand_normalized, '')), 'B') || setweight(to_tsvector('simple'::regconfig, coalesce(category, '')), 'C')) STORED,
+	"search_vector" "tsvector" GENERATED ALWAYS AS (setweight(to_tsvector('simple'::regconfig, coalesce(name_normalized, '')), 'A') || setweight(to_tsvector('simple'::regconfig, coalesce(brand_normalized, '')), 'B') || setweight(to_tsvector('simple'::regconfig, translate(replace(lower(coalesce(category, '')), 'ß', 'ss'), 'àáâãäåçèéêëìíîïñòóôõöøùúûüýÿ', 'aaaaaaceeeeiiiinoooooouuuuyy')), 'C')) STORED,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL,
 	CONSTRAINT "foods_name_not_blank" CHECK (length(trim("foods"."name")) > 0 and length("foods"."name_normalized") > 0),
@@ -411,10 +410,10 @@ ALTER TABLE "meal_entries" ADD CONSTRAINT "meal_entries_user_id_user_id_fk" FORE
 ALTER TABLE "meal_entries" ADD CONSTRAINT "meal_entries_food_id_foods_id_fk" FOREIGN KEY ("food_id") REFERENCES "public"."foods"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "meal_entries" ADD CONSTRAINT "meal_entries_recipe_id_recipes_id_fk" FOREIGN KEY ("recipe_id") REFERENCES "public"."recipes"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "meal_entries" ADD CONSTRAINT "meal_entries_serving_id_food_servings_id_fk" FOREIGN KEY ("serving_id") REFERENCES "public"."food_servings"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "meal_entries" ADD CONSTRAINT "meal_entries_meal_owner_fk" FOREIGN KEY ("meal_id","user_id") REFERENCES "public"."meals"("id","user_id") ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "meal_entries" ADD CONSTRAINT "meal_entries_meal_owner_fk" FOREIGN KEY ("meal_id","user_id") REFERENCES "public"."meals"("id","user_id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "meals" ADD CONSTRAINT "meals_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "recipe_ingredients" ADD CONSTRAINT "recipe_ingredients_recipe_id_recipes_id_fk" FOREIGN KEY ("recipe_id") REFERENCES "public"."recipes"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "recipe_ingredients" ADD CONSTRAINT "recipe_ingredients_food_id_foods_id_fk" FOREIGN KEY ("food_id") REFERENCES "public"."foods"("id") ON DELETE restrict ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "recipe_ingredients" ADD CONSTRAINT "recipe_ingredients_food_id_foods_id_fk" FOREIGN KEY ("food_id") REFERENCES "public"."foods"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "recipe_ingredients" ADD CONSTRAINT "recipe_ingredients_serving_id_food_servings_id_fk" FOREIGN KEY ("serving_id") REFERENCES "public"."food_servings"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "recipes" ADD CONSTRAINT "recipes_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "recipes" ADD CONSTRAINT "recipes_food_id_foods_id_fk" FOREIGN KEY ("food_id") REFERENCES "public"."foods"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
@@ -434,15 +433,15 @@ CREATE INDEX "favorite_foods_food_idx" ON "favorite_foods" USING btree ("food_id
 CREATE INDEX "favorite_foods_user_created_idx" ON "favorite_foods" USING btree ("user_id","created_at");--> statement-breakpoint
 CREATE INDEX "food_brands_name_trgm_idx" ON "food_brands" USING gin ("name_normalized" gin_trgm_ops);--> statement-breakpoint
 CREATE INDEX "food_servings_food_idx" ON "food_servings" USING btree ("food_id");--> statement-breakpoint
-CREATE INDEX "food_usage_recent_idx" ON "food_usage" USING btree ("user_id","last_used_at" DESC NULLS LAST);--> statement-breakpoint
-CREATE INDEX "food_usage_frequent_idx" ON "food_usage" USING btree ("user_id","use_count" DESC NULLS LAST);--> statement-breakpoint
+CREATE INDEX "food_usage_recent_idx" ON "food_usage" USING btree ("user_id","last_used_at");--> statement-breakpoint
+CREATE INDEX "food_usage_frequent_idx" ON "food_usage" USING btree ("user_id","use_count");--> statement-breakpoint
 CREATE INDEX "food_usage_food_idx" ON "food_usage" USING btree ("food_id");--> statement-breakpoint
 CREATE INDEX "food_usage_last_serving_idx" ON "food_usage" USING btree ("last_serving_id") WHERE "food_usage"."last_serving_id" is not null;--> statement-breakpoint
 CREATE UNIQUE INDEX "foods_source_source_id_uq" ON "foods" USING btree ("source","source_id") WHERE "foods"."source_id" is not null;--> statement-breakpoint
 CREATE INDEX "foods_barcode_idx" ON "foods" USING btree ("barcode") WHERE "foods"."barcode" is not null;--> statement-breakpoint
 CREATE INDEX "foods_brand_idx" ON "foods" USING btree ("brand_id") WHERE "foods"."brand_id" is not null;--> statement-breakpoint
 CREATE INDEX "foods_owner_idx" ON "foods" USING btree ("owner_user_id","name_normalized") WHERE "foods"."owner_user_id" is not null;--> statement-breakpoint
-CREATE INDEX "foods_popularity_idx" ON "foods" USING btree ("popularity" DESC NULLS LAST) WHERE visibility = 'public' AND NOT is_archived;--> statement-breakpoint
+CREATE INDEX "foods_popularity_idx" ON "foods" USING btree ("popularity") WHERE visibility = 'public' AND NOT is_archived;--> statement-breakpoint
 CREATE INDEX "foods_name_trgm_idx" ON "foods" USING gin ("name_normalized" gin_trgm_ops) WHERE visibility = 'public' AND NOT is_archived;--> statement-breakpoint
 CREATE INDEX "foods_brand_trgm_idx" ON "foods" USING gin ("brand_normalized" gin_trgm_ops) WHERE visibility = 'public' AND NOT is_archived;--> statement-breakpoint
 CREATE INDEX "foods_search_vector_idx" ON "foods" USING gin ("search_vector") WHERE visibility = 'public' AND NOT is_archived;--> statement-breakpoint

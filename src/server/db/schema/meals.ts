@@ -70,9 +70,11 @@ export const mealEntries = pgTable(
       .references(() => user.id, { onDelete: "cascade" }),
     date: date("date", { mode: "string" }).notNull(),
     /**
-     * RESTRICT: meal slots are archived, never deleted while they hold entries.
+     * Restricted: a meal slot can't be deleted while it holds entries (slots are archived).
      * Enforced by the composite FK `meal_entries_meal_owner_fk` (meal_id, user_id) below,
-     * which additionally guarantees the meal belongs to the same user.
+     * which additionally guarantees the meal belongs to the same user. NO ACTION instead of
+     * RESTRICT so the check runs at end of statement – otherwise the user-delete cascade
+     * (meals and entries in one statement) fails with 23001.
      */
     mealId: uuid("meal_id").notNull(),
     foodId: uuid("food_id").references(() => foods.id, {
@@ -132,7 +134,7 @@ export const mealEntries = pgTable(
       name: "meal_entries_meal_owner_fk",
       columns: [t.mealId, t.userId],
       foreignColumns: [meals.id, meals.userId],
-    }).onDelete("restrict"),
+    }).onDelete("no action"),
     check("meal_entries_quantity_positive", sql`${t.quantity} > 0`),
     check(
       "meal_entries_grams_non_negative",

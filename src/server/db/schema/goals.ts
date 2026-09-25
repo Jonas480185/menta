@@ -119,7 +119,10 @@ export const goalProfiles = pgTable(
  * - Row is upserted when the first entry of a day is logged or a profile is assigned.
  * - For today/future dates targets are refreshed from the resolved goal profile when
  *   goals change; past days keep their snapshot.
- * - `profileOverridden` = user explicitly chose a profile for this date.
+ * - `profileOverridden` = user explicitly chose a profile for this date. If that profile is
+ *   deleted later, goal_profile_id becomes null (targets stay frozen); readers treat
+ *   "overridden but no profile" like "not overridden". Deliberately NOT a CHECK constraint –
+ *   it would make the ON DELETE SET NULL fail.
  */
 export const dailyNutrition = pgTable(
   "daily_nutrition",
@@ -156,11 +159,6 @@ export const dailyNutrition = pgTable(
       "daily_nutrition_targets_non_negative",
       sql`${t.targetProteinG} >= 0 and ${t.targetCarbsG} >= 0 and ${t.targetFatG} >= 0
         and coalesce(${t.targetFiberG}, 0) >= 0`,
-    ),
-    /** An override without a profile is meaningless. */
-    check(
-      "daily_nutrition_override_has_profile",
-      sql`not ${t.profileOverridden} or ${t.goalProfileId} is not null`,
     ),
   ],
 );
