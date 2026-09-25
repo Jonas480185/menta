@@ -121,8 +121,8 @@ export const menuItem = [
   "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
 ].join(" ");
 
-/** Modal scrim: dark in both themes (≈40–75 % darkening), subtle blur. */
+/** Modal scrim: dark in both themes (≈50–80 % darkening), subtle blur. */
 export const overlayScrim = [
-  "fixed inset-0 z-50 bg-foreground/40 backdrop-blur-[2px] dark:bg-background/75",
+  "fixed inset-0 z-50 bg-foreground/50 backdrop-blur-[2px] dark:bg-background/80",
   "transition-opacity duration-200 starting:opacity-0 motion-reduce:transition-none",
 ].join(" ");
