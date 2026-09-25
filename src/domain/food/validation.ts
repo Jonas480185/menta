@@ -64,6 +64,8 @@ const MISSING_CORE_FLAGS = ["missing_kcal", "missing_protein", "missing_carbs", 
 /** Tolerances (documented in docs/architecture/food-data-strategy.md). */
 export const VALIDATION_LIMITS = {
   maxKcalPer100: 900,
+  /** Rounding allowance on top of 900 kcal (USDA computes pure fats with 9.02 kcal/g → 902). */
+  kcalRoundingTolerance: 0.01,
   /** protein + carbs + fat per 100 g; small allowance for label rounding. */
   maxMacroSumPer100g: 102,
   /** per 100 ml: dense liquids (syrups, honey) can exceed 100 g per 100 ml. */
@@ -162,7 +164,7 @@ export function validateNutrients(input: NutrientInput, opts: ValidateOptions = 
     errors.push({ code: "no_nutrition_data", message: "Keine Nährwerte vorhanden." });
   }
 
-  if (kcal !== null && kcal > VALIDATION_LIMITS.maxKcalPer100) {
+  if (kcal !== null && kcal > VALIDATION_LIMITS.maxKcalPer100 * (1 + VALIDATION_LIMITS.kcalRoundingTolerance)) {
     errors.push({
       code: "kcal_exceeds_max",
       field: "kcal",

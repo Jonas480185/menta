@@ -27,8 +27,10 @@ describe("validateNutrients – valid data", () => {
     expect(validateNutrients(oats, { trusted: true }).quality).toBe("verified");
   });
 
-  it("accepts pure oil at 900 kcal and zero-calorie water", () => {
+  it("accepts pure oil at 900 kcal (USDA: 902) and zero-calorie water", () => {
     expect(validateNutrients({ kcal: 900, proteinG: 0, carbsG: 0, fatG: 100 }).valid).toBe(true);
+    expect(validateNutrients({ kcal: 902, proteinG: 0, carbsG: 0, fatG: 100 }).valid).toBe(true);
+    expect(validateNutrients({ kcal: 910, proteinG: 0, carbsG: 0, fatG: 100 }).valid).toBe(false);
     expect(validateNutrients({ kcal: 0, proteinG: 0, carbsG: 0, fatG: 0 }).quality).toBe("complete");
   });
 

@@ -205,7 +205,12 @@ export function mapUsdaRecord(rec: UsdaFoodRecord): UsdaMapResult {
   }
   const proteinG = get(n, N.protein);
   const fatG = get(n, N.fat, N.fatNlea);
-  const carbsG = get(n, N.carbs, N.carbsBySummation);
+  let carbsG = get(n, N.carbs, N.carbsBySummation);
+  // "Carbohydrate, by difference" can come out slightly negative for meats (analytical noise).
+  if (carbsG !== null && carbsG < 0 && carbsG > -2) {
+    carbsG = 0;
+    flags.push("carbs_clamped");
+  }
   if (kcal === null && proteinG === null && fatG === null && carbsG === null) {
     return { ok: false, reason: "no_nutrition_data" };
   }
