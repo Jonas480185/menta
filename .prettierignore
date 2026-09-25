@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+build
+coverage
+.data
+data
+drizzle
+pnpm-lock.yaml
+next-env.d.ts
+playwright-report
+test-results
+public

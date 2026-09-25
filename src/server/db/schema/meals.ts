@@ -1,12 +1,16 @@
+import { sql } from "drizzle-orm";
 import {
   boolean,
+  check,
   date,
   doublePrecision,
+  foreignKey,
   index,
   integer,
   pgTable,
   text,
   timestamp,
+  unique,
   uuid,
 } from "drizzle-orm/pg-core";
 import { timestamps } from "./_shared";
@@ -36,7 +40,15 @@ export const meals = pgTable(
     isArchived: boolean("is_archived").notNull().default(false),
     ...timestamps,
   },
-  (t) => [index("meals_user_idx").on(t.userId)],
+  (t) => [
+    index("meals_user_idx").on(t.userId, t.sortOrder),
+    /** Target of the composite FK meal_entries(meal_id, user_id) – an entry can only live in its owner's meal. */
+    unique("meals_id_user_uq").on(t.id, t.userId),
+    check(
+      "meals_default_time_format",
+      sql`${t.defaultTime} is null or ${t.defaultTime} ~ '^([01][0-9]|2[0-3]):[0-5][0-9]$'`,
+    ),
+  ],
 );
 
 /**
@@ -57,13 +69,24 @@ export const mealEntries = pgTable(
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
     date: date("date", { mode: "string" }).notNull(),
-    mealId: uuid("meal_id")
-      .notNull()
-      .references(() => meals.id, { onDelete: "restrict" }),
-    foodId: uuid("food_id").references(() => foods.id, { onDelete: "set null" }),
+    /**
+     * Restricted: a meal slot can't be deleted while it holds entries (slots are archived).
+     * Enforced by the composite FK `meal_entries_meal_owner_fk` (meal_id, user_id) below,
+     * which additionally guarantees the meal belongs to the same user. NO ACTION instead of
+     * RESTRICT so the check runs at end of statement – otherwise the user-delete cascade
+     * (meals and entries in one statement) fails with 23001.
+     */
+    mealId: uuid("meal_id").notNull(),
+    foodId: uuid("food_id").references(() => foods.id, {
+      onDelete: "set null",
+    }),
     /** Set when the logged food is a recipe (foods.source = recipe). */
-    recipeId: uuid("recipe_id").references(() => recipes.id, { onDelete: "set null" }),
-    servingId: uuid("serving_id").references(() => foodServings.id, { onDelete: "set null" }),
+    recipeId: uuid("recipe_id").references(() => recipes.id, {
+      onDelete: "set null",
+    }),
+    servingId: uuid("serving_id").references(() => foodServings.id, {
+      onDelete: "set null",
+    }),
 
     /** Snapshots for display even if the food is deleted later. */
     foodName: text("food_name").notNull(),
@@ -86,12 +109,46 @@ export const mealEntries = pgTable(
     sodiumMg: doublePrecision("sodium_mg"),
 
     sortOrder: integer("sort_order").notNull().default(0),
-    loggedAt: timestamp("logged_at", { withTimezone: true }).notNull().defaultNow(),
+    loggedAt: timestamp("logged_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
     ...timestamps,
   },
   (t) => [
+    /** Diary of a day, daily totals, analytics ranges (user_id = ? AND date BETWEEN ? AND ?). */
     index("meal_entries_user_date_idx").on(t.userId, t.date),
+    /** "How often/when did I eat X" + food-usage backfill. */
     index("meal_entries_user_food_idx").on(t.userId, t.foodId),
     index("meal_entries_meal_idx").on(t.mealId),
+    /** FK support: deleting a food / serving / recipe sets these to null without a full scan. */
+    index("meal_entries_food_idx")
+      .on(t.foodId)
+      .where(sql`${t.foodId} is not null`),
+    index("meal_entries_serving_idx")
+      .on(t.servingId)
+      .where(sql`${t.servingId} is not null`),
+    index("meal_entries_recipe_idx")
+      .on(t.recipeId)
+      .where(sql`${t.recipeId} is not null`),
+    foreignKey({
+      name: "meal_entries_meal_owner_fk",
+      columns: [t.mealId, t.userId],
+      foreignColumns: [meals.id, meals.userId],
+    }).onDelete("no action"),
+    check("meal_entries_quantity_positive", sql`${t.quantity} > 0`),
+    check(
+      "meal_entries_grams_non_negative",
+      sql`${t.grams} >= 0 and ${t.servingGrams} >= 0`,
+    ),
+    check(
+      "meal_entries_nutrients_non_negative",
+      sql`${t.kcal} >= 0 and ${t.proteinG} >= 0 and ${t.carbsG} >= 0 and ${t.fatG} >= 0
+        and coalesce(${t.fiberG}, 0) >= 0 and coalesce(${t.sugarG}, 0) >= 0
+        and coalesce(${t.saturatedFatG}, 0) >= 0 and coalesce(${t.sodiumMg}, 0) >= 0`,
+    ),
+    check(
+      "meal_entries_food_name_not_blank",
+      sql`length(trim(${t.foodName})) > 0`,
+    ),
   ],
 );
