@@ -135,6 +135,9 @@ describe("validateNutrients – soft flags", () => {
     expect(r.nutrients.kcal).toBe(165);
     expect(r.flags).toContain("energy_derived");
     expect(r.quality).toBe("complete");
+    const placeholder = validateNutrients({ kcal: 0, proteinG: 10, carbsG: 20, fatG: 5 }, { existingFlags: ["missing_kcal"] });
+    expect(placeholder.nutrients.kcal).toBe(165);
+    expect(placeholder.flags).not.toContain("missing_kcal");
   });
 
   it("marks kcal missing when macros are incomplete", () => {

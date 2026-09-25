@@ -185,6 +185,7 @@ export function validateNutrients(input: NutrientInput, opts: ValidateOptions = 
     if (macrosKnown) {
       finalKcal = round(kcalFromMacros({ proteinG, carbsG, fatG, alcoholG }), 1);
       flags.add("energy_derived");
+      flags.delete("missing_kcal");
     } else {
       flags.add("missing_kcal");
     }
