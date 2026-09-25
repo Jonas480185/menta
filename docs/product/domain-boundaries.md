@@ -64,8 +64,8 @@ Daily Engine (Logging/Diary) anhand des Profil-Flags.
   Serie, letzte Interaktionen), Ausgabe = eine Nachricht oder `null`. `mascot_interactions` protokolliert
   `shown` / `dismissed` / `action_taken`.
 
-**Analytics** – schreibt nichts. Liest über die öffentlichen Services von Logging (Tagessummen je Zeitraum),
-Profile & Goals (Ziele je Tag via `daily_nutrition`), Body (Trend), Activity. Eigene SQL-Aggregationen nur als
+**Analytics** – schreibt nichts. Liest über die öffentlichen Services von Logging (Tagessummen und eingefrorene
+Tagesziele aus `daily_nutrition` je Zeitraum), Profile & Goals (aktuelles Ziel), Body (Trend), Activity. Eigene SQL-Aggregationen nur als
 Read-Model innerhalb von `services/analytics`, niemals Schreibzugriffe.
 
 ## 3. Erlaubte Abhängigkeiten
@@ -97,7 +97,7 @@ Pfeil = „darf aufrufen / lesen“. Alles, was nicht eingezeichnet ist, ist **v
 | Verboten | Stattdessen |
 |---|---|
 | Catalog → Logging (z. B. „Anzahl Logs“ in der Suche lesen) | `food_usage` ist Catalog-Eigentum und wird über `recordFoodUsage` befüllt |
-| Logging → Engagement (Achievement direkt nach dem Loggen auslösen) | Server Action orchestriert: `logFood()` → `evaluateAchievements()` |
+| Logging → Engagement (Achievement direkt nach dem Loggen auslösen) | Server Action orchestriert: `addMealEntry()` → `evaluateAchievements()` |
 | Irgendein Kontext → Analytics | Analytics ist Blatt; Dashboard nutzt Logging/Body-Services direkt |
 | Profile & Goals → Logging | Zieländerung aktualisiert `daily_nutrition` von heute/Zukunft über einen Logging-Service, aufgerufen von der Server Action |
 | Direkter Tabellenzugriff auf fremde Tabellen im Service | Öffentliche Service-Funktion des Owner-Kontexts aufrufen |
