@@ -31,7 +31,9 @@ describe("parseEnv", () => {
   });
 
   it("rejects non-postgres DATABASE_URLs with a clear message", () => {
-    expect(() => parseEnv({ DATABASE_URL: "mysql://localhost/db" })).toThrow(/DATABASE_URL: must start with postgres/);
+    expect(() => parseEnv({ DATABASE_URL: "mysql://localhost/db" })).toThrow(
+      /DATABASE_URL: must start with postgres/,
+    );
   });
 
   it.each([
@@ -43,7 +45,9 @@ describe("parseEnv", () => {
     ["1", true],
     ["yes", true],
   ])("parses FOOD_EXTERNAL_PROVIDERS_ENABLED=%s", (value, expected) => {
-    expect(parseEnv({ FOOD_EXTERNAL_PROVIDERS_ENABLED: value }).FOOD_EXTERNAL_PROVIDERS_ENABLED).toBe(expected);
+    expect(parseEnv({ FOOD_EXTERNAL_PROVIDERS_ENABLED: value }).FOOD_EXTERNAL_PROVIDERS_ENABLED).toBe(
+      expected,
+    );
   });
 
   it("rejects invalid booleans", () => {

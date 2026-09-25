@@ -99,7 +99,9 @@ function formatPretty(time: Date, level: LogLevel, msg: string, fields: LogField
     }
     return `${k}=${typeof v === "string" ? v : safeStringify(v)}`;
   });
-  return [head, ...(kv.length ? [kv.join(" ")] : [])].join(" ") + (stacks.length ? `\n${stacks.join("\n")}` : "");
+  return (
+    [head, ...(kv.length ? [kv.join(" ")] : [])].join(" ") + (stacks.length ? `\n${stacks.join("\n")}` : "")
+  );
 }
 
 const consoleWrite = (level: LogLevel, line: string) => {

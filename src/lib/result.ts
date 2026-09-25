@@ -15,7 +15,11 @@ export type ActionResult<T = void> = { ok: true; data: T } | { ok: false; error:
 export const ok = <T>(data: T): ActionResult<T> => ({ ok: true, data });
 
 /** Explicit failure without throwing (e.g. early return in an action). */
-export const fail = (code: AppErrorCode, message: string, fieldErrors?: FieldErrors): ActionResult<never> => ({
+export const fail = (
+  code: AppErrorCode,
+  message: string,
+  fieldErrors?: FieldErrors,
+): ActionResult<never> => ({
   ok: false,
   error: fieldErrors ? { code, message, fieldErrors } : { code, message },
 });
@@ -61,9 +65,12 @@ function fromPostgresError(err: unknown): AppError | undefined {
   // drizzle wraps driver errors (DrizzleQueryError) – the SQLSTATE lives on the cause.
   for (let e: unknown = err, depth = 0; e && typeof e === "object" && depth < 4; depth++) {
     const code = (e as { code?: unknown }).code;
-    if (code === "23505") return new AppError("CONFLICT", "Dieser Eintrag existiert bereits.", undefined, { cause: err });
+    if (code === "23505")
+      return new AppError("CONFLICT", "Dieser Eintrag existiert bereits.", undefined, { cause: err });
     if (code === "23503")
-      return new AppError("VALIDATION", "Ein verknüpfter Eintrag existiert nicht (mehr).", undefined, { cause: err });
+      return new AppError("VALIDATION", "Ein verknüpfter Eintrag existiert nicht (mehr).", undefined, {
+        cause: err,
+      });
     if (code === "22P02") return new AppError("VALIDATION", "Ungültige Eingabe.", undefined, { cause: err });
     e = (e as { cause?: unknown }).cause;
   }

@@ -55,5 +55,6 @@ export const validationError = (fieldErrors: FieldErrors, message = "Bitte Einga
   new AppError("VALIDATION", message, fieldErrors);
 export const rateLimited = () =>
   new AppError("RATE_LIMITED", "Zu viele Anfragen – bitte warte einen Moment und versuche es erneut.");
-export const externalError = (message = "Der Dienst ist gerade nicht erreichbar. Bitte später erneut versuchen.") =>
-  new AppError("EXTERNAL", message);
+export const externalError = (
+  message = "Der Dienst ist gerade nicht erreichbar. Bitte später erneut versuchen.",
+) => new AppError("EXTERNAL", message);

@@ -21,16 +21,14 @@ export const LOG_LEVELS = ["debug", "info", "warn", "error", "silent"] as const;
 const DEV_AUTH_SECRET = "dev-only-insecure-secret-never-use-in-production";
 const PLACEHOLDER_SECRETS = new Set(["change-me-to-a-long-random-string", DEV_AUTH_SECRET]);
 
-const booleanString = z
-  .union([z.boolean(), z.string()])
-  .transform((value, ctx) => {
-    if (typeof value === "boolean") return value;
-    const v = value.trim().toLowerCase();
-    if (["true", "1", "yes", "on"].includes(v)) return true;
-    if (["false", "0", "no", "off"].includes(v)) return false;
-    ctx.addIssue({ code: "custom", message: `expected true/false, got "${value}"` });
-    return z.NEVER;
-  });
+const booleanString = z.union([z.boolean(), z.string()]).transform((value, ctx) => {
+  if (typeof value === "boolean") return value;
+  const v = value.trim().toLowerCase();
+  if (["true", "1", "yes", "on"].includes(v)) return true;
+  if (["false", "0", "no", "off"].includes(v)) return false;
+  ctx.addIssue({ code: "custom", message: `expected true/false, got "${value}"` });
+  return z.NEVER;
+});
 
 const envSchema = z
   .object({
@@ -96,7 +94,9 @@ export type ServerEnv = z.output<typeof envSchema>;
 
 export class EnvError extends Error {
   constructor(public readonly issues: string[]) {
-    super(`Invalid environment configuration:\n${issues.map((i) => `  • ${i}`).join("\n")}\nSee .env.example.`);
+    super(
+      `Invalid environment configuration:\n${issues.map((i) => `  • ${i}`).join("\n")}\nSee .env.example.`,
+    );
     this.name = "EnvError";
   }
 }

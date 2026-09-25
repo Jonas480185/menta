@@ -145,7 +145,10 @@ describe("runAction", () => {
       runAction(async () => {
         throw conflict();
       }),
-    ).resolves.toEqual({ ok: false, error: { code: "CONFLICT", message: "Dieser Eintrag existiert bereits." } });
+    ).resolves.toEqual({
+      ok: false,
+      error: { code: "CONFLICT", message: "Dieser Eintrag existiert bereits." },
+    });
   });
 
   it("maps schema.parse failures", async () => {

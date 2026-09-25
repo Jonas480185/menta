@@ -96,7 +96,10 @@ export function formatLiters(ml: Num, options: { maxFractionDigits?: number } = 
 
 /** Body weight, always one decimal: 82.44 → "82,4 kg" · 82 → "82,0 kg". */
 export function formatWeightKg(value: Num, options: { signed?: boolean } = {}): string {
-  return withUnit(formatNumber(value, { minFractionDigits: 1, maxFractionDigits: 1, signed: options.signed }), "kg");
+  return withUnit(
+    formatNumber(value, { minFractionDigits: 1, maxFractionDigits: 1, signed: options.signed }),
+    "kg",
+  );
 }
 
 /** Ratio (0–1) as percent: 0.25 → "25 %" · 1.234 → "123 %". */
@@ -123,7 +126,20 @@ const MONTHS_LONG = [
   "November",
   "Dezember",
 ];
-const MONTHS_SHORT = ["Jan.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sep.", "Okt.", "Nov.", "Dez."];
+const MONTHS_SHORT = [
+  "Jan.",
+  "Feb.",
+  "März",
+  "Apr.",
+  "Mai",
+  "Juni",
+  "Juli",
+  "Aug.",
+  "Sep.",
+  "Okt.",
+  "Nov.",
+  "Dez.",
+];
 
 function parts(date: IsoDate) {
   const d = date.slice(0, 10);
@@ -177,7 +193,10 @@ export function formatRelativeDay(date: IsoDate, today: IsoDate): string {
  */
 export function parseDecimalInput(input: string | null | undefined): number | null {
   if (input == null) return null;
-  let s = input.trim().replace(/[\s\u00A0\u202F']/g, "").replace(/^[\u2212\u2013]/, "-");
+  let s = input
+    .trim()
+    .replace(/[\s\u00A0\u202F']/g, "")
+    .replace(/^[\u2212\u2013]/, "-");
   if (s === "" || s === "-" || s === "+") return null;
 
   const sign = /^[+-]/.test(s) ? s[0] : "";

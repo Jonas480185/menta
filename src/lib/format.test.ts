@@ -179,7 +179,9 @@ describe("date formatters", () => {
   });
 
   it("all 12 months are mapped", () => {
-    const months = Array.from({ length: 12 }, (_, i) => formatDateShort(`2026-${String(i + 1).padStart(2, "0")}-01`));
+    const months = Array.from({ length: 12 }, (_, i) =>
+      formatDateShort(`2026-${String(i + 1).padStart(2, "0")}-01`),
+    );
     expect(months).toEqual([
       "1. Jan.",
       "1. Feb.",
@@ -222,12 +224,22 @@ describe("parseDecimalInput", () => {
     expect(parseDecimalInput(input)).toBe(expected);
   });
 
-  it.each(["", "   ", "-", "abc", "1,2,3,4x", "1.2.3", "1,5,5.0", "1.250,5,1", "12a", "1e5", "Infinity", "NaN"])(
-    "%j → null",
-    (input) => {
-      expect(parseDecimalInput(input)).toBeNull();
-    },
-  );
+  it.each([
+    "",
+    "   ",
+    "-",
+    "abc",
+    "1,2,3,4x",
+    "1.2.3",
+    "1,5,5.0",
+    "1.250,5,1",
+    "12a",
+    "1e5",
+    "Infinity",
+    "NaN",
+  ])("%j → null", (input) => {
+    expect(parseDecimalInput(input)).toBeNull();
+  });
 
   it("handles null/undefined", () => {
     expect(parseDecimalInput(null)).toBeNull();
