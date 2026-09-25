@@ -481,7 +481,9 @@ async function main() {
     plan: PlanInfo;
     ok: boolean;
   }[] = [];
-  for (const q of queries(userIds[0]).filter((x) => !args.only || x.name.includes(String(args.only)))) {
+  for (const q of queries(userIds[0]).filter(
+    (x) => !args.only || x.name.includes(String(args.only)),
+  )) {
     const planRows = await queryRows<{ "QUERY PLAN": string }>(
       db,
       sql`explain (analyze, buffers) ${q.query}`,
