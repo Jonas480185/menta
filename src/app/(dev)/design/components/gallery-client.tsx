@@ -9,7 +9,6 @@ import {
   Flame,
   Footprints,
   Inbox,
-  Moon,
   Pencil,
   Plus,
   Salad,
@@ -18,7 +17,6 @@ import {
   Search,
   Settings,
   Star,
-  Sun,
   Target,
   Trash,
   User,
@@ -26,7 +24,9 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+
+import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { AdaptiveSheet } from "@/components/ui/adaptive-sheet";
 
 import { ConfirmDialog } from "@/components/ui/alert-dialog";
 import { Avatar, AvatarFallback, getInitials } from "@/components/ui/avatar";
@@ -73,7 +73,6 @@ import { MacroBar } from "@/components/ui/macro-bar";
 import { MacroChips, NutritionBadge } from "@/components/ui/macro-chips";
 import { MacroRings } from "@/components/ui/macro-rings";
 import { NumberInput, numberFieldProps } from "@/components/ui/number-input";
-import { formatNumber } from "@/components/ui/number-utils";
 import { PageHeader } from "@/components/ui/page-header";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ProgressRing } from "@/components/ui/progress-ring";
@@ -96,16 +95,16 @@ import {
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Slider } from "@/components/ui/slider";
-import { toast, Toaster, undoToast } from "@/components/ui/sonner";
+import { toast, undoToast } from "@/components/ui/sonner";
 import { Spinner } from "@/components/ui/spinner";
 import { StatTile } from "@/components/ui/stat-tile";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { formatNumber } from "@/lib/format";
 import { cn } from "@/lib/utils";
-
-const GALLERY_TOASTER = "gallery";
+import { z } from "@/lib/zod";
 
 function Demo({ title, children, className }: { title: string; children: React.ReactNode; className?: string }) {
   return (
@@ -119,39 +118,24 @@ function Demo({ title, children, className }: { title: string; children: React.R
 }
 
 export function ComponentGallery() {
-  const [dark, setDark] = useState(false);
-
   return (
-    <div className={cn(dark && "dark")}>
-      <div className="min-h-dvh bg-background text-foreground">
-        <main className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 pt-4 pb-24 sm:px-6">
-          <PageHeader
-            eyebrow="Intern · nicht indexiert"
-            title="Komponenten-Galerie"
-            subtitle="Alle Bausteine aus src/components/ui in ihren Zuständen. Alle Zahlen sind Beispielwerte."
-            actions={
-              <IconButton
-                label={dark ? "Helles Design anzeigen" : "Dunkles Design anzeigen"}
-                variant="outline"
-                onClick={() => setDark((d) => !d)}
-              >
-                {dark ? <Sun /> : <Moon />}
-              </IconButton>
-            }
-          />
-          <NutritionSection />
-          <ButtonSection />
-          <FieldSection />
-          <SelectionSection />
-          <NavigationSection />
-          <OverlaySection />
-          <LayoutSection />
-          <FeedbackSection />
-          <FormSection />
-        </main>
-        <Toaster id={GALLERY_TOASTER} />
-      </div>
-    </div>
+    <main className="mx-auto flex w-full max-w-wide flex-col gap-10 px-gutter pt-safe-offset-4 pb-safe-offset-24">
+      <PageHeader
+        eyebrow="Intern · nicht indexiert"
+        title="Komponenten-Galerie"
+        subtitle="Alle Bausteine aus src/components/ui in ihren Zuständen. Alle Zahlen sind Beispielwerte."
+        actions={<ThemeToggle iconOnly />}
+      />
+      <NutritionSection />
+      <ButtonSection />
+      <FieldSection />
+      <SelectionSection />
+      <NavigationSection />
+      <OverlaySection />
+      <LayoutSection />
+      <FeedbackSection />
+      <FormSection />
+    </main>
   );
 }
 
@@ -166,20 +150,10 @@ function NutritionSection() {
         <Card>
           <CardHeader>
             <CardTitle>CalorieBudget + ProgressRing</CardTitle>
-            <CardDescription>Regler bewegen, um die Feder-Animation und den Überlauf zu sehen.</CardDescription>
+            <CardDescription>Regler bewegen: Feder-Animation, 0 = Ziel-Anzeige, über 2.250 = zweite Runde.</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col gap-5">
-            <CalorieBudget consumed={kcal[0]} target={target} activity={250} showFormula>
-              <ProgressRing value={kcal[0]} max={target + 250} label="Kalorien" unit="kcal" size={148} tone="kcal">
-                <Flame className="mb-1 size-5 text-kcal" aria-hidden="true" />
-                <span className="text-3xl font-semibold tracking-tight tabular-nums">
-                  {formatNumber(Math.abs(target + 250 - kcal[0]))}
-                </span>
-                <span className="mt-1 text-xs text-muted-foreground">
-                  {kcal[0] > target + 250 ? "kcal drüber" : "kcal übrig"}
-                </span>
-              </ProgressRing>
-            </CalorieBudget>
+            <CalorieBudget consumed={kcal[0]} target={target} activity={250} />
             <Slider value={kcal} onValueChange={setKcal} min={0} max={4000} step={50} thumbLabels={["Gegessene Kalorien"]} />
           </CardContent>
         </Card>
@@ -202,7 +176,7 @@ function NutritionSection() {
                 <span className="text-sm font-semibold tabular-nums">{v}%</span>
               </ProgressRing>
             ))}
-            <ProgressRing value={1.6} max={2.5} label="Wasser" unit="l" size={72} tone="water" track="muted">
+            <ProgressRing value={1.6} max={2.5} label="Wasser" unit="l" size={72} tone="water" track="soft">
               <Droplets className="size-5 text-water" aria-hidden="true" />
             </ProgressRing>
           </CardContent>
@@ -316,7 +290,8 @@ function FieldSection() {
             <Label htmlFor="g-name">Name</Label>
             <Input id="g-name" placeholder="z. B. Haferflocken" />
           </div>
-          <Input aria-label="Lebensmittel suchen" leadingIcon={<Search />} placeholder="Lebensmittel suchen" type="search" />
+          <Input aria-label="Lebensmittel suchen" variant="inset" leadingIcon={<Search />} placeholder="Lebensmittel suchen" type="search" />
+          <Input aria-label="Suche mit Rahmen" leadingIcon={<Search />} placeholder="Mit Rahmen" type="search" />
           <Input aria-label="Menge" suffix="g" defaultValue="150" inputMode="decimal" />
           <Input aria-label="Ungültig" aria-invalid defaultValue="abc" />
           <Input aria-label="Deaktiviert" disabled defaultValue="Deaktiviert" />
@@ -324,10 +299,10 @@ function FieldSection() {
         </Demo>
         <Demo title="NumberInput & QuantityStepper" className="flex-col items-stretch">
           <div className="grid gap-2">
-            <Label htmlFor="g-amount">Menge (deutsche Dezimalzahlen: „1,5“)</Label>
+            <Label htmlFor="g-amount">Menge („1,5“ oder „1.5“)</Label>
             <NumberInput id="g-amount" value={grams} onValueChange={setGrams} unit="g" min={0} max={5000} step={0.5} />
             <p className="text-xs text-muted-foreground tabular-nums">
-              Wert: {grams === null ? "leer" : formatNumber(grams, { decimals: 2 })}
+              Wert: {grams === null ? "leer" : formatNumber(grams, { maxFractionDigits: 2 })}
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-between gap-4">
@@ -547,6 +522,17 @@ function OverlaySection() {
           </BottomSheetContent>
         </BottomSheet>
 
+        <AdaptiveSheet
+          trigger={<Button variant="soft">AdaptiveSheet</Button>}
+          title="Portion wählen"
+          description="Mobil als Bottom Sheet, ab 1024 px als Dialog."
+          footer={<Button block>Hinzufügen</Button>}
+        >
+          <div className="flex justify-center py-2">
+            <QuantityStepper label="Portionen" unit="Portionen" defaultValue={1} step={0.5} min={0.5} size="lg" />
+          </div>
+        </AdaptiveSheet>
+
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="ghost">Popover</Button>
@@ -589,7 +575,7 @@ function OverlaySection() {
 
         <Button
           variant="secondary"
-          onClick={() => toast.success("Gespeichert", { toasterId: GALLERY_TOASTER, description: "Dein Ziel wurde aktualisiert." })}
+          onClick={() => toast.success("Gespeichert", { description: "Dein Ziel wurde aktualisiert." })}
         >
           Toast
         </Button>
@@ -597,8 +583,7 @@ function OverlaySection() {
           variant="secondary"
           onClick={() =>
             undoToast("Eintrag gelöscht", {
-              toasterId: GALLERY_TOASTER,
-              onUndo: () => toast("Wiederhergestellt", { toasterId: GALLERY_TOASTER }),
+              onUndo: () => toast("Wiederhergestellt"),
             })
           }
         >
@@ -629,7 +614,7 @@ function LayoutSection() {
           </CardFooter>
         </Card>
         <Card interactive asChild>
-          <button type="button" onClick={() => toast("Card angetippt", { toasterId: GALLERY_TOASTER })}>
+          <button type="button" onClick={() => toast("Card angetippt")}>
             <CardHeader>
               <CardTitle>Interaktive Card</CardTitle>
               <CardDescription>Ganze Fläche ist tippbar (asChild + interactive).</CardDescription>
@@ -757,7 +742,7 @@ function FormSection() {
               noValidate
               className="grid gap-5 md:max-w-md"
               onSubmit={form.handleSubmit((values) =>
-                toast.success(`Gespeichert: ${formatNumber(values.weight, { decimals: 1 })} kg`, { toasterId: GALLERY_TOASTER }),
+                toast.success(`Gespeichert: ${formatNumber(values.weight, { maxFractionDigits: 1 })} kg`),
               )}
             >
               <FormField
