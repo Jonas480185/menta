@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/theme/toaster";
-import { themeColor } from "@/components/theme/tokens";
+import { BRAND } from "@/content/brand";
 import "./globals.css";
 
 /*
@@ -25,13 +25,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  // Placeholder – the Lead wires the final brand name from src/content/brand.ts.
   title: {
-    default: "Nutrition App",
-    template: "%s · Nutrition App",
+    default: BRAND.name,
+    template: `%s · ${BRAND.name}`,
   },
-  description: "Kalorien, Makros und Fortschritt – ruhig, präzise und motivierend.",
-  appleWebApp: { capable: true, statusBarStyle: "default" },
+  applicationName: BRAND.name,
+  description: BRAND.description,
+  appleWebApp: { capable: true, title: BRAND.shortName, statusBarStyle: "default" },
   formatDetection: { telephone: false },
 };
 
@@ -40,8 +40,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover", // enables env(safe-area-inset-*) → pb-safe etc.
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: themeColor.light },
-    { media: "(prefers-color-scheme: dark)", color: themeColor.dark },
+    { media: "(prefers-color-scheme: light)", color: BRAND.colors.paper },
+    { media: "(prefers-color-scheme: dark)", color: BRAND.colors.ink },
   ],
 };
 

@@ -87,6 +87,6 @@ export const spring = {
 
 /** Theme colors for <meta name="theme-color"> – must equal --background. */
 export const themeColor = {
-  light: "#f5f6f8",
-  dark: "#0b0c0f",
+  light: "#f6f8f7",
+  dark: "#0b0f0e",
 } as const;

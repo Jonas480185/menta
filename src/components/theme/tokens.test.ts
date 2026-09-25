@@ -1,8 +1,9 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { BRAND } from "@/content/brand";
 import { contrastRatio, loadThemeTokens } from "./color-contrast";
-import { NUTRIENT_KEYS, chartColors, nutrientColors } from "./tokens";
+import { NUTRIENT_KEYS, chartColors, nutrientColors, themeColor } from "./tokens";
 
 const css = readFileSync(path.resolve(__dirname, "../../app/globals.css"), "utf8");
 const tokens = loadThemeTokens(css);
@@ -23,9 +24,10 @@ const TEXT_PAIRS: Array<[fg: string, bg: string]> = [
   ["--popover-foreground", "--popover"],
   ["--primary-foreground", "--primary"],
   ["--brand-foreground", "--brand"],
-  ["--primary", "--background"],
-  ["--primary", "--card"],
-  ["--primary", "--primary-soft"],
+  ["--primary-strong", "--background"],
+  ["--primary-strong", "--card"],
+  ["--primary-strong", "--primary-soft"],
+  ["--foreground", "--primary-soft"],
   ["--secondary-foreground", "--secondary"],
   ["--muted-foreground", "--background"],
   ["--muted-foreground", "--card"],
@@ -170,6 +172,42 @@ describe("design tokens · data-color exceptions", () => {
 
   it.each(LIGHT_FILL_EXCEPTIONS)("dark %s fill reaches ≥ 3:1 on card", (name) => {
     expect(contrastRatio(tokens.dark(name), tokens.dark("--card"))).toBeGreaterThanOrEqual(3);
+  });
+});
+
+describe("design tokens · brand (docs/brand/identity.md)", () => {
+  it("light primary is Menta Mint with ink text; text-safe mint is Mint Deep", () => {
+    expect(tokens.light("--primary").toLowerCase()).toBe("#1fc98e");
+    expect(tokens.light("--primary-foreground").toLowerCase()).toBe("#0b0f0e");
+    expect(tokens.light("--primary-strong").toLowerCase()).toBe("#167957");
+  });
+
+  it("canvas colors match brand paper / ink and the theme-color meta", () => {
+    expect(tokens.light("--background").toLowerCase()).toBe(themeColor.light);
+    expect(tokens.dark("--background").toLowerCase()).toBe(themeColor.dark);
+    expect(themeColor.light).toBe(BRAND.colors.paper.toLowerCase());
+    expect(themeColor.dark).toBe(BRAND.colors.ink.toLowerCase());
+    expect(tokens.light("--primary").toLowerCase()).toBe(BRAND.colors.primary.toLowerCase());
+  });
+
+  it.each(themes)("%s: --over is a warm hue clearly apart from --destructive", (_t, get) => {
+    const hue = (hex: string) => {
+      const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255) as [
+        number,
+        number,
+        number,
+      ];
+      const max = Math.max(r, g, b);
+      const d = max - Math.min(r, g, b);
+      const h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+      return (h * 60 + 360) % 360;
+    };
+    const over = hue(get("--over"));
+    const destructive = hue(get("--destructive"));
+    expect(over).toBeGreaterThanOrEqual(15); // orange/amber, not red
+    expect(over).toBeLessThanOrEqual(45);
+    const dist = Math.min(Math.abs(over - destructive), 360 - Math.abs(over - destructive));
+    expect(dist).toBeGreaterThanOrEqual(25);
   });
 });
 
