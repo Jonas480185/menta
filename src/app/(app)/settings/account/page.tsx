@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Download, LogOut } from "lucide-react";
 import { requireUser } from "@/server/auth/context";
-import { buttonClass } from "@/app/(auth)/_components/form-controls";
+import { buttonClass } from "@/app/(auth)/_components/button-styles";
 import { signOutAction } from "./actions";
 import { DeleteAccount } from "./_components/delete-account";
 import { NameForm } from "./_components/name-form";
