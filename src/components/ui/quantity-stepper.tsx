@@ -5,7 +5,9 @@ import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
-import { formatNumber, formatServings, stepValue } from "./number-utils";
+import { formatNumber } from "@/lib/format";
+
+import { formatServings, stepValue } from "./number-utils";
 import { focusRing } from "./tokens";
 
 export interface QuantityStepperProps extends Omit<React.ComponentProps<"div">, "onChange" | "defaultValue"> {
@@ -53,7 +55,8 @@ function QuantityStepper({
   const [internal, setInternal] = useState(defaultValue ?? min);
   const value = isControlled ? valueProp : internal;
 
-  const display = format ?? (step < 1 ? formatServings : (v: number) => formatNumber(v, { decimals: 2 }));
+  const display =
+    format ?? (step < 1 ? formatServings : (v: number) => formatNumber(v, { maxFractionDigits: 2 }));
   const text = display(value);
   const valueText = unit ? `${text} ${unit}` : text;
 
@@ -136,7 +139,7 @@ function QuantityStepper({
 
   const buttonClasses = cn(
     "inline-flex shrink-0 cursor-pointer touch-manipulation items-center justify-center rounded-full bg-secondary text-secondary-foreground select-none",
-    "transition-[background-color,scale] duration-150 hover:bg-secondary/75 active:scale-[0.94] motion-reduce:transition-none motion-reduce:active:scale-100",
+    "transition-[background-color,scale] duration-150 hover:bg-accent active:scale-[0.94] motion-reduce:active:scale-100",
     "disabled:pointer-events-none disabled:opacity-40",
     size === "md" ? "size-11 [&_svg]:size-5" : "size-13 [&_svg]:size-6",
     focusRing,
@@ -180,15 +183,10 @@ function QuantityStepper({
           focusRing,
         )}
       >
-        <span
-          className={cn(
-            "font-semibold tracking-tight text-foreground tabular-nums",
-            size === "md" ? "text-xl" : "text-3xl",
-          )}
-        >
+        <span className={cn("numeric text-foreground", size === "md" ? "text-stat-sm" : "text-stat")}>
           {text}
         </span>
-        {unit && <span className="mt-1 text-xs text-muted-foreground">{unit}</span>}
+        {unit && <span className="mt-1 text-caption text-muted-foreground">{unit}</span>}
       </div>
       <button
         type="button"

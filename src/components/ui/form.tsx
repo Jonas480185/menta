@@ -18,7 +18,8 @@ import { cn } from "@/lib/utils";
 import { Label } from "./label";
 
 /**
- * react-hook-form integration (shadcn pattern):
+ * react-hook-form integration (shadcn pattern). Build schemas with `z` from `@/lib/zod`
+ * (German default messages):
  *
  * ```tsx
  * const form = useForm<Values>({ resolver: zodResolver(schema) });
@@ -45,9 +46,10 @@ type FormFieldContextValue<
 
 const FormFieldContext = createContext<FormFieldContextValue | null>(null);
 
-function FormField<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>>(
-  props: ControllerProps<TFieldValues, TName>,
-) {
+function FormField<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+>(props: ControllerProps<TFieldValues, TName>) {
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />
@@ -116,7 +118,14 @@ function FormControl(props: React.ComponentProps<typeof Slot>) {
 
 function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
   const { formDescriptionId } = useFormField();
-  return <p data-slot="form-description" id={formDescriptionId} className={cn("text-sm text-muted-foreground", className)} {...props} />;
+  return (
+    <p
+      data-slot="form-description"
+      id={formDescriptionId}
+      className={cn("text-body-sm text-muted-foreground", className)}
+      {...props}
+    />
+  );
 }
 
 function FormMessage({ className, children, ...props }: React.ComponentProps<"p">) {
@@ -128,7 +137,7 @@ function FormMessage({ className, children, ...props }: React.ComponentProps<"p"
       data-slot="form-message"
       id={formMessageId}
       aria-live="polite"
-      className={cn("text-sm font-medium text-destructive", className)}
+      className={cn("text-body-sm font-medium text-destructive", className)}
       {...props}
     >
       {body}

@@ -14,7 +14,15 @@ describe("QuantityStepper", () => {
   it("steps by fractional servings and renders fraction glyphs", async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
-    render(<QuantityStepper label="Portionen" defaultValue={1} step={0.5} min={0.5} onValueChange={onValueChange} />);
+    render(
+      <QuantityStepper
+        label="Portionen"
+        defaultValue={1}
+        step={0.5}
+        min={0.5}
+        onValueChange={onValueChange}
+      />,
+    );
     const spin = screen.getByRole("spinbutton", { name: "Portionen" });
     await user.click(screen.getByRole("button", { name: "Portionen erhöhen" }));
     expect(onValueChange).toHaveBeenCalledTimes(1);
@@ -26,7 +34,15 @@ describe("QuantityStepper", () => {
   it("disables the minus button at min", async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
-    render(<QuantityStepper label="Portionen" defaultValue={0.5} step={0.25} min={0.25} onValueChange={onValueChange} />);
+    render(
+      <QuantityStepper
+        label="Portionen"
+        defaultValue={0.5}
+        step={0.25}
+        min={0.25}
+        onValueChange={onValueChange}
+      />,
+    );
     const minus = screen.getByRole("button", { name: "Portionen verringern" });
     await user.click(minus);
     expect(onValueChange).toHaveBeenLastCalledWith(0.25);

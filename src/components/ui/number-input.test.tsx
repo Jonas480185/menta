@@ -35,7 +35,9 @@ describe("NumberInput", () => {
   it("clamps and rounds on blur", async () => {
     const user = userEvent.setup();
     const onValueChange = vi.fn();
-    render(<NumberInput aria-label="Gewicht" min={20} max={300} decimals={1} onValueChange={onValueChange} />);
+    render(
+      <NumberInput aria-label="Gewicht" min={20} max={300} decimals={1} onValueChange={onValueChange} />,
+    );
     const input = screen.getByRole("textbox", { name: "Gewicht" });
     await user.type(input, "412,345");
     await user.tab();
@@ -55,7 +57,15 @@ describe("NumberInput", () => {
 
   it("steps with arrow keys", () => {
     const onValueChange = vi.fn();
-    render(<NumberInput aria-label="Portionen" defaultValue={1} step={0.5} max={2} onValueChange={onValueChange} />);
+    render(
+      <NumberInput
+        aria-label="Portionen"
+        defaultValue={1}
+        step={0.5}
+        max={2}
+        onValueChange={onValueChange}
+      />,
+    );
     const input = screen.getByRole("textbox", { name: "Portionen" });
     fireEvent.keyDown(input, { key: "ArrowUp" });
     expect(input).toHaveValue("1,5");

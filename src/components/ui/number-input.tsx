@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 
-import { Input, type InputProps } from "./input";
-import { formatNumber, parseGermanNumber, roundToPrecision, stepPrecision, stepValue } from "./number-utils";
+import { parseDecimalInput } from "@/lib/format";
 
-export interface NumberInputProps
-  extends Omit<InputProps, "value" | "defaultValue" | "onChange" | "type" | "min" | "max" | "step" | "suffix" | "inputMode"> {
+import { Input, type InputProps } from "./input";
+import { formatDraft, roundToPrecision, stepPrecision, stepValue } from "./number-utils";
+
+export interface NumberInputProps extends Omit<
+  InputProps,
+  "value" | "defaultValue" | "onChange" | "type" | "min" | "max" | "step" | "suffix" | "inputMode"
+> {
   value?: number | null;
   defaultValue?: number | null;
   /** Called with the parsed number while typing (`null` when empty) and with the clamped value on blur. */
@@ -21,13 +25,9 @@ export interface NumberInputProps
   unit?: React.ReactNode;
 }
 
-function toDraft(value: number | null | undefined, decimals: number): string {
-  if (value === null || value === undefined || !Number.isFinite(value)) return "";
-  return formatNumber(value, { decimals, grouping: false });
-}
-
 /**
- * Numeric text field for German users: accepts "1,5" as well as "1.5", shows the
+ * Numeric text field for German users: accepts "1,5" as well as "1.5" (parsed by
+ * `parseDecimalInput` from `@/lib/format`), shows the
  * numeric keypad on mobile (`inputMode="decimal"`), clamps to min/max on blur, supports
  * ↑/↓ stepping and an inline unit suffix. Works controlled, uncontrolled and with
  * react-hook-form (`value` / `onValueChange` / `onBlur` / `ref`).
@@ -50,13 +50,13 @@ function NumberInput({
   const isControlled = valueProp !== undefined;
   const [internal, setInternal] = useState<number | null>(defaultValue);
   const value = isControlled ? (valueProp ?? null) : internal;
-  const [draft, setDraft] = useState(() => toDraft(value, decimals));
+  const [draft, setDraft] = useState(() => formatDraft(value, decimals));
 
   // Sync external changes (reset, programmatic updates) without clobbering what the user is typing.
   const [prevValue, setPrevValue] = useState(value);
   if (value !== prevValue) {
     setPrevValue(value);
-    if (value !== parseGermanNumber(draft)) setDraft(toDraft(value, decimals));
+    if (value !== parseDecimalInput(draft)) setDraft(formatDraft(value, decimals));
   }
 
   const allowNegative = min === undefined || min < 0;
@@ -83,7 +83,7 @@ function NumberInput({
       enterKeyHint="done"
       placeholder={placeholder}
       suffix={unit}
-      className="tabular-nums"
+      className="tabular"
       {...props}
       value={draft}
       onChange={(event) => {
@@ -95,17 +95,17 @@ function NumberInput({
           if (value !== null) emit(null);
           return;
         }
-        const parsed = parseGermanNumber(next);
+        const parsed = parseDecimalInput(next);
         if (parsed !== null && parsed !== value) emit(parsed);
       }}
       onBlur={(event) => {
-        const parsed = parseGermanNumber(draft);
+        const parsed = parseDecimalInput(draft);
         if (parsed === null) {
           setDraft("");
           if (value !== null) emit(null);
         } else {
           const clamped = clampValue(parsed);
-          setDraft(toDraft(clamped, decimals));
+          setDraft(formatDraft(clamped, decimals));
           if (clamped !== value) emit(clamped);
         }
         onBlur?.(event);
@@ -115,9 +115,9 @@ function NumberInput({
         if (event.defaultPrevented) return;
         if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
         event.preventDefault();
-        const current = parseGermanNumber(draft) ?? value ?? min ?? 0;
+        const current = parseDecimalInput(draft) ?? value ?? min ?? 0;
         const next = stepValue(current, event.key === "ArrowUp" ? 1 : -1, { step, min, max });
-        setDraft(toDraft(next, decimals));
+        setDraft(formatDraft(next, decimals));
         if (next !== value) emit(next);
       }}
     />

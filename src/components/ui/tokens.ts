@@ -1,12 +1,13 @@
 /**
- * Shared class-name building blocks for the component library.
+ * Shared class-name building blocks for the component library, built on the design
+ * tokens in src/app/globals.css (docs/design/design-system.md).
  *
  * Tailwind only generates classes it can find as complete literal strings, so every
  * token → class mapping lives here as a static lookup table (never build class names
  * with template strings like `bg-${tone}`).
  */
 
-/** Semantic colour tones a data visual (ring, bar, chip, badge) can take. */
+/** Semantic colour tones a data visual (ring, bar, chip, badge, icon well) can take. */
 export type Tone =
   | "primary"
   | "kcal"
@@ -17,13 +18,18 @@ export type Tone =
   | "water"
   | "weight"
   | "activity"
+  | "over"
   | "success"
   | "warning"
-  | "over"
+  | "info"
+  | "destructive"
   | "muted";
 
-/** Solid foreground colour (also drives SVG strokes via `currentColor`). */
-export const toneText: Record<Tone, string> = {
+/**
+ * Graphic fill as text colour – drives SVG strokes / icons via `currentColor`
+ * (rings, dots). Not for small text: use `toneStrong`.
+ */
+export const toneGraphic: Record<Tone, string> = {
   primary: "text-primary",
   kcal: "text-kcal",
   protein: "text-protein",
@@ -33,14 +39,16 @@ export const toneText: Record<Tone, string> = {
   water: "text-water",
   weight: "text-weight",
   activity: "text-activity",
+  over: "text-over",
   success: "text-success",
   warning: "text-warning",
-  over: "text-over",
+  info: "text-info",
+  destructive: "text-destructive",
   muted: "text-muted-foreground",
 };
 
-/** Solid background fill. */
-export const toneBg: Record<Tone, string> = {
+/** Solid background fill (bars, dots, caps). */
+export const toneFill: Record<Tone, string> = {
   primary: "bg-primary",
   kcal: "bg-kcal",
   protein: "bg-protein",
@@ -50,32 +58,61 @@ export const toneBg: Record<Tone, string> = {
   water: "bg-water",
   weight: "bg-weight",
   activity: "bg-activity",
+  over: "bg-over",
   success: "bg-success",
   warning: "bg-warning",
-  over: "bg-over",
+  info: "bg-info",
+  destructive: "bg-destructive",
   muted: "bg-muted-foreground",
 };
 
-/** Soft tinted background (≈15 % of the tone) for chips, icon wells and tracks. */
-export const toneSoftBg: Record<Tone, string> = {
-  primary: "bg-primary/15",
-  kcal: "bg-kcal/15",
-  protein: "bg-protein/15",
-  carbs: "bg-carbs/15",
-  fat: "bg-fat/15",
-  fiber: "bg-fiber/15",
-  water: "bg-water/15",
-  weight: "bg-weight/15",
-  activity: "bg-activity/15",
-  success: "bg-success/15",
-  warning: "bg-warning/15",
-  over: "bg-over/15",
+/** Tinted background for chips, badges and icon wells. */
+export const toneSoft: Record<Tone, string> = {
+  primary: "bg-primary-soft",
+  kcal: "bg-kcal-soft",
+  protein: "bg-protein-soft",
+  carbs: "bg-carbs-soft",
+  fat: "bg-fat-soft",
+  fiber: "bg-fiber-soft",
+  water: "bg-water-soft",
+  weight: "bg-weight-soft",
+  activity: "bg-activity-soft",
+  over: "bg-over-soft",
+  success: "bg-success-soft",
+  warning: "bg-warning-soft",
+  info: "bg-info-soft",
+  destructive: "bg-destructive-soft",
   muted: "bg-muted",
 };
 
-/** Visible, consistent keyboard focus ring (never remove without a replacement). */
-export const focusRing =
-  "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+/** Coloured text that is AA on card, background and the matching `toneSoft`. */
+export const toneStrong: Record<Tone, string> = {
+  primary: "text-primary-strong",
+  kcal: "text-kcal-strong",
+  protein: "text-protein-strong",
+  carbs: "text-carbs-strong",
+  fat: "text-fat-strong",
+  fiber: "text-fiber-strong",
+  water: "text-water-strong",
+  weight: "text-weight-strong",
+  activity: "text-activity-strong",
+  over: "text-over-strong",
+  success: "text-success",
+  warning: "text-warning",
+  info: "text-info",
+  destructive: "text-destructive",
+  muted: "text-muted-foreground",
+};
+
+/**
+ * Keyboard focus indicator – the design-system `focus-ring` utility (2 px `--ring`
+ * outline, 2 px offset), identical to the global `:focus-visible` style.
+ */
+export const focusRing = "focus-ring";
+
+/** Focus ring for rows inside `overflow-hidden` containers (drawn inside the element). */
+export const focusRingInset =
+  "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring";
 
 /**
  * Expands the hit area of a visually small control to ≥ 44 px on coarse pointers
@@ -96,33 +133,35 @@ export const nutrientLabel = {
 
 /** Shared field look (Input, Textarea, SelectTrigger, NumberInput). */
 export const fieldClasses = [
-  "w-full min-w-0 rounded-md border border-input bg-background text-base text-foreground shadow-xs shadow-foreground/5",
-  "transition-[border-color,box-shadow] duration-150 outline-none motion-reduce:transition-none",
+  "w-full min-w-0 rounded-control border border-input bg-card text-body text-foreground",
+  "transition-[border-color,box-shadow] duration-150 outline-none",
   "placeholder:text-muted-foreground",
-  "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30",
+  "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/25",
   "aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive/25",
   "disabled:cursor-not-allowed disabled:opacity-50",
 ].join(" ");
 
 /**
- * Floating surface (Popover, Select, DropdownMenu). Enter animation uses `@starting-style`
- * (`starting:` variant) so no animation plugin is needed; exits are instant by design.
+ * Floating surface (Popover, Select, DropdownMenu) – elevation level 2: shadow in light,
+ * hairline in dark. Radix keeps the element mounted until the exit animation ends.
  */
 export const floatingSurface = [
-  "z-50 rounded-lg border border-border bg-popover text-popover-foreground shadow-lg shadow-foreground/10 outline-none",
-  "transition-[opacity,scale] duration-150 ease-out starting:scale-95 starting:opacity-0 motion-reduce:transition-none",
+  "z-50 rounded-lg border border-transparent bg-popover text-popover-foreground shadow-md outline-none dark:border-border",
+  "data-[state=open]:animate-scale-in data-[state=closed]:animate-scale-out",
 ].join(" ");
 
 /** Menu / listbox row: 44 px on touch, compact on precise pointers. */
 export const menuItem = [
-  "relative flex min-h-11 w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-2 text-base outline-none select-none pointer-fine:min-h-9 pointer-fine:text-sm",
+  "relative flex min-h-11 w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-2 text-body outline-none select-none pointer-fine:min-h-9 pointer-fine:text-body-sm",
   "focus:bg-accent focus:text-accent-foreground data-highlighted:bg-accent data-highlighted:text-accent-foreground",
   "data-disabled:pointer-events-none data-disabled:opacity-50",
   "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
 ].join(" ");
 
-/** Modal scrim: dark in both themes (≈50–80 % darkening), subtle blur. */
-export const overlayScrim = [
-  "fixed inset-0 z-50 bg-foreground/50 backdrop-blur-[2px] dark:bg-background/80",
-  "transition-opacity duration-200 starting:opacity-0 motion-reduce:transition-none",
-].join(" ");
+/** Modal scrim (`--overlay`: ink 40 % light, black 60 % dark) with fade in/out. */
+export const overlayScrim =
+  "fixed inset-0 z-50 bg-overlay data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out";
+
+/** Card surface – elevation level 1: soft shadow in light, hairline border in dark. */
+export const cardSurface =
+  "rounded-card border border-transparent bg-card text-card-foreground shadow-sm dark:border-border";
