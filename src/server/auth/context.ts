@@ -28,8 +28,11 @@ export const DEFAULT_TIMEZONE = "Europe/Berlin";
 
 /** One session lookup per request, no matter how many components ask. */
 const getSession = cache(async () => {
+  // Read request headers BEFORE touching the DB: this marks the route as dynamic, so
+  // prerendering at build time bails out instead of opening the database.
+  const requestHeaders = await headers();
   const auth = await getAuth();
-  return auth.api.getSession({ headers: await headers() });
+  return auth.api.getSession({ headers: requestHeaders });
 });
 
 /** Profile fields the auth layer needs; one query per request. Self-heals a missing row. */
