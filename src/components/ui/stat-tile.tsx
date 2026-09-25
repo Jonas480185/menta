@@ -2,8 +2,9 @@ import { ArrowDownRight, ArrowUpRight, Minus } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-import { formatNumber } from "./number-utils";
-import { toneSoftBg, toneText, type Tone } from "./tokens";
+import { formatNumber, NBSP } from "@/lib/format";
+
+import { cardSurface, toneSoft, toneStrong, type Tone } from "./tokens";
 
 export interface StatDelta {
   /** Signed change, e.g. -0.4 (kg). */
@@ -44,15 +45,17 @@ function StatTile({
   className,
   ...props
 }: StatTileProps) {
-  const display = value === null ? "–" : typeof value === "number" ? formatNumber(value, { decimals }) : value;
+  const display =
+    value === null
+      ? "–"
+      : typeof value === "number"
+        ? formatNumber(value, { maxFractionDigits: decimals, minFractionDigits: decimals })
+        : value;
 
   return (
     <div
       data-slot="stat-tile"
-      className={cn(
-        "flex min-w-0 flex-col gap-2 rounded-xl border border-border/60 bg-card p-4 text-card-foreground shadow-sm shadow-foreground/5 dark:border-border dark:shadow-none",
-        className,
-      )}
+      className={cn(cardSurface, "flex min-w-0 flex-col gap-2 p-4", className)}
       {...props}
     >
       <div className="flex items-center gap-2">
@@ -60,29 +63,24 @@ function StatTile({
           <span
             aria-hidden="true"
             className={cn(
-              "flex size-7 shrink-0 items-center justify-center rounded-md [&_svg:not([class*='size-'])]:size-4",
-              toneSoftBg[tone],
-              tone === "primary" || tone === "muted" ? "text-foreground" : toneText[tone],
+              "flex size-7 shrink-0 items-center justify-center rounded-sm [&_svg:not([class*='size-'])]:size-4",
+              toneSoft[tone],
+              toneStrong[tone],
             )}
           >
             {icon}
           </span>
         )}
-        <span className="truncate text-sm font-medium text-muted-foreground">{label}</span>
+        <span className="truncate text-body-sm font-medium text-muted-foreground">{label}</span>
       </div>
       <p className="flex items-baseline gap-1">
-        <span
-          className={cn(
-            "font-semibold tracking-tight text-foreground tabular-nums",
-            size === "md" ? "text-3xl leading-none" : "text-2xl leading-none",
-          )}
-        >
+        <span className={cn("numeric text-foreground", size === "md" ? "text-stat" : "text-stat-sm")}>
           {display}
         </span>
-        {unit && value !== null && <span className="text-sm font-medium text-muted-foreground">{unit}</span>}
+        {unit && value !== null && <span className="text-body-sm text-muted-foreground">{unit}</span>}
       </p>
       {delta && <DeltaIndicator {...delta} />}
-      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+      {hint && <p className="text-caption text-muted-foreground">{hint}</p>}
     </div>
   );
 }
@@ -93,15 +91,14 @@ function DeltaIndicator({ value, unit, decimals = 1, goodDirection = "up", label
   const direction = rounded > 0 ? "up" : rounded < 0 ? "down" : "flat";
   const isGood = goodDirection !== "none" && direction !== "flat" && direction === goodDirection;
   const Icon = direction === "up" ? ArrowUpRight : direction === "down" ? ArrowDownRight : Minus;
-  const sign = direction === "up" ? "+" : direction === "down" ? "−" : "±";
-  const text = `${sign}${formatNumber(Math.abs(rounded), { decimals })}${unit ? ` ${unit}` : ""}`;
+  const text = `${formatNumber(rounded, { maxFractionDigits: decimals, signed: true })}${unit ? `${NBSP}${unit}` : ""}`;
 
   return (
-    <p className="flex items-center gap-1 text-xs font-medium">
+    <p className="flex items-center gap-1.5 text-caption">
       <span
         className={cn(
-          "inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 tabular-nums",
-          isGood ? "bg-success/15 text-foreground [&_svg]:text-success" : "bg-muted text-muted-foreground",
+          "inline-flex items-center gap-0.5 rounded-xs px-1.5 py-0.5 tabular",
+          isGood ? "bg-success-soft text-success" : "bg-muted text-muted-foreground",
         )}
       >
         <Icon className="size-3.5" aria-hidden="true" />

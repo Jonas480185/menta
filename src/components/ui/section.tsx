@@ -12,7 +12,15 @@ export interface SectionProps extends Omit<React.ComponentProps<"section">, "tit
 }
 
 /** Vertical content group with an optional heading row. Spacing rhythm: 12 px head → body. */
-function Section({ title, description, action, as: Heading = "h2", className, children, ...props }: SectionProps) {
+function Section({
+  title,
+  description,
+  action,
+  as: Heading = "h2",
+  className,
+  children,
+  ...props
+}: SectionProps) {
   const headingId = useId();
   return (
     <section
@@ -25,11 +33,11 @@ function Section({ title, description, action, as: Heading = "h2", className, ch
         <div className="flex items-end justify-between gap-4">
           <div className="flex min-w-0 flex-col gap-0.5">
             {title && (
-              <Heading id={headingId} className="text-lg leading-snug font-semibold tracking-tight text-foreground">
+              <Heading id={headingId} className="text-heading text-foreground">
                 {title}
               </Heading>
             )}
-            {description && <p className="text-sm text-muted-foreground">{description}</p>}
+            {description && <p className="text-body-sm text-muted-foreground">{description}</p>}
           </div>
           {action && <div className="flex shrink-0 items-center">{action}</div>}
         </div>

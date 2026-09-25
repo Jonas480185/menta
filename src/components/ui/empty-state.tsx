@@ -44,18 +44,20 @@ function EmptyState({
         <div
           aria-hidden="true"
           className={cn(
-            "flex items-center justify-center rounded-full bg-primary/12 text-foreground",
-            size === "md" ? "size-14 [&_svg:not([class*='size-'])]:size-7" : "size-11 [&_svg:not([class*='size-'])]:size-5",
+            "flex items-center justify-center rounded-full bg-primary-soft text-primary-strong",
+            size === "md"
+              ? "size-14 [&_svg:not([class*='size-'])]:size-7"
+              : "size-11 [&_svg:not([class*='size-'])]:size-5",
           )}
         >
           {icon}
         </div>
       ) : null}
       <div className="flex max-w-sm flex-col gap-1.5">
-        <p className={cn("font-semibold tracking-tight text-balance text-foreground", size === "md" ? "text-lg" : "text-base")}>
+        <p className={cn("text-balance text-foreground", size === "md" ? "text-heading" : "text-headline")}>
           {title}
         </p>
-        {description && <p className="text-sm leading-relaxed text-pretty text-muted-foreground">{description}</p>}
+        {description && <p className="text-body-sm text-pretty text-muted-foreground">{description}</p>}
       </div>
       {(action || secondaryAction) && (
         <div className="flex w-full max-w-xs flex-col items-stretch gap-2 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">

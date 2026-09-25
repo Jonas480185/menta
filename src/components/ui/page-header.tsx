@@ -24,7 +24,7 @@ function PageHeader({ title, eyebrow, subtitle, actions, back, className, ...pro
         <Link
           href={back.href}
           className={cn(
-            "-ml-2 inline-flex h-11 w-fit items-center gap-0.5 rounded-full pr-3 pl-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+            "-ml-2 inline-flex h-11 w-fit items-center gap-0.5 rounded-control pr-3 pl-1 text-body-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
             focusRing,
           )}
         >
@@ -34,9 +34,9 @@ function PageHeader({ title, eyebrow, subtitle, actions, back, className, ...pro
       )}
       <div className="flex items-start justify-between gap-4">
         <div className="flex min-w-0 flex-col gap-1">
-          {eyebrow && <p className="text-sm font-medium text-muted-foreground">{eyebrow}</p>}
-          <h1 className="text-2xl leading-tight font-bold tracking-tight text-balance text-foreground sm:text-3xl">{title}</h1>
-          {subtitle && <p className="text-base text-pretty text-muted-foreground">{subtitle}</p>}
+          {eyebrow && <p className="text-body-sm font-medium text-muted-foreground">{eyebrow}</p>}
+          <h1 className="text-title text-balance text-foreground">{title}</h1>
+          {subtitle && <p className="text-body text-pretty text-muted-foreground">{subtitle}</p>}
         </div>
         {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
       </div>
