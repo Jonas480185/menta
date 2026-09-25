@@ -1,89 +1,315 @@
 @import "tailwindcss";
 
 /*
- * DESIGN TOKENS – FOUNDATION SKELETON
- * Owner: Design System. Token NAMES are the contract; values are placeholders
- * until Design System lands the real palette. Components must only use these semantic tokens
- * (bg-card, text-muted-foreground, bg-protein, …) – never raw hex / palette classes.
+ * ============================================================================
+ *  DESIGN TOKENS  ·  Owner: Design System
+ * ============================================================================
+ *  Three layers (docs/design/design-system.md):
+ *    1. Primitives   --mint-*, --ink-*            raw values, theme-independent,
+ *                                                 NOT exposed as Tailwind classes.
+ *    2. Semantics    --background, --primary,     meaning; switch per theme
+ *                    --protein, --surface-2 …     (:root = light, .dark = dark).
+ *    3. Components   --radius-card, --spacing-gutter, --bottom-nav-height …
+ *
+ *  Token NAMES are a contract (components build on them). Add, never rename.
+ *  Components use semantic utilities only: bg-card, text-muted-foreground,
+ *  (text-primary-strong for mint text – text-primary is fill-only on light),
+ *  bg-protein-soft text-protein-strong, shadow-md, rounded-card, ease-spring …
+ *  Never raw hex / Tailwind palette classes (bg-zinc-100, text-emerald-600).
+ *
+ *  Contrast of every text pair is verified in
+ *  src/components/theme/tokens.test.ts (WCAG AA, both themes).
+ * ============================================================================
  */
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ---------------------------------------------------------------------------
+ * 1 · PRIMITIVES (theme-independent)
+ * ------------------------------------------------------------------------- */
 :root {
+  /* Mint – brand hue (≈158°). 500 is the signature #1FC98E. */
+  --mint-50: #edfbf5;
+  --mint-100: #d2f6e7;
+  --mint-200: #a6ecd1;
+  --mint-300: #6fdeb7;
+  --mint-400: #3dd4a0;
+  --mint-500: #1fc98e;
+  --mint-600: #13a877;
+  --mint-700: #167957;
+  --mint-800: #0f5e44;
+  --mint-900: #0b4d38;
+  --mint-950: #042b1f;
+
+  /* Ink – cool neutral (zinc/slate blend). */
+  --ink-0: #ffffff;
+  --ink-25: #fafbfb;
+  --ink-50: #f6f8f7;
+  --ink-100: #edf0ef;
+  --ink-200: #e1e6e4;
+  --ink-300: #ccd3d0;
+  --ink-400: #a1aaa7;
+  --ink-500: #7a8481;
+  --ink-600: #59635f;
+  --ink-700: #3e4744;
+  --ink-800: #29302e;
+  --ink-850: #212725;
+  --ink-900: #191e1c;
+  --ink-925: #121615;
+  --ink-950: #0b0f0e;
+
+  /* Motion durations (use via var(); Tailwind: duration-(--duration-fast)) */
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --duration-slower: 500ms; /* ring fill, chart draw-in */
+  --duration-spring: 550ms; /* pairs with --ease-spring */
+
+  /* Layout component tokens */
+  --gutter: 1rem; /* page side padding, 16px mobile */
+  --card-padding: 1.25rem; /* 20px mobile */
+  --section-gap: 1.5rem; /* between cards/sections */
+  --header-height: 3.5rem; /* 56px */
+  --bottom-nav-height: 4rem; /* 64px, excl. safe-area inset */
+
+  /* Radius base (skeleton contract). Cards = radius-xl = 20px. */
   --radius: 1rem;
+}
 
-  --background: #ffffff;
-  --foreground: #0b0b0f;
-  --card: #ffffff;
-  --card-foreground: #0b0b0f;
-  --popover: #ffffff;
-  --popover-foreground: #0b0b0f;
-  --primary: #4f46e5;
-  --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --accent: #f4f4f5;
-  --accent-foreground: #18181b;
-  --destructive: #dc2626;
+@media (min-width: 768px) {
+  :root {
+    --gutter: 1.5rem;
+    --card-padding: 1.5rem;
+    --section-gap: 2rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * 2 · SEMANTICS – LIGHT   (`.light` = force-light island inside dark UI)
+ * ------------------------------------------------------------------------- */
+:root,
+.light {
+  color-scheme: light;
+
+  /* Base surfaces */
+  --background: var(--ink-50);
+  --foreground: var(--ink-950);
+  --card: var(--ink-0);
+  --card-foreground: var(--ink-950);
+  --popover: var(--ink-0);
+  --popover-foreground: var(--ink-950);
+
+  /* Elevation levels (light: white + growing shadow; dark: lighter tints) */
+  --surface-inset: #eef1f0; /* wells, segmented-control tracks, search field */
+  --surface-1: var(--ink-0); /* cards */
+  --surface-2: var(--ink-0); /* sticky header, sheet, popover */
+  --surface-3: var(--ink-0); /* dialog, toast */
+
+  /* Brand & actions */
+  --brand: var(--mint-500); /* signature mint – fills, illustrations, ring */
+  --brand-foreground: var(--ink-950);
+  --primary: var(--mint-500); /* Menta Mint: CTA fill, never text on light */
+  --primary-foreground: var(--ink-950); /* ink on mint (white on mint fails) */
+  --primary-strong: var(--mint-700); /* text-safe mint: links, values, icons */
+  --primary-soft: #e0f7ef; /* tinted bg; text-primary-strong on it is AA */
+  --secondary: var(--ink-100);
+  --secondary-foreground: var(--ink-900);
+  --muted: var(--ink-100);
+  --muted-foreground: var(--ink-600);
+  --accent: var(--ink-100);
+  --accent-foreground: var(--ink-950);
+
+  /* Status */
+  --destructive: #c8283e;
   --destructive-foreground: #ffffff;
-  --success: #16a34a;
-  --warning: #d97706;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-  --ring: #4f46e5;
+  --destructive-soft: #fdecee;
+  --success: var(--mint-700);
+  --success-foreground: #ffffff;
+  --success-soft: var(--mint-50);
+  --warning: #a95a06; /* amber that works as text */
+  --warning-foreground: #ffffff;
+  --warning-soft: #fdf4e4;
+  --info: #2a5bd7;
+  --info-foreground: #ffffff;
+  --info-soft: #e8eefd;
 
-  /* Nutrition semantics */
-  --kcal: #f97316;
-  --protein: #3b82f6;
-  --carbs: #eab308;
-  --fat: #ec4899;
-  --fiber: #22c55e;
-  --water: #06b6d4;
+  /* Lines & focus */
+  --border: var(--ink-200);
+  --border-strong: var(--ink-300);
+  --input: var(--ink-300);
+  --ring: var(--mint-700);
+  --track: #e7ebe9; /* empty part of progress rings/bars */
+  --overlay: rgb(11 15 14 / 0.4); /* scrim behind sheets/dialogs */
+  --selection: var(--mint-200);
+  --scrollbar-thumb: var(--ink-300);
+
+  /*
+   * Nutrition semantics – three shades each:
+   *   --x          graphic fill (ring, bar, dot, chart series, icon)
+   *   --x-soft     tinted background (chips, badges, highlighted rows)
+   *   --x-strong   colored TEXT, AA on card, background and --x-soft
+   */
+  --kcal: var(--mint-600);
+  --kcal-soft: #e3f5ef;
+  --kcal-strong: var(--mint-700);
+  --protein: #3f7ef0;
+  --protein-soft: #e8f0fd;
+  --protein-strong: #2a5bd7;
+  --carbs: #f5a524;
+  --carbs-soft: #fef4e5;
+  --carbs-strong: #9e5c00;
+  --fat: #e5527a;
+  --fat-soft: #fceaef;
+  --fat-strong: #c02d52;
+  --fiber: #7cb518;
+  --fiber-soft: #eff6e3;
+  --fiber-strong: #4a770e;
+  --water: #19a3e6;
+  --water-soft: #e4f4fc;
+  --water-strong: #06729c;
   --weight: #8b5cf6;
-  --activity: #10b981;
-  --over: #ef4444;
+  --weight-soft: #f1ebfe;
+  --weight-strong: #6d3fe0;
+  --activity: #0f766e;
+  --activity-soft: #e2f1f0;
+  --activity-strong: #0f766e;
+  --over: #dd6426; /* over target: information, not alarm */
+  --over-soft: #fceee5;
+  --over-strong: #b04e0c;
 
-  /* Chart series */
-  --chart-1: var(--primary);
+  /* Chart series + chart chrome */
+  --chart-1: var(--kcal);
   --chart-2: var(--protein);
   --chart-3: var(--carbs);
   --chart-4: var(--fat);
   --chart-5: var(--weight);
+  --chart-grid: var(--ink-200);
+  --chart-axis: var(--ink-600);
+  --chart-target: var(--ink-500);
+
+  /* Elevation shadows – soft, layered, cool-tinted */
+  --elevation-xs: 0 1px 2px 0 rgb(16 24 40 / 0.05);
+  --elevation-sm: 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 1px 3px 0 rgb(16 24 40 / 0.06);
+  --elevation-md: 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 4px 12px -2px rgb(16 24 40 / 0.08);
+  --elevation-lg: 0 2px 4px -1px rgb(16 24 40 / 0.04), 0 12px 24px -4px rgb(16 24 40 / 0.1);
+  --elevation-xl: 0 4px 8px -2px rgb(16 24 40 / 0.05), 0 24px 48px -12px rgb(16 24 40 / 0.18);
 }
 
+/* ---------------------------------------------------------------------------
+ * 2 · SEMANTICS – DARK (near-black, elevation by lighter tints + hairlines)
+ * ------------------------------------------------------------------------- */
 .dark {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --card: #18181b;
-  --card-foreground: #fafafa;
-  --popover: #18181b;
-  --popover-foreground: #fafafa;
-  --primary: #818cf8;
-  --primary-foreground: #0b0b0f;
-  --secondary: #27272a;
-  --secondary-foreground: #fafafa;
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-  --accent: #27272a;
-  --accent-foreground: #fafafa;
-  --destructive: #f87171;
-  --destructive-foreground: #0b0b0f;
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #818cf8;
+  color-scheme: dark;
+
+  --background: var(--ink-950);
+  --foreground: var(--ink-50);
+  --card: var(--ink-925);
+  --card-foreground: var(--ink-50);
+  --popover: var(--ink-900);
+  --popover-foreground: var(--ink-50);
+
+  --surface-inset: #070a09;
+  --surface-1: var(--ink-925);
+  --surface-2: var(--ink-900);
+  --surface-3: var(--ink-850);
+
+  --brand: var(--mint-500);
+  --brand-foreground: var(--ink-950);
+  --primary: var(--mint-500);
+  --primary-foreground: var(--ink-950);
+  --primary-strong: var(--mint-400);
+  --primary-soft: #113027;
+  --secondary: var(--ink-850);
+  --secondary-foreground: var(--ink-50);
+  --muted: var(--ink-900);
+  --muted-foreground: #9aa3a0;
+  --accent: var(--ink-850);
+  --accent-foreground: var(--ink-50);
+
+  --destructive: #f7636e;
+  --destructive-foreground: #1a0507;
+  --destructive-soft: #3a1a1f;
+  --success: var(--mint-400);
+  --success-foreground: var(--ink-950);
+  --success-soft: #113027;
+  --warning: #fbbf24;
+  --warning-foreground: #1c1203;
+  --warning-soft: #372e1f;
+  --info: #8aadff;
+  --info-foreground: #0a1330;
+  --info-soft: #212a3e;
+
+  --border: #242a28;
+  --border-strong: #323936;
+  --input: #323936;
+  --ring: var(--mint-500);
+  --track: #252b29;
+  --overlay: rgb(0 0 0 / 0.6);
+  --selection: var(--mint-900);
+  --scrollbar-thumb: var(--ink-700);
+
+  --kcal: var(--mint-500);
+  --kcal-soft: #143328;
+  --kcal-strong: var(--mint-400);
+  --protein: #6b9bff;
+  --protein-soft: #202b3a;
+  --protein-strong: #8aadff;
+  --carbs: #f5b43c;
+  --carbs-soft: #362f1b;
+  --carbs-strong: #f7c35f;
+  --fat: #f27491;
+  --fat-soft: #362529;
+  --fat-strong: #f795ab;
+  --fiber: #95cc3a;
+  --fiber-soft: #27321d;
+  --fiber-strong: #a8d660;
+  --water: #38beea;
+  --water-soft: #183039;
+  --water-strong: #5ccbf0;
+  --weight: #a688fa;
+  --weight-soft: #2a283c;
+  --weight-strong: #b9a2fb;
+  --activity: #14a3a3;
+  --activity-soft: #132d2d;
+  --activity-strong: #3cc4c1;
+  --over: #ff8a4c;
+  --over-soft: #3a2a1f;
+  --over-strong: #ffa170;
+
+  --chart-grid: #242a28;
+  --chart-axis: #9aa3a0;
+  --chart-target: #7a8481;
+
+  /* Dark: shadows barely read – a top highlight + deep shadow does the lifting */
+  --elevation-xs: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --elevation-sm: inset 0 1px 0 0 rgb(255 255 255 / 0.03), 0 1px 2px 0 rgb(0 0 0 / 0.45);
+  --elevation-md: inset 0 1px 0 0 rgb(255 255 255 / 0.04), 0 4px 12px -2px rgb(0 0 0 / 0.5);
+  --elevation-lg: inset 0 1px 0 0 rgb(255 255 255 / 0.05), 0 12px 24px -4px rgb(0 0 0 / 0.55);
+  --elevation-xl: inset 0 1px 0 0 rgb(255 255 255 / 0.06), 0 24px 48px -12px rgb(0 0 0 / 0.65);
 }
 
+/* ---------------------------------------------------------------------------
+ * 3 · TAILWIND MAPPING (semantic → utilities)
+ * ------------------------------------------------------------------------- */
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+  --color-surface-inset: var(--surface-inset);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-strong: var(--primary-strong);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -92,34 +318,394 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-soft: var(--destructive-soft);
   --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-soft: var(--success-soft);
   --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-soft: var(--warning-soft);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-soft: var(--info-soft);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-track: var(--track);
+  --color-overlay: var(--overlay);
+
   --color-kcal: var(--kcal);
+  --color-kcal-soft: var(--kcal-soft);
+  --color-kcal-strong: var(--kcal-strong);
   --color-protein: var(--protein);
+  --color-protein-soft: var(--protein-soft);
+  --color-protein-strong: var(--protein-strong);
   --color-carbs: var(--carbs);
+  --color-carbs-soft: var(--carbs-soft);
+  --color-carbs-strong: var(--carbs-strong);
   --color-fat: var(--fat);
+  --color-fat-soft: var(--fat-soft);
+  --color-fat-strong: var(--fat-strong);
   --color-fiber: var(--fiber);
+  --color-fiber-soft: var(--fiber-soft);
+  --color-fiber-strong: var(--fiber-strong);
   --color-water: var(--water);
+  --color-water-soft: var(--water-soft);
+  --color-water-strong: var(--water-strong);
   --color-weight: var(--weight);
+  --color-weight-soft: var(--weight-soft);
+  --color-weight-strong: var(--weight-strong);
   --color-activity: var(--activity);
+  --color-activity-soft: var(--activity-soft);
+  --color-activity-strong: var(--activity-strong);
   --color-over: var(--over);
+  --color-over-soft: var(--over-soft);
+  --color-over-strong: var(--over-strong);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 6px);
-  --radius-md: calc(var(--radius) - 4px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-axis: var(--chart-axis);
+  --color-chart-target: var(--chart-target);
+
+  /* Radius (skeleton names kept; card = xl = 20px) */
+  --radius-xs: calc(var(--radius) - 10px); /*  6px – checkbox, tiny tags */
+  --radius-sm: calc(var(--radius) - 6px); /* 10px – chips, small buttons */
+  --radius-md: calc(var(--radius) - 4px); /* 12px – buttons, inputs */
+  --radius-lg: var(--radius); /* 16px – list rows, tiles */
+  --radius-xl: calc(var(--radius) + 4px); /* 20px – cards */
+  --radius-2xl: calc(var(--radius) + 8px); /* 24px – hero cards */
+  --radius-3xl: calc(var(--radius) + 12px); /* 28px – bottom sheet top */
+  --radius-control: var(--radius-md);
+  --radius-card: var(--radius-xl);
+  --radius-sheet: var(--radius-3xl);
+
+  /* Shadows – theme-aware via --elevation-* */
+  --shadow-xs: var(--elevation-xs);
+  --shadow-sm: var(--elevation-sm);
+  --shadow-md: var(--elevation-md);
+  --shadow-lg: var(--elevation-lg);
+  --shadow-xl: var(--elevation-xl);
+
+  /* Fonts (variables set by next/font in src/app/layout.tsx) */
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Layout component tokens → p-gutter, gap-section, pb-bottom-nav, h-header … */
+  --spacing-gutter: var(--gutter);
+  --spacing-card: var(--card-padding);
+  --spacing-section: var(--section-gap);
+  --spacing-header: var(--header-height);
+  --spacing-bottom-nav: var(--bottom-nav-height);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+@theme {
+  /*
+   * Type scale → text-display, text-title, text-heading, text-headline, text-body,
+   * text-body-sm, text-caption, text-overline, text-stat, text-stat-sm.
+   * Each sets size + line-height + tracking + default weight.
+   */
+  --text-display: clamp(2.5rem, 2.1rem + 1.6vw, 3rem); /* 40→48 hero number */
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.035em;
+  --text-display--font-weight: 700;
+  --text-title: 1.75rem; /* 28 page title */
+  --text-title--line-height: 1.15;
+  --text-title--letter-spacing: -0.022em;
+  --text-title--font-weight: 650;
+  --text-heading: 1.25rem; /* 20 card / section heading */
+  --text-heading--line-height: 1.3;
+  --text-heading--letter-spacing: -0.012em;
+  --text-heading--font-weight: 600;
+  --text-headline: 1.0625rem; /* 17 list-row title, emphasized body */
+  --text-headline--line-height: 1.35;
+  --text-headline--letter-spacing: -0.006em;
+  --text-headline--font-weight: 600;
+  --text-body: 1rem; /* 16 */
+  --text-body--line-height: 1.5;
+  --text-body--letter-spacing: -0.003em;
+  --text-body-sm: 0.875rem; /* 14 secondary text */
+  --text-body-sm--line-height: 1.45;
+  --text-body-sm--letter-spacing: 0em;
+  --text-caption: 0.75rem; /* 12 meta, units, axis labels */
+  --text-caption--line-height: 1.35;
+  --text-caption--letter-spacing: 0.005em;
+  --text-caption--font-weight: 500;
+  --text-overline: 0.75rem; /* 12 uppercase section label (add `uppercase`) */
+  --text-overline--line-height: 1.2;
+  --text-overline--letter-spacing: 0.06em;
+  --text-overline--font-weight: 600;
+  --text-stat: 2rem; /* 32 KPI numbers */
+  --text-stat--line-height: 1.05;
+  --text-stat--letter-spacing: -0.03em;
+  --text-stat--font-weight: 650;
+  --text-stat-sm: 1.25rem; /* 20 macro values, list totals */
+  --text-stat-sm--line-height: 1.1;
+  --text-stat-sm--letter-spacing: -0.015em;
+  --text-stat-sm--font-weight: 600;
+
+  /* Easing → ease-out, ease-in, ease-in-out, ease-emphasized, ease-spring */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  /* damped spring k=300 c=24 m=1 (~5 % overshoot, settles ≈ 550 ms) */
+  --ease-spring: linear(
+    0,
+    0.063,
+    0.209,
+    0.386,
+    0.56,
+    0.713,
+    0.835,
+    0.925,
+    0.987,
+    1.024,
+    1.043,
+    1.049,
+    1.047,
+    1.04,
+    1.031,
+    1.023,
+    1.015,
+    1.009,
+    1.004,
+    1.001,
+    0.999,
+    0.998,
+    0.998,
+    0.998,
+    1
+  );
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Content widths → max-w-content, max-w-wide */
+  --container-content: 40rem;
+  --container-wide: 72rem;
+
+  /* Entrance / exit animations (exit ≈ 65 % of enter) */
+  --animate-fade-in: fade-in 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-out: fade-out 130ms cubic-bezier(0.7, 0, 0.84, 0) both;
+  --animate-scale-in: scale-in 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-scale-out: scale-out 130ms cubic-bezier(0.7, 0, 0.84, 0) both;
+  --animate-slide-up: slide-up 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-down: slide-down 200ms cubic-bezier(0.7, 0, 0.84, 0) both;
+  --animate-rise: rise 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-pop: pop 550ms var(--ease-spring) both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  @keyframes scale-out {
+    to {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  @keyframes slide-up {
+    from {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes slide-down {
+    to {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+  }
+  @keyframes shimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * UTILITIES
+ * ------------------------------------------------------------------------- */
+
+/* Tabular figures for every number that changes or is compared. */
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Big stat numbers: tabular + slightly tighter + optical sizing. */
+@utility numeric {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings:
+    "tnum" 1,
+    "cv05" 1;
+  font-optical-sizing: auto;
+}
+
+/* Explicit focus ring for custom interactive elements (base applies it globally). */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Skeleton shimmer surface */
+@utility skeleton {
+  background-color: var(--muted);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklab, var(--card) 55%, transparent) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+/* Safe-area insets (iOS notch / home indicator). Requires viewportFit: "cover". */
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@utility pl-safe {
+  padding-left: env(safe-area-inset-left, 0px);
+}
+@utility pr-safe {
+  padding-right: env(safe-area-inset-right, 0px);
+}
+@utility px-safe {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+@utility py-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@utility mb-safe {
+  margin-bottom: env(safe-area-inset-bottom, 0px);
+}
+@utility top-safe {
+  top: env(safe-area-inset-top, 0px);
+}
+@utility bottom-safe {
+  bottom: env(safe-area-inset-bottom, 0px);
+}
+/* pb-safe-offset-4 → inset + 1rem · pb-safe-offset-bottom-nav → inset + nav height */
+@utility pb-safe-offset-* {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + --spacing(--value(integer)));
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + --value(--spacing-*));
+}
+@utility pt-safe-offset-* {
+  padding-top: calc(env(safe-area-inset-top, 0px) + --spacing(--value(integer)));
+  padding-top: calc(env(safe-area-inset-top, 0px) + --value(--spacing-*));
+}
+@utility bottom-safe-offset-* {
+  bottom: calc(env(safe-area-inset-bottom, 0px) + --spacing(--value(integer)));
+  bottom: calc(env(safe-area-inset-bottom, 0px) + --value(--spacing-*));
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+/* ---------------------------------------------------------------------------
+ * BASE
+ * ------------------------------------------------------------------------- */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  ::selection {
+    background-color: var(--selection);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  button,
+  [role="button"],
+  a,
+  label[for],
+  select,
+  summary {
+    touch-action: manipulation;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
