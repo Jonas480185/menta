@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
+  check,
   date,
   doublePrecision,
   index,
@@ -31,10 +32,24 @@ export const weightEntries = pgTable(
     source: text("source").notNull().default("manual"),
     ...timestamps,
   },
-  (t) => [uniqueIndex("weight_entries_user_date_uq").on(t.userId, t.date)],
+  (t) => [
+    /** One entry per day; also serves the weight trend range scan. */
+    uniqueIndex("weight_entries_user_date_uq").on(t.userId, t.date),
+    check("weight_entries_weight_range", sql`${t.weightKg} between 20 and 400`),
+    check(
+      "weight_entries_body_fat_range",
+      sql`${t.bodyFatPct} is null or ${t.bodyFatPct} between 0 and 100`,
+    ),
+  ],
 );
 
-export const activityTypeEnum = pgEnum("activity_type", ["steps", "cardio", "strength", "sport", "other"]);
+export const activityTypeEnum = pgEnum("activity_type", [
+  "steps",
+  "cardio",
+  "strength",
+  "sport",
+  "other",
+]);
 /** Integration source – manual today, wearables later. */
 export const activitySourceEnum = pgEnum("activity_source", [
   "manual",
@@ -73,6 +88,12 @@ export const activities = pgTable(
     uniqueIndex("activities_source_external_uq")
       .on(t.userId, t.source, t.externalId)
       .where(sql`${t.externalId} is not null`),
+    check(
+      "activities_values_non_negative",
+      sql`coalesce(${t.durationMin}, 0) >= 0 and coalesce(${t.steps}, 0) >= 0
+        and coalesce(${t.distanceKm}, 0) >= 0 and coalesce(${t.caloriesBurned}, 0) >= 0`,
+    ),
+    check("activities_name_not_blank", sql`length(trim(${t.name})) > 0`),
   ],
 );
 
@@ -86,10 +107,15 @@ export const waterEntries = pgTable(
       .references(() => user.id, { onDelete: "cascade" }),
     date: date("date", { mode: "string" }).notNull(),
     amountMl: integer("amount_ml").notNull(),
-    loggedAt: timestamp("logged_at", { withTimezone: true }).notNull().defaultNow(),
+    loggedAt: timestamp("logged_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
     ...timestamps,
   },
-  (t) => [index("water_entries_user_date_idx").on(t.userId, t.date)],
+  (t) => [
+    index("water_entries_user_date_idx").on(t.userId, t.date),
+    check("water_entries_amount_positive", sql`${t.amountMl} > 0`),
+  ],
 );
 
 /** Unlocked achievements. Streaks/consistency are computed, not stored. Owner: Gamification. */
@@ -100,7 +126,9 @@ export const userAchievements = pgTable(
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
     achievementKey: text("achievement_key").notNull(),
-    unlockedAt: timestamp("unlocked_at", { withTimezone: true }).notNull().defaultNow(),
+    unlockedAt: timestamp("unlocked_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
     meta: jsonb("meta").$type<Record<string, unknown>>(),
   },
   (t) => [primaryKey({ columns: [t.userId, t.achievementKey] })],
@@ -117,7 +145,9 @@ export const mascotInteractions = pgTable(
     date: date("date", { mode: "string" }).notNull(),
     messageKey: text("message_key").notNull(),
     action: text("action").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
   },
   (t) => [index("mascot_interactions_user_date_idx").on(t.userId, t.date)],
 );
