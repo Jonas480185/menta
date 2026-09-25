@@ -9,9 +9,9 @@
 
 | # | Journey | Taps | Zielzeit | Module |
 |---|---|---|---|---|
-| J1 | Signup → Onboarding → erster Eintrag | ~14 | ≤ 3 min | Auth, Onboarding, Calorie Engine, Macro Engine, Meal Logging |
+| J1 | Signup → Onboarding → erster Eintrag | ~15 | ≤ 3 min | Auth, Onboarding, Calorie Engine, Macro Engine, Meal Logging |
 | J2 | Frühstück erneut loggen | 2 | ≤ 5 s | Meal Logging, Today Dashboard |
-| J3 | Suchen & neues Lebensmittel loggen | 3 | ≤ 15 s | Food Search, Meal Logging |
+| J3 | Suchen & neues Lebensmittel loggen | 4 | ≤ 15 s | Food Search, Meal Logging |
 | J4 | Barcode scannen (gefunden / unbekannt) | 3 / ~7 | ≤ 10 s / ≤ 60 s | Barcode, Custom Foods, Meal Logging |
 | J5 | Eigenes Lebensmittel anlegen | ~4 | ≤ 60 s | Custom Foods |
 | J6 | Rezept anlegen & Portion loggen | ~12 | ≤ 3 min (5 Zutaten) | Recipes, Meal Logging |
@@ -40,7 +40,7 @@
    „Low Carb“, „Eigene Werte“ → **„Weiter“**.
 9. **Überblick**: alle Werte als editierbare Zeilen (Tap öffnet den jeweiligen Schritt) → **„Plan starten“**.
 10. `/today` mit Empty State: Milo „Dein Plan steht! Was hattest du zuletzt?“ + CTA **„Erstes Essen eintragen“**
-    → `/log` (Mahlzeit nach Uhrzeit vorausgewählt) → Suche „Banane“ → Tap Treffer → **„Hinzufügen“**.
+    → `/log` (Mahlzeit nach Uhrzeit vorausgewählt) → Suchfeld, „Banane“ → Treffer → **„Hinzufügen“**.
 11. Zurück auf `/today`: Ring animiert von 0 auf 105 kcal, Milo `celebrating` „Erster Eintrag! Weiter so.“
 
 **Edge Cases**
@@ -72,14 +72,15 @@ Menge = zuletzt verwendete Portion (`food_usage.last_serving_id`, `last_quantity
   ersten Eintrag reicht ein Tap.“
 - Lebensmittel inzwischen gelöscht/archiviert: Eintrag aus Snapshot kopieren (Name, Nährwerte), Hinweis nicht nötig.
 
-## J3 – Suchen & neues Lebensmittel loggen (3 Taps, ≤ 15 s)
+## J3 – Suchen & neues Lebensmittel loggen (4 Taps, ≤ 15 s)
 
-1. Tap **(+)** (1) → `/log`, Suchfeld hat Autofokus (Tastatur offen).
+1. Tap **(+)** (1) → `/log` → Tap Suchfeld (2). Kein Autofokus auf Mobile, damit „Wie gestern“ und „Zuletzt“
+   sichtbar bleiben (Desktop: Autofokus).
 2. Tippen „skyr“ → lokale Treffer nach ≤ 300 ms (Debounce 150 ms), Rangfolge: eigene/Recents → Favoriten →
    lokale DB (Popularität) → externe Treffer werden unten nachgeladen („Weitere Treffer aus Open Food Facts …“).
-3. Tap Treffer „Skyr Natur · Arla · 63 kcal / 100 g“ (2) → `/log/food/[id]` mit Standardportion, Menge 1,
+3. Tap Treffer „Skyr Natur · Arla · 63 kcal / 100 g“ (3) → `/log/food/[id]` mit Standardportion, Menge 1,
    vorausgewählter Mahlzeit, Live-Nährwerten.
-4. **„Hinzufügen“** (3) → zurück zu `/log` mit Toast; Suchfeld geleert und fokussiert für den nächsten Eintrag.
+4. **„Hinzufügen“** (4) → zurück zu `/log` mit Toast; Suchfeld geleert und fokussiert für den nächsten Eintrag.
 
 **Edge Cases**
 - Keine Treffer: „Nichts gefunden für „skyrr“.“ + Aktionen „Barcode scannen“, „Eigenes Lebensmittel anlegen“
