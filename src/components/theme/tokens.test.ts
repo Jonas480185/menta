@@ -180,3 +180,12 @@ describe("contrastRatio", () => {
     expect(contrastRatio("#fff", "#ffffff")).toBe(1);
   });
 });
+
+describe("extractBlockVars", () => {
+  it("reads selector lists and ignores indented/nested blocks", () => {
+    const sample = `:root,\n.light {\n  --a: #fff; /* c */\n}\n@media (x) {\n  :root {\n    --a: #000;\n  }\n}\n.dark {\n  --a: var(--b);\n}`;
+    const tokens = loadThemeTokens(sample + "\n:root {\n  --b: #111;\n}");
+    expect(tokens.light("--a")).toBe("#fff");
+    expect(tokens.dark("--a")).toBe("#111");
+  });
+});

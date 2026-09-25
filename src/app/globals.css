@@ -86,9 +86,10 @@
 }
 
 /* ---------------------------------------------------------------------------
- * 2 · SEMANTICS – LIGHT
+ * 2 · SEMANTICS – LIGHT   (`.light` = force-light island inside dark UI)
  * ------------------------------------------------------------------------- */
-:root {
+:root,
+.light {
   color-scheme: light;
 
   /* Base surfaces */

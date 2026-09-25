@@ -38,13 +38,17 @@ export function contrastRatio(a: string, b: string): number {
 
 export type TokenMap = Record<string, string>;
 
-/** Collect custom properties of every top-level (unindented) `selector { … }` block. */
+/**
+ * Collect custom properties of every top-level (unindented) rule whose selector list
+ * contains `selector`, e.g. `:root, .light { … }` matches ":root" and ".light".
+ */
 export function extractBlockVars(css: string, selector: string): TokenMap {
   const map: TokenMap = {};
-  const escaped = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const blockRe = new RegExp(`^${escaped}\\s*\\{([^}]*)\\}`, "gm");
+  const blockRe = /^([:.\w][^{}@]*?)\{([^}]*)\}/gm;
   for (const match of css.matchAll(blockRe)) {
-    const body = (match[1] ?? "").replace(/\/\*[\s\S]*?\*\//g, "");
+    const selectors = (match[1] ?? "").split(",").map((s) => s.trim());
+    if (!selectors.includes(selector)) continue;
+    const body = (match[2] ?? "").replace(/\/\*[\s\S]*?\*\//g, "");
     for (const decl of body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)) {
       map[decl[1]!] = decl[2]!.trim().replace(/\s+/g, " ");
     }
