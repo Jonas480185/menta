@@ -106,4 +106,19 @@ describe("better-auth integration (email + password)", () => {
     const again = await auth.api.signInEmail({ body: { email, password: "neues-passwort" } });
     expect(again.user.email).toBe(email);
   });
+
+  it("verifies the password (delete-account guard) and updates the name", async () => {
+    const res = await auth.api.signInEmail({ body: { email, password: "neues-passwort" }, returnHeaders: true });
+    const headers = new Headers({ cookie: (res.headers.get("set-cookie") ?? "").split(";")[0] });
+
+    const wrong = await errorOf(auth.api.verifyPassword({ body: { password: "falsch-falsch" }, headers }));
+    expect(wrong.code).toBe("INVALID_PASSWORD");
+    await expect(auth.api.verifyPassword({ body: { password: "neues-passwort" }, headers })).resolves.toMatchObject({
+      status: true,
+    });
+
+    await auth.api.updateUser({ body: { name: "Lena M." }, headers });
+    const [row] = await db.select().from(user).where(eq(user.email, email));
+    expect(row.name).toBe("Lena M.");
+  });
 });
