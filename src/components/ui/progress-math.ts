@@ -3,6 +3,8 @@
  * Framework-free and fully unit-tested (progress-math.test.ts).
  */
 
+import { formatNumber } from "./number-utils";
+
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
@@ -97,4 +99,24 @@ export function barSegments(consumed: number, target: number): BarSegments {
   }
   const targetPct = (sanitize(target) / sanitize(consumed)) * 100;
   return { basePct: targetPct, overPct: 100 - targetPct, targetPct };
+}
+
+export interface DescribeProgressOptions {
+  unit?: string;
+  decimals?: number;
+}
+
+/**
+ * German, screen-reader friendly summary used as `aria-valuetext`, e.g.
+ * "1.450 von 2.000 kcal, 550 kcal übrig" / "2.300 von 2.000 kcal, 300 kcal über dem Ziel".
+ */
+export function describeProgress(value: number, max: number, { unit = "", decimals = 0 }: DescribeProgressOptions = {}): string {
+  const u = unit ? ` ${unit}` : "";
+  const fmt = (n: number) => formatNumber(n, { decimals });
+  const p = computeProgress(value, max);
+  if (sanitize(max) === 0) return `${fmt(sanitize(value))}${u}, kein Ziel festgelegt`;
+  const head = `${fmt(sanitize(value))} von ${fmt(sanitize(max))}${u}`;
+  if (p.isOver) return `${head}, ${fmt(p.overAmount)}${u} über dem Ziel`;
+  if (p.remaining === 0) return `${head}, Ziel erreicht`;
+  return `${head}, ${fmt(p.remaining)}${u} übrig`;
 }
