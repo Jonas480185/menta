@@ -16,7 +16,9 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx scripts/db/migrate.ts",
     "db:seed": "tsx scripts/db/seed.ts",
-    "db:reset": "rm -rf .data/pglite && pnpm db:migrate && pnpm db:seed"
+    "db:reset": "rm -rf .data/pglite && pnpm db:migrate && pnpm db:seed",
+    "db:bench-search": "tsx scripts/db/bench-search.ts",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.8",
