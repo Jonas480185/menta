@@ -181,6 +181,16 @@ describe("upsertNormalizedFoods", () => {
     expect((await getFoodDetails(db, ids.get("curated:pop")!))?.popularity).toBe(50);
   });
 
+  it("never overwrites a row that was refreshed more recently (e.g. old seed snapshot)", async () => {
+    const f = food({ sourceId: "fresh", nutrients: { kcal: 372, proteinG: 13.5, carbsG: 58.7, fatG: 7 } });
+    const ids = await upsertNormalizedFoods(db, [f], { fetchedAt: new Date("2026-09-01") });
+    const stale = { ...f, nutrients: { ...f.nutrients, kcal: 360 } };
+    const report = await upsertNormalizedFoodsDetailed(db, [stale], { fetchedAt: new Date("2026-01-01") });
+    expect(report.stats).toMatchObject({ inserted: 0, updated: 0, skippedNewer: 1 });
+    expect(report.ids.get("curated:fresh")).toBe(ids.get("curated:fresh"));
+    expect((await getFoodDetails(db, ids.get("curated:fresh")!))?.nutrients.kcal).toBe(372);
+  });
+
   it("handles thousands of rows in batches", async () => {
     const many = Array.from({ length: 1200 }, (_, i) => food({ source: "usda", sourceId: `bulk-${i}`, name: `Bulk Food ${i}` }));
     const t0 = Date.now();

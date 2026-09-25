@@ -13,26 +13,22 @@
  *
  * No `server-only` import: used by tsx import/seed scripts as well.
  */
-import { and, asc, eq, inArray, isNull, sql } from "drizzle-orm";
+import { and, asc, eq, inArray, isNull, or, sql } from "drizzle-orm";
 import type { DbOrTx } from "@/server/db/create";
 import { foodBrands, foods, foodServings } from "@/server/db/schema";
 import type { FoodDetails, NormalizedFood, NormalizedServing } from "@/server/food/types";
 import { normalizeFoodText } from "@/domain/food/normalize";
-import { normalizeBarcode } from "@/domain/food/barcode";
-import { isValidServingGrams } from "@/domain/food/units";
-import { validateNormalizedFood, type DataQuality, type ValidationIssue } from "@/domain/food/validation";
-import { finalizeServings } from "@/server/food/normalize/common";
+import type { ValidationIssue } from "@/domain/food/validation";
+import { dedupePrepared, foodKey, foodRichness, prepareFood, type PreparedFood } from "@/server/food/normalize/prepare";
 
-/** Stable key of a normalized food: "off:4014400400007", "usda:173944", "curated:apfel". */
-export function foodKey(food: Pick<NormalizedFood, "source" | "sourceId">): string {
-  return `${food.source}:${food.sourceId ?? ""}`;
-}
+export { foodKey, foodRichness } from "@/server/food/normalize/prepare";
 
 export interface UpsertOptions {
   /** Foods per transaction (default 500). */
   batchSize?: number;
   /** Clean records from these sources become "verified" (default: curated only). */
   trusted?: (food: NormalizedFood) => boolean;
+  /** Written to foods.fetched_at (default now). Rows with a newer fetched_at are not overwritten. */
   fetchedAt?: Date;
   /** Cross-source barcode dedupe against the DB (default true). */
   dedupeByBarcode?: boolean;
@@ -48,6 +44,8 @@ export interface UpsertStats {
   inserted: number;
   updated: number;
   archived: number;
+  /** Existing rows with newer `fetched_at` that were left untouched. */
+  skippedNewer: number;
 }
 
 export interface UpsertReport {
@@ -60,89 +58,6 @@ export interface UpsertReport {
   errorCounts: Record<string, number>;
 }
 
-interface Prepared {
-  key: string;
-  food: NormalizedFood;
-  barcode: string | null;
-  quality: DataQuality;
-  flags: string[];
-  richness: number;
-}
-
-const QUALITY_RANK: Record<DataQuality, number> = { verified: 4, complete: 3, partial: 1, suspect: 0 };
-
-/** Higher = better record for the same product (used for barcode dedupe). */
-export function foodRichness(input: {
-  quality: DataQuality;
-  nutrients: Record<string, unknown>;
-  servingCount: number;
-  language: string | null;
-  brandName: string | null;
-  imageUrl: string | null;
-}): number {
-  const nutrientFields = Object.entries(input.nutrients).filter(
-    ([k, v]) => k !== "micronutrients" && typeof v === "number",
-  ).length;
-  const micros = input.nutrients.micronutrients ? Object.keys(input.nutrients.micronutrients as object).length : 0;
-  return (
-    QUALITY_RANK[input.quality] * 100 +
-    (input.language === "de" ? 20 : 0) +
-    nutrientFields * 2 +
-    Math.min(micros, 10) +
-    Math.min(input.servingCount, 5) +
-    (input.brandName ? 2 : 0) +
-    (input.imageUrl ? 2 : 0)
-  );
-}
-
-function sanitizeServings(food: NormalizedFood): NormalizedServing[] {
-  const valid = food.servings.filter(
-    (s) => isValidServingGrams(s.grams) && s.amount > 0 && Number.isFinite(s.amount) && s.label?.trim(),
-  );
-  return finalizeServings(
-    valid.map((s) => ({ ...s, label: s.label.trim().slice(0, 120) })),
-    food.nutrientBasis,
-  );
-}
-
-function prepare(
-  food: NormalizedFood,
-  trusted: (f: NormalizedFood) => boolean,
-): { ok: true; value: Prepared } | { ok: false; errors: ValidationIssue[] } {
-  if (!food.sourceId) {
-    return { ok: false, errors: [{ code: "missing_source_id", field: "sourceId", message: "sourceId fehlt." }] };
-  }
-  const barcode = food.barcode ? normalizeBarcode(food.barcode, { requireValidChecksum: false }) : null;
-  const cleaned: NormalizedFood = {
-    ...food,
-    name: food.name?.replace(/\s+/g, " ").trim() ?? "",
-    brandName: food.brandName?.replace(/\s+/g, " ").trim() || null,
-    barcode,
-    servings: sanitizeServings(food),
-  };
-  const v = validateNormalizedFood(cleaned, { trusted: trusted(food) });
-  if (!v.valid) return { ok: false, errors: v.errors };
-  const value: NormalizedFood = { ...cleaned, nutrients: v.nutrients, qualityFlags: v.flags };
-  return {
-    ok: true,
-    value: {
-      key: foodKey(food),
-      food: value,
-      barcode,
-      quality: v.quality,
-      flags: v.flags,
-      richness: foodRichness({
-        quality: v.quality,
-        nutrients: v.nutrients as unknown as Record<string, unknown>,
-        servingCount: value.servings.length,
-        language: value.language,
-        brandName: value.brandName,
-        imageUrl: value.imageUrl,
-      }),
-    },
-  };
-}
-
 const emptyStats = (): UpsertStats => ({
   received: 0,
   invalid: 0,
@@ -151,6 +66,7 @@ const emptyStats = (): UpsertStats => ({
   inserted: 0,
   updated: 0,
   archived: 0,
+  skippedNewer: 0,
 });
 
 /** Upserts foods and returns foodKey → id. See `upsertNormalizedFoodsDetailed` for stats. */
@@ -182,39 +98,22 @@ async function upsertBatch(db: DbOrTx, batch: readonly NormalizedFood[], opts: U
   stats.received += batch.length;
 
   // 1) validate + in-batch dedupe (by key, then by barcode)
-  const byKey = new Map<string, Prepared>();
-  const aliases = new Map<string, string>(); // dropped key → winning key
+  const prepared: PreparedFood[] = [];
   for (const food of batch) {
-    const r = prepare(food, trusted);
+    const r = prepareFood(food, trusted);
     if (!r.ok) {
       stats.invalid++;
       for (const e of r.errors) report.errorCounts[e.code] = (report.errorCounts[e.code] ?? 0) + 1;
       if (report.rejected.length < 200) report.rejected.push({ key: foodKey(food), name: food.name, errors: r.errors });
       continue;
     }
-    const p = r.value;
-    const existing = byKey.get(p.key);
-    if (existing) {
-      stats.duplicates++;
-      if (p.richness > existing.richness) byKey.set(p.key, p);
-      continue;
-    }
-    byKey.set(p.key, p);
+    prepared.push(r.value);
   }
-  const byBarcode = new Map<string, Prepared>();
-  for (const p of [...byKey.values()]) {
-    if (!p.barcode) continue;
-    const other = byBarcode.get(p.barcode);
-    if (!other) {
-      byBarcode.set(p.barcode, p);
-      continue;
-    }
-    stats.duplicates++;
-    const [winner, loser] = p.richness > other.richness ? [p, other] : [other, p];
-    byBarcode.set(p.barcode, winner);
-    byKey.delete(loser.key);
-    aliases.set(loser.key, winner.key);
-  }
+  const deduped = dedupePrepared(prepared);
+  stats.duplicates += deduped.duplicates;
+  const aliases = deduped.aliases;
+  const byKey = new Map(deduped.winners.map((p) => [p.key, p]));
+  const byBarcode = new Map(deduped.winners.filter((p) => p.barcode).map((p) => [p.barcode!, p]));
 
   await db.transaction(async (tx) => {
     // 2) barcode dedupe against existing active rows of other identities
@@ -355,6 +254,8 @@ async function upsertBatch(db: DbOrTx, batch: readonly NormalizedFood[], opts: U
       .onConflictDoUpdate({
         target: [foods.source, foods.sourceId],
         targetWhere: sql`${foods.sourceId} is not null`,
+        // Never overwrite a row with older data (e.g. seed snapshot after a live refresh).
+        setWhere: sql`${foods.fetchedAt} is null or ${foods.fetchedAt} <= excluded.fetched_at`,
         set: {
           name: ex("name"),
           nameNormalized: ex("name_normalized"),
@@ -403,6 +304,21 @@ async function upsertBatch(db: DbOrTx, batch: readonly NormalizedFood[], opts: U
       else stats.updated++;
     }
     for (const [k, v] of idByKey) ids.set(k, v);
+
+    // Rows skipped by the newer-data guard are not returned – resolve their ids.
+    const skipped = winners.filter((p) => !idByKey.has(p.key));
+    if (skipped.length) {
+      const rows = await tx
+        .select({ id: foods.id, source: foods.source, sourceId: foods.sourceId })
+        .from(foods)
+        .where(
+          or(
+            ...skipped.map((p) => and(eq(foods.source, p.food.source), eq(foods.sourceId, p.food.sourceId!))),
+          ),
+        );
+      for (const r of rows) ids.set(`${r.source}:${r.sourceId}`, r.id);
+      stats.skippedNewer += rows.length;
+    }
 
     // 5) servings
     await syncServings(
