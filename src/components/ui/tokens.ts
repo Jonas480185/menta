@@ -103,3 +103,20 @@ export const fieldClasses = [
   "aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive/25",
   "disabled:cursor-not-allowed disabled:opacity-50",
 ].join(" ");
+
+/**
+ * Floating surface (Popover, Select, DropdownMenu). Enter animation uses `@starting-style`
+ * (`starting:` variant) so no animation plugin is needed; exits are instant by design.
+ */
+export const floatingSurface = [
+  "z-50 rounded-lg border border-border bg-popover text-popover-foreground shadow-lg shadow-foreground/10 outline-none",
+  "transition-[opacity,scale] duration-150 ease-out starting:scale-95 starting:opacity-0 motion-reduce:transition-none",
+].join(" ");
+
+/** Menu / listbox row: 44 px on touch, compact on precise pointers. */
+export const menuItem = [
+  "relative flex min-h-11 w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-2 text-base outline-none select-none pointer-fine:min-h-9 pointer-fine:text-sm",
+  "focus:bg-accent focus:text-accent-foreground data-highlighted:bg-accent data-highlighted:text-accent-foreground",
+  "data-disabled:pointer-events-none data-disabled:opacity-50",
+  "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground",
+].join(" ");
