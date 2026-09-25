@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
   arcLength,
-  barSegments,
   clamp,
   computeProgress,
   dashOffset,
@@ -63,18 +62,9 @@ describe("progress-math", () => {
     expect(dashOffset(100, -1)).toBe(100);
   });
 
-  it("lays out bar segments under and over target", () => {
-    expect(barSegments(70, 140)).toEqual({ basePct: 50, overPct: 0, targetPct: 100 });
-    const over = barSegments(160, 140);
-    expect(over.targetPct).toBeCloseTo(87.5);
-    expect(over.basePct).toBeCloseTo(87.5);
-    expect(over.overPct).toBeCloseTo(12.5);
-    expect(barSegments(10, 0)).toEqual({ basePct: 0, overPct: 0, targetPct: 100 });
-  });
-
   it("describes progress in German", () => {
     expect(describeProgress(1450, 2000, { unit: "kcal" })).toBe("1.450 von 2.000 kcal, 550 kcal übrig");
-    expect(describeProgress(2300, 2000, { unit: "kcal" })).toBe("2.300 von 2.000 kcal, 300 kcal über dem Ziel");
+    expect(describeProgress(2300, 2000, { unit: "kcal" })).toBe("2.300 von 2.000 kcal, 300 kcal über Ziel");
     expect(describeProgress(140, 140, { unit: "g" })).toBe("140 von 140 g, Ziel erreicht");
     expect(describeProgress(12.5, 0, { unit: "g", decimals: 1 })).toBe("12,5 g, kein Ziel festgelegt");
   });

@@ -3,7 +3,7 @@
  * Framework-free and fully unit-tested (progress-math.test.ts).
  */
 
-import { formatNumber } from "./number-utils";
+import { formatNumber } from "@/lib/format";
 
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
@@ -78,29 +78,6 @@ export function dashOffset(circumference: number, fraction: number): number {
   return circumference - arcLength(circumference, fraction);
 }
 
-export interface BarSegments {
-  /** Width of the in-target fill, in % of the track. */
-  basePct: number;
-  /** Width of the over-target segment (starts at basePct), in % of the track. */
-  overPct: number;
-  /** Position of the target marker, in % of the track (100 when not over). */
-  targetPct: number;
-}
-
-/**
- * Linear bar layout. Under target the track represents the target; once over, the
- * track rescales to the consumed amount so the target marker moves left and the
- * surplus is shown as a separate segment (no clipping, no overflow outside the card).
- */
-export function barSegments(consumed: number, target: number): BarSegments {
-  const p = computeProgress(consumed, target);
-  if (!p.isOver) {
-    return { basePct: p.fill * 100, overPct: 0, targetPct: 100 };
-  }
-  const targetPct = (sanitize(target) / sanitize(consumed)) * 100;
-  return { basePct: targetPct, overPct: 100 - targetPct, targetPct };
-}
-
 export interface DescribeProgressOptions {
   unit?: string;
   decimals?: number;
@@ -108,15 +85,19 @@ export interface DescribeProgressOptions {
 
 /**
  * German, screen-reader friendly summary used as `aria-valuetext`, e.g.
- * "1.450 von 2.000 kcal, 550 kcal übrig" / "2.300 von 2.000 kcal, 300 kcal über dem Ziel".
+ * "1.450 von 2.000 kcal, 550 kcal übrig" / "2.300 von 2.000 kcal, 300 kcal über Ziel".
  */
-export function describeProgress(value: number, max: number, { unit = "", decimals = 0 }: DescribeProgressOptions = {}): string {
+export function describeProgress(
+  value: number,
+  max: number,
+  { unit = "", decimals = 0 }: DescribeProgressOptions = {},
+): string {
   const u = unit ? ` ${unit}` : "";
-  const fmt = (n: number) => formatNumber(n, { decimals });
+  const fmt = (n: number) => formatNumber(n, { maxFractionDigits: decimals });
   const p = computeProgress(value, max);
   if (sanitize(max) === 0) return `${fmt(sanitize(value))}${u}, kein Ziel festgelegt`;
   const head = `${fmt(sanitize(value))} von ${fmt(sanitize(max))}${u}`;
-  if (p.isOver) return `${head}, ${fmt(p.overAmount)}${u} über dem Ziel`;
+  if (p.isOver) return `${head}, ${fmt(p.overAmount)}${u} über Ziel`;
   if (p.remaining === 0) return `${head}, Ziel erreicht`;
   return `${head}, ${fmt(p.remaining)}${u} übrig`;
 }

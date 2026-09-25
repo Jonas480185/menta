@@ -1,12 +1,12 @@
 "use client";
 
-import { motion, useTransform } from "motion/react";
+import { motion } from "motion/react";
 
+import { formatNumber, NBSP } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
-import { formatNumber } from "./number-utils";
-import { barSegments, clamp, computeProgress, describeProgress, sanitize } from "./progress-math";
-import { toneBg, toneText, type Tone } from "./tokens";
+import { clamp, computeProgress, describeProgress, sanitize } from "./progress-math";
+import { toneFill, type Tone } from "./tokens";
 import { useProgressSpring } from "./use-progress-spring";
 
 export interface MacroBarProps extends Omit<React.ComponentProps<"div">, "children"> {
@@ -17,16 +17,16 @@ export interface MacroBarProps extends Omit<React.ComponentProps<"div">, "childr
   unit?: string;
   tone?: Tone;
   decimals?: number;
-  /** Show "58 g übrig" / "20 g über dem Ziel" below the bar (default true). */
+  /** Show "58 g übrig" / "6 g über Ziel" below the bar (default true). */
   showRemaining?: boolean;
   size?: "sm" | "md";
   animate?: boolean;
 }
 
 /**
- * Linear macro progress: label, "consumed / target unit", bar and remaining text.
- * Over target the bar rescales: the tone segment ends at the target and the surplus is
- * a separate `over` segment after a small gap.
+ * Linear macro progress (docs/design/visual-language.md §2): dot + label, "92 / 140 g",
+ * an 8 px track with a `scaleX` spring fill. Over target the fill stays at 100 % in the
+ * macro colour, a 12 px `over` cap marks the end and "{n} g über Ziel" appears below.
  */
 function MacroBar({
   label,
@@ -42,30 +42,33 @@ function MacroBar({
   ...props
 }: MacroBarProps) {
   const progress = computeProgress(consumed, target);
-  const segments = barSegments(consumed, target);
   const hasTarget = sanitize(target) > 0;
-  const fmt = (n: number) => formatNumber(n, { decimals });
-
-  const base = useProgressSpring(segments.basePct, animate);
-  const over = useProgressSpring(segments.overPct, animate);
-  const baseClip = useTransform(base, (b) => `inset(0 ${100 - clamp(b, 0, 100)}% 0 0 round 9999px)`);
-  const overClip = useTransform([base, over], ([b, o]: number[]) => {
-    const start = clamp(b, 0, 100);
-    const end = clamp(b + o, 0, 100);
-    return `inset(0 ${100 - end}% 0 calc(${start}% + 3px) round 9999px)`;
-  });
+  const fmt = (n: number) => formatNumber(n, { maxFractionDigits: decimals });
+  const withUnit = (n: number) => (unit ? `${fmt(n)}${NBSP}${unit}` : fmt(n));
+  const scaleX = useProgressSpring(progress.fill, animate);
 
   return (
-    <div data-slot="macro-bar" data-over={progress.isOver || undefined} className={cn("flex flex-col gap-1.5", className)} {...props}>
+    <div
+      data-slot="macro-bar"
+      data-over={progress.isOver || undefined}
+      className={cn("flex flex-col gap-1.5", className)}
+      {...props}
+    >
       <div className="flex items-baseline justify-between gap-3">
-        <span className={cn("flex items-center gap-2 font-medium text-foreground", size === "md" ? "text-sm" : "text-xs")}>
-          <span aria-hidden="true" className={cn("size-2 rounded-full", toneBg[tone])} />
+        <span
+          className={cn(
+            "flex items-center gap-2 font-medium text-foreground",
+            size === "md" ? "text-body-sm" : "text-caption",
+          )}
+        >
+          <span aria-hidden="true" className={cn("size-2 shrink-0 rounded-full", toneFill[tone])} />
           {label}
         </span>
-        <span className={cn("text-muted-foreground tabular-nums", size === "md" ? "text-sm" : "text-xs")}>
-          <span className="font-semibold text-foreground">{fmt(sanitize(consumed))}</span>
-          {hasTarget && <> / {fmt(sanitize(target))}</>}
-          {unit && ` ${unit}`}
+        <span
+          className={cn("text-muted-foreground tabular", size === "md" ? "text-body-sm" : "text-caption")}
+        >
+          <span className="numeric font-semibold text-foreground">{fmt(sanitize(consumed))}</span>
+          {hasTarget ? ` / ${withUnit(sanitize(target))}` : unit ? `${NBSP}${unit}` : ""}
         </span>
       </div>
       <div
@@ -75,31 +78,32 @@ function MacroBar({
         aria-valuemax={sanitize(target)}
         aria-valuenow={Math.round(clamp(sanitize(consumed), 0, sanitize(target)))}
         aria-valuetext={describeProgress(consumed, target, { unit, decimals })}
-        className={cn("relative w-full overflow-hidden rounded-full", size === "md" ? "h-2.5" : "h-1.5")}
+        className={cn(
+          "relative w-full overflow-hidden rounded-full bg-track",
+          size === "md" ? "h-2" : "h-1.5",
+        )}
       >
-        <div aria-hidden="true" className={cn("absolute inset-0 opacity-16", toneBg[tone])} />
-        <motion.div aria-hidden="true" className={cn("absolute inset-0", toneBg[tone])} style={{ clipPath: baseClip }} />
+        <motion.div
+          aria-hidden="true"
+          className={cn("absolute inset-0 origin-left rounded-full", toneFill[tone])}
+          style={{ scaleX }}
+        />
         {progress.isOver && (
-          <motion.div aria-hidden="true" className="absolute inset-0 bg-over" style={{ clipPath: overClip }} />
+          <span
+            data-slot="macro-bar-over"
+            aria-hidden="true"
+            className="absolute inset-y-0 right-0 w-3 rounded-full bg-over ring-2 ring-card"
+          />
         )}
       </div>
       {showRemaining && hasTarget && (
-        <p className={cn("text-muted-foreground tabular-nums", size === "md" ? "text-xs" : "text-[11px]")}>
+        <p className="text-caption tabular">
           {progress.isOver ? (
-            <>
-              <span className={cn("font-medium", toneText.over)}>
-                {fmt(progress.overAmount)}
-                {unit && ` ${unit}`}
-              </span>{" "}
-              über dem Ziel
-            </>
+            <span className="text-over-strong">{withUnit(progress.overAmount)} über Ziel</span>
           ) : progress.remaining === 0 ? (
-            "Ziel erreicht"
+            <span className="text-muted-foreground">Ziel erreicht</span>
           ) : (
-            <>
-              {fmt(progress.remaining)}
-              {unit && ` ${unit}`} übrig
-            </>
+            <span className="text-muted-foreground">{withUnit(progress.remaining)} übrig</span>
           )}
         </p>
       )}
