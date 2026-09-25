@@ -19,6 +19,7 @@ export type DataQuality = "verified" | "complete" | "partial" | "suspect";
 export type ValidationErrorCode =
   | "missing_name"
   | "missing_source_id"
+  | "unsupported_source"
   | "not_a_number"
   | "negative_value"
   | "value_out_of_range"

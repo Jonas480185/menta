@@ -7,7 +7,11 @@ import type { NormalizedFood, NormalizedServing } from "@/server/food/types";
 import { normalizeBarcode } from "@/domain/food/barcode";
 import { isValidServingGrams } from "@/domain/food/units";
 import { validateNormalizedFood, type DataQuality, type ValidationIssue } from "@/domain/food/validation";
+import { normalizeFoodText } from "@/domain/food/normalize";
 import { finalizeServings } from "./common";
+
+/** Sources this pipeline writes. user/recipe foods are owned rows written by their services. */
+export const PUBLIC_SOURCES: ReadonlySet<string> = new Set(["off", "usda", "curated"]);
 
 /** Stable key of a normalized food: "off:4014400400007", "usda:173944", "curated:apfel". */
 export function foodKey(food: Pick<NormalizedFood, "source" | "sourceId">): string {
@@ -63,15 +67,23 @@ export function prepareFood(
   food: NormalizedFood,
   trusted: (f: NormalizedFood) => boolean,
 ): { ok: true; value: PreparedFood } | { ok: false; errors: ValidationIssue[] } {
+  if (!PUBLIC_SOURCES.has(food.source)) {
+    // user/recipe foods have an owner (foods_owner_matches_source) – not handled here
+    return { ok: false, errors: [{ code: "unsupported_source", field: "source", message: `Quelle ${food.source} wird hier nicht importiert.` }] };
+  }
   if (!food.sourceId) {
     return { ok: false, errors: [{ code: "missing_source_id", field: "sourceId", message: "sourceId fehlt." }] };
   }
   const barcode = food.barcode ? normalizeBarcode(food.barcode, { requireValidChecksum: false }) : null;
+  const name = food.name?.replace(/\s+/g, " ").trim().slice(0, 250) ?? "";
   const cleaned: NormalizedFood = {
     ...food,
-    name: food.name?.replace(/\s+/g, " ").trim() ?? "",
-    brandName: food.brandName?.replace(/\s+/g, " ").trim() || null,
+    // a name without letters/digits would violate foods_name_not_blank (name_normalized)
+    name: normalizeFoodText(name) ? name : "",
+    brandName: food.brandName?.replace(/\s+/g, " ").trim().slice(0, 120) || null,
     barcode,
+    densityGPerMl: food.densityGPerMl && food.densityGPerMl > 0 && Number.isFinite(food.densityGPerMl) ? food.densityGPerMl : null,
+    popularity: Math.max(0, Math.min(2_000_000_000, Math.round(food.popularity ?? 0))) || 0,
     servings: sanitizeServings(food),
   };
   const v = validateNormalizedFood(cleaned, { trusted: trusted(food) });

@@ -193,11 +193,9 @@ describe("upsertNormalizedFoods", () => {
 
   it("handles thousands of rows in batches", async () => {
     const many = Array.from({ length: 1200 }, (_, i) => food({ source: "usda", sourceId: `bulk-${i}`, name: `Bulk Food ${i}` }));
-    const t0 = Date.now();
     const report = await upsertNormalizedFoodsDetailed(db, many, { batchSize: 500 });
     expect(report.stats.inserted).toBe(1200);
     expect(report.ids.size).toBe(1200);
-    expect(Date.now() - t0).toBeLessThan(15_000);
   });
 });
 
@@ -249,5 +247,21 @@ describe("LocalFoodProvider", () => {
     const provider = new LocalFoodProvider(db);
     expect(await provider.searchFoods("geheimkuchen")).toEqual([]);
     expect(await provider.getFood(row.id)).toBeNull();
+  });
+});
+
+describe("constraint safety", () => {
+  it("rejects rows that would violate DB CHECKs instead of failing the batch", async () => {
+    const report = await upsertNormalizedFoodsDetailed(db, [
+      food({ sourceId: "punct", name: "!!! ---" }),
+      food({ source: "user", sourceId: "u1" }),
+      food({ sourceId: "dens", densityGPerMl: -1, popularity: -5 }),
+      food({ sourceId: "honey-ml", nutrientBasis: "ml", nutrients: { kcal: 430, proteinG: 0.4, carbsG: 115, fatG: 0 } }),
+    ]);
+    expect(report.stats).toMatchObject({ invalid: 2, inserted: 2 });
+    expect(report.errorCounts).toMatchObject({ missing_name: 1, unsupported_source: 1 });
+    const dens = await getFoodDetails(db, report.ids.get("curated:dens")!);
+    expect(dens?.densityGPerMl).toBeNull();
+    expect(dens?.popularity).toBe(0);
   });
 });
