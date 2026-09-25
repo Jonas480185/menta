@@ -11,8 +11,7 @@ export interface SpinnerProps extends Omit<React.ComponentProps<"svg">, "childre
 }
 
 /**
- * Indeterminate loading indicator. Continuous motion is allowed for loaders, but it slows
- * down under `prefers-reduced-motion`.
+ * Indeterminate loading indicator (the only kind of looping motion allowed).
  */
 function Spinner({ size = "md", label = "Wird geladen", className, ...props }: SpinnerProps) {
   const hidden = props["aria-hidden"] === true || props["aria-hidden"] === "true";
@@ -21,11 +20,7 @@ function Spinner({ size = "md", label = "Wird geladen", className, ...props }: S
       data-slot="spinner"
       role={hidden ? undefined : "status"}
       aria-label={hidden ? undefined : label}
-      className={cn(
-        "animate-spin text-current motion-reduce:animate-[spin_1.6s_linear_infinite]",
-        sizes[size],
-        className,
-      )}
+      className={cn("animate-spin text-current", sizes[size], className)}
       {...props}
     />
   );

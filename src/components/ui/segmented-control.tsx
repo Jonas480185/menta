@@ -1,8 +1,9 @@
 "use client";
 
-import { LayoutGroup, motion, MotionConfig } from "motion/react";
+import { LayoutGroup, motion } from "motion/react";
 import { useCallback, useId, useRef, useState } from "react";
 
+import { spring } from "@/components/theme/tokens";
 import { cn } from "@/lib/utils";
 
 import { focusRing } from "./tokens";
@@ -15,8 +16,10 @@ export interface SegmentedControlOption<T extends string = string> {
   disabled?: boolean;
 }
 
-export interface SegmentedControlProps<T extends string = string>
-  extends Omit<React.ComponentProps<"div">, "onChange" | "defaultValue"> {
+export interface SegmentedControlProps<T extends string = string> extends Omit<
+  React.ComponentProps<"div">,
+  "onChange" | "defaultValue"
+> {
   options: readonly SegmentedControlOption<T>[];
   value?: T;
   defaultValue?: T;
@@ -27,8 +30,6 @@ export interface SegmentedControlProps<T extends string = string>
   /** Stretch to the full width with equal segments. */
   block?: boolean;
 }
-
-const spring = { type: "spring", stiffness: 520, damping: 40, mass: 0.9 } as const;
 
 /**
  * Single-choice pill switcher with an animated thumb (period filters 7T/30T/3M/6M/1J,
@@ -59,7 +60,8 @@ function SegmentedControl<T extends string = string>({
 
   const enabledIndexes = options.flatMap((o, i) => (o.disabled ? [] : [i]));
   const selectedIndex = options.findIndex((o) => o.value === value);
-  const tabStopIndex = selectedIndex >= 0 && !options[selectedIndex]?.disabled ? selectedIndex : enabledIndexes[0];
+  const tabStopIndex =
+    selectedIndex >= 0 && !options[selectedIndex]?.disabled ? selectedIndex : enabledIndexes[0];
 
   const moveTo = (index: number) => {
     const option = options[index];
@@ -95,62 +97,59 @@ function SegmentedControl<T extends string = string>({
   };
 
   return (
-    <MotionConfig reducedMotion="user">
-      <LayoutGroup id={layoutId}>
-        <div
-          role="radiogroup"
-          data-slot="segmented-control"
-          className={cn(
-            "relative inline-flex items-center gap-0.5 rounded-full bg-muted p-1",
-            size === "md" ? "h-11" : "h-9",
-            block && "flex w-full",
-            className,
-          )}
-          {...props}
-        >
-          {options.map((option, index) => {
-            const selected = option.value === value;
-            return (
-              <button
-                key={option.value}
-                ref={(el) => {
-                  refs.current[index] = el;
-                }}
-                type="button"
-                role="radio"
-                aria-checked={selected}
-                aria-label={option.ariaLabel}
-                disabled={option.disabled}
-                tabIndex={index === tabStopIndex ? 0 : -1}
-                data-state={selected ? "on" : "off"}
-                onClick={() => select(option.value)}
-                onKeyDown={(event) => onKeyDown(event, index)}
-                className={cn(
-                  "relative isolate inline-flex h-full min-w-11 cursor-pointer items-center justify-center rounded-full px-3.5 font-medium whitespace-nowrap tabular-nums",
-                  "text-muted-foreground transition-colors duration-150 hover:text-foreground motion-reduce:transition-none",
-                  "data-[state=on]:text-foreground disabled:cursor-not-allowed disabled:opacity-40",
-                  "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-                  size === "md" ? "text-sm" : "text-xs",
-                  block && "flex-1",
-                  focusRing,
-                  "focus-visible:ring-offset-0",
-                )}
-              >
-                {selected && (
-                  <motion.span
-                    layoutId="segmented-thumb"
-                    aria-hidden="true"
-                    transition={spring}
-                    className="absolute inset-0 -z-10 rounded-full bg-background shadow-sm shadow-foreground/10 dark:bg-card"
-                  />
-                )}
-                {option.label}
-              </button>
-            );
-          })}
-        </div>
-      </LayoutGroup>
-    </MotionConfig>
+    <LayoutGroup id={layoutId}>
+      <div
+        role="radiogroup"
+        data-slot="segmented-control"
+        className={cn(
+          "relative inline-flex items-center gap-0.5 rounded-lg bg-surface-inset p-1",
+          size === "md" ? "h-11" : "h-9",
+          block && "flex w-full",
+          className,
+        )}
+        {...props}
+      >
+        {options.map((option, index) => {
+          const selected = option.value === value;
+          return (
+            <button
+              key={option.value}
+              ref={(el) => {
+                refs.current[index] = el;
+              }}
+              type="button"
+              role="radio"
+              aria-checked={selected}
+              aria-label={option.ariaLabel}
+              disabled={option.disabled}
+              tabIndex={index === tabStopIndex ? 0 : -1}
+              data-state={selected ? "on" : "off"}
+              onClick={() => select(option.value)}
+              onKeyDown={(event) => onKeyDown(event, index)}
+              className={cn(
+                "relative isolate inline-flex h-full min-w-11 cursor-pointer items-center justify-center rounded-md px-3.5 font-medium whitespace-nowrap tabular",
+                "text-muted-foreground transition-colors duration-150 hover:text-foreground",
+                "disabled:cursor-not-allowed disabled:opacity-40 data-[state=on]:text-foreground",
+                "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+                size === "md" ? "text-body-sm" : "text-caption",
+                block && "flex-1",
+                focusRing,
+              )}
+            >
+              {selected && (
+                <motion.span
+                  layoutId="segmented-thumb"
+                  aria-hidden="true"
+                  transition={spring.snappy}
+                  className="absolute inset-0 -z-10 rounded-md bg-card shadow-sm dark:bg-surface-3"
+                />
+              )}
+              {option.label}
+            </button>
+          );
+        })}
+      </div>
+    </LayoutGroup>
   );
 }
 

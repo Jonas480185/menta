@@ -8,7 +8,10 @@ import { cn } from "@/lib/utils";
  * Tooltips only appear on hover / keyboard focus – never put essential information in
  * them (touch users will not see it). Use them to label icon buttons on desktop.
  */
-function TooltipProvider({ delayDuration = 300, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
+function TooltipProvider({
+  delayDuration = 300,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
   return <TooltipPrimitive.Provider data-slot="tooltip-provider" delayDuration={delayDuration} {...props} />;
 }
 
@@ -36,8 +39,8 @@ function TooltipContent({
         data-slot="tooltip-content"
         sideOffset={sideOffset}
         className={cn(
-          "z-50 w-fit max-w-64 origin-(--radix-tooltip-content-transform-origin) rounded-md bg-foreground px-2.5 py-1.5 text-xs font-medium text-balance text-background",
-          "transition-[opacity,scale] duration-150 ease-out starting:scale-95 starting:opacity-0 motion-reduce:transition-none",
+          "z-50 w-fit max-w-64 origin-(--radix-tooltip-content-transform-origin) rounded-md bg-foreground px-2.5 py-1.5 text-caption text-balance text-background",
+          "data-[state=closed]:animate-fade-out data-[state=delayed-open]:animate-scale-in data-[state=instant-open]:animate-fade-in",
           className,
         )}
         {...props}

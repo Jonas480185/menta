@@ -12,17 +12,20 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        "peer size-5.5 shrink-0 cursor-pointer rounded-[7px] border-2 border-input bg-background transition-colors duration-150 motion-reduce:transition-none",
+        "peer size-5.5 shrink-0 cursor-pointer rounded-xs border-2 border-border-strong bg-card transition-colors duration-150",
         "data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
         "data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-primary-foreground",
-        "aria-invalid:border-destructive disabled:cursor-not-allowed disabled:opacity-50",
+        "disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive",
         focusRing,
         touchTarget,
         className,
       )}
       {...props}
     >
-      <CheckboxPrimitive.Indicator data-slot="checkbox-indicator" className="flex items-center justify-center text-current">
+      <CheckboxPrimitive.Indicator
+        data-slot="checkbox-indicator"
+        className="flex items-center justify-center text-current"
+      >
         {props.checked === "indeterminate" ? (
           <Minus className="size-3.5" strokeWidth={3} aria-hidden="true" />
         ) : (

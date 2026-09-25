@@ -8,9 +8,9 @@ import { focusRing, touchTarget } from "./tokens";
 
 const buttonVariants = cva(
   [
-    "relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap select-none",
-    "transition-[background-color,color,box-shadow,transform,opacity] duration-150 ease-out",
-    "active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100",
+    "relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-semibold whitespace-nowrap select-none",
+    "transition-[background-color,color,box-shadow,scale,opacity] duration-150 ease-out",
+    "active:scale-[0.98] motion-reduce:active:scale-100",
     "disabled:pointer-events-none disabled:opacity-50 aria-busy:cursor-progress",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5",
     focusRing,
@@ -18,21 +18,23 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground shadow-sm shadow-primary/25 hover:bg-primary/90 dark:shadow-none",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/75",
-        soft: "bg-primary/15 text-foreground hover:bg-primary/25",
-        outline: "border border-border bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground",
-        ghost: "bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground",
+        /** Mint fill with ink text – one per view. */
+        primary: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-accent",
+        /** Mint-tinted, e.g. the "+" add buttons in meal cards. */
+        soft: "bg-primary-soft text-primary-strong hover:bg-primary-soft/70",
+        outline: "border border-border-strong bg-transparent text-foreground hover:bg-accent",
+        ghost: "bg-transparent text-foreground hover:bg-accent",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        link: "h-auto rounded-sm px-0 text-foreground underline-offset-4 hover:underline active:scale-100",
+        link: "h-auto! rounded-xs px-0! text-primary-strong underline-offset-4 hover:underline active:scale-100",
       },
       size: {
-        sm: cn("h-9 px-3.5 text-sm [&_svg:not([class*='size-'])]:size-4", touchTarget),
-        md: "h-11 px-5 text-base",
-        lg: "h-13 px-7 text-base",
-        "icon-sm": cn("size-9 [&_svg:not([class*='size-'])]:size-4", touchTarget),
-        icon: "size-11",
-        "icon-lg": "size-13 [&_svg:not([class*='size-'])]:size-6",
+        sm: cn("h-9 rounded-sm px-3.5 text-body-sm [&_svg:not([class*='size-'])]:size-4", touchTarget),
+        md: "h-11 rounded-control px-5 text-body",
+        lg: "h-13 rounded-control px-6 text-body",
+        "icon-sm": cn("size-9 rounded-full [&_svg:not([class*='size-'])]:size-[18px]", touchTarget),
+        icon: "size-11 rounded-full",
+        "icon-lg": "size-14 rounded-full [&_svg:not([class*='size-'])]:size-6",
       },
       block: {
         true: "w-full",

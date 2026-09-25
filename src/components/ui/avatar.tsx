@@ -8,10 +8,10 @@ import { cn } from "@/lib/utils";
 const avatarVariants = cva("relative flex shrink-0 overflow-hidden rounded-full select-none", {
   variants: {
     size: {
-      sm: "size-8 text-xs",
-      md: "size-10 text-sm",
-      lg: "size-14 text-lg",
-      xl: "size-20 text-2xl",
+      sm: "size-8 text-caption",
+      md: "size-10 text-body-sm",
+      lg: "size-14 text-headline",
+      xl: "size-20 text-heading",
     },
   },
   defaultVariants: { size: "md" },
@@ -22,12 +22,18 @@ function Avatar({
   size,
   ...props
 }: React.ComponentProps<typeof AvatarPrimitive.Root> & VariantProps<typeof avatarVariants>) {
-  return <AvatarPrimitive.Root data-slot="avatar" className={cn(avatarVariants({ size }), className)} {...props} />;
+  return (
+    <AvatarPrimitive.Root data-slot="avatar" className={cn(avatarVariants({ size }), className)} {...props} />
+  );
 }
 
 function AvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
   return (
-    <AvatarPrimitive.Image data-slot="avatar-image" className={cn("aspect-square size-full object-cover", className)} {...props} />
+    <AvatarPrimitive.Image
+      data-slot="avatar-image"
+      className={cn("aspect-square size-full object-cover", className)}
+      {...props}
+    />
   );
 }
 
@@ -35,7 +41,10 @@ function AvatarFallback({ className, ...props }: React.ComponentProps<typeof Ava
   return (
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
-      className={cn("flex size-full items-center justify-center bg-primary/15 font-semibold text-foreground", className)}
+      className={cn(
+        "flex size-full items-center justify-center bg-primary-soft font-semibold text-primary-strong",
+        className,
+      )}
       {...props}
     />
   );

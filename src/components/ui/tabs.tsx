@@ -25,8 +25,8 @@ function TabsList({ className, variant = "underline", ...props }: TabsListProps)
       data-variant={variant}
       className={cn(
         "group/tabs-list inline-flex w-fit items-center text-muted-foreground",
-        variant === "underline" && "w-full gap-6 overflow-x-auto border-b border-border [scrollbar-width:none]",
-        variant === "pill" && "h-11 gap-1 rounded-full bg-muted p-1",
+        variant === "underline" && "scrollbar-none w-full gap-6 overflow-x-auto border-b border-border",
+        variant === "pill" && "h-11 gap-1 rounded-lg bg-surface-inset p-1",
         className,
       )}
       {...props}
@@ -39,15 +39,15 @@ function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPr
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        "relative inline-flex cursor-pointer items-center justify-center gap-2 text-sm font-medium whitespace-nowrap transition-colors duration-150 motion-reduce:transition-none",
-        "hover:text-foreground data-[state=active]:text-foreground disabled:pointer-events-none disabled:opacity-50",
+        "relative inline-flex cursor-pointer items-center justify-center gap-2 text-body-sm font-medium whitespace-nowrap transition-colors duration-150",
+        "hover:text-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-foreground",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         // underline
-        "group-data-[variant=underline]/tabs-list:h-11 group-data-[variant=underline]/tabs-list:rounded-sm",
+        "group-data-[variant=underline]/tabs-list:h-11 group-data-[variant=underline]/tabs-list:rounded-xs",
         "group-data-[variant=underline]/tabs-list:after:absolute group-data-[variant=underline]/tabs-list:after:inset-x-0 group-data-[variant=underline]/tabs-list:after:-bottom-px group-data-[variant=underline]/tabs-list:after:h-0.5 group-data-[variant=underline]/tabs-list:after:rounded-full group-data-[variant=underline]/tabs-list:after:bg-primary group-data-[variant=underline]/tabs-list:after:opacity-0 group-data-[variant=underline]/tabs-list:after:transition-opacity group-data-[variant=underline]/tabs-list:data-[state=active]:after:opacity-100",
         // pill
-        "group-data-[variant=pill]/tabs-list:h-full group-data-[variant=pill]/tabs-list:flex-1 group-data-[variant=pill]/tabs-list:rounded-full group-data-[variant=pill]/tabs-list:px-4",
-        "group-data-[variant=pill]/tabs-list:data-[state=active]:bg-background group-data-[variant=pill]/tabs-list:data-[state=active]:shadow-sm group-data-[variant=pill]/tabs-list:data-[state=active]:shadow-foreground/10 dark:group-data-[variant=pill]/tabs-list:data-[state=active]:bg-card",
+        "group-data-[variant=pill]/tabs-list:h-full group-data-[variant=pill]/tabs-list:flex-1 group-data-[variant=pill]/tabs-list:rounded-md group-data-[variant=pill]/tabs-list:px-4",
+        "group-data-[variant=pill]/tabs-list:data-[state=active]:bg-card group-data-[variant=pill]/tabs-list:data-[state=active]:shadow-sm dark:group-data-[variant=pill]/tabs-list:data-[state=active]:bg-surface-3",
         focusRing,
         className,
       )}
@@ -57,7 +57,13 @@ function TabsTrigger({ className, ...props }: React.ComponentProps<typeof TabsPr
 }
 
 function TabsContent({ className, ...props }: React.ComponentProps<typeof TabsPrimitive.Content>) {
-  return <TabsPrimitive.Content data-slot="tabs-content" className={cn("flex-1 outline-none", focusRing, className)} {...props} />;
+  return (
+    <TabsPrimitive.Content
+      data-slot="tabs-content"
+      className={cn("flex-1 outline-none", focusRing, className)}
+      {...props}
+    />
+  );
 }
 
 export { Tabs, TabsContent, TabsList, TabsTrigger };

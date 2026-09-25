@@ -7,19 +7,20 @@ import { focusRing } from "./tokens";
 
 const badgeVariants = cva(
   cn(
-    "inline-flex h-6 w-fit shrink-0 items-center justify-center gap-1 rounded-full px-2.5 text-xs font-medium whitespace-nowrap tabular-nums [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-3.5",
+    "inline-flex h-6 w-fit shrink-0 items-center justify-center gap-1 rounded-sm px-2 text-caption whitespace-nowrap tabular [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-3.5",
     focusRing,
   ),
   {
     variants: {
       variant: {
-        neutral: "bg-secondary text-secondary-foreground",
-        primary: "bg-primary/15 text-foreground",
+        neutral: "bg-muted text-foreground",
+        primary: "bg-primary-soft text-primary-strong",
         solid: "bg-primary text-primary-foreground",
-        success: "bg-success/15 text-foreground [&_svg]:text-success",
-        warning: "bg-warning/15 text-foreground [&_svg]:text-warning",
-        destructive: "bg-destructive/15 text-foreground [&_svg]:text-destructive",
-        outline: "border border-border text-foreground",
+        success: "bg-success-soft text-success",
+        warning: "bg-warning-soft text-warning",
+        info: "bg-info-soft text-info",
+        destructive: "bg-destructive-soft text-destructive",
+        outline: "border border-border-strong text-foreground",
       },
     },
     defaultVariants: { variant: "neutral" },

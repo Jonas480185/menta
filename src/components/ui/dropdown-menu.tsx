@@ -51,7 +51,7 @@ function DropdownMenuItem({ className, variant = "default", ...props }: Dropdown
       data-variant={variant}
       className={cn(
         menuItem,
-        "data-[variant=destructive]:text-destructive data-[variant=destructive]:[&_svg]:text-destructive! data-[variant=destructive]:data-highlighted:bg-destructive/10",
+        "data-[variant=destructive]:text-destructive data-[variant=destructive]:data-highlighted:bg-destructive-soft data-[variant=destructive]:[&_svg]:text-destructive!",
         className,
       )}
       {...props}
@@ -73,7 +73,7 @@ function DropdownMenuCheckboxItem({
       {children}
       <span className="absolute right-3 flex size-4 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <Check className="size-4 text-primary!" aria-hidden="true" />
+          <Check className="size-4 text-primary-strong!" aria-hidden="true" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
     </DropdownMenuPrimitive.CheckboxItem>
@@ -90,7 +90,11 @@ function DropdownMenuRadioItem({
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>) {
   return (
-    <DropdownMenuPrimitive.RadioItem data-slot="dropdown-menu-radio-item" className={cn(menuItem, "pr-9", className)} {...props}>
+    <DropdownMenuPrimitive.RadioItem
+      data-slot="dropdown-menu-radio-item"
+      className={cn(menuItem, "pr-9", className)}
+      {...props}
+    >
       {children}
       <span className="absolute right-3 flex size-4 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
@@ -101,25 +105,39 @@ function DropdownMenuRadioItem({
   );
 }
 
-function DropdownMenuLabel({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Label>) {
+function DropdownMenuLabel({
+  className,
+  ...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Label>) {
   return (
     <DropdownMenuPrimitive.Label
       data-slot="dropdown-menu-label"
-      className={cn("px-3 pt-2 pb-1 text-xs font-medium text-muted-foreground", className)}
+      className={cn("px-3 pt-2 pb-1 text-caption text-muted-foreground", className)}
       {...props}
     />
   );
 }
 
-function DropdownMenuSeparator({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Separator>) {
+function DropdownMenuSeparator({
+  className,
+  ...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Separator>) {
   return (
-    <DropdownMenuPrimitive.Separator data-slot="dropdown-menu-separator" className={cn("-mx-1 my-1 h-px bg-border", className)} {...props} />
+    <DropdownMenuPrimitive.Separator
+      data-slot="dropdown-menu-separator"
+      className={cn("-mx-1 my-1 h-px bg-border", className)}
+      {...props}
+    />
   );
 }
 
 function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<"span">) {
   return (
-    <span data-slot="dropdown-menu-shortcut" className={cn("ml-auto text-xs tracking-widest text-muted-foreground", className)} {...props} />
+    <span
+      data-slot="dropdown-menu-shortcut"
+      className={cn("ml-auto text-caption tracking-widest text-muted-foreground", className)}
+      {...props}
+    />
   );
 }
 
@@ -144,12 +162,19 @@ function DropdownMenuSubTrigger({
   );
 }
 
-function DropdownMenuSubContent({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>) {
+function DropdownMenuSubContent({
+  className,
+  ...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.SubContent>) {
   return (
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.SubContent
         data-slot="dropdown-menu-sub-content"
-        className={cn(floatingSurface, "min-w-40 origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden p-1", className)}
+        className={cn(
+          floatingSurface,
+          "min-w-40 origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden p-1",
+          className,
+        )}
         {...props}
       />
     </DropdownMenuPrimitive.Portal>

@@ -29,7 +29,7 @@ function Slider({ className, defaultValue, value, min = 0, max = 100, thumbLabel
     >
       <SliderPrimitive.Track
         data-slot="slider-track"
-        className="relative grow overflow-hidden rounded-full bg-muted data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2"
+        className="relative grow overflow-hidden rounded-full bg-track data-[orientation=horizontal]:h-2 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-2"
       >
         <SliderPrimitive.Range
           data-slot="slider-range"
@@ -42,8 +42,8 @@ function Slider({ className, defaultValue, value, min = 0, max = 100, thumbLabel
           data-slot="slider-thumb"
           aria-label={thumbLabels?.[index]}
           className={cn(
-            "relative block size-6 shrink-0 cursor-grab rounded-full border-2 border-primary bg-background shadow-md shadow-foreground/15 active:cursor-grabbing",
-            "transition-[scale] duration-150 hover:scale-110 active:scale-110 motion-reduce:transition-none",
+            "relative block size-6 shrink-0 cursor-grab rounded-full border-2 border-primary bg-card shadow-md active:cursor-grabbing",
+            "transition-[scale] duration-150 hover:scale-110 active:scale-110",
             "after:absolute after:top-1/2 after:left-1/2 after:size-11 after:-translate-1/2 after:content-['']",
             "data-disabled:pointer-events-none",
             focusRing,
