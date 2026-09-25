@@ -78,6 +78,27 @@ describe("parseEnv", () => {
     expect(e.authSecretIsPlaceholder).toBe(true);
   });
 
+  it("parses BETTER_AUTH_TRUSTED_ORIGINS as a trimmed list", () => {
+    expect(parseEnv({}).BETTER_AUTH_TRUSTED_ORIGINS).toEqual([]);
+    expect(
+      parseEnv({ BETTER_AUTH_TRUSTED_ORIGINS: " https://a.example.com, http://localhost:*,," })
+        .BETTER_AUTH_TRUSTED_ORIGINS,
+    ).toEqual(["https://a.example.com", "http://localhost:*"]);
+  });
+
+  it("validates BETTER_AUTH_URL and treats it as optional", () => {
+    expect(parseEnv({}).BETTER_AUTH_URL).toBeUndefined();
+    expect(parseEnv({ BETTER_AUTH_URL: "http://localhost:3127" }).BETTER_AUTH_URL).toBe(
+      "http://localhost:3127",
+    );
+    expect(() => parseEnv({ BETTER_AUTH_URL: "localhost" })).toThrow(/BETTER_AUTH_URL/);
+  });
+
+  it("accepts AUTH_SECRET as alias for BETTER_AUTH_SECRET", () => {
+    const e = parseEnv({ NODE_ENV: "production", AUTH_SECRET: LONG_SECRET });
+    expect(e.BETTER_AUTH_SECRET).toBe(LONG_SECRET);
+  });
+
   it("lists all problems at once", () => {
     try {
       parseEnv({ NODE_ENV: "production", DATABASE_URL: "nope", LOG_LEVEL: "loud" });

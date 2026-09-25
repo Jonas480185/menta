@@ -19,7 +19,11 @@ import { z } from "zod";
 export const LOG_LEVELS = ["debug", "info", "warn", "error", "silent"] as const;
 
 const DEV_AUTH_SECRET = "dev-only-insecure-secret-never-use-in-production";
-const PLACEHOLDER_SECRETS = new Set(["change-me-to-a-long-random-string", DEV_AUTH_SECRET]);
+const PLACEHOLDER_SECRETS = new Set([
+  "change-me-to-a-long-random-string",
+  "dev-only-insecure-better-auth-secret-do-not-use-in-production",
+  DEV_AUTH_SECRET,
+]);
 
 const booleanString = z.union([z.boolean(), z.string()]).transform((value, ctx) => {
   if (typeof value === "boolean") return value;
@@ -48,7 +52,20 @@ const envSchema = z
 
     // ── Auth ────────────────────────────────────────────────────────────
     BETTER_AUTH_SECRET: z.string().optional(),
+    /** Legacy alias for BETTER_AUTH_SECRET. */
+    AUTH_SECRET: z.string().optional(),
+    /** Public origin, e.g. https://app.example.com. Unset → better-auth infers it from the request. */
     BETTER_AUTH_URL: z.url().optional(),
+    /** Extra origins for better-auth's CSRF origin check, comma-separated (wildcards like http://localhost:* ok). */
+    BETTER_AUTH_TRUSTED_ORIGINS: z
+      .string()
+      .optional()
+      .transform((v) =>
+        (v ?? "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean),
+      ),
 
     // ── Food providers ──────────────────────────────────────────────────
     USDA_API_KEY: z.string().default("DEMO_KEY"),
@@ -61,7 +78,7 @@ const envSchema = z
   .transform((raw, ctx) => {
     const isProduction = raw.NODE_ENV === "production";
     const isBuild = raw.NEXT_PHASE === "phase-production-build";
-    let secret = raw.BETTER_AUTH_SECRET;
+    let secret = raw.BETTER_AUTH_SECRET ?? raw.AUTH_SECRET;
     if (isProduction && !isBuild) {
       if (!secret) {
         ctx.addIssue({
