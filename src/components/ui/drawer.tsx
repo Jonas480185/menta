@@ -14,6 +14,8 @@ import { cn } from "@/lib/utils";
  *   (`repositionInputs`, on by default); content is capped at 92 dvh and scrolls inside
  *   `DrawerBody`; footer respects the home-indicator safe area.
  * - Snap points: `<Drawer snapPoints={[0.5, 1]}>` + `<DrawerContent fullHeight>`.
+ * - A title is required for screen readers (`DrawerTitle`, may be `sr-only`).
+ * - Desktop: use `AdaptiveSheet` (adaptive-sheet.tsx) to get a centred dialog at ≥ lg.
  */
 function Drawer({ repositionInputs = true, ...props }: React.ComponentProps<typeof DrawerPrimitive.Root>) {
   return <DrawerPrimitive.Root data-slot="drawer" repositionInputs={repositionInputs} {...props} />;
@@ -35,7 +37,7 @@ function DrawerOverlay({ className, ...props }: React.ComponentProps<typeof Draw
   return (
     <DrawerPrimitive.Overlay
       data-slot="drawer-overlay"
-      className={cn("fixed inset-0 z-50 bg-foreground/50 dark:bg-background/80", className)}
+      className={cn("fixed inset-0 z-50 bg-overlay", className)}
       {...props}
     />
   );
@@ -48,24 +50,30 @@ export interface DrawerContentProps extends React.ComponentProps<typeof DrawerPr
   showHandle?: boolean;
 }
 
-function DrawerContent({ className, children, fullHeight = false, showHandle = true, ...props }: DrawerContentProps) {
+function DrawerContent({
+  className,
+  children,
+  fullHeight = false,
+  showHandle = true,
+  ...props
+}: DrawerContentProps) {
   return (
     <DrawerPortal>
       <DrawerOverlay />
       <DrawerPrimitive.Content
         data-slot="drawer-content"
         className={cn(
-          "fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-lg flex-col rounded-t-xl border border-b-0 border-border bg-card text-card-foreground shadow-2xl shadow-foreground/20 outline-none",
+          "fixed inset-x-0 bottom-0 z-50 mx-auto flex w-full max-w-lg flex-col rounded-t-sheet border-transparent bg-surface-2 text-foreground shadow-xl outline-none dark:border-t dark:border-border",
           fullHeight ? "h-[96dvh] max-h-[96dvh]" : "max-h-[92dvh]",
           className,
         )}
         {...props}
       >
         {showHandle && (
-          <div className="flex shrink-0 justify-center pt-2.5 pb-1.5" aria-hidden="true">
+          <div className="flex shrink-0 justify-center pt-2 pb-1.5" aria-hidden="true">
             <DrawerPrimitive.Handle
               data-slot="drawer-handle"
-              className="h-1.5! w-10! rounded-full! bg-muted-foreground/35! opacity-100!"
+              className="h-1.5! w-10! rounded-full! bg-border-strong! opacity-100!"
             />
           </div>
         )}
@@ -76,13 +84,23 @@ function DrawerContent({ className, children, fullHeight = false, showHandle = t
 }
 
 function DrawerHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="drawer-header" className={cn("flex shrink-0 flex-col gap-1 px-5 pt-2 pb-3", className)} {...props} />;
+  return (
+    <div
+      data-slot="drawer-header"
+      className={cn("flex shrink-0 flex-col gap-1 px-5 pt-2 pb-3", className)}
+      {...props}
+    />
+  );
 }
 
 /** Scrollable middle area; overscroll is contained so the page behind never scrolls. */
 function DrawerBody({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div data-slot="drawer-body" className={cn("min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-4", className)} {...props} />
+    <div
+      data-slot="drawer-body"
+      className={cn("min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 pb-4", className)}
+      {...props}
+    />
   );
 }
 
@@ -91,7 +109,7 @@ function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="drawer-footer"
       className={cn(
-        "flex shrink-0 flex-col gap-2 border-t border-border/60 px-5 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]",
+        "flex shrink-0 flex-col gap-2 border-t border-border px-5 pt-3 pb-safe-offset-4",
         className,
       )}
       {...props}
@@ -103,14 +121,23 @@ function DrawerTitle({ className, ...props }: React.ComponentProps<typeof Drawer
   return (
     <DrawerPrimitive.Title
       data-slot="drawer-title"
-      className={cn("text-lg leading-tight font-semibold tracking-tight text-foreground", className)}
+      className={cn("text-heading text-foreground", className)}
       {...props}
     />
   );
 }
 
-function DrawerDescription({ className, ...props }: React.ComponentProps<typeof DrawerPrimitive.Description>) {
-  return <DrawerPrimitive.Description data-slot="drawer-description" className={cn("text-sm text-muted-foreground", className)} {...props} />;
+function DrawerDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof DrawerPrimitive.Description>) {
+  return (
+    <DrawerPrimitive.Description
+      data-slot="drawer-description"
+      className={cn("text-body-sm text-muted-foreground", className)}
+      {...props}
+    />
+  );
 }
 
 export {
