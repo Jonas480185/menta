@@ -1,8 +1,9 @@
 /**
  * Food search benchmark.
  *
- *   pnpm db:bench-search                       # 200k foods, in-memory PGlite
- *   pnpm db:bench-search --rows=500000 --runs=30
+ *   pnpm exec tsx scripts/db/bench-search.ts   # 200k foods, in-memory PGlite
+ *   … --rows=1000000 --runs=10 --verbose --only=milch
+ *   … --random-page-cost=1.1   # planner experiment
  *
  * Fills a fresh in-memory PGlite (all migrations applied) with synthetic, German-ish foods
  * (realistic token distribution: generic + branded products, flavours, modifiers, Zipf-like
@@ -464,6 +465,13 @@ async function main() {
     `  migrations applied in ${((performance.now() - t0) / 1000).toFixed(1)} s`,
   );
   const userIds = await load(db);
+  // Optional planner experiment, e.g. --random-page-cost=1.1 (SSD setting). Measured: no plan
+  // change for the reference queries (database.md §7).
+  const rpc = String(args["random-page-cost"] ?? "default");
+  if (rpc !== "default") {
+    await db.execute(sql.raw(`set random_page_cost = ${Number(rpc)}`));
+    console.log(`  random_page_cost = ${Number(rpc)}`);
+  }
 
   const [size] = await queryRows<{ table_mb: string; indexes: string }>(
     db,
