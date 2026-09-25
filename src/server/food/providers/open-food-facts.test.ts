@@ -3,6 +3,7 @@ import { mapOffProduct } from "@/server/food/normalize/off";
 import { validateNormalizedFood } from "@/domain/food/validation";
 import { OpenFoodFactsProvider } from "./open-food-facts";
 import { TokenBucket } from "./http";
+import { resetEnvCache } from "@/lib/env";
 import { fixtureFetch, loadFixture } from "./__fixtures__/load";
 
 type ProductResponse = { product: Record<string, unknown> };
@@ -139,6 +140,7 @@ describe("mapOffProduct", () => {
 describe("OpenFoodFactsProvider", () => {
   afterEach(() => {
     vi.unstubAllEnvs();
+    resetEnvCache();
   });
 
   it("looks up a barcode via API v2 with fields and User-Agent", async () => {
@@ -174,6 +176,7 @@ describe("OpenFoodFactsProvider", () => {
 
   it("does no network when FOOD_EXTERNAL_PROVIDERS_ENABLED=false", async () => {
     vi.stubEnv("FOOD_EXTERNAL_PROVIDERS_ENABLED", "false");
+    resetEnvCache();
     const fetch = vi.fn();
     const provider = new OpenFoodFactsProvider({ fetch: fetch as unknown as typeof globalThis.fetch });
     expect(await provider.searchFoods("Milch")).toEqual([]);

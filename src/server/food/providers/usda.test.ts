@@ -3,6 +3,7 @@ import { mapUsdaRecord, usdaPortionsToServings, usdaRecordFromApi, type UsdaFood
 import { validateNormalizedFood } from "@/domain/food/validation";
 import { UsdaProvider } from "./usda";
 import { TokenBucket } from "./http";
+import { resetEnvCache } from "@/lib/env";
 import { fixtureFetch, loadFixture } from "./__fixtures__/load";
 
 const unlimited = () => new TokenBucket({ capacity: 1000, requests: 1000, perMs: 1 });
@@ -96,7 +97,10 @@ describe("USDA normalization", () => {
 });
 
 describe("UsdaProvider", () => {
-  afterEach(() => vi.unstubAllEnvs());
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    resetEnvCache();
+  });
 
   it("searches Foundation + SR Legacy with the API key", async () => {
     const { fetch, calls } = fixtureFetch({ "/foods/search": { body: loadFixture("usda-search-banana.json") } });
@@ -130,6 +134,7 @@ describe("UsdaProvider", () => {
 
   it("does no network when providers are disabled", async () => {
     vi.stubEnv("FOOD_EXTERNAL_PROVIDERS_ENABLED", "false");
+    resetEnvCache();
     const fetch = vi.fn();
     const provider = new UsdaProvider({ fetch: fetch as unknown as typeof globalThis.fetch });
     expect(await provider.searchFoods("apple")).toEqual([]);

@@ -1,22 +1,22 @@
 /**
- * Runtime configuration for external food providers (read lazily from process.env so tests
- * and scripts can change it). Kept free of `server-only` so tsx scripts can import it.
+ * Runtime configuration for external food providers, read from the validated server env
+ * (`@/lib/env`, lazy + cached – tests call `resetEnvCache()` after `vi.stubEnv`).
+ * Kept free of `server-only` so tsx scripts can import it.
  */
+import { env } from "@/lib/env";
 
 /** FOOD_EXTERNAL_PROVIDERS_ENABLED=false → providers answer empty/null without network. */
 export function externalProvidersEnabled(): boolean {
-  return (process.env.FOOD_EXTERNAL_PROVIDERS_ENABLED ?? "true").trim().toLowerCase() !== "false";
+  return env.FOOD_EXTERNAL_PROVIDERS_ENABLED;
 }
-
-export const DEFAULT_OFF_USER_AGENT = "NutritionApp/0.1 (dev@example.com)";
 
 /** Open Food Facts requires `AppName/Version (ContactEmail)`. */
 export function offUserAgent(): string {
-  return process.env.OFF_USER_AGENT?.trim() || DEFAULT_OFF_USER_AGENT;
+  return env.OFF_USER_AGENT;
 }
 
 export function usdaApiKey(): string {
-  return process.env.USDA_API_KEY?.trim() || "DEMO_KEY";
+  return env.USDA_API_KEY;
 }
 
 export interface RateLimit {
