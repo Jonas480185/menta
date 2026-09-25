@@ -93,3 +93,13 @@ export const nutrientLabel = {
   fiber: "Ballaststoffe",
   water: "Wasser",
 } as const;
+
+/** Shared field look (Input, Textarea, SelectTrigger, NumberInput). */
+export const fieldClasses = [
+  "w-full min-w-0 rounded-md border border-input bg-background text-base text-foreground shadow-xs shadow-foreground/5",
+  "transition-[border-color,box-shadow] duration-150 outline-none motion-reduce:transition-none",
+  "placeholder:text-muted-foreground",
+  "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30",
+  "aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive/25",
+  "disabled:cursor-not-allowed disabled:opacity-50",
+].join(" ");
