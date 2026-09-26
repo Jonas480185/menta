@@ -99,7 +99,6 @@ export async function* fetchOffPopularProducts(opts: OffApiFetchOptions): AsyncG
   const log = opts.log ?? (() => {});
   const limiter = opts.limiter ?? new TokenBucket(RATE_LIMITS.offSearch);
   const base = (opts.baseUrl ?? "https://world.openfoodfacts.org").replace(/\/$/, "");
-  const slug = [country, tag ?? "all", `ps${pageSize}`].join("_").replace(/[^a-z0-9_-]/gi, "");
   await mkdir(opts.cacheDir, { recursive: true });
 
   const partitions = opts.partitions ?? DEFAULT_OFF_PARTITIONS;
