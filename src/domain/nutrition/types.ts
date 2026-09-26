@@ -50,6 +50,43 @@ export interface DailyTargets extends Macros {
   goalProfileName: string | null;
 }
 
+/** Optional nutrients of NutrientTotals – `null` means "unknown", never "zero". */
+export const OPTIONAL_TOTAL_KEYS = ["fiberG", "sugarG", "saturatedFatG", "sodiumMg"] as const;
+export type OptionalTotalKey = (typeof OPTIONAL_TOTAL_KEYS)[number];
+
+/** Always-known nutrients of NutrientTotals (a missing value would make the entry invalid). */
+export const REQUIRED_TOTAL_KEYS = ["kcal", "proteinG", "carbsG", "fatG"] as const;
+export type RequiredTotalKey = (typeof REQUIRED_TOTAL_KEYS)[number];
+
+/**
+ * What is left of the day's targets. Values may be negative (= over target).
+ * `kcal` already includes counted activity calories (budget = target + activity).
+ */
+export interface NutrientRemaining extends Macros {
+  kcal: number;
+  /** null when the day has no fiber target. */
+  fiberG: number | null;
+}
+
+/**
+ * Progress state of one nutrient against its target (see targets.ts for thresholds):
+ * - none:    nothing consumed yet
+ * - under:   < 90 %
+ * - near:    90 % … < 100 %
+ * - reached: 100 % … 105 % (and above for "more is fine" nutrients like protein/fiber)
+ * - over:    > 105 %
+ */
+export type NutrientStatus = "none" | "under" | "near" | "reached" | "over";
+
+/** Status per displayed nutrient for a day. `fiber` is null without a fiber target. */
+export interface DayNutrientStatus {
+  kcal: NutrientStatus;
+  protein: NutrientStatus;
+  carbs: NutrientStatus;
+  fat: NutrientStatus;
+  fiber: NutrientStatus | null;
+}
+
 export const ZERO_TOTALS: NutrientTotals = {
   kcal: 0,
   proteinG: 0,
