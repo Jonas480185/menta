@@ -101,6 +101,13 @@ describe("upsertNormalizedFoods", () => {
     expect(usage.lastServingId).toBe(slice.id);
   });
 
+  it("splits oversized batches (PGlite drops RETURNING rows above 32k parameters)", async () => {
+    const many = Array.from({ length: 1000 }, (_, i) => food({ sourceId: `bulk-${i}` }));
+    const report = await upsertNormalizedFoodsDetailed(db, many, { batchSize: 1000 });
+    expect(report.stats.inserted).toBe(1000);
+    expect(report.ids.size).toBe(1000);
+  });
+
   it("rejects invalid foods and reports stage counts", async () => {
     const report = await upsertNormalizedFoodsDetailed(db, [
       food({ sourceId: "bad-1", nutrients: { kcal: 950, proteinG: 0, carbsG: 0, fatG: 100 } }),

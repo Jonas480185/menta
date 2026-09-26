@@ -69,6 +69,13 @@ const emptyStats = (): UpsertStats => ({
   skippedNewer: 0,
 });
 
+/**
+ * Upper bound for foods per INSERT: ~37 bind parameters per row. PGlite silently returns no
+ * rows from `INSERT … RETURNING` above 32 767 parameters (int16 overflow; verified with
+ * 1 000 rows), so larger batches are split.
+ */
+export const MAX_FOODS_PER_STATEMENT = 800;
+
 /** Upserts foods and returns foodKey → id. See `upsertNormalizedFoodsDetailed` for stats. */
 export async function upsertNormalizedFoods(
   db: DbOrTx,
@@ -84,7 +91,7 @@ export async function upsertNormalizedFoodsDetailed(
   opts: UpsertOptions = {},
 ): Promise<UpsertReport> {
   const report: UpsertReport = { ids: new Map(), stats: emptyStats(), rejected: [], errorCounts: {} };
-  const batchSize = Math.max(1, opts.batchSize ?? 500);
+  const batchSize = Math.min(MAX_FOODS_PER_STATEMENT, Math.max(1, opts.batchSize ?? 500));
   for (let i = 0; i < items.length; i += batchSize) {
     await upsertBatch(db, items.slice(i, i + batchSize), opts, report);
     opts.onBatch?.(report.stats);
@@ -318,6 +325,9 @@ async function upsertBatch(db: DbOrTx, batch: readonly NormalizedFood[], opts: U
         );
       for (const r of rows) ids.set(`${r.source}:${r.sourceId}`, r.id);
       stats.skippedNewer += rows.length;
+      if (rows.length !== skipped.length) {
+        throw new Error(`food upsert returned ${upserted.length + rows.length} of ${winners.length} rows`);
+      }
     }
 
     // 5) servings
