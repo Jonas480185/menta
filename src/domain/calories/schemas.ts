@@ -50,3 +50,70 @@ export const CalorieInputSchema = z.object({
 });
 
 export type CalorieInput = z.infer<typeof CalorieInputSchema>;
+
+const IsoDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Bitte ein gültiges Datum angeben.");
+
+/** Valid IANA timezone (checked via Intl, works in Node and browsers). */
+export const TimezoneSchema = z
+  .string()
+  .min(1, "Bitte eine Zeitzone wählen.")
+  .max(64, "Bitte eine gültige Zeitzone wählen.")
+  .refine((tz) => {
+    try {
+      new Intl.DateTimeFormat("de-DE", { timeZone: tz });
+      return true;
+    } catch {
+      return false;
+    }
+  }, "Bitte eine gültige Zeitzone wählen.");
+
+/**
+ * Patch for `updateProfile()` (src/server/services/profile) – every field optional, unknown keys
+ * rejected (bmr/tdee/onboarding timestamps are not user-editable). Ranges match the DB CHECKs.
+ * Cross-field rules that need the stored row (gain + fast, age on "today") live in the service.
+ */
+export const ProfilePatchSchema = z
+  .object({
+    sex: SexSchema,
+    birthDate: IsoDateSchema,
+    heightCm: HeightCmSchema,
+    startWeightKg: WeightKgSchema,
+    targetWeightKg: TargetWeightKgSchema.nullable(),
+    activityLevel: ActivityLevelSchema,
+    goalType: GoalTypeSchema,
+    goalPace: GoalPaceSchema.nullable(),
+    calculatorId: z.string().min(1).max(64),
+    addActivityCalories: z.boolean(),
+    waterGoalMl: z.number().int("Bitte ganze Milliliter angeben.").min(0).max(10000, "Maximal 10.000 ml."),
+    stepGoal: z.number().int("Bitte ganze Schritte angeben.").min(0).max(100000, "Maximal 100.000 Schritte."),
+    timezone: TimezoneSchema,
+    theme: z.enum(["system", "light", "dark"]),
+  })
+  .partial()
+  .strict();
+
+export type ProfilePatch = z.infer<typeof ProfilePatchSchema>;
+
+/**
+ * Values that override the stored profile for a single calculation – lets onboarding/settings
+ * preview the result before saving. `weightKg` replaces the current weight, `ageYears` wins over
+ * `birthDate`.
+ */
+export const CalorieOverridesSchema = z
+  .object({
+    sex: SexSchema,
+    birthDate: IsoDateSchema,
+    ageYears: AgeYearsSchema,
+    heightCm: HeightCmSchema,
+    weightKg: WeightKgSchema,
+    bodyFatPct: BodyFatPctSchema.nullable(),
+    activityLevel: ActivityLevelSchema,
+    goalType: GoalTypeSchema,
+    goalPace: GoalPaceSchema.nullable(),
+    targetWeightKg: TargetWeightKgSchema.nullable(),
+    calculatorId: z.string().min(1).max(64).nullable(),
+  })
+  .partial()
+  .strict();
+
+export type CalorieOverrides = z.infer<typeof CalorieOverridesSchema>;
