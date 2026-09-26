@@ -41,7 +41,9 @@ export type CalorieWarningCode =
   | "goal_reached"
   | "pace_adjusted"
   | "calculator_fallback"
-  | "age_outside_range";
+  | "age_outside_range"
+  /** Only from checkManualTarget(). */
+  | "manual_below_floor";
 
 export interface CalorieWarning {
   code: CalorieWarningCode;

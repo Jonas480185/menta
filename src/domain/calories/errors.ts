@@ -14,5 +14,10 @@ export class CalorieInputError extends Error {
 }
 
 export function isCalorieInputError(err: unknown): err is CalorieInputError {
-  return err instanceof CalorieInputError || (err instanceof Error && err.name === "CalorieInputError");
+  if (err instanceof CalorieInputError) return true;
+  return (
+    err instanceof Error &&
+    err.name === "CalorieInputError" &&
+    typeof (err as Error & { field?: unknown }).field === "string"
+  );
 }
