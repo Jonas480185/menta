@@ -48,14 +48,15 @@ export function movingAverage7(
   dates?: readonly IsoDate[],
 ): { date: IsoDate; value: number | null }[] {
   const samples = normalizeSamples(entries);
+  const byDate = new Map(samples.map((s) => [s.date, s.weightKg]));
   const targets = dates ?? samples.map((s) => s.date);
   return targets.map((date) => {
-    const from = addDays(date, -(AVERAGE_WINDOW_DAYS - 1));
     let sum = 0;
     let n = 0;
-    for (const s of samples) {
-      if (s.date >= from && s.date <= date) {
-        sum += s.weightKg;
+    for (let i = 0; i < AVERAGE_WINDOW_DAYS; i++) {
+      const w = byDate.get(addDays(date, -i));
+      if (w !== undefined) {
+        sum += w;
         n++;
       }
     }
@@ -103,7 +104,8 @@ export function trendSeries(entries: readonly WeightSample[], options: TrendOpti
   }
 
   if (options.until && options.until > lastDate) {
-    for (let d = addDays(lastDate, 1); d <= options.until; d = addDays(d, 1)) out.push({ date: d, value: trend });
+    for (let d = addDays(lastDate, 1); d <= options.until; d = addDays(d, 1))
+      out.push({ date: d, value: trend });
   }
   return out;
 }
@@ -154,11 +156,7 @@ export function weeklyRate(points: readonly DatedValue[]): number | null {
  * before) `latest.date − days`. `asOf` limits "latest" to points on or before that day.
  * `null` when the series doesn't reach back far enough.
  */
-export function weightChange(
-  series: readonly DatedValue[],
-  days: number,
-  asOf?: IsoDate,
-): number | null {
+export function weightChange(series: readonly DatedValue[], days: number, asOf?: IsoDate): number | null {
   const sorted = [...series]
     .filter((p) => Number.isFinite(p.value) && (asOf === undefined || p.date <= asOf))
     .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));

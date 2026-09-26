@@ -116,7 +116,12 @@ export interface ProjectGoalDateInput {
  * `null` when there's no rate, the trend is flat or heading away, the target is already
  * reached, or the projection is more than MAX_PROJECTION_WEEKS away.
  */
-export function projectGoalDate({ current, target, weeklyRate, today }: ProjectGoalDateInput): IsoDate | null {
+export function projectGoalDate({
+  current,
+  target,
+  weeklyRate,
+  today,
+}: ProjectGoalDateInput): IsoDate | null {
   if (weeklyRate === null || Math.abs(weeklyRate) < STABLE_RATE_KG_PER_WEEK) return null;
   const gap = target - current;
   if (gap === 0 || Math.sign(gap) !== Math.sign(weeklyRate)) return null;
