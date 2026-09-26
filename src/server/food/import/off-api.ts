@@ -158,3 +158,65 @@ export async function* fetchOffPopularProducts(opts: OffApiFetchOptions): AsyncG
     }
   }
 }
+
+export interface OffSalFetchOptions extends Omit<OffApiFetchOptions, "partitions" | "maxPagesPerPartition" | "popularityTag" | "country"> {
+  /** Lucene query, default: German-language products sold in Germany. */
+  query?: string;
+}
+
+export const DEFAULT_OFF_SAL_QUERY = 'countries_tags:"en:germany" AND lang:"de"';
+
+/**
+ * Crawls search-a-licious (search.openfoodfacts.org, Elasticsearch) sorted by unique scans.
+ * Unlike the v2 search it paginates deep (up to the 10 000-hit window) and is fast; limit
+ * 30 req/min. Pages are cached as `sal-*.json` next to the v2 pages.
+ */
+export async function* fetchOffSearchALiciousProducts(opts: OffSalFetchOptions): AsyncGenerator<unknown> {
+  const pageSize = Math.min(opts.pageSize ?? 100, 100);
+  const query = opts.query ?? DEFAULT_OFF_SAL_QUERY;
+  const log = opts.log ?? (() => {});
+  const limiter = opts.limiter ?? new TokenBucket(RATE_LIMITS.offSearchALicious);
+  const base = (opts.baseUrl ?? "https://search.openfoodfacts.org").replace(/\/$/, "");
+  const slug = query.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase().slice(0, 60);
+  await mkdir(opts.cacheDir, { recursive: true });
+  const seen = new Set<string>();
+  const maxPages = Math.ceil(10_000 / pageSize);
+
+  for (let page = 1; page <= maxPages && seen.size < opts.limit; page++) {
+    const cacheFile = path.join(opts.cacheDir, `sal-${slug}-ps${pageSize}-p${String(page).padStart(3, "0")}.json`);
+    let hits: unknown[];
+    if (!opts.refresh && existsSync(cacheFile)) {
+      hits = (JSON.parse(await readFile(cacheFile, "utf8")) as { hits?: unknown[] }).hits ?? [];
+    } else {
+      const params = new URLSearchParams({
+        q: query,
+        sort_by: "-unique_scans_n",
+        page_size: String(pageSize),
+        page: String(page),
+        fields: OFF_PRODUCT_FIELDS.join(","),
+      });
+      const res = await fetchJson<{ hits?: unknown[]; count?: number }>(`${base}/search?${params}`, {
+        fetch: opts.fetch,
+        headers: { "User-Agent": opts.userAgent ?? offUserAgent() },
+        limiter,
+        timeoutMs: 30_000,
+        retries: 4,
+        backoffMs: 3_000,
+        maxBackoffMs: 30_000,
+        sleep: opts.sleep,
+      });
+      hits = res.data?.hits ?? [];
+      await writeFile(cacheFile, JSON.stringify({ count: res.data?.count, hits }));
+      log(`  sal page ${page}: ${hits.length} products (${res.data?.count ?? "?"} total, ${seen.size} unique so far)`);
+    }
+    for (const p of hits) {
+      if (seen.size >= opts.limit) break;
+      const code = (p as { code?: unknown })?.code;
+      if (typeof code !== "string" && typeof code !== "number") continue;
+      if (seen.has(String(code))) continue;
+      seen.add(String(code));
+      yield p;
+    }
+    if (hits.length < pageSize) break;
+  }
+}

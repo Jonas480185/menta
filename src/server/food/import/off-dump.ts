@@ -1,6 +1,7 @@
 /**
  * Offline Open Food Facts sources:
- * - `readCachedOffPages`: products from API search pages cached by off-api.ts (data/raw/off).
+ * - `readCachedOffPages`: products from search pages cached by off-api.ts (data/raw/off):
+ *   v2 search pages (`api-*.json`, `products`) and search-a-licious pages (`sal-*.json`, `hits`).
  * - `readOffJsonl`: streams the official JSONL dump (`openfoodfacts-products.jsonl.gz`,
  *   ~7 GB gzipped / 3.5 M products) line by line – constant memory, optional country filter.
  *
@@ -19,18 +20,20 @@ const productCode = (p: unknown): string | null => {
   return typeof code === "string" || typeof code === "number" ? String(code) : null;
 };
 
-/** Yields every product of the cached `api-*.json` pages once (first occurrence wins). */
+/** Yields every product of the cached pages once (first occurrence wins). */
 export async function* readCachedOffPages(cacheDir: string): AsyncGenerator<unknown> {
   let files: string[];
   try {
-    files = (await readdir(cacheDir)).filter((f) => f.startsWith("api-") && f.endsWith(".json")).sort(pageOrder);
+    files = (await readdir(cacheDir))
+      .filter((f) => (f.startsWith("api-") || f.startsWith("sal-")) && f.endsWith(".json"))
+      .sort(pageOrder);
   } catch {
     return;
   }
   const seen = new Set<string>();
   for (const f of files) {
-    const data = JSON.parse(await readFile(path.join(cacheDir, f), "utf8")) as { products?: unknown[] };
-    for (const p of data.products ?? []) {
+    const data = JSON.parse(await readFile(path.join(cacheDir, f), "utf8")) as { products?: unknown[]; hits?: unknown[] };
+    for (const p of data.products ?? data.hits ?? []) {
       const code = productCode(p);
       if (!code || seen.has(code)) continue;
       seen.add(code);
@@ -39,9 +42,9 @@ export async function* readCachedOffPages(cacheDir: string): AsyncGenerator<unkn
   }
 }
 
-/** Overall top list ("_any_") first, then categories alphabetically, pages ascending. */
+/** search-a-licious pages (global scan ranking) first, then v2 top list, then categories. */
 function pageOrder(a: string, b: string): number {
-  const rank = (f: string) => (f.includes("_any_") ? 0 : 1);
+  const rank = (f: string) => (f.startsWith("sal-") ? 0 : f.includes("_any_") ? 1 : 2);
   return rank(a) - rank(b) || a.localeCompare(b);
 }
 
