@@ -361,9 +361,9 @@ function SelectionSection() {
           </div>
           <RadioGroup defaultValue="moderate" aria-label="Zieltempo">
             {[
-              ["slow", "Gemütlich (−0,25 kg/Woche)"],
-              ["moderate", "Moderat (−0,5 kg/Woche)"],
-              ["fast", "Ambitioniert (−0,75 kg/Woche)"],
+              ["slow", "Gemütlich (≈ 0,25 kg/Woche)"],
+              ["moderate", "Moderat (≈ 0,45 kg/Woche)"],
+              ["fast", "Ambitioniert (≈ 0,7 kg/Woche)"],
             ].map(([value, label]) => (
               <div key={value} className="flex items-center gap-3">
                 <RadioGroupItem value={value} id={`g-r-${value}`} />
