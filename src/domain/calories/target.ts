@@ -176,7 +176,9 @@ export function computeCalorieTarget(input: ComputeTargetInput): CalorieCalculat
   let floorApplied = false;
   if (adjustment < 0 && target < floorKcal) {
     target = floorKcal;
-    adjustment = Math.min(0, target - roundedTdee);
+    adjustment = target - roundedTdee;
+    // Floor at (rounded) TDEE: the "deficit" is only rounding noise → no deficit at all.
+    if (adjustment > -step) adjustment = 0;
     floorApplied = true;
     warn("floor_applied", WARNING_MESSAGES.floorApplied(floorKcal));
   }
