@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "builtAt": "2026-09-26T12:42:01.787Z",
+  "files": [
+    {
+      "file": "foods-curated.de.jsonl.gz",
+      "source": "curated",
+      "description": "Kuratierte deutsche Basis-Lebensmittel (Nährwerte: USDA FDC)",
+      "license": "CC0 1.0 (USDA FoodData Central) / Menta curation",
+      "count": 446,
+      "bytes": 56662,
+      "sha256": "fb268e506946a7b5d9fb69d7ff6cd31492d3a73cd83d13c530aac72b972d6215"
+    },
+    {
+      "file": "foods-usda.jsonl.gz",
+      "source": "usda",
+      "description": "USDA FoodData Central: Foundation Foods 2026-04 + SR Legacy 2018-04",
+      "license": "CC0 1.0 (public domain)",
+      "count": 8229,
+      "bytes": 923153,
+      "sha256": "33ed75c42722b95c200c99f38c7a8e3e045df36ca39b83c73d7f76fd909885cc"
+    },
+    {
+      "file": "foods-off.de.jsonl.gz",
+      "source": "off",
+      "description": "Open Food Facts: beliebte Produkte in Deutschland (nach Scans)",
+      "license": "ODbL 1.0 (© Open Food Facts contributors)",
+      "count": 9311,
+      "bytes": 642345,
+      "sha256": "26aef0a5c685333b79efcb27ceea5d004c75ebbfb860bfc0ce87614beede30c7"
+    }
+  ]
+}
