@@ -187,7 +187,7 @@ export function getMetActivity(key: string | null | undefined): MetActivity | un
 
 /** Lower-case, strip diacritics and ß → ss, so "fussball" finds "Fußball". */
 function normalize(s: string): string {
-  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ß/g, "ss").trim();
+  return s.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "").replace(/ß/g, "ss").trim();
 }
 
 /**
