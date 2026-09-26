@@ -50,7 +50,7 @@ function AvatarFallback({ className, ...props }: React.ComponentProps<typeof Ava
   );
 }
 
-/** "Jonas Lunkwitz" → "JL" */
+/** "Alex Muster" → "AM" */
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return "?";
