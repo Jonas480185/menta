@@ -4,15 +4,15 @@ Owner: Macro Engine. Code: `src/domain/macros/**` (reine Logik, Client + Server 
 `src/server/services/goals/**` (Service-Schicht, DB). Schema: `goal_profiles`, `daily_nutrition`
 in `src/server/db/schema/goals.ts`.
 
-| Modul | Inhalt |
-|---|---|
-| `domain/macros/math.ts` | kcal ↔ g ↔ %, Rundungsstrategie, Konsistenzprüfung, Warnungen |
-| `domain/macros/recommend.ts` | Auto-Modus: Protein-/Fett-Empfehlung, Bezugsgewicht |
-| `domain/macros/targets.ts` | `computeMacroTargets(spec)` – ein Einstieg für alle drei Modi (auch für Live-Vorschau im Client) |
-| `domain/macros/presets.ts` | Prozent-Presets (Ausgewogen, Proteinreich, Low Carb, Ausdauer, Keto) |
-| `domain/macros/day-profiles.ts` | Profilarten + `deriveDayProfile` (Trainingstag, Ruhetag, …) |
-| `domain/macros/schedule.ts` | Wochentagsplan, Konfliktprüfung, `pickDayProfile` (Auflösungsreihenfolge) |
-| `server/services/goals/*` | Profile lesen/schreiben, `resolveGoalProfileForDate`, Zod-Schemas |
+| Modul                           | Inhalt                                                                                           |
+| ------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `domain/macros/math.ts`         | kcal ↔ g ↔ %, Rundungsstrategie, Konsistenzprüfung, Warnungen                                    |
+| `domain/macros/recommend.ts`    | Auto-Modus: Protein-/Fett-Empfehlung, Bezugsgewicht                                              |
+| `domain/macros/targets.ts`      | `computeMacroTargets(spec)` – ein Einstieg für alle drei Modi (auch für Live-Vorschau im Client) |
+| `domain/macros/presets.ts`      | Prozent-Presets (Ausgewogen, Proteinreich, Low Carb, Ausdauer, Keto)                             |
+| `domain/macros/day-profiles.ts` | Profilarten + `deriveDayProfile` (Trainingstag, Ruhetag, …)                                      |
+| `domain/macros/schedule.ts`     | Wochentagsplan, Konfliktprüfung, `pickDayProfile` (Auflösungsreihenfolge)                        |
+| `server/services/goals/*`       | Profile lesen/schreiben, `resolveGoalProfileForDate`, Zod-Schemas                                |
 
 ---
 
@@ -28,11 +28,11 @@ in `src/server/db/schema/goals.ts`.
 
 ## 2. Die drei Makro-Modi
 
-| Modus | Eingabe | Rechnung |
-|---|---|---|
-| `percent` | kcal + Anteile (%) | g = kcal × % / 100 / Faktor, dann Rundungsstrategie (§3). Anteile werden auf exakt 100 normiert (33,3/33,3/33,4 geht). |
-| `grams` | kcal + Protein g + Fett g | P, F fest (auf ganze g gerundet), **C = (kcal − 4P − 9F) / 4**. Ist das negativ → Warnung `carbs_negative`, der Service lehnt ab (`VALIDATION`). |
-| `auto` | kcal + Gewicht, Ziel, Aktivität (optional Größe, Zielgewicht) | Empfehlung nach §4, dann Rundungsstrategie. |
+| Modus     | Eingabe                                                       | Rechnung                                                                                                                                         |
+| --------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `percent` | kcal + Anteile (%)                                            | g = kcal × % / 100 / Faktor, dann Rundungsstrategie (§3). Anteile werden auf exakt 100 normiert (33,3/33,3/33,4 geht).                           |
+| `grams`   | kcal + Protein g + Fett g                                     | P, F fest (auf ganze g gerundet), **C = (kcal − 4P − 9F) / 4**. Ist das negativ → Warnung `carbs_negative`, der Service lehnt ab (`VALIDATION`). |
+| `auto`    | kcal + Gewicht, Ziel, Aktivität (optional Größe, Zielgewicht) | Empfehlung nach §4, dann Rundungsstrategie.                                                                                                      |
 
 Beispiele („diese Makros ergeben X kcal“):
 
@@ -73,7 +73,7 @@ Werte werden auch gespeichert, damit Anzeige und Rechnung übereinstimmen.
 ### 4.1 Bezugsgewicht
 
 Bei hohem Körpergewicht überschätzt g/kg × Gesamtgewicht den Proteinbedarf (Fettmasse braucht kaum Protein).
-Daher wird – analog zum in der klinischen Ernährung üblichen *adjusted body weight* – nur ein Teil des
+Daher wird – analog zum in der klinischen Ernährung üblichen _adjusted body weight_ – nur ein Teil des
 Übergewichts gezählt:
 
 ```
@@ -94,13 +94,14 @@ Protein = g/kg × Bezugsgewicht, höchstens 40 % der kcal
 ```
 
 Begründung/Quellen:
-- Morton et al., *Br J Sports Med* 52:376 – Meta-Analyse: Nutzen für Muskelzuwachs flacht bei
+
+- Morton et al., _Br J Sports Med_ 52:376 – Meta-Analyse: Nutzen für Muskelzuwachs flacht bei
   ~1,6 g/kg/Tag ab (oberes KI ~2,2 g/kg) → Basis „halten“ 1,6, Obergrenze 2,2.
-- Jäger et al., *ISSN Position Stand: Protein and Exercise*, JISSN 14:20 – 1,4–2,0 g/kg für
+- Jäger et al., _ISSN Position Stand: Protein and Exercise_, JISSN 14:20 – 1,4–2,0 g/kg für
   Trainierende.
-- Thomas, Erdman & Burke, *ACSM/AND/DC Joint Position: Nutrition and Athletic Performance* –
+- Thomas, Erdman & Burke, _ACSM/AND/DC Joint Position: Nutrition and Athletic Performance_ –
   1,2–2,0 g/kg → Untergrenze 1,2.
-- Helms et al., JISSN 11:20; Phillips & Van Loon, *J Sports Sci* 29:S29 – im Kaloriendefizit
+- Helms et al., JISSN 11:20; Phillips & Van Loon, _J Sports Sci_ 29:S29 – im Kaloriendefizit
   schützt mehr Protein (bis ~2,3–3,1 g/kg fettfreie Masse) die Muskulatur → „abnehmen“ 2,0.
 - Die DGE-Referenz (0,8 g/kg für Erwachsene) ist der Mindestbedarf, nicht das Optimum für aktive Menschen;
   alle Empfehlungen liegen darüber.
@@ -114,8 +115,8 @@ Fett = max(Anteil nach Ziel × kcal / 9 (abnehmen 25 % · halten 30 % · zunehme
        höchstens 40 % der kcal
 ```
 
-Quellen: DGE-Referenzwerte (Richtwert 30 % der Energie), EFSA *Dietary Reference Values for fats*
-(20–35 % E), IOM *AMDR* (20–35 % E). Die Untergrenze 0,6 g/kg bzw. die Warnung `fat_low` (< 20 % E oder
+Quellen: DGE-Referenzwerte (Richtwert 30 % der Energie), EFSA _Dietary Reference Values for fats_
+(20–35 % E), IOM _AMDR_ (20–35 % E). Die Untergrenze 0,6 g/kg bzw. die Warnung `fat_low` (< 20 % E oder
 < 0,5 g/kg) schützt Hormonhaushalt und Aufnahme fettlöslicher Vitamine; bei Diäten wird 25 % statt 30 %
 gewählt, damit mehr Raum für Protein und KH bleibt.
 
@@ -126,13 +127,13 @@ Rest der Energie (`(kcal − 4P − 9F) / 4`), anschließend §3. `recommendMacr
 
 ### 4.5 Warnungen (nicht blockierend)
 
-| Code | Bedingung | blockiert? |
-|---|---|---|
+| Code             | Bedingung                           | blockiert?                                    |
+| ---------------- | ----------------------------------- | --------------------------------------------- |
 | `carbs_negative` | Protein + Fett > kcal (Gramm-Modus) | **ja** (Service → `VALIDATION`, Feld `grams`) |
-| `carbs_very_low` | KH < 50 g | nein |
-| `fat_low` | Fett < 20 % kcal oder < 0,5 g/kg | nein |
-| `protein_high` | > 2,5 g/kg | nein |
-| `calories_low` | kcal < 1.200 | nein |
+| `carbs_very_low` | KH < 50 g                           | nein                                          |
+| `fat_low`        | Fett < 20 % kcal oder < 0,5 g/kg    | nein                                          |
+| `protein_high`   | > 2,5 g/kg                          | nein                                          |
+| `calories_low`   | kcal < 1.200                        | nein                                          |
 
 Texte sind deutsch, freundlich, ohne Schuldzuweisung (`warning.message`).
 
@@ -163,14 +164,14 @@ Ausdauer 20/55/25 · Keto 25/5/70 (P/C/F). `findMatchingPreset(percents)` markie
 Protein bleibt gleich, kcal ändert sich um `kcalDelta`, optional wird Fett-Energie in KH verschoben
 (`fatShiftKcal`, Fett nie unter 50 % des Basiswerts), KH balancieren:
 
-| Art | kcal | Fett→KH | Name |
-|---|---|---|---|
-| training | +250 | 0 | Trainingstag |
-| rest | −250 | 0 | Ruhetag |
-| high_carb | +200 | 150 kcal | High-Carb-Tag |
-| low_carb | −200 | −150 kcal (mehr Fett) | Low-Carb-Tag |
-| refeed | +500 bzw. Erhaltungsbedarf | 200 kcal | Refeed-Tag |
-| custom | 0 | 0 | Eigenes Profil |
+| Art       | kcal                       | Fett→KH               | Name           |
+| --------- | -------------------------- | --------------------- | -------------- |
+| training  | +250                       | 0                     | Trainingstag   |
+| rest      | −250                       | 0                     | Ruhetag        |
+| high_carb | +200                       | 150 kcal              | High-Carb-Tag  |
+| low_carb  | −200                       | −150 kcal (mehr Fett) | Low-Carb-Tag   |
+| refeed    | +500 bzw. Erhaltungsbedarf | 200 kcal              | Refeed-Tag     |
+| custom    | 0                          | 0                     | Eigenes Profil |
 
 Beispiel: Standard 2.300 kcal, 150/281/64 → Trainingstag 2.550 kcal, 150/344/64 (= 2.552 kcal).
 
@@ -236,7 +237,9 @@ setProfileWeekdays(ctx, id: string, weekdays: readonly number[]): Promise<GoalPr
 ```ts
 // Onboarding / Einstellungen – legt das Standardprofil an oder aktualisiert es (atomarer Upsert)
 const { profile, calculation } = await upsertDefaultGoalProfile(ctx, {
-  calorieTarget: 2000, calorieSource: "calculated", macroMode: "percent",
+  calorieTarget: 2000,
+  calorieSource: "calculated",
+  macroMode: "percent",
   percents: { protein: 30, carbs: 40, fat: 30 },
 });
 // profile: 150 P / 199 C / 67 F, proteinPct 30 …
@@ -247,32 +250,43 @@ await createDerivedGoalProfile(ctx, { kind: "training", weekdays: [1, 3, 5] });
 
 // Eigenes Profil mit Gramm-Vorgaben
 await createGoalProfile(ctx, {
-  name: "Ruhetag", kind: "rest", weekdays: [7],
-  calorieTarget: 2050, calorieSource: "manual", macroMode: "grams", grams: { proteinG: 150, fatG: 64 },
+  name: "Ruhetag",
+  kind: "rest",
+  weekdays: [7],
+  calorieTarget: 2050,
+  calorieSource: "manual",
+  macroMode: "grams",
+  grams: { proteinG: 150, fatG: 64 },
 }); // → 150 / 219 / 64 = 2.052 kcal
 
 // Nur Name ändern (Ziele bleiben; calculation wird aus den gespeicherten Gramm gebildet)
 await updateGoalProfile(ctx, id, { name: "Beintag" });
 // Ziele ändern: `targets` immer vollständig (Modi hängen voneinander ab)
-await updateGoalProfile(ctx, id, { targets: { calorieTarget: 2600, calorieSource: "manual",
-  macroMode: "percent", percents: { protein: 25, carbs: 50, fat: 25 } } });
+await updateGoalProfile(ctx, id, {
+  targets: {
+    calorieTarget: 2600,
+    calorieSource: "manual",
+    macroMode: "percent",
+    percents: { protein: 25, carbs: 50, fat: 25 },
+  },
+});
 
-await setProfileWeekdays(ctx, id, [2, 4]);   // CONFLICT, wenn Di/Do schon vergeben
-await archiveGoalProfile(ctx, id);           // VALIDATION für das Standardprofil
+await setProfileWeekdays(ctx, id, [2, 4]); // CONFLICT, wenn Di/Do schon vergeben
+await archiveGoalProfile(ctx, id); // VALIDATION für das Standardprofil
 ```
 
 ### 7.3 Regeln im Überblick
 
-| Regel | Fehler |
-|---|---|
-| Zusätzliche Profile brauchen ein Standardprofil | `VALIDATION` „Lege zuerst dein Standardziel fest.“ |
-| `kind: "default"` ist reserviert; Standardprofil ändert seine Art nicht | `VALIDATION` |
-| Standardprofil bekommt keine Wochentage | `VALIDATION` |
-| Wochentag schon einem anderen aktiven Profil zugeordnet | `CONFLICT` |
-| Standardprofil archivieren | `VALIDATION` |
-| Archiviertes Profil bearbeiten / Wochentage setzen | `VALIDATION` |
-| Protein + Fett > Kalorienziel (Gramm-Modus) | `VALIDATION` (`fieldErrors.grams`) |
-| Fremde oder unbekannte ID | `NOT_FOUND` |
+| Regel                                                                   | Fehler                                             |
+| ----------------------------------------------------------------------- | -------------------------------------------------- |
+| Zusätzliche Profile brauchen ein Standardprofil                         | `VALIDATION` „Lege zuerst dein Standardziel fest.“ |
+| `kind: "default"` ist reserviert; Standardprofil ändert seine Art nicht | `VALIDATION`                                       |
+| Standardprofil bekommt keine Wochentage                                 | `VALIDATION`                                       |
+| Wochentag schon einem anderen aktiven Profil zugeordnet                 | `CONFLICT`                                         |
+| Standardprofil archivieren                                              | `VALIDATION`                                       |
+| Archiviertes Profil bearbeiten / Wochentage setzen                      | `VALIDATION`                                       |
+| Protein + Fett > Kalorienziel (Gramm-Modus)                             | `VALIDATION` (`fieldErrors.grams`)                 |
+| Fremde oder unbekannte ID                                               | `NOT_FOUND`                                        |
 
 Nebenläufigkeit: Schreibvorgänge mit Wochentagen laufen in `inTransaction` und sperren die aktiven Profile
 des Nutzers (`SELECT … FOR UPDATE`), damit zwei parallele Zuordnungen keinen Doppel-Wochentag erzeugen.
