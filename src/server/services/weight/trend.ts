@@ -12,6 +12,7 @@ import {
   type GoalProgress,
   type TrendDirection,
   type WeightGoalDirection,
+  type WeightTrendPoint,
 } from "@/domain/weight";
 import { addDays, dateRange, todayInTimezone, type IsoDate } from "@/lib/dates";
 import type { ServiceContext } from "@/server/context";
@@ -25,15 +26,7 @@ import { getFirstWeight, getLatestWeightBefore, listWeights, type WeightEntry } 
  */
 export const TREND_WARMUP_DAYS = 60;
 
-export interface WeightTrendPoint {
-  date: IsoDate;
-  /** Logged weight of this day, null on days without an entry. */
-  weightKg: number | null;
-  /** Trailing 7-day average, null when the window has no entry. */
-  avg7: number | null;
-  /** Smoothed trend, null before the first entry and after the user's today. */
-  trend: number | null;
-}
+export type { WeightTrendPoint };
 
 export interface WeightGoalSummary {
   targetKg: number;
