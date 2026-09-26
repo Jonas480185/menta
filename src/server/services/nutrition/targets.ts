@@ -137,10 +137,7 @@ export async function getDailyTargets(ctx: ServiceContext, date: IsoDate): Promi
  * - Today/future → inserted or refreshed to the live targets (no write when unchanged).
  * Returns the day's targets; null (and no row) when the user has no goal profile.
  */
-export async function ensureDailyNutrition(
-  ctx: ServiceContext,
-  date: IsoDate,
-): Promise<DailyTargets | null> {
+export async function ensureDailyNutrition(ctx: ServiceContext, date: IsoDate): Promise<DailyTargets | null> {
   assertIsoDate(date);
   const isPast = date < todayFor(ctx);
   const loaded = await loadDay(ctx, date);

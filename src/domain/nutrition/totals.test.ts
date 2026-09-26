@@ -80,7 +80,11 @@ describe("macroEnergySplit", () => {
   });
 
   it("weights fat with 9 kcal/g", () => {
-    expect(macroEnergySplit({ proteinG: 0, carbsG: 9, fatG: 4 })).toEqual({ protein: 0, carbs: 0.5, fat: 0.5 });
+    expect(macroEnergySplit({ proteinG: 0, carbsG: 9, fatG: 4 })).toEqual({
+      protein: 0,
+      carbs: 0.5,
+      fat: 0.5,
+    });
   });
 
   it("single-macro food → 100 %", () => {

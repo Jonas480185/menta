@@ -81,10 +81,7 @@ export async function getDailyTotals(
       sodiumMg: r.sodiumMg,
     },
     targets:
-      r.targetCalories == null ||
-      r.targetProteinG == null ||
-      r.targetCarbsG == null ||
-      r.targetFatG == null
+      r.targetCalories == null || r.targetProteinG == null || r.targetCarbsG == null || r.targetFatG == null
         ? null
         : {
             calories: r.targetCalories,

@@ -119,7 +119,12 @@ export async function getDaySummary(ctx: ServiceContext, date: IsoDate): Promise
       .select()
       .from(mealEntries)
       .where(and(eq(mealEntries.userId, ctx.userId), eq(mealEntries.date, date)))
-      .orderBy(asc(mealEntries.sortOrder), asc(mealEntries.loggedAt), asc(mealEntries.createdAt), asc(mealEntries.id)),
+      .orderBy(
+        asc(mealEntries.sortOrder),
+        asc(mealEntries.loggedAt),
+        asc(mealEntries.createdAt),
+        asc(mealEntries.id),
+      ),
     countedActivityKcal(ctx, date),
   ]);
 
