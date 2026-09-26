@@ -23,6 +23,12 @@ describe("validateNutrients – valid data", () => {
     expect(r.nutrients.sodiumMg).toBe(12);
   });
 
+  it("tolerates energy mismatches only for trusted data", () => {
+    expect(qualityFor(false, ["energy_mismatch"], true)).toBe("verified");
+    expect(qualityFor(false, ["energy_mismatch"], false)).toBe("suspect");
+    expect(qualityFor(false, ["sugar_exceeds_carbs"], true)).toBe("suspect");
+  });
+
   it("marks trusted clean data as verified", () => {
     expect(validateNutrients(oats, { trusted: true }).quality).toBe("verified");
   });
@@ -162,7 +168,7 @@ describe("validateNutrients – soft flags", () => {
 describe("qualityFor", () => {
   it("orders suspect > partial > verified/complete", () => {
     expect(qualityFor(true, [], true)).toBe("suspect");
-    expect(qualityFor(false, ["energy_mismatch", "missing_fat"], true)).toBe("suspect");
+    expect(qualityFor(false, ["energy_mismatch", "missing_fat"], false)).toBe("suspect");
     expect(qualityFor(false, ["missing_fat"], true)).toBe("partial");
     expect(qualityFor(false, ["sodium_derived"], true)).toBe("verified");
     expect(qualityFor(false, [], false)).toBe("complete");

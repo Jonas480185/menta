@@ -60,6 +60,12 @@ export const SUSPECT_FLAGS: ReadonlySet<string> = new Set([
   "sugar_exceeds_carbs",
   "saturated_fat_exceeds_fat",
 ]);
+/**
+ * Flags that stay informational for trusted (curated, reviewed) data: USDA lab values use
+ * food-specific Atwater factors, so high-fibre foods (bran, cocoa powder) legitimately deviate
+ * from 4/4/9 – the reviewed kcal value is correct.
+ */
+export const TRUSTED_TOLERATED_FLAGS: ReadonlySet<string> = new Set(["energy_mismatch"]);
 const MISSING_CORE_FLAGS = ["missing_kcal", "missing_protein", "missing_carbs", "missing_fat"] as const;
 
 /** Tolerances (documented in docs/architecture/food-data-strategy.md). */
@@ -267,7 +273,8 @@ export function validateNutrients(input: NutrientInput, opts: ValidateOptions = 
 
 /** Derives the data quality from flags (exported for re-evaluation of stored rows). */
 export function qualityFor(hasErrors: boolean, flags: readonly string[], trusted: boolean): DataQuality {
-  if (hasErrors || flags.some((f) => SUSPECT_FLAGS.has(f))) return "suspect";
+  if (hasErrors) return "suspect";
+  if (flags.some((f) => SUSPECT_FLAGS.has(f) && !(trusted && TRUSTED_TOLERATED_FLAGS.has(f)))) return "suspect";
   if (MISSING_CORE_FLAGS.some((f) => flags.includes(f))) return "partial";
   return trusted ? "verified" : "complete";
 }

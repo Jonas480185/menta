@@ -123,3 +123,20 @@ export async function loadUsdaRecords(dir: string, dataType: string): Promise<Ma
   }
   return records;
 }
+
+/**
+ * Ensures and loads several datasets into one fdcId → record map (fdcIds are unique across
+ * FDC data types). Default: Foundation + SR Legacy.
+ */
+export async function loadUsdaBulk(
+  rawDir: string,
+  datasets: readonly UsdaDatasetName[] = ["foundation", "sr_legacy"],
+  opts: EnsureDatasetOptions = {},
+): Promise<Map<number, UsdaFoodRecord>> {
+  const all = new Map<number, UsdaFoodRecord>();
+  for (const name of datasets) {
+    const dir = await ensureUsdaDataset(name, rawDir, opts);
+    for (const [id, rec] of await loadUsdaRecords(dir, USDA_DATASETS[name].dataType)) all.set(id, rec);
+  }
+  return all;
+}

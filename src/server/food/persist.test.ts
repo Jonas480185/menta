@@ -109,7 +109,7 @@ describe("upsertNormalizedFoods", () => {
       food({ sourceId: "ok-1", nutrients: { kcal: 150, proteinG: 13.5, carbsG: 58.7, fatG: 7 } }),
       food({ sourceId: "ok-1" }),
       food({ sourceId: "ok-2", nutrients: { kcal: 150, proteinG: 13.5, carbsG: 58.7, fatG: 7 } }),
-    ]);
+    ], { trusted: () => false }); // untrusted: energy mismatches make records suspect
     // for the duplicate key the richer (non-suspect) record wins; ok-2 stays flagged
     expect(report.stats).toMatchObject({ received: 6, invalid: 3, duplicates: 1, inserted: 2, flagged: 1 });
     expect(report.errorCounts).toMatchObject({ kcal_exceeds_max: 1, missing_name: 1, missing_source_id: 1 });

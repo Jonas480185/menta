@@ -1,0 +1,4659 @@
+{
+  "version": 1,
+  "description": "Kuratierte deutsche Basis-Lebensmittel. Nährwerte werden beim Import aus USDA FoodData Central (SR Legacy 2018-04 / Foundation Foods) über fdcId aufgelöst (CC0). Portionsgrößen: typische Haushaltsmengen in Deutschland; 'grams' sind Basiseinheiten (g, bzw. ml bei basis=ml).",
+  "foods": [
+    {
+      "id": "apfel",
+      "nameDe": "Apfel",
+      "category": "Obst",
+      "fdcId": 171688,
+      "usdaDescription": "Apples, raw, with skin (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 180 },
+        { "label": "1 Stück (klein)", "unit": "piece", "grams": 130 },
+        { "label": "1 Stück (groß)", "unit": "piece", "grams": 230 }
+      ]
+    },
+    {
+      "id": "apfel-geschaelt",
+      "nameDe": "Apfel, geschält",
+      "category": "Obst",
+      "fdcId": 171689,
+      "usdaDescription": "Apples, raw, without skin",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 160 }
+      ]
+    },
+    {
+      "id": "banane",
+      "nameDe": "Banane",
+      "category": "Obst",
+      "fdcId": 173944,
+      "usdaDescription": "Bananas, raw",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 120 },
+        { "label": "1 Stück (klein)", "unit": "piece", "grams": 100 },
+        { "label": "1 Stück (groß)", "unit": "piece", "grams": 140 }
+      ]
+    },
+    {
+      "id": "birne",
+      "nameDe": "Birne",
+      "category": "Obst",
+      "fdcId": 169118,
+      "usdaDescription": "Pears, raw",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 180 }
+      ]
+    },
+    {
+      "id": "orange",
+      "nameDe": "Orange",
+      "category": "Obst",
+      "fdcId": 169097,
+      "usdaDescription": "Oranges, raw, all commercial varieties",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "mandarine",
+      "nameDe": "Mandarine",
+      "category": "Obst",
+      "fdcId": 169105,
+      "usdaDescription": "Tangerines, (mandarin oranges), raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 75 }
+      ]
+    },
+    {
+      "id": "clementine",
+      "nameDe": "Clementine",
+      "category": "Obst",
+      "fdcId": 168195,
+      "usdaDescription": "Clementines, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 75 }
+      ]
+    },
+    {
+      "id": "grapefruit",
+      "nameDe": "Grapefruit",
+      "category": "Obst",
+      "fdcId": 174673,
+      "usdaDescription": "Grapefruit, raw, pink and red, all areas",
+      "servings": [
+        { "label": "½ Stück", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "zitrone",
+      "nameDe": "Zitrone",
+      "category": "Obst",
+      "fdcId": 167746,
+      "usdaDescription": "Lemons, raw, without peel",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 60 }
+      ]
+    },
+    {
+      "id": "limette",
+      "nameDe": "Limette",
+      "category": "Obst",
+      "fdcId": 168155,
+      "usdaDescription": "Limes, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 45 }
+      ]
+    },
+    {
+      "id": "erdbeeren",
+      "nameDe": "Erdbeeren",
+      "category": "Obst",
+      "fdcId": 167762,
+      "usdaDescription": "Strawberries, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 100 },
+        { "label": "1 Schale", "unit": "package", "grams": 250 },
+        { "label": "1 Stück", "unit": "piece", "grams": 12 }
+      ]
+    },
+    {
+      "id": "himbeeren",
+      "nameDe": "Himbeeren",
+      "category": "Obst",
+      "fdcId": 167755,
+      "usdaDescription": "Raspberries, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 60 },
+        { "label": "1 Schale", "unit": "package", "grams": 125 }
+      ]
+    },
+    {
+      "id": "heidelbeeren",
+      "nameDe": "Heidelbeeren",
+      "category": "Obst",
+      "fdcId": 171711,
+      "usdaDescription": "Blueberries, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 60 },
+        { "label": "1 Schale", "unit": "package", "grams": 125 }
+      ]
+    },
+    {
+      "id": "brombeeren",
+      "nameDe": "Brombeeren",
+      "category": "Obst",
+      "fdcId": 173946,
+      "usdaDescription": "Blackberries, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 60 },
+        { "label": "1 Schale", "unit": "package", "grams": 125 }
+      ]
+    },
+    {
+      "id": "johannisbeeren-rot",
+      "nameDe": "Rote Johannisbeeren",
+      "category": "Obst",
+      "fdcId": 173964,
+      "usdaDescription": "Currants, red and white, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "johannisbeeren-schwarz",
+      "nameDe": "Schwarze Johannisbeeren",
+      "category": "Obst",
+      "fdcId": 173963,
+      "usdaDescription": "Currants, european black, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "stachelbeeren",
+      "nameDe": "Stachelbeeren",
+      "category": "Obst",
+      "fdcId": 173030,
+      "usdaDescription": "Gooseberries, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "kirschen",
+      "nameDe": "Süßkirschen",
+      "category": "Obst",
+      "fdcId": 171719,
+      "usdaDescription": "Cherries, sweet, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 100 },
+        { "label": "1 Stück", "unit": "piece", "grams": 8 }
+      ]
+    },
+    {
+      "id": "sauerkirschen",
+      "nameDe": "Sauerkirschen",
+      "category": "Obst",
+      "fdcId": 173954,
+      "usdaDescription": "Cherries, sour, red, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "weintrauben",
+      "nameDe": "Weintrauben",
+      "category": "Obst",
+      "fdcId": 174683,
+      "usdaDescription": "Grapes, red or green (European type, such as Thompson seedless), raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 80 },
+        { "label": "1 Stück", "unit": "piece", "grams": 5 }
+      ]
+    },
+    {
+      "id": "pflaume",
+      "nameDe": "Pflaume",
+      "category": "Obst",
+      "fdcId": 169949,
+      "usdaDescription": "Plums, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 60 }
+      ]
+    },
+    {
+      "id": "aprikose",
+      "nameDe": "Aprikose",
+      "category": "Obst",
+      "fdcId": 171697,
+      "usdaDescription": "Apricots, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 40 }
+      ]
+    },
+    {
+      "id": "pfirsich",
+      "nameDe": "Pfirsich",
+      "category": "Obst",
+      "fdcId": 169928,
+      "usdaDescription": "Peaches, yellow, raw",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "nektarine",
+      "nameDe": "Nektarine",
+      "category": "Obst",
+      "fdcId": 169914,
+      "usdaDescription": "Nectarines, raw",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 140 }
+      ]
+    },
+    {
+      "id": "kiwi",
+      "nameDe": "Kiwi",
+      "category": "Obst",
+      "fdcId": 168153,
+      "usdaDescription": "Kiwifruit, green, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 75 }
+      ]
+    },
+    {
+      "id": "mango",
+      "nameDe": "Mango",
+      "category": "Obst",
+      "fdcId": 169910,
+      "usdaDescription": "Mangos, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 300 },
+        { "label": "½ Stück", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "ananas",
+      "nameDe": "Ananas",
+      "category": "Obst",
+      "fdcId": 169124,
+      "usdaDescription": "Pineapple, raw, all varieties",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 80 },
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "wassermelone",
+      "nameDe": "Wassermelone",
+      "category": "Obst",
+      "fdcId": 167765,
+      "usdaDescription": "Watermelon, raw",
+      "servings": [
+        { "label": "1 Stück (Spalte)", "unit": "piece", "grams": 300 }
+      ]
+    },
+    {
+      "id": "honigmelone",
+      "nameDe": "Honigmelone",
+      "category": "Obst",
+      "fdcId": 169911,
+      "usdaDescription": "Melons, honeydew, raw",
+      "servings": [
+        { "label": "1 Stück (Spalte)", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "zuckermelone",
+      "nameDe": "Zuckermelone (Cantaloupe)",
+      "category": "Obst",
+      "fdcId": 169092,
+      "usdaDescription": "Melons, cantaloupe, raw",
+      "servings": [
+        { "label": "1 Stück (Spalte)", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "granatapfel",
+      "nameDe": "Granatapfel",
+      "category": "Obst",
+      "fdcId": 169134,
+      "usdaDescription": "Pomegranates, raw",
+      "servings": [
+        { "label": "½ Stück", "unit": "piece", "grams": 90 }
+      ]
+    },
+    {
+      "id": "feige",
+      "nameDe": "Feige, frisch",
+      "category": "Obst",
+      "fdcId": 173021,
+      "usdaDescription": "Figs, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "papaya",
+      "nameDe": "Papaya",
+      "category": "Obst",
+      "fdcId": 169926,
+      "usdaDescription": "Papayas, raw",
+      "servings": [
+        { "label": "½ Stück", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "avocado",
+      "nameDe": "Avocado",
+      "category": "Obst",
+      "fdcId": 171705,
+      "usdaDescription": "Avocados, raw, all commercial varieties",
+      "servings": [
+        { "label": "½ Stück", "unit": "piece", "grams": 70 },
+        { "label": "1 Stück", "unit": "piece", "grams": 140 }
+      ]
+    },
+    {
+      "id": "rhabarber",
+      "nameDe": "Rhabarber",
+      "category": "Obst",
+      "fdcId": 167758,
+      "usdaDescription": "Rhubarb, raw",
+      "servings": [
+        { "label": "1 Stange", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "datteln",
+      "nameDe": "Datteln, getrocknet",
+      "category": "Obst",
+      "fdcId": 168191,
+      "usdaDescription": "Dates, medjool",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 24 }
+      ]
+    },
+    {
+      "id": "datteln-deglet",
+      "nameDe": "Datteln (Deglet Nour)",
+      "category": "Obst",
+      "fdcId": 171726,
+      "usdaDescription": "Dates, deglet noor",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 7 }
+      ]
+    },
+    {
+      "id": "rosinen",
+      "nameDe": "Rosinen",
+      "category": "Obst",
+      "fdcId": 168165,
+      "usdaDescription": "Raisins, dark, seedless (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 },
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "aprikosen-getrocknet",
+      "nameDe": "Aprikosen, getrocknet",
+      "category": "Obst",
+      "fdcId": 173941,
+      "usdaDescription": "Apricots, dried, sulfured, uncooked",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 8 }
+      ]
+    },
+    {
+      "id": "pflaumen-getrocknet",
+      "nameDe": "Backpflaumen",
+      "category": "Obst",
+      "fdcId": 168162,
+      "usdaDescription": "Plums, dried (prunes), uncooked",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 10 }
+      ]
+    },
+    {
+      "id": "cranberries-getrocknet",
+      "nameDe": "Cranberries, getrocknet",
+      "category": "Obst",
+      "fdcId": 171723,
+      "usdaDescription": "Cranberries, dried, sweetened (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "apfelmus",
+      "nameDe": "Apfelmus, ungesüßt",
+      "category": "Obst",
+      "fdcId": 171695,
+      "usdaDescription": "Applesauce, canned, unsweetened, without added ascorbic acid (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 20 }
+      ]
+    },
+    {
+      "id": "apfelmus-gesuesst",
+      "nameDe": "Apfelmus, gesüßt",
+      "category": "Obst",
+      "fdcId": 171696,
+      "usdaDescription": "Applesauce, canned, sweetened, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "kokosnuss",
+      "nameDe": "Kokosnuss, Fruchtfleisch",
+      "category": "Obst",
+      "fdcId": 170169,
+      "usdaDescription": "Nuts, coconut meat, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 30 }
+      ]
+    },
+    {
+      "id": "holunderbeeren",
+      "nameDe": "Holunderbeeren",
+      "category": "Obst",
+      "fdcId": 171727,
+      "usdaDescription": "Elderberries, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "quitte",
+      "nameDe": "Quitte",
+      "category": "Obst",
+      "fdcId": 168163,
+      "usdaDescription": "Quinces, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 200 }
+      ]
+    },
+    {
+      "id": "physalis",
+      "nameDe": "Physalis",
+      "category": "Obst",
+      "fdcId": 173043,
+      "usdaDescription": "Groundcherries, (cape-gooseberries or poha), raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 5 }
+      ]
+    },
+    {
+      "id": "litschi",
+      "nameDe": "Litschi",
+      "category": "Obst",
+      "fdcId": 169086,
+      "usdaDescription": "Litchis, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 10 }
+      ]
+    },
+    {
+      "id": "maracuja",
+      "nameDe": "Maracuja",
+      "category": "Obst",
+      "fdcId": 169108,
+      "usdaDescription": "Passion-fruit, (granadilla), purple, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 20 }
+      ]
+    },
+    {
+      "id": "obstsalat",
+      "nameDe": "Obstsalat (Dose)",
+      "category": "Obst",
+      "fdcId": 174668,
+      "usdaDescription": "Fruit cocktail, (peach and pineapple and pear and grape and cherry), canned, juice pack, solids and liquids",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "pfirsiche-dose",
+      "nameDe": "Pfirsiche (Dose)",
+      "category": "Obst",
+      "fdcId": 169111,
+      "usdaDescription": "Peaches, canned, light syrup pack, solids and liquids",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "mandarinen-dose",
+      "nameDe": "Mandarinen (Dose)",
+      "category": "Obst",
+      "fdcId": 169924,
+      "usdaDescription": "Tangerines, (mandarin oranges), canned, light syrup pack",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "tomate",
+      "nameDe": "Tomate",
+      "category": "Gemüse",
+      "fdcId": 170457,
+      "usdaDescription": "Tomatoes, red, ripe, raw, year round average",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 120 }
+      ]
+    },
+    {
+      "id": "cherrytomaten",
+      "nameDe": "Cherrytomaten",
+      "category": "Gemüse",
+      "fdcId": 170457,
+      "usdaDescription": "Tomatoes, red, ripe, raw, year round average",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 15 },
+        { "label": "1 Handvoll", "unit": "serving", "grams": 80 }
+      ]
+    },
+    {
+      "id": "gurke",
+      "nameDe": "Salatgurke",
+      "category": "Gemüse",
+      "fdcId": 168409,
+      "usdaDescription": "Cucumber, with peel, raw",
+      "servings": [
+        { "label": "½ Stück", "unit": "piece", "grams": 200 },
+        { "label": "1 Scheibe", "unit": "slice", "grams": 8 }
+      ]
+    },
+    {
+      "id": "paprika-rot",
+      "nameDe": "Paprika, rot",
+      "category": "Gemüse",
+      "fdcId": 170108,
+      "usdaDescription": "Peppers, sweet, red, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 160 }
+      ]
+    },
+    {
+      "id": "paprika-gruen",
+      "nameDe": "Paprika, grün",
+      "category": "Gemüse",
+      "fdcId": 170427,
+      "usdaDescription": "Peppers, sweet, green, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 160 }
+      ]
+    },
+    {
+      "id": "paprika-gelb",
+      "nameDe": "Paprika, gelb",
+      "category": "Gemüse",
+      "fdcId": 169383,
+      "usdaDescription": "Peppers, sweet, yellow, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 160 }
+      ]
+    },
+    {
+      "id": "karotte",
+      "nameDe": "Karotte (Möhre)",
+      "category": "Gemüse",
+      "fdcId": 170393,
+      "usdaDescription": "Carrots, raw",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 80 }
+      ]
+    },
+    {
+      "id": "karotten-gekocht",
+      "nameDe": "Karotten, gekocht",
+      "category": "Gemüse",
+      "fdcId": 170394,
+      "usdaDescription": "Carrots, cooked, boiled, drained, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "zwiebel",
+      "nameDe": "Zwiebel",
+      "category": "Gemüse",
+      "fdcId": 170000,
+      "usdaDescription": "Onions, raw",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 110 }
+      ]
+    },
+    {
+      "id": "rote-zwiebel",
+      "nameDe": "Rote Zwiebel",
+      "category": "Gemüse",
+      "fdcId": 170000,
+      "usdaDescription": "Onions, raw",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 110 }
+      ]
+    },
+    {
+      "id": "fruehlingszwiebel",
+      "nameDe": "Frühlingszwiebel",
+      "category": "Gemüse",
+      "fdcId": 170005,
+      "usdaDescription": "Onions, spring or scallions (includes tops and bulb), raw",
+      "servings": [
+        { "label": "1 Stange", "unit": "piece", "grams": 15 }
+      ]
+    },
+    {
+      "id": "knoblauch",
+      "nameDe": "Knoblauch",
+      "category": "Gemüse",
+      "fdcId": 169230,
+      "usdaDescription": "Garlic, raw",
+      "servings": [
+        { "label": "1 Zehe", "unit": "piece", "grams": 3 }
+      ]
+    },
+    {
+      "id": "brokkoli",
+      "nameDe": "Brokkoli",
+      "category": "Gemüse",
+      "fdcId": 170379,
+      "usdaDescription": "Broccoli, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 },
+        { "label": "1 Röschen", "unit": "piece", "grams": 15 }
+      ]
+    },
+    {
+      "id": "brokkoli-gekocht",
+      "nameDe": "Brokkoli, gekocht",
+      "category": "Gemüse",
+      "fdcId": 169967,
+      "usdaDescription": "Broccoli, cooked, boiled, drained, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "blumenkohl",
+      "nameDe": "Blumenkohl",
+      "category": "Gemüse",
+      "fdcId": 169986,
+      "usdaDescription": "Cauliflower, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "blumenkohl-gekocht",
+      "nameDe": "Blumenkohl, gekocht",
+      "category": "Gemüse",
+      "fdcId": 170397,
+      "usdaDescription": "Cauliflower, cooked, boiled, drained, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "zucchini",
+      "nameDe": "Zucchini",
+      "category": "Gemüse",
+      "fdcId": 169291,
+      "usdaDescription": "Squash, summer, zucchini, includes skin, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 200 }
+      ]
+    },
+    {
+      "id": "aubergine",
+      "nameDe": "Aubergine",
+      "category": "Gemüse",
+      "fdcId": 169228,
+      "usdaDescription": "Eggplant, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 300 }
+      ]
+    },
+    {
+      "id": "spinat",
+      "nameDe": "Spinat, frisch",
+      "category": "Gemüse",
+      "fdcId": 168462,
+      "usdaDescription": "Spinach, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 },
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "spinat-tk",
+      "nameDe": "Blattspinat, gekocht (TK)",
+      "category": "Gemüse",
+      "fdcId": 169288,
+      "usdaDescription": "Spinach, frozen, chopped or leaf, cooked, boiled, drained, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "kopfsalat",
+      "nameDe": "Kopfsalat",
+      "category": "Gemüse",
+      "fdcId": 168429,
+      "usdaDescription": "Lettuce, butterhead (includes boston and bibb types), raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 50 }
+      ]
+    },
+    {
+      "id": "eisbergsalat",
+      "nameDe": "Eisbergsalat",
+      "category": "Gemüse",
+      "fdcId": 169248,
+      "usdaDescription": "Lettuce, iceberg (includes crisphead types), raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 50 }
+      ]
+    },
+    {
+      "id": "romanasalat",
+      "nameDe": "Romanasalat",
+      "category": "Gemüse",
+      "fdcId": 169247,
+      "usdaDescription": "Lettuce, cos or romaine, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 50 }
+      ]
+    },
+    {
+      "id": "rucola",
+      "nameDe": "Rucola",
+      "category": "Gemüse",
+      "fdcId": 169387,
+      "usdaDescription": "Arugula, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 20 }
+      ]
+    },
+    {
+      "id": "weisskohl",
+      "nameDe": "Weißkohl",
+      "category": "Gemüse",
+      "fdcId": 169975,
+      "usdaDescription": "Cabbage, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "rotkohl",
+      "nameDe": "Rotkohl",
+      "category": "Gemüse",
+      "fdcId": 169977,
+      "usdaDescription": "Cabbage, red, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "sauerkraut",
+      "nameDe": "Sauerkraut",
+      "category": "Gemüse",
+      "fdcId": 169279,
+      "usdaDescription": "Sauerkraut, canned, solids and liquids",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "rosenkohl",
+      "nameDe": "Rosenkohl",
+      "category": "Gemüse",
+      "fdcId": 170383,
+      "usdaDescription": "Brussels sprouts, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "gruenkohl",
+      "nameDe": "Grünkohl",
+      "category": "Gemüse",
+      "fdcId": 168421,
+      "usdaDescription": "Kale, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "wirsing",
+      "nameDe": "Wirsing",
+      "category": "Gemüse",
+      "fdcId": 170388,
+      "usdaDescription": "Cabbage, savoy, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "kohlrabi",
+      "nameDe": "Kohlrabi",
+      "category": "Gemüse",
+      "fdcId": 168424,
+      "usdaDescription": "Kohlrabi, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 250 }
+      ]
+    },
+    {
+      "id": "lauch",
+      "nameDe": "Lauch (Porree)",
+      "category": "Gemüse",
+      "fdcId": 169246,
+      "usdaDescription": "Leeks, (bulb and lower leaf-portion), raw",
+      "servings": [
+        { "label": "1 Stange", "unit": "piece", "grams": 200 }
+      ]
+    },
+    {
+      "id": "staudensellerie",
+      "nameDe": "Staudensellerie",
+      "category": "Gemüse",
+      "fdcId": 169988,
+      "usdaDescription": "Celery, raw",
+      "servings": [
+        { "label": "1 Stange", "unit": "piece", "grams": 40 }
+      ]
+    },
+    {
+      "id": "knollensellerie",
+      "nameDe": "Knollensellerie",
+      "category": "Gemüse",
+      "fdcId": 170400,
+      "usdaDescription": "Celeriac, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "fenchel",
+      "nameDe": "Fenchel",
+      "category": "Gemüse",
+      "fdcId": 169385,
+      "usdaDescription": "Fennel, bulb, raw",
+      "servings": [
+        { "label": "1 Knolle", "unit": "piece", "grams": 250 }
+      ]
+    },
+    {
+      "id": "spargel",
+      "nameDe": "Spargel",
+      "category": "Gemüse",
+      "fdcId": 168389,
+      "usdaDescription": "Asparagus, raw",
+      "servings": [
+        { "label": "1 Stange", "unit": "piece", "grams": 20 },
+        { "label": "1 Portion", "unit": "serving", "grams": 250 }
+      ]
+    },
+    {
+      "id": "champignons",
+      "nameDe": "Champignons",
+      "category": "Gemüse",
+      "fdcId": 169251,
+      "usdaDescription": "Mushrooms, white, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 15 },
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "braune-champignons",
+      "nameDe": "Braune Champignons",
+      "category": "Gemüse",
+      "fdcId": 168434,
+      "usdaDescription": "Mushrooms, brown, italian, or crimini, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "mais-dose",
+      "nameDe": "Mais (Dose)",
+      "category": "Gemüse",
+      "fdcId": 169214,
+      "usdaDescription": "Corn, sweet, yellow, canned, whole kernel, drained solids",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 Dose (abgetropft)", "unit": "can", "grams": 140 }
+      ]
+    },
+    {
+      "id": "maiskolben",
+      "nameDe": "Maiskolben",
+      "category": "Gemüse",
+      "fdcId": 169998,
+      "usdaDescription": "Corn, sweet, yellow, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "erbsen",
+      "nameDe": "Erbsen, grün",
+      "category": "Gemüse",
+      "fdcId": 170419,
+      "usdaDescription": "Peas, green, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 }
+      ]
+    },
+    {
+      "id": "erbsen-tk",
+      "nameDe": "Erbsen (TK), gekocht",
+      "category": "Gemüse",
+      "fdcId": 170017,
+      "usdaDescription": "Peas, green, frozen, cooked, boiled, drained, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "gruene-bohnen",
+      "nameDe": "Grüne Bohnen",
+      "category": "Gemüse",
+      "fdcId": 169961,
+      "usdaDescription": "Beans, snap, green, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "gruene-bohnen-gekocht",
+      "nameDe": "Grüne Bohnen, gekocht",
+      "category": "Gemüse",
+      "fdcId": 169141,
+      "usdaDescription": "Beans, snap, green, cooked, boiled, drained, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "radieschen",
+      "nameDe": "Radieschen",
+      "category": "Gemüse",
+      "fdcId": 169276,
+      "usdaDescription": "Radishes, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 10 }
+      ]
+    },
+    {
+      "id": "rettich",
+      "nameDe": "Rettich",
+      "category": "Gemüse",
+      "fdcId": 168451,
+      "usdaDescription": "Radishes, oriental, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "rote-bete",
+      "nameDe": "Rote Bete, roh",
+      "category": "Gemüse",
+      "fdcId": 169145,
+      "usdaDescription": "Beets, raw",
+      "servings": [
+        { "label": "1 Knolle", "unit": "piece", "grams": 100 }
+      ]
+    },
+    {
+      "id": "rote-bete-gekocht",
+      "nameDe": "Rote Bete, gekocht",
+      "category": "Gemüse",
+      "fdcId": 169146,
+      "usdaDescription": "Beets, cooked, boiled, drained",
+      "servings": [
+        { "label": "1 Knolle", "unit": "piece", "grams": 100 }
+      ]
+    },
+    {
+      "id": "kuerbis",
+      "nameDe": "Kürbis",
+      "category": "Gemüse",
+      "fdcId": 168448,
+      "usdaDescription": "Pumpkin, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "butternut",
+      "nameDe": "Butternut-Kürbis",
+      "category": "Gemüse",
+      "fdcId": 169295,
+      "usdaDescription": "Squash, winter, butternut, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "suesskartoffel",
+      "nameDe": "Süßkartoffel",
+      "category": "Gemüse",
+      "fdcId": 168482,
+      "usdaDescription": "Sweet potato, raw, unprepared (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 200 }
+      ]
+    },
+    {
+      "id": "pastinake",
+      "nameDe": "Pastinake",
+      "category": "Gemüse",
+      "fdcId": 170417,
+      "usdaDescription": "Parsnips, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 120 }
+      ]
+    },
+    {
+      "id": "ingwer",
+      "nameDe": "Ingwer",
+      "category": "Gemüse",
+      "fdcId": 169231,
+      "usdaDescription": "Ginger root, raw",
+      "servings": [
+        { "label": "1 TL (gerieben)", "unit": "tsp", "grams": 2 },
+        { "label": "1 Stück", "unit": "piece", "grams": 10 }
+      ]
+    },
+    {
+      "id": "petersilie",
+      "nameDe": "Petersilie",
+      "category": "Gemüse",
+      "fdcId": 170416,
+      "usdaDescription": "Parsley, fresh",
+      "servings": [
+        { "label": "1 EL (gehackt)", "unit": "tbsp", "grams": 4 }
+      ]
+    },
+    {
+      "id": "schnittlauch",
+      "nameDe": "Schnittlauch",
+      "category": "Gemüse",
+      "fdcId": 169994,
+      "usdaDescription": "Chives, raw",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 3 }
+      ]
+    },
+    {
+      "id": "basilikum",
+      "nameDe": "Basilikum",
+      "category": "Gemüse",
+      "fdcId": 172232,
+      "usdaDescription": "Basil, fresh",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 5 }
+      ]
+    },
+    {
+      "id": "chili",
+      "nameDe": "Chilischote",
+      "category": "Gemüse",
+      "fdcId": 170106,
+      "usdaDescription": "Peppers, hot chili, red, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 15 }
+      ]
+    },
+    {
+      "id": "oliven-schwarz",
+      "nameDe": "Oliven, schwarz",
+      "category": "Gemüse",
+      "fdcId": 169094,
+      "usdaDescription": "Olives, ripe, canned (small-extra large)",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 4 },
+        { "label": "1 Portion", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "oliven-gruen",
+      "nameDe": "Oliven, grün",
+      "category": "Gemüse",
+      "fdcId": 169096,
+      "usdaDescription": "Olives, pickled, canned or bottled, green",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 4 },
+        { "label": "1 Portion", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "gewuerzgurke",
+      "nameDe": "Gewürzgurke",
+      "category": "Gemüse",
+      "fdcId": 168558,
+      "usdaDescription": "Pickles, cucumber, dill or kosher dill",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 35 }
+      ]
+    },
+    {
+      "id": "mangold",
+      "nameDe": "Mangold",
+      "category": "Gemüse",
+      "fdcId": 169991,
+      "usdaDescription": "Chard, swiss, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "artischocke",
+      "nameDe": "Artischocke",
+      "category": "Gemüse",
+      "fdcId": 169205,
+      "usdaDescription": "Artichokes, (globe or french), raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 130 }
+      ]
+    },
+    {
+      "id": "sojasprossen",
+      "nameDe": "Sojasprossen",
+      "category": "Gemüse",
+      "fdcId": 169957,
+      "usdaDescription": "Mung beans, mature seeds, sprouted, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "tomatenmark",
+      "nameDe": "Tomatenmark",
+      "category": "Gemüse",
+      "fdcId": 170459,
+      "usdaDescription": "Tomato products, canned, paste, without salt added (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 16 }
+      ]
+    },
+    {
+      "id": "passierte-tomaten",
+      "nameDe": "Passierte Tomaten",
+      "category": "Gemüse",
+      "fdcId": 170460,
+      "usdaDescription": "Tomato products, canned, puree, without salt added",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "tomaten-dose",
+      "nameDe": "Tomaten, stückig (Dose)",
+      "category": "Gemüse",
+      "fdcId": 170051,
+      "usdaDescription": "Tomatoes, red, ripe, canned, packed in tomato juice",
+      "servings": [
+        { "label": "1 Dose", "unit": "can", "grams": 400 },
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "getrocknete-tomaten",
+      "nameDe": "Getrocknete Tomaten",
+      "category": "Gemüse",
+      "fdcId": 168567,
+      "usdaDescription": "Tomatoes, sun-dried",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 3 }
+      ]
+    },
+    {
+      "id": "kartoffel",
+      "nameDe": "Kartoffel, roh",
+      "category": "Kartoffeln",
+      "fdcId": 170026,
+      "usdaDescription": "Potatoes, flesh and skin, raw",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 150 },
+        { "label": "1 Stück (klein)", "unit": "piece", "grams": 90 }
+      ]
+    },
+    {
+      "id": "salzkartoffeln",
+      "nameDe": "Salzkartoffeln (gekocht, geschält)",
+      "category": "Kartoffeln",
+      "fdcId": 170440,
+      "usdaDescription": "Potatoes, boiled, cooked without skin, flesh, without salt",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 130 },
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "pellkartoffeln",
+      "nameDe": "Pellkartoffeln",
+      "category": "Kartoffeln",
+      "fdcId": 170438,
+      "usdaDescription": "Potatoes, boiled, cooked in skin, flesh, without salt",
+      "servings": [
+        { "label": "1 Stück (mittel)", "unit": "piece", "grams": 130 },
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "kartoffelpueree",
+      "nameDe": "Kartoffelpüree",
+      "category": "Kartoffeln",
+      "fdcId": 168555,
+      "usdaDescription": "Potatoes, mashed, home-prepared, whole milk and butter added",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "pommes-ofen",
+      "nameDe": "Pommes frites (Backofen)",
+      "category": "Kartoffeln",
+      "fdcId": 170118,
+      "usdaDescription": "Potatoes, french fried, all types, salt not added in processing, frozen, oven-heated",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "pommes",
+      "nameDe": "Pommes frites (frittiert)",
+      "category": "Kartoffeln",
+      "fdcId": 170698,
+      "usdaDescription": "Fast foods, potato, french fried in vegetable oil",
+      "servings": [
+        { "label": "1 Portion (klein)", "unit": "serving", "grams": 100 },
+        { "label": "1 Portion (mittel)", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "bratkartoffeln",
+      "nameDe": "Bratkartoffeln",
+      "category": "Kartoffeln",
+      "fdcId": 170036,
+      "usdaDescription": "Potatoes, hash brown, home-prepared",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "kartoffelgratin",
+      "nameDe": "Kartoffelgratin",
+      "category": "Kartoffeln",
+      "fdcId": 170442,
+      "usdaDescription": "Potatoes, au gratin, home-prepared from recipe using butter",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "kartoffelsalat",
+      "nameDe": "Kartoffelsalat",
+      "category": "Kartoffeln",
+      "fdcId": 169269,
+      "usdaDescription": "Potato salad, home-prepared",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "kartoffelchips",
+      "nameDe": "Kartoffelchips",
+      "category": "Süßes & Snacks",
+      "fdcId": 169677,
+      "usdaDescription": "Snacks, potato chips, plain, salted",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 25 },
+        { "label": "1 Tüte", "unit": "package", "grams": 175 }
+      ]
+    },
+    {
+      "id": "roggenbrot",
+      "nameDe": "Roggenbrot",
+      "category": "Brot & Backwaren",
+      "fdcId": 172684,
+      "usdaDescription": "Bread, rye",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 45 }
+      ]
+    },
+    {
+      "id": "vollkornbrot",
+      "nameDe": "Vollkornbrot",
+      "category": "Brot & Backwaren",
+      "fdcId": 172688,
+      "usdaDescription": "Bread, whole-wheat, commercially prepared",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 45 }
+      ]
+    },
+    {
+      "id": "mehrkornbrot",
+      "nameDe": "Mehrkornbrot",
+      "category": "Brot & Backwaren",
+      "fdcId": 168013,
+      "usdaDescription": "Bread, multi-grain (includes whole-grain)",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 45 }
+      ]
+    },
+    {
+      "id": "pumpernickel",
+      "nameDe": "Pumpernickel",
+      "category": "Brot & Backwaren",
+      "fdcId": 174918,
+      "usdaDescription": "Bread, pumpernickel",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 40 }
+      ]
+    },
+    {
+      "id": "weissbrot",
+      "nameDe": "Weißbrot",
+      "category": "Brot & Backwaren",
+      "fdcId": 174924,
+      "usdaDescription": "Bread, white, commercially prepared (includes soft bread crumbs)",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 30 }
+      ]
+    },
+    {
+      "id": "toastbrot",
+      "nameDe": "Toastbrot",
+      "category": "Brot & Backwaren",
+      "fdcId": 174925,
+      "usdaDescription": "Bread, white, commercially prepared, toasted",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "vollkorntoast",
+      "nameDe": "Vollkorntoast",
+      "category": "Brot & Backwaren",
+      "fdcId": 172689,
+      "usdaDescription": "Bread, whole-wheat, commercially prepared, toasted",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 28 }
+      ]
+    },
+    {
+      "id": "baguette",
+      "nameDe": "Baguette",
+      "category": "Brot & Backwaren",
+      "fdcId": 172675,
+      "usdaDescription": "Bread, french or vienna (includes sourdough)",
+      "servings": [
+        { "label": "1 Stück (10 cm)", "unit": "piece", "grams": 60 },
+        { "label": "1 Scheibe", "unit": "slice", "grams": 15 }
+      ]
+    },
+    {
+      "id": "ciabatta",
+      "nameDe": "Ciabatta",
+      "category": "Brot & Backwaren",
+      "fdcId": 174913,
+      "usdaDescription": "Bread, Italian",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 80 }
+      ]
+    },
+    {
+      "id": "broetchen",
+      "nameDe": "Brötchen (Weizen)",
+      "category": "Brot & Backwaren",
+      "fdcId": 175031,
+      "usdaDescription": "Rolls, hard (includes kaiser)",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 55 }
+      ]
+    },
+    {
+      "id": "vollkornbroetchen",
+      "nameDe": "Vollkornbrötchen",
+      "category": "Brot & Backwaren",
+      "fdcId": 172794,
+      "usdaDescription": "Rolls, dinner, whole-wheat",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 60 }
+      ]
+    },
+    {
+      "id": "laugenbrezel",
+      "nameDe": "Laugenbrezel",
+      "category": "Brot & Backwaren",
+      "fdcId": 169064,
+      "usdaDescription": "Pretzels, soft",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 85 }
+      ]
+    },
+    {
+      "id": "croissant",
+      "nameDe": "Croissant",
+      "category": "Brot & Backwaren",
+      "fdcId": 174987,
+      "usdaDescription": "Croissants, butter",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 60 }
+      ]
+    },
+    {
+      "id": "knaeckebrot",
+      "nameDe": "Knäckebrot",
+      "category": "Brot & Backwaren",
+      "fdcId": 172739,
+      "usdaDescription": "Crackers, crispbread, rye",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 10 }
+      ]
+    },
+    {
+      "id": "zwieback",
+      "nameDe": "Zwieback",
+      "category": "Brot & Backwaren",
+      "fdcId": 171372,
+      "usdaDescription": "Zwieback",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 10 }
+      ]
+    },
+    {
+      "id": "bagel",
+      "nameDe": "Bagel",
+      "category": "Brot & Backwaren",
+      "fdcId": 174899,
+      "usdaDescription": "Bagels, plain, enriched, with calcium propionate (includes onion, poppy, sesame)",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 90 }
+      ]
+    },
+    {
+      "id": "wrap",
+      "nameDe": "Tortilla-Wrap (Weizen)",
+      "category": "Brot & Backwaren",
+      "fdcId": 167535,
+      "usdaDescription": "Tortillas, ready-to-bake or -fry, flour, shelf stable",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 60 }
+      ]
+    },
+    {
+      "id": "pita",
+      "nameDe": "Pitabrot",
+      "category": "Brot & Backwaren",
+      "fdcId": 174915,
+      "usdaDescription": "Bread, pita, white, enriched",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 60 }
+      ]
+    },
+    {
+      "id": "berliner",
+      "nameDe": "Berliner (Krapfen)",
+      "category": "Brot & Backwaren",
+      "fdcId": 172759,
+      "usdaDescription": "Doughnuts, yeast-leavened, with jelly filling",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 80 }
+      ]
+    },
+    {
+      "id": "donut",
+      "nameDe": "Donut, glasiert",
+      "category": "Brot & Backwaren",
+      "fdcId": 172758,
+      "usdaDescription": "Doughnuts, yeast-leavened, glazed, enriched (includes honey buns)",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 60 }
+      ]
+    },
+    {
+      "id": "muffin",
+      "nameDe": "Blaubeer-Muffin",
+      "category": "Brot & Backwaren",
+      "fdcId": 172765,
+      "usdaDescription": "Muffins, blueberry, commercially prepared (Includes mini-muffins)",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 110 }
+      ]
+    },
+    {
+      "id": "ruehrkuchen",
+      "nameDe": "Rührkuchen (Sandkuchen)",
+      "category": "Brot & Backwaren",
+      "fdcId": 172704,
+      "usdaDescription": "Cake, pound, commercially prepared, butter (includes fresh and frozen)",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 70 }
+      ]
+    },
+    {
+      "id": "kaesekuchen",
+      "nameDe": "Käsekuchen",
+      "category": "Brot & Backwaren",
+      "fdcId": 172711,
+      "usdaDescription": "Cake, cheesecake, commercially prepared",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 120 }
+      ]
+    },
+    {
+      "id": "apfelstrudel",
+      "nameDe": "Apfelstrudel",
+      "category": "Brot & Backwaren",
+      "fdcId": 175032,
+      "usdaDescription": "Strudel, apple",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 120 }
+      ]
+    },
+    {
+      "id": "schokokuchen",
+      "nameDe": "Schokoladenkuchen",
+      "category": "Brot & Backwaren",
+      "fdcId": 174934,
+      "usdaDescription": "Cake, chocolate, commercially prepared with chocolate frosting, in-store bakery",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 90 }
+      ]
+    },
+    {
+      "id": "butterkekse",
+      "nameDe": "Butterkekse",
+      "category": "Süßes & Snacks",
+      "fdcId": 174950,
+      "usdaDescription": "Cookies, butter, commercially prepared, enriched",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 5 }
+      ]
+    },
+    {
+      "id": "schokokekse",
+      "nameDe": "Schokoladenkekse (Cookies)",
+      "category": "Süßes & Snacks",
+      "fdcId": 172716,
+      "usdaDescription": "Cookies, chocolate chip, commercially prepared, regular, higher fat, enriched",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 12 }
+      ]
+    },
+    {
+      "id": "waffeln",
+      "nameDe": "Waffeln",
+      "category": "Brot & Backwaren",
+      "fdcId": 175039,
+      "usdaDescription": "Waffles, plain, prepared from recipe",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 75 }
+      ]
+    },
+    {
+      "id": "pfannkuchen",
+      "nameDe": "Pfannkuchen",
+      "category": "Gerichte",
+      "fdcId": 175009,
+      "usdaDescription": "Pancakes, plain, prepared from recipe",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 80 }
+      ]
+    },
+    {
+      "id": "zimtschnecke",
+      "nameDe": "Zimtschnecke",
+      "category": "Brot & Backwaren",
+      "fdcId": 175034,
+      "usdaDescription": "Sweet rolls, cinnamon, commercially prepared with raisins",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 90 }
+      ]
+    },
+    {
+      "id": "salzstangen",
+      "nameDe": "Salzstangen",
+      "category": "Süßes & Snacks",
+      "fdcId": 167555,
+      "usdaDescription": "Snacks, pretzels, hard, plain, salted",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 25 }
+      ]
+    },
+    {
+      "id": "reiswaffeln",
+      "nameDe": "Reiswaffeln",
+      "category": "Süßes & Snacks",
+      "fdcId": 170250,
+      "usdaDescription": "Snacks, rice cakes, brown rice, plain, unsalted",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 8 }
+      ]
+    },
+    {
+      "id": "blaetterteig",
+      "nameDe": "Blätterteig",
+      "category": "Brot & Backwaren",
+      "fdcId": 172790,
+      "usdaDescription": "Puff pastry, frozen, ready-to-bake",
+      "servings": [
+        { "label": "1 Rolle", "unit": "package", "grams": 275 }
+      ]
+    },
+    {
+      "id": "paniermehl",
+      "nameDe": "Paniermehl",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 174928,
+      "usdaDescription": "Bread, crumbs, dry, grated, plain",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 8 }
+      ]
+    },
+    {
+      "id": "haferflocken",
+      "nameDe": "Haferflocken",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 173904,
+      "usdaDescription": "Cereals, oats, regular and quick, not fortified, dry",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 },
+        { "label": "1 Portion", "unit": "serving", "grams": 40 }
+      ]
+    },
+    {
+      "id": "porridge",
+      "nameDe": "Haferbrei (mit Wasser)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 173905,
+      "usdaDescription": "Cereals, oats, regular and quick, unenriched, cooked with water (includes boiling and microwaving), without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 250 }
+      ]
+    },
+    {
+      "id": "cornflakes",
+      "nameDe": "Cornflakes",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 174648,
+      "usdaDescription": "Cereals ready-to-eat, RALSTON Corn Flakes",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "granola",
+      "nameDe": "Knuspermüsli (Granola)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 171646,
+      "usdaDescription": "Cereals ready-to-eat, granola, homemade",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 50 }
+      ]
+    },
+    {
+      "id": "reis",
+      "nameDe": "Reis, weiß (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168877,
+      "usdaDescription": "Rice, white, long-grain, regular, raw, enriched",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 70 }
+      ]
+    },
+    {
+      "id": "reis-gekocht",
+      "nameDe": "Reis, weiß (gekocht)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168878,
+      "usdaDescription": "Rice, white, long-grain, regular, enriched, cooked",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 },
+        { "label": "1 Tasse", "unit": "cup", "grams": 160 }
+      ]
+    },
+    {
+      "id": "naturreis",
+      "nameDe": "Naturreis (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169703,
+      "usdaDescription": "Rice, brown, long-grain, raw (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 70 }
+      ]
+    },
+    {
+      "id": "naturreis-gekocht",
+      "nameDe": "Naturreis (gekocht)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169704,
+      "usdaDescription": "Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "milchreis",
+      "nameDe": "Milchreis (fertig)",
+      "category": "Milchprodukte",
+      "fdcId": 168782,
+      "usdaDescription": "Puddings, rice, ready-to-eat",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 200 }
+      ]
+    },
+    {
+      "id": "nudeln",
+      "nameDe": "Nudeln (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169736,
+      "usdaDescription": "Pasta, dry, enriched",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "nudeln-gekocht",
+      "nameDe": "Nudeln (gekocht)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169737,
+      "usdaDescription": "Pasta, cooked, enriched, without added salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 250 },
+        { "label": "1 Tasse", "unit": "cup", "grams": 140 }
+      ]
+    },
+    {
+      "id": "vollkornnudeln",
+      "nameDe": "Vollkornnudeln (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169738,
+      "usdaDescription": "Pasta, whole-wheat, dry (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "vollkornnudeln-gekocht",
+      "nameDe": "Vollkornnudeln (gekocht)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168910,
+      "usdaDescription": "Pasta, whole-wheat, cooked (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 250 }
+      ]
+    },
+    {
+      "id": "eiernudeln",
+      "nameDe": "Eiernudeln (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169731,
+      "usdaDescription": "Noodles, egg, dry, enriched",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "spaetzle",
+      "nameDe": "Spätzle (gekocht)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169732,
+      "usdaDescription": "Noodles, egg, enriched, cooked",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "couscous",
+      "nameDe": "Couscous (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169699,
+      "usdaDescription": "Couscous, dry",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 70 }
+      ]
+    },
+    {
+      "id": "couscous-gekocht",
+      "nameDe": "Couscous (gekocht)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169700,
+      "usdaDescription": "Couscous, cooked",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 180 }
+      ]
+    },
+    {
+      "id": "bulgur",
+      "nameDe": "Bulgur (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 170688,
+      "usdaDescription": "Bulgur, dry",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 70 }
+      ]
+    },
+    {
+      "id": "bulgur-gekocht",
+      "nameDe": "Bulgur (gekocht)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 170287,
+      "usdaDescription": "Bulgur, cooked",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 180 }
+      ]
+    },
+    {
+      "id": "quinoa",
+      "nameDe": "Quinoa (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168874,
+      "usdaDescription": "Quinoa, uncooked",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 70 }
+      ]
+    },
+    {
+      "id": "quinoa-gekocht",
+      "nameDe": "Quinoa (gekocht)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168917,
+      "usdaDescription": "Quinoa, cooked",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 180 }
+      ]
+    },
+    {
+      "id": "hirse",
+      "nameDe": "Hirse (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169702,
+      "usdaDescription": "Millet, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 70 }
+      ]
+    },
+    {
+      "id": "buchweizen",
+      "nameDe": "Buchweizen",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 170286,
+      "usdaDescription": "Buckwheat",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 70 }
+      ]
+    },
+    {
+      "id": "weizenmehl",
+      "nameDe": "Weizenmehl (Type 405)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168894,
+      "usdaDescription": "Wheat flour, white, all-purpose, enriched, bleached",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 },
+        { "label": "1 Tasse", "unit": "cup", "grams": 125 }
+      ]
+    },
+    {
+      "id": "vollkornmehl",
+      "nameDe": "Weizenvollkornmehl",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168893,
+      "usdaDescription": "Wheat flour, whole-grain (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "roggenmehl",
+      "nameDe": "Roggenmehl",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168886,
+      "usdaDescription": "Rye flour, medium",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "dinkel",
+      "nameDe": "Dinkel",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169745,
+      "usdaDescription": "Spelt, uncooked",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 70 }
+      ]
+    },
+    {
+      "id": "speisestaerke",
+      "nameDe": "Speisestärke",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169698,
+      "usdaDescription": "Cornstarch",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 8 },
+        { "label": "1 TL", "unit": "tsp", "grams": 3 }
+      ]
+    },
+    {
+      "id": "griess",
+      "nameDe": "Grieß (Weichweizen)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169715,
+      "usdaDescription": "Semolina, enriched",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 12 }
+      ]
+    },
+    {
+      "id": "polenta",
+      "nameDe": "Polenta (Maisgrieß)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168867,
+      "usdaDescription": "Cornmeal, degermed, enriched, yellow",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "haferkleie",
+      "nameDe": "Haferkleie",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 168872,
+      "usdaDescription": "Oat bran, raw",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 8 }
+      ]
+    },
+    {
+      "id": "weizenkleie",
+      "nameDe": "Weizenkleie",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169722,
+      "usdaDescription": "Wheat bran, crude",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 5 }
+      ]
+    },
+    {
+      "id": "popcorn",
+      "nameDe": "Popcorn (ohne Fett)",
+      "category": "Süßes & Snacks",
+      "fdcId": 167959,
+      "usdaDescription": "Snacks, popcorn, air-popped",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 25 }
+      ]
+    },
+    {
+      "id": "reisnudeln",
+      "nameDe": "Reisnudeln (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 169742,
+      "usdaDescription": "Rice noodles, dry",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 80 }
+      ]
+    },
+    {
+      "id": "glasnudeln",
+      "nameDe": "Glasnudeln (roh)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 174258,
+      "usdaDescription": "Noodles, chinese, cellophane or long rice (mung beans), dehydrated",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 50 }
+      ]
+    },
+    {
+      "id": "instantnudeln",
+      "nameDe": "Instant-Nudeln (trocken)",
+      "category": "Getreide, Nudeln & Reis",
+      "fdcId": 171177,
+      "usdaDescription": "Soup, ramen noodle, any flavor, dry",
+      "servings": [
+        { "label": "1 Packung", "unit": "package", "grams": 85 }
+      ]
+    },
+    {
+      "id": "vollmilch",
+      "nameDe": "Vollmilch 3,5 %",
+      "category": "Milchprodukte",
+      "fdcId": 171265,
+      "usdaDescription": "Milk, whole, 3.25% milkfat, with added vitamin D",
+      "basis": "ml",
+      "densityGPerMl": 1.03,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Tasse", "unit": "cup", "grams": 150 },
+        { "label": "1 Schuss", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "milch-fettarm",
+      "nameDe": "Fettarme Milch 1,5 %",
+      "category": "Milchprodukte",
+      "fdcId": 171267,
+      "usdaDescription": "Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D",
+      "basis": "ml",
+      "densityGPerMl": 1.03,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Tasse", "unit": "cup", "grams": 150 },
+        { "label": "1 Schuss", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "magermilch",
+      "nameDe": "Magermilch 0,3 %",
+      "category": "Milchprodukte",
+      "fdcId": 171269,
+      "usdaDescription": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+      "basis": "ml",
+      "densityGPerMl": 1.03,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "buttermilch",
+      "nameDe": "Buttermilch",
+      "category": "Milchprodukte",
+      "fdcId": 172225,
+      "usdaDescription": "Milk, buttermilk, fluid, whole",
+      "basis": "ml",
+      "densityGPerMl": 1.03,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "kefir",
+      "nameDe": "Kefir",
+      "category": "Milchprodukte",
+      "fdcId": 170904,
+      "usdaDescription": "Kefir, lowfat, plain, LIFEWAY",
+      "basis": "ml",
+      "densityGPerMl": 1.03,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "kakao",
+      "nameDe": "Kakao (Schokomilch)",
+      "category": "Getränke",
+      "fdcId": 170880,
+      "usdaDescription": "Milk, chocolate, fluid, commercial, reduced fat, with added vitamin A and vitamin D",
+      "basis": "ml",
+      "densityGPerMl": 1.05,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Tasse", "unit": "cup", "grams": 250 }
+      ]
+    },
+    {
+      "id": "joghurt",
+      "nameDe": "Naturjoghurt 3,5 %",
+      "category": "Milchprodukte",
+      "fdcId": 171284,
+      "usdaDescription": "Yogurt, plain, whole milk",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 150 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 }
+      ]
+    },
+    {
+      "id": "joghurt-fettarm",
+      "nameDe": "Naturjoghurt 1,5 %",
+      "category": "Milchprodukte",
+      "fdcId": 170886,
+      "usdaDescription": "Yogurt, plain, low fat",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 150 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 }
+      ]
+    },
+    {
+      "id": "magerjoghurt",
+      "nameDe": "Magerjoghurt 0,1 %",
+      "category": "Milchprodukte",
+      "fdcId": 170887,
+      "usdaDescription": "Yogurt, plain, skim milk",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 150 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 }
+      ]
+    },
+    {
+      "id": "griechischer-joghurt",
+      "nameDe": "Griechischer Joghurt 10 %",
+      "category": "Milchprodukte",
+      "fdcId": 171304,
+      "usdaDescription": "Yogurt, Greek, plain, whole milk",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 20 }
+      ]
+    },
+    {
+      "id": "skyr",
+      "nameDe": "Skyr natur",
+      "category": "Milchprodukte",
+      "fdcId": 170894,
+      "usdaDescription": "Yogurt, Greek, plain, nonfat (Includes foods for USDA's Food Distribution Program)",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 150 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 20 }
+      ]
+    },
+    {
+      "id": "fruchtjoghurt",
+      "nameDe": "Fruchtjoghurt",
+      "category": "Milchprodukte",
+      "fdcId": 171285,
+      "usdaDescription": "Yogurt, fruit, low fat, 10 grams protein per 8 ounce",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 150 }
+      ]
+    },
+    {
+      "id": "magerquark",
+      "nameDe": "Magerquark",
+      "category": "Milchprodukte",
+      "fdcId": 172181,
+      "usdaDescription": "Cheese, cottage, nonfat, uncreamed, dry, large or small curd",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 30 },
+        { "label": "1 Packung", "unit": "package", "grams": 250 },
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "speisequark",
+      "nameDe": "Speisequark 20 %",
+      "category": "Milchprodukte",
+      "fdcId": 172179,
+      "usdaDescription": "Cheese, cottage, creamed, large or small curd",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 30 },
+        { "label": "1 Packung", "unit": "package", "grams": 250 }
+      ]
+    },
+    {
+      "id": "huettenkaese",
+      "nameDe": "Hüttenkäse",
+      "category": "Milchprodukte",
+      "fdcId": 172182,
+      "usdaDescription": "Cheese, cottage, lowfat, 2% milkfat",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 200 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 30 }
+      ]
+    },
+    {
+      "id": "sahne",
+      "nameDe": "Schlagsahne",
+      "category": "Milchprodukte",
+      "fdcId": 170859,
+      "usdaDescription": "Cream, fluid, heavy whipping",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 Becher", "unit": "package", "grams": 200 }
+      ]
+    },
+    {
+      "id": "saure-sahne",
+      "nameDe": "Saure Sahne",
+      "category": "Milchprodukte",
+      "fdcId": 171257,
+      "usdaDescription": "Cream, sour, cultured",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 Becher", "unit": "package", "grams": 200 }
+      ]
+    },
+    {
+      "id": "kaffeesahne",
+      "nameDe": "Kaffeesahne 10 %",
+      "category": "Milchprodukte",
+      "fdcId": 171255,
+      "usdaDescription": "Cream, fluid, half and half",
+      "basis": "ml",
+      "densityGPerMl": 1.02,
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 10 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 }
+      ]
+    },
+    {
+      "id": "kondensmilch",
+      "nameDe": "Kondensmilch 7,5 %",
+      "category": "Milchprodukte",
+      "fdcId": 171276,
+      "usdaDescription": "Milk, canned, evaporated, with added vitamin D and without added vitamin A",
+      "basis": "ml",
+      "densityGPerMl": 1.07,
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 5 },
+        { "label": "1 Portion", "unit": "serving", "grams": 10 }
+      ]
+    },
+    {
+      "id": "butter",
+      "nameDe": "Butter",
+      "category": "Öle & Fette",
+      "fdcId": 173430,
+      "usdaDescription": "Butter, without salt",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 5 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 12 },
+        { "label": "1 Portion (Brot)", "unit": "serving", "grams": 10 }
+      ]
+    },
+    {
+      "id": "butter-gesalzen",
+      "nameDe": "Butter, gesalzen",
+      "category": "Öle & Fette",
+      "fdcId": 173410,
+      "usdaDescription": "Butter, salted",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 5 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 12 }
+      ]
+    },
+    {
+      "id": "butterschmalz",
+      "nameDe": "Butterschmalz",
+      "category": "Öle & Fette",
+      "fdcId": 173412,
+      "usdaDescription": "Butter oil, anhydrous",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 12 }
+      ]
+    },
+    {
+      "id": "margarine",
+      "nameDe": "Margarine",
+      "category": "Öle & Fette",
+      "fdcId": 172347,
+      "usdaDescription": "Margarine, regular, 80% fat, composite, tub, with salt",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 5 },
+        { "label": "1 Portion (Brot)", "unit": "serving", "grams": 10 }
+      ]
+    },
+    {
+      "id": "vanillepudding",
+      "nameDe": "Vanillepudding",
+      "category": "Milchprodukte",
+      "fdcId": 169608,
+      "usdaDescription": "Puddings, vanilla, ready-to-eat",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 125 }
+      ]
+    },
+    {
+      "id": "schokopudding",
+      "nameDe": "Schokoladenpudding",
+      "category": "Milchprodukte",
+      "fdcId": 168778,
+      "usdaDescription": "Puddings, chocolate, ready-to-eat",
+      "servings": [
+        { "label": "1 Becher", "unit": "package", "grams": 125 }
+      ]
+    },
+    {
+      "id": "vanilleeis",
+      "nameDe": "Vanilleeis",
+      "category": "Süßes & Snacks",
+      "fdcId": 167575,
+      "usdaDescription": "Ice creams, vanilla",
+      "servings": [
+        { "label": "1 Kugel", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "schokoeis",
+      "nameDe": "Schokoladeneis",
+      "category": "Süßes & Snacks",
+      "fdcId": 168809,
+      "usdaDescription": "Ice creams, chocolate",
+      "servings": [
+        { "label": "1 Kugel", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "sojadrink",
+      "nameDe": "Sojadrink",
+      "category": "Getränke",
+      "fdcId": 172446,
+      "usdaDescription": "Soymilk, original and vanilla, unfortified",
+      "basis": "ml",
+      "densityGPerMl": 1.03,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "mandeldrink",
+      "nameDe": "Mandeldrink, ungesüßt",
+      "category": "Getränke",
+      "fdcId": 174832,
+      "usdaDescription": "Beverages, almond milk, unsweetened, shelf stable",
+      "basis": "ml",
+      "densityGPerMl": 1.01,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "reisdrink",
+      "nameDe": "Reisdrink",
+      "category": "Getränke",
+      "fdcId": 171942,
+      "usdaDescription": "Beverages, rice milk, unsweetened",
+      "basis": "ml",
+      "densityGPerMl": 1.02,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "gouda",
+      "nameDe": "Gouda",
+      "category": "Käse",
+      "fdcId": 171241,
+      "usdaDescription": "Cheese, gouda",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "edamer",
+      "nameDe": "Edamer",
+      "category": "Käse",
+      "fdcId": 173419,
+      "usdaDescription": "Cheese, edam",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "emmentaler",
+      "nameDe": "Emmentaler",
+      "category": "Käse",
+      "fdcId": 171251,
+      "usdaDescription": "Cheese, swiss",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "butterkaese",
+      "nameDe": "Butterkäse",
+      "category": "Käse",
+      "fdcId": 171245,
+      "usdaDescription": "Cheese, muenster",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "tilsiter",
+      "nameDe": "Tilsiter",
+      "category": "Käse",
+      "fdcId": 170852,
+      "usdaDescription": "Cheese, tilsit",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "camembert",
+      "nameDe": "Camembert",
+      "category": "Käse",
+      "fdcId": 172178,
+      "usdaDescription": "Cheese, camembert",
+      "servings": [
+        { "label": "1 Stück (⅛)", "unit": "piece", "grams": 30 },
+        { "label": "1 Packung", "unit": "package", "grams": 125 }
+      ]
+    },
+    {
+      "id": "brie",
+      "nameDe": "Brie",
+      "category": "Käse",
+      "fdcId": 172177,
+      "usdaDescription": "Cheese, brie",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "mozzarella",
+      "nameDe": "Mozzarella",
+      "category": "Käse",
+      "fdcId": 170845,
+      "usdaDescription": "Cheese, mozzarella, whole milk",
+      "servings": [
+        { "label": "1 Kugel", "unit": "piece", "grams": 125 },
+        { "label": "1 Scheibe", "unit": "slice", "grams": 20 }
+      ]
+    },
+    {
+      "id": "mozzarella-light",
+      "nameDe": "Mozzarella light",
+      "category": "Käse",
+      "fdcId": 170847,
+      "usdaDescription": "Cheese, mozzarella, part skim milk",
+      "servings": [
+        { "label": "1 Kugel", "unit": "piece", "grams": 125 }
+      ]
+    },
+    {
+      "id": "feta",
+      "nameDe": "Feta",
+      "category": "Käse",
+      "fdcId": 173420,
+      "usdaDescription": "Cheese, feta",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 30 },
+        { "label": "1 Packung", "unit": "package", "grams": 200 }
+      ]
+    },
+    {
+      "id": "parmesan",
+      "nameDe": "Parmesan",
+      "category": "Käse",
+      "fdcId": 170848,
+      "usdaDescription": "Cheese, parmesan, hard",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 10 }
+      ]
+    },
+    {
+      "id": "parmesan-gerieben",
+      "nameDe": "Parmesan, gerieben",
+      "category": "Käse",
+      "fdcId": 171247,
+      "usdaDescription": "Cheese, parmesan, grated",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 5 }
+      ]
+    },
+    {
+      "id": "cheddar",
+      "nameDe": "Cheddar",
+      "category": "Käse",
+      "fdcId": 170899,
+      "usdaDescription": "Cheese, cheddar, sharp, sliced",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "frischkaese",
+      "nameDe": "Frischkäse (Doppelrahm)",
+      "category": "Käse",
+      "fdcId": 173418,
+      "usdaDescription": "Cheese, cream",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 20 },
+        { "label": "1 Portion (Brot)", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "frischkaese-light",
+      "nameDe": "Frischkäse, fettreduziert",
+      "category": "Käse",
+      "fdcId": 169079,
+      "usdaDescription": "Cheese, cream, low fat",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 20 }
+      ]
+    },
+    {
+      "id": "ricotta",
+      "nameDe": "Ricotta",
+      "category": "Käse",
+      "fdcId": 170851,
+      "usdaDescription": "Cheese, ricotta, whole milk",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 25 }
+      ]
+    },
+    {
+      "id": "ziegenkaese",
+      "nameDe": "Ziegenfrischkäse",
+      "category": "Käse",
+      "fdcId": 173435,
+      "usdaDescription": "Cheese, goat, soft type",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "schmelzkaese",
+      "nameDe": "Schmelzkäse (Streichkäse)",
+      "category": "Käse",
+      "fdcId": 171254,
+      "usdaDescription": "Cheese spread, pasteurized process, American",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 20 }
+      ]
+    },
+    {
+      "id": "blauschimmelkaese",
+      "nameDe": "Blauschimmelkäse",
+      "category": "Käse",
+      "fdcId": 172175,
+      "usdaDescription": "Cheese, blue",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "roquefort",
+      "nameDe": "Roquefort",
+      "category": "Käse",
+      "fdcId": 171250,
+      "usdaDescription": "Cheese, roquefort",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "provolone",
+      "nameDe": "Provolone",
+      "category": "Käse",
+      "fdcId": 170850,
+      "usdaDescription": "Cheese, provolone",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "limburger",
+      "nameDe": "Limburger",
+      "category": "Käse",
+      "fdcId": 171243,
+      "usdaDescription": "Cheese, limburger",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "gruyere",
+      "nameDe": "Gruyère (Greyerzer)",
+      "category": "Käse",
+      "fdcId": 171242,
+      "usdaDescription": "Cheese, gruyere",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "ei",
+      "nameDe": "Hühnerei",
+      "category": "Eier",
+      "fdcId": 171287,
+      "usdaDescription": "Egg, whole, raw, fresh",
+      "servings": [
+        { "label": "1 Ei (M)", "unit": "piece", "grams": 50 },
+        { "label": "1 Ei (L)", "unit": "piece", "grams": 58 }
+      ]
+    },
+    {
+      "id": "eiweiss",
+      "nameDe": "Eiklar (Eiweiß)",
+      "category": "Eier",
+      "fdcId": 172183,
+      "usdaDescription": "Egg, white, raw, fresh",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 33 }
+      ]
+    },
+    {
+      "id": "eigelb",
+      "nameDe": "Eigelb",
+      "category": "Eier",
+      "fdcId": 172184,
+      "usdaDescription": "Egg, yolk, raw, fresh",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 17 }
+      ]
+    },
+    {
+      "id": "ei-gekocht",
+      "nameDe": "Ei, hart gekocht",
+      "category": "Eier",
+      "fdcId": 173424,
+      "usdaDescription": "Egg, whole, cooked, hard-boiled",
+      "servings": [
+        { "label": "1 Ei (M)", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "ruehrei",
+      "nameDe": "Rührei",
+      "category": "Eier",
+      "fdcId": 172187,
+      "usdaDescription": "Egg, whole, cooked, scrambled",
+      "servings": [
+        { "label": "1 Portion (2 Eier)", "unit": "serving", "grams": 120 }
+      ]
+    },
+    {
+      "id": "spiegelei",
+      "nameDe": "Spiegelei",
+      "category": "Eier",
+      "fdcId": 173423,
+      "usdaDescription": "Egg, whole, cooked, fried",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 46 }
+      ]
+    },
+    {
+      "id": "omelett",
+      "nameDe": "Omelett",
+      "category": "Eier",
+      "fdcId": 172185,
+      "usdaDescription": "Egg, whole, cooked, omelet",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 120 }
+      ]
+    },
+    {
+      "id": "haehnchenbrust",
+      "nameDe": "Hähnchenbrustfilet, roh",
+      "category": "Fleisch",
+      "fdcId": 171077,
+      "usdaDescription": "Chicken, broiler or fryers, breast, skinless, boneless, meat only, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "haehnchenbrust-gebraten",
+      "nameDe": "Hähnchenbrust, gebraten",
+      "category": "Fleisch",
+      "fdcId": 171477,
+      "usdaDescription": "Chicken, broilers or fryers, breast, meat only, cooked, roasted",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 120 }
+      ]
+    },
+    {
+      "id": "haehnchenschenkel",
+      "nameDe": "Hähnchenschenkel ohne Haut, roh",
+      "category": "Fleisch",
+      "fdcId": 173627,
+      "usdaDescription": "Chicken, broilers or fryers, dark meat, thigh, meat only, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 110 }
+      ]
+    },
+    {
+      "id": "haehnchenkeule",
+      "nameDe": "Hähnchenkeule mit Haut, gebraten",
+      "category": "Fleisch",
+      "fdcId": 173617,
+      "usdaDescription": "Chicken, broilers or fryers, leg, meat and skin, cooked, roasted",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 180 }
+      ]
+    },
+    {
+      "id": "chicken-wings",
+      "nameDe": "Chicken Wings, gebraten",
+      "category": "Fleisch",
+      "fdcId": 173630,
+      "usdaDescription": "Chicken, broilers or fryers, wing, meat and skin, cooked, roasted",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 35 }
+      ]
+    },
+    {
+      "id": "putenbrust",
+      "nameDe": "Putenbrust, roh",
+      "category": "Fleisch",
+      "fdcId": 174515,
+      "usdaDescription": "Turkey, retail parts, breast, meat only, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "rinderhack",
+      "nameDe": "Rinderhackfleisch",
+      "category": "Fleisch",
+      "fdcId": 174036,
+      "usdaDescription": "Beef, ground, 80% lean meat / 20% fat, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 },
+        { "label": "1 Packung", "unit": "package", "grams": 500 }
+      ]
+    },
+    {
+      "id": "rinderhack-mager",
+      "nameDe": "Rinderhackfleisch, mager (5 %)",
+      "category": "Fleisch",
+      "fdcId": 171790,
+      "usdaDescription": "Beef, ground, 95% lean meat / 5% fat, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "hackfleisch-gemischt",
+      "nameDe": "Hackfleisch, gemischt",
+      "category": "Fleisch",
+      "fdcId": 174036,
+      "usdaDescription": "Beef, ground, 80% lean meat / 20% fat, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 },
+        { "label": "1 Packung", "unit": "package", "grams": 500 }
+      ]
+    },
+    {
+      "id": "schweinehack",
+      "nameDe": "Schweinehackfleisch (Mett)",
+      "category": "Fleisch",
+      "fdcId": 167902,
+      "usdaDescription": "Pork, fresh, ground, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "schweinefilet",
+      "nameDe": "Schweinefilet",
+      "category": "Fleisch",
+      "fdcId": 168249,
+      "usdaDescription": "Pork, fresh, loin, tenderloin, separable lean only, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "schweineschnitzel",
+      "nameDe": "Schweineschnitzel, roh",
+      "category": "Fleisch",
+      "fdcId": 168263,
+      "usdaDescription": "Pork, fresh, loin, center loin (chops), boneless, separable lean only, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "schweinekotelett",
+      "nameDe": "Schweinekotelett",
+      "category": "Fleisch",
+      "fdcId": 168238,
+      "usdaDescription": "Pork, fresh, loin, center loin (chops), bone-in, separable lean and fat, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 180 }
+      ]
+    },
+    {
+      "id": "schweinebauch",
+      "nameDe": "Schweinebauch",
+      "category": "Fleisch",
+      "fdcId": 167812,
+      "usdaDescription": "Pork, fresh, belly, raw",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 80 }
+      ]
+    },
+    {
+      "id": "speck",
+      "nameDe": "Speck (Bacon), roh",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 168277,
+      "usdaDescription": "Pork, cured, bacon, unprepared",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 15 }
+      ]
+    },
+    {
+      "id": "speck-gebraten",
+      "nameDe": "Speck, gebraten",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 168322,
+      "usdaDescription": "Pork, cured, bacon, pre-sliced, cooked, pan-fried",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 8 }
+      ]
+    },
+    {
+      "id": "lammhack",
+      "nameDe": "Lammhackfleisch",
+      "category": "Fleisch",
+      "fdcId": 174370,
+      "usdaDescription": "Lamb, ground, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "kalbsschnitzel",
+      "nameDe": "Kalbsschnitzel, roh",
+      "category": "Fleisch",
+      "fdcId": 175269,
+      "usdaDescription": "Veal, leg (top round), separable lean only, raw",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "ente",
+      "nameDe": "Ente mit Haut, gebraten",
+      "category": "Fleisch",
+      "fdcId": 172409,
+      "usdaDescription": "Duck, domesticated, meat and skin, cooked, roasted",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "gans",
+      "nameDe": "Gans mit Haut, gebraten",
+      "category": "Fleisch",
+      "fdcId": 172412,
+      "usdaDescription": "Goose, domesticated, meat and skin, cooked, roasted",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 }
+      ]
+    },
+    {
+      "id": "hirsch",
+      "nameDe": "Hirsch/Reh, roh",
+      "category": "Fleisch",
+      "fdcId": 173855,
+      "usdaDescription": "Game meat, deer, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "rinderleber",
+      "nameDe": "Rinderleber",
+      "category": "Fleisch",
+      "fdcId": 169451,
+      "usdaDescription": "Beef, variety meats and by-products, liver, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "salami",
+      "nameDe": "Salami",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 174603,
+      "usdaDescription": "Salami, Italian, pork",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 10 }
+      ]
+    },
+    {
+      "id": "fleischwurst",
+      "nameDe": "Fleischwurst (Lyoner)",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 172013,
+      "usdaDescription": "Bologna, beef and pork",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 20 }
+      ]
+    },
+    {
+      "id": "mortadella",
+      "nameDe": "Mortadella",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 174573,
+      "usdaDescription": "Mortadella, beef, pork",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 15 }
+      ]
+    },
+    {
+      "id": "wiener",
+      "nameDe": "Wiener Würstchen",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 172968,
+      "usdaDescription": "Frankfurter, meat",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "bratwurst",
+      "nameDe": "Bratwurst, gebraten",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 171620,
+      "usdaDescription": "Bratwurst, pork, cooked",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 100 }
+      ]
+    },
+    {
+      "id": "bockwurst",
+      "nameDe": "Bockwurst",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 173867,
+      "usdaDescription": "Knackwurst, knockwurst, pork, beef",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 100 }
+      ]
+    },
+    {
+      "id": "leberwurst",
+      "nameDe": "Leberwurst",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 171621,
+      "usdaDescription": "Braunschweiger (a liver sausage), pork",
+      "servings": [
+        { "label": "1 Portion (Brot)", "unit": "serving", "grams": 20 }
+      ]
+    },
+    {
+      "id": "chorizo",
+      "nameDe": "Chorizo",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 173859,
+      "usdaDescription": "Sausage, pork, chorizo, link or ground, raw",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 10 }
+      ]
+    },
+    {
+      "id": "cabanossi",
+      "nameDe": "Cabanossi",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 174577,
+      "usdaDescription": "Polish sausage, pork",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "kochschinken",
+      "nameDe": "Kochschinken",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 173864,
+      "usdaDescription": "Ham, sliced, regular (approximately 11% fat)",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 20 }
+      ]
+    },
+    {
+      "id": "corned-beef",
+      "nameDe": "Corned Beef",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 170602,
+      "usdaDescription": "Beef, cured, corned beef, canned",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "blutwurst",
+      "nameDe": "Blutwurst",
+      "category": "Wurst & Aufschnitt",
+      "fdcId": 171618,
+      "usdaDescription": "Blood sausage",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 25 }
+      ]
+    },
+    {
+      "id": "lachs",
+      "nameDe": "Lachs, roh",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175167,
+      "usdaDescription": "Fish, salmon, Atlantic, farmed, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 125 }
+      ]
+    },
+    {
+      "id": "lachs-gebraten",
+      "nameDe": "Lachs, gebraten",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175168,
+      "usdaDescription": "Fish, salmon, Atlantic, farmed, cooked, dry heat",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 110 }
+      ]
+    },
+    {
+      "id": "raeucherlachs",
+      "nameDe": "Räucherlachs",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 173687,
+      "usdaDescription": "Fish, salmon, chinook, smoked",
+      "servings": [
+        { "label": "1 Scheibe", "unit": "slice", "grams": 20 },
+        { "label": "1 Packung", "unit": "package", "grams": 100 }
+      ]
+    },
+    {
+      "id": "thunfisch-wasser",
+      "nameDe": "Thunfisch im eigenen Saft (Dose)",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 334194,
+      "usdaDescription": "Fish, tuna, light, canned in water, drained solids",
+      "servings": [
+        { "label": "1 Dose (abgetropft)", "unit": "can", "grams": 140 }
+      ]
+    },
+    {
+      "id": "thunfisch-oel",
+      "nameDe": "Thunfisch in Öl (Dose)",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 173708,
+      "usdaDescription": "Fish, tuna, light, canned in oil, drained solids",
+      "servings": [
+        { "label": "1 Dose (abgetropft)", "unit": "can", "grams": 140 }
+      ]
+    },
+    {
+      "id": "thunfisch",
+      "nameDe": "Thunfisch, frisch",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175159,
+      "usdaDescription": "Fish, tuna, fresh, yellowfin, raw",
+      "servings": [
+        { "label": "1 Steak", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "kabeljau",
+      "nameDe": "Kabeljau (Dorsch)",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 171955,
+      "usdaDescription": "Fish, cod, Atlantic, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "seelachs",
+      "nameDe": "Seelachs (Alaska-Pollack)",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 173725,
+      "usdaDescription": "Fish, pollock, Alaska, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "fischstaebchen",
+      "nameDe": "Fischstäbchen",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 174195,
+      "usdaDescription": "Fish, fish sticks, frozen, prepared",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 30 }
+      ]
+    },
+    {
+      "id": "forelle",
+      "nameDe": "Forelle",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 173717,
+      "usdaDescription": "Fish, trout, rainbow, farmed, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 100 }
+      ]
+    },
+    {
+      "id": "hering",
+      "nameDe": "Hering (Bismarck, eingelegt)",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175118,
+      "usdaDescription": "Fish, herring, Atlantic, pickled",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 60 }
+      ]
+    },
+    {
+      "id": "matjes",
+      "nameDe": "Hering (Matjes), roh",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175116,
+      "usdaDescription": "Fish, herring, Atlantic, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "makrele",
+      "nameDe": "Makrele",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175119,
+      "usdaDescription": "Fish, mackerel, Atlantic, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 120 }
+      ]
+    },
+    {
+      "id": "sardinen",
+      "nameDe": "Sardinen in Öl (Dose)",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175139,
+      "usdaDescription": "Fish, sardine, Atlantic, canned in oil, drained solids with bone",
+      "servings": [
+        { "label": "1 Dose (abgetropft)", "unit": "can", "grams": 90 }
+      ]
+    },
+    {
+      "id": "garnelen",
+      "nameDe": "Garnelen, roh",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175179,
+      "usdaDescription": "Crustaceans, shrimp, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "miesmuscheln",
+      "nameDe": "Miesmuscheln",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 174216,
+      "usdaDescription": "Mollusks, mussel, blue, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "tintenfisch",
+      "nameDe": "Tintenfisch (Kalmar)",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 174223,
+      "usdaDescription": "Mollusks, squid, mixed species, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "tilapia",
+      "nameDe": "Tilapia",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175176,
+      "usdaDescription": "Fish, tilapia, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 120 }
+      ]
+    },
+    {
+      "id": "scholle",
+      "nameDe": "Scholle",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 174196,
+      "usdaDescription": "Fish, flatfish (flounder and sole species), raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 120 }
+      ]
+    },
+    {
+      "id": "zander",
+      "nameDe": "Zander/Barsch",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 173678,
+      "usdaDescription": "Fish, perch, mixed species, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "karpfen",
+      "nameDe": "Karpfen",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 171952,
+      "usdaDescription": "Fish, carp, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "surimi",
+      "nameDe": "Surimi",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 173702,
+      "usdaDescription": "Fish, surimi",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 15 }
+      ]
+    },
+    {
+      "id": "rotbarsch",
+      "nameDe": "Rotbarsch",
+      "category": "Fisch & Meeresfrüchte",
+      "fdcId": 175125,
+      "usdaDescription": "Fish, ocean perch, Atlantic, raw",
+      "servings": [
+        { "label": "1 Filet", "unit": "piece", "grams": 150 }
+      ]
+    },
+    {
+      "id": "linsen",
+      "nameDe": "Linsen (roh)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 172420,
+      "usdaDescription": "Lentils, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "rote-linsen",
+      "nameDe": "Rote Linsen (roh)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 174284,
+      "usdaDescription": "Lentils, pink or red, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "linsen-gekocht",
+      "nameDe": "Linsen (gekocht)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 172421,
+      "usdaDescription": "Lentils, mature seeds, cooked, boiled, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "kichererbsen",
+      "nameDe": "Kichererbsen (roh)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 173756,
+      "usdaDescription": "Chickpeas (garbanzo beans, bengal gram), mature seeds, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "kichererbsen-gekocht",
+      "nameDe": "Kichererbsen (gekocht)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 173757,
+      "usdaDescription": "Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 },
+        { "label": "1 Dose (abgetropft)", "unit": "can", "grams": 240 }
+      ]
+    },
+    {
+      "id": "kidneybohnen",
+      "nameDe": "Kidneybohnen (gekocht)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 175194,
+      "usdaDescription": "Beans, kidney, red, mature seeds, cooked, boiled, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 },
+        { "label": "1 Dose (abgetropft)", "unit": "can", "grams": 250 }
+      ]
+    },
+    {
+      "id": "weisse-bohnen",
+      "nameDe": "Weiße Bohnen (Dose)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 175204,
+      "usdaDescription": "Beans, white, mature seeds, canned",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "schwarze-bohnen",
+      "nameDe": "Schwarze Bohnen (gekocht)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 173735,
+      "usdaDescription": "Beans, black, mature seeds, cooked, boiled, without salt",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 150 }
+      ]
+    },
+    {
+      "id": "baked-beans",
+      "nameDe": "Baked Beans",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 175182,
+      "usdaDescription": "Beans, baked, canned, plain or vegetarian",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 200 },
+        { "label": "1 Dose", "unit": "can", "grams": 415 }
+      ]
+    },
+    {
+      "id": "spalterbsen",
+      "nameDe": "Spalterbsen (roh)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 172428,
+      "usdaDescription": "Peas, green, split, mature seeds, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "edamame",
+      "nameDe": "Edamame",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 168411,
+      "usdaDescription": "Edamame, frozen, prepared",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "tofu",
+      "nameDe": "Tofu (natur)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 172475,
+      "usdaDescription": "Tofu, raw, firm, prepared with calcium sulfate",
+      "servings": [
+        { "label": "1 Packung", "unit": "package", "grams": 200 },
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "sojabohnen",
+      "nameDe": "Sojabohnen (roh)",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 174270,
+      "usdaDescription": "Soybeans, mature seeds, raw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 60 }
+      ]
+    },
+    {
+      "id": "hummus",
+      "nameDe": "Hummus",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 174289,
+      "usdaDescription": "Hummus, commercial",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 Portion", "unit": "serving", "grams": 50 }
+      ]
+    },
+    {
+      "id": "falafel",
+      "nameDe": "Falafel",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 172455,
+      "usdaDescription": "Falafel, home-prepared",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 17 }
+      ]
+    },
+    {
+      "id": "tempeh",
+      "nameDe": "Tempeh",
+      "category": "Hülsenfrüchte & Soja",
+      "fdcId": 174272,
+      "usdaDescription": "Tempeh",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "mandeln",
+      "nameDe": "Mandeln",
+      "category": "Nüsse & Samen",
+      "fdcId": 170567,
+      "usdaDescription": "Nuts, almonds",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 },
+        { "label": "1 Stück", "unit": "piece", "grams": 1.2 }
+      ]
+    },
+    {
+      "id": "walnuesse",
+      "nameDe": "Walnüsse",
+      "category": "Nüsse & Samen",
+      "fdcId": 170187,
+      "usdaDescription": "Nuts, walnuts, english",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 },
+        { "label": "1 Stück", "unit": "piece", "grams": 4 }
+      ]
+    },
+    {
+      "id": "haselnuesse",
+      "nameDe": "Haselnüsse",
+      "category": "Nüsse & Samen",
+      "fdcId": 170581,
+      "usdaDescription": "Nuts, hazelnuts or filberts",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "cashews",
+      "nameDe": "Cashewkerne",
+      "category": "Nüsse & Samen",
+      "fdcId": 170162,
+      "usdaDescription": "Nuts, cashew nuts, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "erdnuesse",
+      "nameDe": "Erdnüsse, geröstet und gesalzen",
+      "category": "Nüsse & Samen",
+      "fdcId": 174262,
+      "usdaDescription": "Peanuts, all types, dry-roasted, with salt",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "erdnuesse-roh",
+      "nameDe": "Erdnüsse, ungesalzen",
+      "category": "Nüsse & Samen",
+      "fdcId": 172430,
+      "usdaDescription": "Peanuts, all types, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "erdnussbutter",
+      "nameDe": "Erdnussbutter",
+      "category": "Nüsse & Samen",
+      "fdcId": 172470,
+      "usdaDescription": "Peanut butter, smooth style, without salt",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 16 },
+        { "label": "1 TL", "unit": "tsp", "grams": 6 }
+      ]
+    },
+    {
+      "id": "pistazien",
+      "nameDe": "Pistazien, geröstet",
+      "category": "Nüsse & Samen",
+      "fdcId": 169426,
+      "usdaDescription": "Nuts, pistachio nuts, dry roasted, with salt added",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "paranuesse",
+      "nameDe": "Paranüsse",
+      "category": "Nüsse & Samen",
+      "fdcId": 170569,
+      "usdaDescription": "Nuts, brazilnuts, dried, unblanched",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 5 }
+      ]
+    },
+    {
+      "id": "macadamia",
+      "nameDe": "Macadamianüsse",
+      "category": "Nüsse & Samen",
+      "fdcId": 170178,
+      "usdaDescription": "Nuts, macadamia nuts, raw",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "pekannuesse",
+      "nameDe": "Pekannüsse",
+      "category": "Nüsse & Samen",
+      "fdcId": 170182,
+      "usdaDescription": "Nuts, pecans",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "pinienkerne",
+      "nameDe": "Pinienkerne",
+      "category": "Nüsse & Samen",
+      "fdcId": 170591,
+      "usdaDescription": "Nuts, pine nuts, dried",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "sonnenblumenkerne",
+      "nameDe": "Sonnenblumenkerne",
+      "category": "Nüsse & Samen",
+      "fdcId": 170562,
+      "usdaDescription": "Seeds, sunflower seed kernels, dried",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "kuerbiskerne",
+      "nameDe": "Kürbiskerne",
+      "category": "Nüsse & Samen",
+      "fdcId": 170556,
+      "usdaDescription": "Seeds, pumpkin and squash seed kernels, dried",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "leinsamen",
+      "nameDe": "Leinsamen",
+      "category": "Nüsse & Samen",
+      "fdcId": 169414,
+      "usdaDescription": "Seeds, flaxseed",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "chiasamen",
+      "nameDe": "Chiasamen",
+      "category": "Nüsse & Samen",
+      "fdcId": 170554,
+      "usdaDescription": "Seeds, chia seeds, dried",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 12 }
+      ]
+    },
+    {
+      "id": "sesam",
+      "nameDe": "Sesam",
+      "category": "Nüsse & Samen",
+      "fdcId": 170150,
+      "usdaDescription": "Seeds, sesame seeds, whole, dried",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 9 }
+      ]
+    },
+    {
+      "id": "hanfsamen",
+      "nameDe": "Hanfsamen, geschält",
+      "category": "Nüsse & Samen",
+      "fdcId": 170148,
+      "usdaDescription": "Seeds, hemp seed, hulled",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "kokosraspeln",
+      "nameDe": "Kokosraspeln",
+      "category": "Nüsse & Samen",
+      "fdcId": 170170,
+      "usdaDescription": "Nuts, coconut meat, dried (desiccated), not sweetened",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 6 }
+      ]
+    },
+    {
+      "id": "mandelmus",
+      "nameDe": "Mandelmus",
+      "category": "Nüsse & Samen",
+      "fdcId": 168588,
+      "usdaDescription": "Nuts, almond butter, plain, without salt added",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 16 }
+      ]
+    },
+    {
+      "id": "tahini",
+      "nameDe": "Tahini (Sesammus)",
+      "category": "Nüsse & Samen",
+      "fdcId": 170189,
+      "usdaDescription": "Seeds, sesame butter, tahini, from roasted and toasted kernels (most common type)",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 }
+      ]
+    },
+    {
+      "id": "studentenfutter",
+      "nameDe": "Studentenfutter",
+      "category": "Nüsse & Samen",
+      "fdcId": 167561,
+      "usdaDescription": "Snacks, trail mix, regular",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 30 }
+      ]
+    },
+    {
+      "id": "olivenoel",
+      "nameDe": "Olivenöl",
+      "category": "Öle & Fette",
+      "fdcId": 171413,
+      "usdaDescription": "Oil, olive, salad or cooking",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 },
+        { "label": "1 TL", "unit": "tsp", "grams": 4 }
+      ]
+    },
+    {
+      "id": "rapsoel",
+      "nameDe": "Rapsöl",
+      "category": "Öle & Fette",
+      "fdcId": 172336,
+      "usdaDescription": "Oil, canola",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 },
+        { "label": "1 TL", "unit": "tsp", "grams": 4 }
+      ]
+    },
+    {
+      "id": "sonnenblumenoel",
+      "nameDe": "Sonnenblumenöl",
+      "category": "Öle & Fette",
+      "fdcId": 171025,
+      "usdaDescription": "Oil, sunflower, linoleic, (approx. 65%)",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "kokosoel",
+      "nameDe": "Kokosöl",
+      "category": "Öle & Fette",
+      "fdcId": 171412,
+      "usdaDescription": "Oil, coconut",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "leinoel",
+      "nameDe": "Leinöl",
+      "category": "Öle & Fette",
+      "fdcId": 167702,
+      "usdaDescription": "Oil, flaxseed, cold pressed",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "sesamoel",
+      "nameDe": "Sesamöl",
+      "category": "Öle & Fette",
+      "fdcId": 171016,
+      "usdaDescription": "Oil, sesame, salad or cooking",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "walnussoel",
+      "nameDe": "Walnussöl",
+      "category": "Öle & Fette",
+      "fdcId": 171030,
+      "usdaDescription": "Oil, walnut",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 10 }
+      ]
+    },
+    {
+      "id": "schmalz",
+      "nameDe": "Schweineschmalz",
+      "category": "Öle & Fette",
+      "fdcId": 171401,
+      "usdaDescription": "Lard",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 12 }
+      ]
+    },
+    {
+      "id": "mayonnaise",
+      "nameDe": "Mayonnaise",
+      "category": "Saucen & Gewürze",
+      "fdcId": 171009,
+      "usdaDescription": "Salad dressing, mayonnaise, regular",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 TL", "unit": "tsp", "grams": 5 }
+      ]
+    },
+    {
+      "id": "wasser",
+      "nameDe": "Wasser (Leitungswasser)",
+      "category": "Getränke",
+      "fdcId": 173647,
+      "usdaDescription": "Beverages, water, tap, drinking",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Flasche (0,5 l)", "unit": "bottle", "grams": 500 }
+      ]
+    },
+    {
+      "id": "mineralwasser",
+      "nameDe": "Mineralwasser",
+      "category": "Getränke",
+      "fdcId": 174158,
+      "usdaDescription": "Water, bottled, generic",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Flasche (0,5 l)", "unit": "bottle", "grams": 500 },
+        { "label": "1 Flasche (1 l)", "unit": "bottle", "grams": 1000 }
+      ]
+    },
+    {
+      "id": "orangensaft",
+      "nameDe": "Orangensaft",
+      "category": "Getränke",
+      "fdcId": 167794,
+      "usdaDescription": "Orange juice, chilled, includes from concentrate, with added calcium and vitamins A, D, E",
+      "basis": "ml",
+      "densityGPerMl": 1.04,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "apfelsaft",
+      "nameDe": "Apfelsaft",
+      "category": "Getränke",
+      "fdcId": 173933,
+      "usdaDescription": "Apple juice, canned or bottled, unsweetened, without added ascorbic acid",
+      "basis": "ml",
+      "densityGPerMl": 1.04,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "traubensaft",
+      "nameDe": "Traubensaft",
+      "category": "Getränke",
+      "fdcId": 173042,
+      "usdaDescription": "Grape juice, canned or bottled, unsweetened, without added ascorbic acid",
+      "basis": "ml",
+      "densityGPerMl": 1.06,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "tomatensaft",
+      "nameDe": "Tomatensaft",
+      "category": "Getränke",
+      "fdcId": 170458,
+      "usdaDescription": "Tomato juice, canned, with salt added",
+      "basis": "ml",
+      "densityGPerMl": 1.03,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "cola",
+      "nameDe": "Cola",
+      "category": "Getränke",
+      "fdcId": 174852,
+      "usdaDescription": "Beverages, carbonated, cola, regular",
+      "basis": "ml",
+      "densityGPerMl": 1.04,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Dose", "unit": "can", "grams": 330 },
+        { "label": "1 Flasche (0,5 l)", "unit": "bottle", "grams": 500 }
+      ]
+    },
+    {
+      "id": "cola-light",
+      "nameDe": "Cola light/zero",
+      "category": "Getränke",
+      "fdcId": 175099,
+      "usdaDescription": "Beverages, carbonated, low calorie, cola or pepper-type, with aspartame, contains caffeine",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Dose", "unit": "can", "grams": 330 }
+      ]
+    },
+    {
+      "id": "orangenlimonade",
+      "nameDe": "Orangenlimonade",
+      "category": "Getränke",
+      "fdcId": 174854,
+      "usdaDescription": "Beverages, carbonated, orange",
+      "basis": "ml",
+      "densityGPerMl": 1.04,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Dose", "unit": "can", "grams": 330 }
+      ]
+    },
+    {
+      "id": "zitronenlimonade",
+      "nameDe": "Zitronenlimonade",
+      "category": "Getränke",
+      "fdcId": 173205,
+      "usdaDescription": "Beverages, carbonated, lemon-lime soda, no caffeine",
+      "basis": "ml",
+      "densityGPerMl": 1.04,
+      "servings": [
+        { "label": "1 Glas", "unit": "glass", "grams": 200 },
+        { "label": "1 Dose", "unit": "can", "grams": 330 }
+      ]
+    },
+    {
+      "id": "energydrink",
+      "nameDe": "Energydrink",
+      "category": "Getränke",
+      "fdcId": 173210,
+      "usdaDescription": "Beverages, Energy drink, RED BULL",
+      "basis": "ml",
+      "densityGPerMl": 1.04,
+      "servings": [
+        { "label": "1 Dose", "unit": "can", "grams": 250 }
+      ]
+    },
+    {
+      "id": "kaffee",
+      "nameDe": "Kaffee, schwarz",
+      "category": "Getränke",
+      "fdcId": 171890,
+      "usdaDescription": "Beverages, coffee, brewed, prepared with tap water",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Tasse", "unit": "cup", "grams": 150 },
+        { "label": "1 Becher", "unit": "serving", "grams": 250 }
+      ]
+    },
+    {
+      "id": "espresso",
+      "nameDe": "Espresso",
+      "category": "Getränke",
+      "fdcId": 171891,
+      "usdaDescription": "Beverages, coffee, brewed, espresso, restaurant-prepared",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Tasse", "unit": "cup", "grams": 30 }
+      ]
+    },
+    {
+      "id": "schwarztee",
+      "nameDe": "Schwarzer Tee",
+      "category": "Getränke",
+      "fdcId": 173227,
+      "usdaDescription": "Beverages, tea, black, brewed, prepared with tap water",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Tasse", "unit": "cup", "grams": 200 }
+      ]
+    },
+    {
+      "id": "kraeutertee",
+      "nameDe": "Kräutertee",
+      "category": "Getränke",
+      "fdcId": 173232,
+      "usdaDescription": "Beverages, tea, herb, other than chamomile, brewed",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Tasse", "unit": "cup", "grams": 200 }
+      ]
+    },
+    {
+      "id": "bier",
+      "nameDe": "Bier (Pils)",
+      "category": "Getränke",
+      "fdcId": 168746,
+      "usdaDescription": "Alcoholic beverage, beer, regular, all",
+      "basis": "ml",
+      "densityGPerMl": 1.01,
+      "servings": [
+        { "label": "1 Flasche (0,33 l)", "unit": "bottle", "grams": 330 },
+        { "label": "1 Flasche (0,5 l)", "unit": "bottle", "grams": 500 },
+        { "label": "1 Glas (0,3 l)", "unit": "glass", "grams": 300 }
+      ]
+    },
+    {
+      "id": "bier-light",
+      "nameDe": "Bier, leicht",
+      "category": "Getränke",
+      "fdcId": 168749,
+      "usdaDescription": "Alcoholic beverage, beer, light",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Flasche (0,33 l)", "unit": "bottle", "grams": 330 }
+      ]
+    },
+    {
+      "id": "weisswein",
+      "nameDe": "Weißwein",
+      "category": "Getränke",
+      "fdcId": 174837,
+      "usdaDescription": "Alcoholic beverage, wine, table, white",
+      "basis": "ml",
+      "densityGPerMl": 0.99,
+      "servings": [
+        { "label": "1 Glas (0,15 l)", "unit": "glass", "grams": 150 },
+        { "label": "1 Glas (0,2 l)", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "rotwein",
+      "nameDe": "Rotwein",
+      "category": "Getränke",
+      "fdcId": 173190,
+      "usdaDescription": "Alcoholic beverage, wine, table, red",
+      "basis": "ml",
+      "densityGPerMl": 0.99,
+      "servings": [
+        { "label": "1 Glas (0,15 l)", "unit": "glass", "grams": 150 },
+        { "label": "1 Glas (0,2 l)", "unit": "glass", "grams": 200 }
+      ]
+    },
+    {
+      "id": "spirituosen",
+      "nameDe": "Spirituosen (Wodka, Korn)",
+      "category": "Getränke",
+      "fdcId": 174815,
+      "usdaDescription": "Alcoholic beverage, distilled, all (gin, rum, vodka, whiskey) 80 proof",
+      "basis": "ml",
+      "densityGPerMl": 0.95,
+      "servings": [
+        { "label": "1 Schnapsglas (2 cl)", "unit": "glass", "grams": 20 },
+        { "label": "1 Glas (4 cl)", "unit": "glass", "grams": 40 }
+      ]
+    },
+    {
+      "id": "gemuesebruehe",
+      "nameDe": "Gemüsebrühe",
+      "category": "Gerichte",
+      "fdcId": 171583,
+      "usdaDescription": "Soup, vegetable broth, ready to serve",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Tasse", "unit": "cup", "grams": 250 },
+        { "label": "1 Teller", "unit": "serving", "grams": 300 }
+      ]
+    },
+    {
+      "id": "huehnerbruehe",
+      "nameDe": "Hühnerbrühe",
+      "category": "Gerichte",
+      "fdcId": 174536,
+      "usdaDescription": "Soup, chicken broth, ready-to-serve",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 Tasse", "unit": "cup", "grams": 250 },
+        { "label": "1 Teller", "unit": "serving", "grams": 300 }
+      ]
+    },
+    {
+      "id": "kokosmilch",
+      "nameDe": "Kokosmilch (Dose)",
+      "category": "Milchprodukte",
+      "fdcId": 170173,
+      "usdaDescription": "Nuts, coconut milk, canned (liquid expressed from grated meat and water)",
+      "basis": "ml",
+      "densityGPerMl": 1.0,
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 Dose", "unit": "can", "grams": 400 }
+      ]
+    },
+    {
+      "id": "vollmilchschokolade",
+      "nameDe": "Vollmilchschokolade",
+      "category": "Süßes & Snacks",
+      "fdcId": 167587,
+      "usdaDescription": "Candies, milk chocolate",
+      "servings": [
+        { "label": "1 Rippe", "unit": "piece", "grams": 6 },
+        { "label": "1 Riegel", "unit": "piece", "grams": 25 },
+        { "label": "1 Tafel", "unit": "package", "grams": 100 }
+      ]
+    },
+    {
+      "id": "zartbitter-70",
+      "nameDe": "Zartbitterschokolade 70–85 %",
+      "category": "Süßes & Snacks",
+      "fdcId": 170273,
+      "usdaDescription": "Chocolate, dark, 70-85% cacao solids",
+      "servings": [
+        { "label": "1 Rippe", "unit": "piece", "grams": 10 },
+        { "label": "1 Tafel", "unit": "package", "grams": 100 }
+      ]
+    },
+    {
+      "id": "zartbitter-50",
+      "nameDe": "Zartbitterschokolade 45–59 %",
+      "category": "Süßes & Snacks",
+      "fdcId": 170271,
+      "usdaDescription": "Chocolate, dark, 45- 59% cacao solids",
+      "servings": [
+        { "label": "1 Rippe", "unit": "piece", "grams": 10 },
+        { "label": "1 Tafel", "unit": "package", "grams": 100 }
+      ]
+    },
+    {
+      "id": "weisse-schokolade",
+      "nameDe": "Weiße Schokolade",
+      "category": "Süßes & Snacks",
+      "fdcId": 167571,
+      "usdaDescription": "Candies, white chocolate",
+      "servings": [
+        { "label": "1 Rippe", "unit": "piece", "grams": 6 },
+        { "label": "1 Tafel", "unit": "package", "grams": 100 }
+      ]
+    },
+    {
+      "id": "fruchtgummi",
+      "nameDe": "Fruchtgummi (Gummibärchen)",
+      "category": "Süßes & Snacks",
+      "fdcId": 167989,
+      "usdaDescription": "Candies, gumdrops, starch jelly pieces",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 25 },
+        { "label": "1 Stück", "unit": "piece", "grams": 2 }
+      ]
+    },
+    {
+      "id": "marshmallows",
+      "nameDe": "Marshmallows",
+      "category": "Süßes & Snacks",
+      "fdcId": 167995,
+      "usdaDescription": "Candies, marshmallows",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 7 }
+      ]
+    },
+    {
+      "id": "nuss-nougat-creme",
+      "nameDe": "Nuss-Nougat-Creme",
+      "category": "Süßes & Snacks",
+      "fdcId": 168000,
+      "usdaDescription": "Chocolate-flavored hazelnut spread",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 7 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 Portion (Brot)", "unit": "serving", "grams": 15 }
+      ]
+    },
+    {
+      "id": "honig",
+      "nameDe": "Honig",
+      "category": "Süßes & Snacks",
+      "fdcId": 169640,
+      "usdaDescription": "Honey",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 8 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 20 }
+      ]
+    },
+    {
+      "id": "zucker",
+      "nameDe": "Zucker",
+      "category": "Süßes & Snacks",
+      "fdcId": 169655,
+      "usdaDescription": "Sugars, granulated",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 4 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 12 },
+        { "label": "1 Stück (Würfel)", "unit": "piece", "grams": 3 }
+      ]
+    },
+    {
+      "id": "puderzucker",
+      "nameDe": "Puderzucker",
+      "category": "Süßes & Snacks",
+      "fdcId": 169656,
+      "usdaDescription": "Sugars, powdered",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 8 }
+      ]
+    },
+    {
+      "id": "brauner-zucker",
+      "nameDe": "Brauner Zucker",
+      "category": "Süßes & Snacks",
+      "fdcId": 168833,
+      "usdaDescription": "Sugars, brown",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 4 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 12 }
+      ]
+    },
+    {
+      "id": "marmelade",
+      "nameDe": "Konfitüre (Marmelade)",
+      "category": "Süßes & Snacks",
+      "fdcId": 169641,
+      "usdaDescription": "Jams and preserves",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 8 },
+        { "label": "1 Portion (Brot)", "unit": "serving", "grams": 20 }
+      ]
+    },
+    {
+      "id": "ahornsirup",
+      "nameDe": "Ahornsirup",
+      "category": "Süßes & Snacks",
+      "fdcId": 169661,
+      "usdaDescription": "Syrups, maple",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 20 }
+      ]
+    },
+    {
+      "id": "agavendicksaft",
+      "nameDe": "Agavendicksaft",
+      "category": "Süßes & Snacks",
+      "fdcId": 170277,
+      "usdaDescription": "Sweetener, syrup, agave",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 20 }
+      ]
+    },
+    {
+      "id": "tortillachips",
+      "nameDe": "Tortillachips",
+      "category": "Süßes & Snacks",
+      "fdcId": 167558,
+      "usdaDescription": "Snacks, tortilla chips, plain, white corn, salted",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 25 }
+      ]
+    },
+    {
+      "id": "karamellpopcorn",
+      "nameDe": "Popcorn, karamellisiert",
+      "category": "Süßes & Snacks",
+      "fdcId": 167552,
+      "usdaDescription": "Snacks, popcorn, caramel-coated, without peanuts",
+      "servings": [
+        { "label": "1 Handvoll", "unit": "serving", "grams": 25 }
+      ]
+    },
+    {
+      "id": "muesliriegel",
+      "nameDe": "Müsliriegel",
+      "category": "Süßes & Snacks",
+      "fdcId": 167542,
+      "usdaDescription": "Snacks, granola bars, hard, plain",
+      "servings": [
+        { "label": "1 Riegel", "unit": "piece", "grams": 25 }
+      ]
+    },
+    {
+      "id": "schokoriegel",
+      "nameDe": "Schokoriegel mit Erdnüssen und Karamell",
+      "category": "Süßes & Snacks",
+      "fdcId": 169589,
+      "usdaDescription": "Candies, MARS SNACKFOOD US, SNICKERS Bar",
+      "servings": [
+        { "label": "1 Riegel", "unit": "piece", "grams": 50 }
+      ]
+    },
+    {
+      "id": "karamellbonbons",
+      "nameDe": "Karamellbonbons",
+      "category": "Süßes & Snacks",
+      "fdcId": 167974,
+      "usdaDescription": "Candies, caramels",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 8 }
+      ]
+    },
+    {
+      "id": "goetterspeise",
+      "nameDe": "Götterspeise",
+      "category": "Süßes & Snacks",
+      "fdcId": 169596,
+      "usdaDescription": "Gelatin desserts, dry mix, prepared with water",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "ketchup",
+      "nameDe": "Ketchup",
+      "category": "Saucen & Gewürze",
+      "fdcId": 168556,
+      "usdaDescription": "Catsup",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 Portion", "unit": "serving", "grams": 20 }
+      ]
+    },
+    {
+      "id": "senf",
+      "nameDe": "Senf (mittelscharf)",
+      "category": "Saucen & Gewürze",
+      "fdcId": 172234,
+      "usdaDescription": "Mustard, prepared, yellow",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 5 }
+      ]
+    },
+    {
+      "id": "sojasauce",
+      "nameDe": "Sojasauce",
+      "category": "Saucen & Gewürze",
+      "fdcId": 174277,
+      "usdaDescription": "Soy sauce made from soy and wheat (shoyu)",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 16 },
+        { "label": "1 TL", "unit": "tsp", "grams": 6 }
+      ]
+    },
+    {
+      "id": "balsamico",
+      "nameDe": "Balsamico-Essig",
+      "category": "Saucen & Gewürze",
+      "fdcId": 172241,
+      "usdaDescription": "Vinegar, balsamic",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 16 }
+      ]
+    },
+    {
+      "id": "essig",
+      "nameDe": "Essig (Branntweinessig)",
+      "category": "Saucen & Gewürze",
+      "fdcId": 172237,
+      "usdaDescription": "Vinegar, distilled",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 }
+      ]
+    },
+    {
+      "id": "apfelessig",
+      "nameDe": "Apfelessig",
+      "category": "Saucen & Gewürze",
+      "fdcId": 173469,
+      "usdaDescription": "Vinegar, cider",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 }
+      ]
+    },
+    {
+      "id": "tomatensauce",
+      "nameDe": "Tomatensauce (Pasta)",
+      "category": "Saucen & Gewürze",
+      "fdcId": 171192,
+      "usdaDescription": "Sauce, pasta, spaghetti/marinara, ready-to-serve",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "pesto",
+      "nameDe": "Pesto Genovese",
+      "category": "Saucen & Gewürze",
+      "fdcId": 171579,
+      "usdaDescription": "Sauce, pesto, ready-to-serve, refrigerated",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 15 },
+        { "label": "1 Portion", "unit": "serving", "grams": 40 }
+      ]
+    },
+    {
+      "id": "bbq-sauce",
+      "nameDe": "Barbecue-Sauce",
+      "category": "Saucen & Gewürze",
+      "fdcId": 174523,
+      "usdaDescription": "Sauce, barbecue",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 17 }
+      ]
+    },
+    {
+      "id": "salz",
+      "nameDe": "Speisesalz",
+      "category": "Saucen & Gewürze",
+      "fdcId": 173468,
+      "usdaDescription": "Salt, table",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 6 },
+        { "label": "1 Prise", "unit": "serving", "grams": 0.5 }
+      ]
+    },
+    {
+      "id": "pfeffer",
+      "nameDe": "Pfeffer, schwarz",
+      "category": "Saucen & Gewürze",
+      "fdcId": 170931,
+      "usdaDescription": "Spices, pepper, black",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 2 }
+      ]
+    },
+    {
+      "id": "zimt",
+      "nameDe": "Zimt",
+      "category": "Saucen & Gewürze",
+      "fdcId": 171320,
+      "usdaDescription": "Spices, cinnamon, ground",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 3 }
+      ]
+    },
+    {
+      "id": "paprikapulver",
+      "nameDe": "Paprikapulver",
+      "category": "Saucen & Gewürze",
+      "fdcId": 171329,
+      "usdaDescription": "Spices, paprika",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 2 }
+      ]
+    },
+    {
+      "id": "currypulver",
+      "nameDe": "Currypulver",
+      "category": "Saucen & Gewürze",
+      "fdcId": 170924,
+      "usdaDescription": "Spices, curry powder",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 2 }
+      ]
+    },
+    {
+      "id": "oregano",
+      "nameDe": "Oregano, getrocknet",
+      "category": "Saucen & Gewürze",
+      "fdcId": 171328,
+      "usdaDescription": "Spices, oregano, dried",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 1 }
+      ]
+    },
+    {
+      "id": "hefe",
+      "nameDe": "Hefe, frisch",
+      "category": "Saucen & Gewürze",
+      "fdcId": 175042,
+      "usdaDescription": "Leavening agents, yeast, baker's, compressed",
+      "servings": [
+        { "label": "1 Würfel", "unit": "piece", "grams": 42 }
+      ]
+    },
+    {
+      "id": "trockenhefe",
+      "nameDe": "Trockenhefe",
+      "category": "Saucen & Gewürze",
+      "fdcId": 175043,
+      "usdaDescription": "Leavening agents, yeast, baker's, active dry",
+      "servings": [
+        { "label": "1 Päckchen", "unit": "package", "grams": 7 }
+      ]
+    },
+    {
+      "id": "backpulver",
+      "nameDe": "Backpulver",
+      "category": "Saucen & Gewürze",
+      "fdcId": 172803,
+      "usdaDescription": "Leavening agents, baking powder, double-acting, sodium aluminum sulfate",
+      "servings": [
+        { "label": "1 Päckchen", "unit": "package", "grams": 15 },
+        { "label": "1 TL", "unit": "tsp", "grams": 4 }
+      ]
+    },
+    {
+      "id": "kakaopulver",
+      "nameDe": "Kakaopulver, ungesüßt",
+      "category": "Saucen & Gewürze",
+      "fdcId": 169593,
+      "usdaDescription": "Cocoa, dry powder, unsweetened",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 3 },
+        { "label": "1 EL", "unit": "tbsp", "grams": 6 }
+      ]
+    },
+    {
+      "id": "salsa",
+      "nameDe": "Salsa (Tomate)",
+      "category": "Saucen & Gewürze",
+      "fdcId": 174524,
+      "usdaDescription": "Sauce, salsa, ready-to-serve",
+      "servings": [
+        { "label": "1 EL", "unit": "tbsp", "grams": 16 }
+      ]
+    },
+    {
+      "id": "meerrettich",
+      "nameDe": "Meerrettich",
+      "category": "Saucen & Gewürze",
+      "fdcId": 173472,
+      "usdaDescription": "Horseradish, prepared",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 5 }
+      ]
+    },
+    {
+      "id": "sriracha",
+      "nameDe": "Sriracha",
+      "category": "Saucen & Gewürze",
+      "fdcId": 171186,
+      "usdaDescription": "Sauce, hot chile, sriracha",
+      "servings": [
+        { "label": "1 TL", "unit": "tsp", "grams": 6 }
+      ]
+    },
+    {
+      "id": "pizza-margherita",
+      "nameDe": "Pizza Margherita (TK)",
+      "category": "Gerichte",
+      "fdcId": 170317,
+      "usdaDescription": "Pizza, cheese topping, regular crust, frozen, cooked",
+      "servings": [
+        { "label": "1 Pizza", "unit": "piece", "grams": 350 },
+        { "label": "1 Stück (⅛)", "unit": "piece", "grams": 45 }
+      ]
+    },
+    {
+      "id": "pizza-salami",
+      "nameDe": "Pizza Salami (TK)",
+      "category": "Gerichte",
+      "fdcId": 172096,
+      "usdaDescription": "Pizza, pepperoni topping, regular crust, frozen, cooked",
+      "servings": [
+        { "label": "1 Pizza", "unit": "piece", "grams": 350 },
+        { "label": "1 Stück (⅛)", "unit": "piece", "grams": 45 }
+      ]
+    },
+    {
+      "id": "lasagne",
+      "nameDe": "Lasagne mit Fleischsauce",
+      "category": "Gerichte",
+      "fdcId": 172114,
+      "usdaDescription": "Lasagna with meat sauce, frozen, prepared",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 300 }
+      ]
+    },
+    {
+      "id": "lasagne-vegetarisch",
+      "nameDe": "Gemüselasagne",
+      "category": "Gerichte",
+      "fdcId": 172106,
+      "usdaDescription": "Lasagna, Vegetable, frozen, baked",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 300 }
+      ]
+    },
+    {
+      "id": "spaghetti-bolognese",
+      "nameDe": "Spaghetti Bolognese",
+      "category": "Gerichte",
+      "fdcId": 167680,
+      "usdaDescription": "Restaurant, Italian, spaghetti with meat sauce",
+      "servings": [
+        { "label": "1 Teller", "unit": "serving", "grams": 400 }
+      ]
+    },
+    {
+      "id": "spaghetti-tomate",
+      "nameDe": "Spaghetti mit Tomatensauce",
+      "category": "Gerichte",
+      "fdcId": 169033,
+      "usdaDescription": "Restaurant, Italian, spaghetti with pomodoro sauce (no meat)",
+      "servings": [
+        { "label": "1 Teller", "unit": "serving", "grams": 400 }
+      ]
+    },
+    {
+      "id": "chili-con-carne",
+      "nameDe": "Chili con Carne",
+      "category": "Gerichte",
+      "fdcId": 172097,
+      "usdaDescription": "Chili con carne with beans, canned entree",
+      "servings": [
+        { "label": "1 Teller", "unit": "serving", "grams": 300 }
+      ]
+    },
+    {
+      "id": "hamburger",
+      "nameDe": "Hamburger",
+      "category": "Gerichte",
+      "fdcId": 170694,
+      "usdaDescription": "Fast foods, hamburger; single, regular patty; with condiments",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 110 }
+      ]
+    },
+    {
+      "id": "cheeseburger",
+      "nameDe": "Cheeseburger",
+      "category": "Gerichte",
+      "fdcId": 170690,
+      "usdaDescription": "Fast foods, cheeseburger; single, regular patty; plain",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 115 }
+      ]
+    },
+    {
+      "id": "chicken-nuggets",
+      "nameDe": "Chicken Nuggets",
+      "category": "Gerichte",
+      "fdcId": 172112,
+      "usdaDescription": "Chicken, nuggets, white meat, precooked, frozen, not reheated",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 18 },
+        { "label": "6 Stück", "unit": "piece", "grams": 108 }
+      ]
+    },
+    {
+      "id": "tomatensuppe",
+      "nameDe": "Tomatensuppe",
+      "category": "Gerichte",
+      "fdcId": 171176,
+      "usdaDescription": "Soup, tomato, canned, prepared with equal volume water, commercial",
+      "basis": "ml",
+      "densityGPerMl": 1.03,
+      "servings": [
+        { "label": "1 Teller", "unit": "serving", "grams": 300 }
+      ]
+    },
+    {
+      "id": "erbsensuppe",
+      "nameDe": "Erbsensuppe",
+      "category": "Gerichte",
+      "fdcId": 174561,
+      "usdaDescription": "Soup, pea, green, canned, prepared with equal volume water",
+      "basis": "ml",
+      "densityGPerMl": 1.04,
+      "servings": [
+        { "label": "1 Teller", "unit": "serving", "grams": 300 }
+      ]
+    },
+    {
+      "id": "rindergulasch",
+      "nameDe": "Gulasch/Rindereintopf",
+      "category": "Gerichte",
+      "fdcId": 173330,
+      "usdaDescription": "Beef stew, canned entree",
+      "servings": [
+        { "label": "1 Teller", "unit": "serving", "grams": 300 }
+      ]
+    },
+    {
+      "id": "krautsalat",
+      "nameDe": "Krautsalat (Coleslaw)",
+      "category": "Gerichte",
+      "fdcId": 170300,
+      "usdaDescription": "Fast foods, coleslaw",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 100 }
+      ]
+    },
+    {
+      "id": "ravioli",
+      "nameDe": "Ravioli (Dose)",
+      "category": "Gerichte",
+      "fdcId": 173328,
+      "usdaDescription": "Ravioli, cheese-filled, canned",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 250 }
+      ]
+    },
+    {
+      "id": "tortellini",
+      "nameDe": "Tortellini mit Käsefüllung",
+      "category": "Gerichte",
+      "fdcId": 172094,
+      "usdaDescription": "Tortellini, pasta with cheese filling, fresh-refrigerated, as purchased",
+      "servings": [
+        { "label": "1 Portion", "unit": "serving", "grams": 125 }
+      ]
+    },
+    {
+      "id": "burrito",
+      "nameDe": "Burrito (Bohnen & Käse)",
+      "category": "Gerichte",
+      "fdcId": 173336,
+      "usdaDescription": "Burrito, bean and cheese, frozen",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 140 }
+      ]
+    },
+    {
+      "id": "fruehlingsrolle",
+      "nameDe": "Frühlingsrolle",
+      "category": "Gerichte",
+      "fdcId": 172103,
+      "usdaDescription": "Egg rolls, pork, refrigerated, heated",
+      "servings": [
+        { "label": "1 Stück", "unit": "piece", "grams": 85 }
+      ]
+    }
+  ]
+}
