@@ -119,9 +119,15 @@ describe("dayNutrientStatus", () => {
   it("rates each nutrient; protein and fiber over target are neutral", () => {
     const s = dayNutrientStatus(
       targets,
-      consumed({ kcal: 2500, proteinG: 200, carbsG: 250, fatG: 80, fiberG: 45 }),
+      consumed({ kcal: 2500, proteinG: 200, carbsG: 260, fatG: 80, fiberG: 45 }),
     );
+    // kcal 108.7 % → over; protein 133 % → neutral; carbs 92.5 % → near; fat 125 % → over; fiber 150 % → neutral
     expect(s).toEqual({ kcal: "over", protein: "reached", carbs: "near", fat: "over", fiber: "reached" });
+  });
+
+  it("carbs just below 90 % are still under", () => {
+    // 250 / 281 = 88.97 %
+    expect(dayNutrientStatus(targets, consumed({ carbsG: 250 })).carbs).toBe("under");
   });
 
   it("measures kcal against target + activity", () => {
