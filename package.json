@@ -14,8 +14,8 @@
     "format": "prettier --write .",
     "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm build",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "tsx scripts/db/migrate.ts",
-    "db:seed": "tsx scripts/db/seed.ts",
+    "db:migrate": "tsx --require ./scripts/server-only-stub.cjs scripts/db/migrate.ts",
+    "db:seed": "tsx --require ./scripts/server-only-stub.cjs scripts/db/seed.ts",
     "db:reset": "rm -rf .data/pglite && pnpm db:migrate && pnpm db:seed",
     "db:bench-search": "tsx scripts/db/bench-search.ts",
     "format:check": "prettier --check ."
