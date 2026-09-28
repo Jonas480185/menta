@@ -709,3 +709,13 @@
     }
   }
 }
+
+/* Milo idle animation (mascot). Disabled for reduced motion. */
+@keyframes milo-breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.02, 0.98); } }
+@keyframes milo-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
+@keyframes milo-pop { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.15); opacity: 1; } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: no-preference) {
+  .milo-animated .milo-body { animation: milo-breathe 3.6s ease-in-out infinite; }
+  .milo-animated .milo-eyes { transform-box: fill-box; transform-origin: center; animation: milo-blink 4.8s infinite; }
+  .milo-animated .milo-spark { transform-box: fill-box; transform-origin: center; animation: milo-pop 600ms var(--ease-spring, ease-out) both; }
+}
