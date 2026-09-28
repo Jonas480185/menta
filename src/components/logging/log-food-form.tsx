@@ -169,12 +169,12 @@ export function LogFoodForm({ food, meals, date, initial, entryId, targets, retu
         <MealPicker meals={meals} value={mealId} onChange={setMealId} />
       </section>
 
-      <div className="sticky bottom-4 space-y-2">
+      <div className="space-y-2 pb-4">
         <Button block size="lg" onClick={submit} disabled={!valid} loading={save.isPending}>
           {entryId ? "Speichern" : `Hinzufügen · ${formatNumber(n.kcal)} kcal`}
         </Button>
         {entryId && (
-          <div className="flex gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <Button variant="secondary" block onClick={() => duplicate.execute(entryId)} loading={duplicate.isPending}>
               <Copy /> Duplizieren
             </Button>

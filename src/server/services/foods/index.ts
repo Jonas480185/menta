@@ -237,9 +237,17 @@ export async function searchFoods(
   // German curated rows beat their English USDA twins; suspect data sinks.
   const penalty = (r: (typeof rows)[number]) =>
     (r.source === "usda" ? 0.5 : 0) + (r.data_quality === "suspect" ? 1 : 0);
+  // Tier 0: own history (recent/frequent/favorite) whose name starts with the query – re-logging
+  // must be instant. Tier 1: up to 3 exact name matches. Tier 2: everything else by group/score.
+  let exactSlots = 3;
   const ranked = rows
-    .map((r, i) => ({ r, i, exact: normalizeFoodText(r.name) === norm ? 0 : 1, group: groupRank[sectionOf(r)] }))
-    .sort((a, b) => a.exact - b.exact || a.group - b.group || penalty(a.r) - penalty(b.r) || a.i - b.i)
+    .map((r, i) => {
+      const name = normalizeFoodText(r.name);
+      const group = groupRank[sectionOf(r)];
+      const tier = group <= 3 && name.startsWith(norm) ? 0 : name === norm && exactSlots-- > 0 ? 1 : 2;
+      return { r, i, tier, group };
+    })
+    .sort((a, b) => a.tier - b.tier || a.group - b.group || penalty(a.r) - penalty(b.r) || a.i - b.i)
     .slice(0, limit);
   const sections = new Map(ranked.map(({ r }) => [r.id, sectionOf(r)]));
   let items = await toListItems(ctx.db, ranked.map(({ r }) => r.id), (id) => sections.get(id)!);
