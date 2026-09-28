@@ -42,18 +42,9 @@ export function LogSearch({
 
   useEffect(() => {
     const q = query.trim();
-    if (!q) {
-      setResult(null);
-      setLoading(false);
-      return;
-    }
-    const hit = cache.get(q);
-    if (hit) {
-      setResult(hit);
-      return;
-    }
-    setLoading(true);
+    if (!q || cache.has(q)) return;
     const t = setTimeout(async () => {
+      setLoading(true);
       abortRef.current?.abort();
       const ac = new AbortController();
       abortRef.current = ac;
@@ -72,7 +63,9 @@ export function LogSearch({
     return () => clearTimeout(t);
   }, [query]);
 
-  const items = query.trim() ? (result?.items ?? []) : quickPicks;
+  const q = query.trim();
+  const current = q ? (cache.get(q) ?? result) : null;
+  const items = q ? (current?.items ?? []) : quickPicks;
   const detailHref = (id: string) => `/log/food/${id}?date=${date}&meal=${mealId}`;
 
   return (
@@ -107,7 +100,7 @@ export function LogSearch({
         </Button>
       </div>
 
-      {loading && !result ? (
+      {q && !cache.has(q) && (loading || !result) ? (
         <div className="space-y-2" aria-busy="true">
           {Array.from({ length: 6 }, (_, i) => (
             <Skeleton key={i} className="h-16 w-full rounded-card" />

@@ -175,7 +175,7 @@ export async function restoreEntry(ctx: ServiceContext, row: EntryRow): Promise<
 export async function duplicateEntry(ctx: ServiceContext, id: string): Promise<EntryRow> {
   const cur = await getOwnEntry(ctx, id);
   const { id: _id, createdAt: _c, updatedAt: _u, loggedAt: _l, ...rest } = cur;
-  void _id, _c, _u, _l;
+  void [_id, _c, _u, _l];
   const [row] = await ctx.db
     .insert(mealEntries)
     .values({ ...rest, sortOrder: await nextSortOrder(ctx, cur.date, cur.mealId) })
@@ -198,7 +198,7 @@ export async function copyEntries(
     if (!src.length) return 0;
     if (to.mealId) await assertMeal(tx, to.mealId);
     const values = src.map(({ id: _id, createdAt: _c, updatedAt: _u, loggedAt: _l, ...rest }) => {
-      void _id, _c, _u, _l;
+      void [_id, _c, _u, _l];
       return { ...rest, date: to.date, mealId: to.mealId ?? rest.mealId };
     });
     await tx.db.insert(mealEntries).values(values);
