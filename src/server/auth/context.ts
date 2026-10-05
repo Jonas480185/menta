@@ -8,6 +8,11 @@ import type { ServiceContext } from "@/server/context";
 import { getDb } from "@/server/db/client";
 import { userProfiles } from "@/server/db/schema";
 import { bootstrapNewUser } from "@/server/services/account/bootstrap";
+import { keepDemoDataCurrent } from "@/server/services/demo/keep-current";
+import { env } from "@/lib/env";
+import { todayInTimezone } from "@/lib/dates";
+import { logger } from "@/lib/logger";
+import { isDemoMode } from "./demo";
 import { getAuth } from "./server";
 import { loginPath, ONBOARDING_PATH, PATHNAME_HEADER } from "./redirects";
 
@@ -89,7 +94,24 @@ export async function requireUser(): Promise<SessionUser> {
 export async function getServiceContext(): Promise<ServiceContext> {
   const user = await requireUser();
   const [db, profile] = await Promise.all([getDb(), getProfileState(user.id)]);
-  return { db, userId: user.id, timezone: profile.timezone };
+  const ctx = { db, userId: user.id, timezone: profile.timezone };
+  if (isDemoMode() && user.email === env.DEMO_EMAIL) await keepDemoCurrentOncePerDay(ctx);
+  return ctx;
+}
+
+const globalForDemo = globalThis as unknown as { __demoCurrentOn?: string };
+
+/** Public demo: moves the shared diary to today on the first request of a day (per instance). */
+async function keepDemoCurrentOncePerDay(ctx: ServiceContext): Promise<void> {
+  const today = todayInTimezone(ctx.timezone);
+  if (globalForDemo.__demoCurrentOn === today) return;
+  try {
+    await keepDemoDataCurrent(ctx, today);
+    globalForDemo.__demoCurrentOn = today;
+  } catch (err) {
+    // Never block the demo over this: the diary just stays on its last day until the next try.
+    logger.error("demo diary shift failed", { scope: "demo", err });
+  }
 }
 
 /** Whether the user finished onboarding (user_profiles.onboarding_completed_at is set). */
