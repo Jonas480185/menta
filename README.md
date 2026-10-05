@@ -16,7 +16,8 @@ ruhig, präzise und ohne Schuldgefühle.
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 ![Drizzle](https://img.shields.io/badge/Drizzle_ORM-C5F74F?logo=drizzle&logoColor=black)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-06B6D4?logo=tailwindcss&logoColor=white)
-![Tests](https://img.shields.io/badge/Tests-1.270_passing-1FC98E)
+[![CI](https://github.com/Jonas480185/menta/actions/workflows/ci.yml/badge.svg)](https://github.com/Jonas480185/menta/actions/workflows/ci.yml)
+![Tests](https://img.shields.io/badge/Tests-1.275_passing-1FC98E)
 
 </div>
 
@@ -137,9 +138,20 @@ Ausführliche Dokumentation: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) ·
 
 ## Qualität
 
-- **1.270 Tests** in 71 Dateien – Fachlogik, Services gegen frische In-Memory-PostgreSQL-Instanzen,
+- **1.275 Tests** in 72 Dateien – Fachlogik, Services gegen frische In-Memory-PostgreSQL-Instanzen,
   Komponenten und ein E2E-Flow (Registrierung → Onboarding → Suche → Loggen → Portion ändern)
-- Quality Gate: `pnpm typecheck && pnpm lint && pnpm test && pnpm build`
+- **CI** auf jedem Push: Typecheck, Lint, Tests und Production-Build (GitHub Actions)
+
+## Sicherheit
+
+- Server Actions und Route Handler prüfen die Session serverseitig; alle Abfragen sind auf den angemeldeten
+  Nutzer beschränkt, Eigentümerschaft wird vor jeder Änderung geprüft
+- Zod-Validierung aller Eingaben, parametrisierte SQL-Abfragen, sichere `?next=`-Weiterleitungen
+- **Content Security Policy** mit Nonce pro Request (`strict-dynamic`, `frame-ancestors 'none'`) plus HSTS,
+  `X-Content-Type-Options`, `Referrer-Policy` und `Permissions-Policy`
+- better-auth mit gehashten Passwörtern, HttpOnly-Cookies und Rate-Limiting; Konto-Löschung nur mit Passwort
+
+Sicherheitslücken bitte vertraulich melden – siehe [SECURITY.md](SECURITY.md).
 
 ## Lokal starten
 
