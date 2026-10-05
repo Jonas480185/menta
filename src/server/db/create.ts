@@ -33,6 +33,24 @@ export function resolveDbDriver(url: string | undefined): DbDriver {
 }
 
 /**
+ * node-postgres connection options. With a provider CA the certificate is verified against it
+ * (`rejectUnauthorized: true`, hostname checked). The `ssl*` URL parameters are dropped in that
+ * case because node-postgres lets them override the `ssl` object, and `sslmode=require` alone
+ * would verify against Node's default roots only, which fails for providers with their own CA.
+ */
+export function postgresConnectionOptions(
+  url: string,
+  sslCa: string | undefined,
+): { connectionString: string; ssl?: { ca: string; rejectUnauthorized: true } } {
+  if (!sslCa) return { connectionString: url };
+  const parsed = new URL(url);
+  for (const key of [...parsed.searchParams.keys()]) {
+    if (key.startsWith("ssl")) parsed.searchParams.delete(key);
+  }
+  return { connectionString: parsed.toString(), ssl: { ca: sslCa, rejectUnauthorized: true } };
+}
+
+/**
  * Creates a Drizzle instance for either real Postgres or embedded PGlite.
  * Kept free of `server-only` so scripts (seed/import) and tests can use it.
  *
@@ -46,7 +64,10 @@ export async function createDatabase(opts: CreateDatabaseOptions = {}): Promise<
   if (resolveDbDriver(url) === "postgres") {
     const { Pool } = await import("pg");
     const { drizzle } = await import("drizzle-orm/node-postgres");
-    const pool = new Pool({ connectionString: url, max: getEnv().DB_POOL_MAX });
+    const pool = new Pool({
+      ...postgresConnectionOptions(url!, getEnv().DATABASE_SSL_CA),
+      max: getEnv().DB_POOL_MAX,
+    });
     const db = drizzle(pool, { schema, casing: "snake_case" });
     if (opts.migrate) {
       const { migrate } = await import("drizzle-orm/node-postgres/migrator");

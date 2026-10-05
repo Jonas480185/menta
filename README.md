@@ -181,6 +181,8 @@ Für Produktion `DATABASE_URL` auf eine PostgreSQL-Instanz (≥ 14, Extensions `
 | Variable | Default | Beschreibung |
 |---|---|---|
 | `DATABASE_URL` | leer | `postgres://…` für echtes PostgreSQL, leer = PGlite |
+| `POSTGRES_URL` | leer | Fallback für `DATABASE_URL` (setzt die Supabase-Integration auf Vercel) |
+| `DATABASE_SSL_CA` | leer | Root-Zertifikat des Postgres-Anbieters (PEM), aktiviert volle Zertifikatsprüfung, z. B. für Supabase |
 | `PGLITE_DATA_DIR` | `./.data/pglite` | Datenverzeichnis für PGlite |
 | `BETTER_AUTH_SECRET` | Dev-Fallback | **In Produktion Pflicht**, ≥ 32 Zeichen (`openssl rand -base64 32`) |
 | `BETTER_AUTH_URL` | leer | Öffentliche URL der App |

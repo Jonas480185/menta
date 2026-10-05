@@ -46,6 +46,24 @@ const envSchema = z
       .string()
       .regex(/^postgres(ql)?:\/\//, "must start with postgres:// or postgresql://")
       .optional(),
+    /**
+     * Fallback for DATABASE_URL: the Supabase/Neon integrations on Vercel inject the pooled
+     * connection string as POSTGRES_URL. DATABASE_URL wins when both are set.
+     */
+    POSTGRES_URL: z
+      .string()
+      .regex(/^postgres(ql)?:\/\//, "must start with postgres:// or postgresql://")
+      .optional(),
+    /**
+     * PEM root certificate of the Postgres provider (e.g. Supabase Root 2021 CA). When set, the
+     * server certificate is verified against it (verify-full). Needed for providers whose chain
+     * ends in their own CA, which Node does not trust by default.
+     */
+    DATABASE_SSL_CA: z
+      .string()
+      .transform((v) => v.replace(/\\n/g, "\n"))
+      .refine((v) => v.includes("-----BEGIN CERTIFICATE-----"), "must be a PEM certificate")
+      .optional(),
     /** PGlite data directory (only used when DATABASE_URL is unset). */
     PGLITE_DATA_DIR: z.string().default("./.data/pglite"),
     DB_POOL_MAX: z.coerce.number().int().min(1).max(100).default(10),
@@ -95,15 +113,17 @@ const envSchema = z
       }
     }
     secret ??= DEV_AUTH_SECRET;
+    const databaseUrl = raw.DATABASE_URL ?? raw.POSTGRES_URL;
     return {
       ...raw,
+      DATABASE_URL: databaseUrl,
       BETTER_AUTH_SECRET: secret,
       /** True when the auth secret is a known placeholder (fine locally, log a warning in prod). */
       authSecretIsPlaceholder: PLACEHOLDER_SECRETS.has(secret),
       isProduction,
       isTest: raw.NODE_ENV === "test",
       isDevelopment: raw.NODE_ENV === "development",
-      dbDriver: (raw.DATABASE_URL ? "postgres" : "pglite") as "postgres" | "pglite",
+      dbDriver: (databaseUrl ? "postgres" : "pglite") as "postgres" | "pglite",
     };
   });
 

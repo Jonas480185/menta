@@ -30,6 +30,20 @@ describe("parseEnv", () => {
     expect(parseEnv({ DATABASE_URL: "postgresql://localhost/db" }).dbDriver).toBe("postgres");
   });
 
+  it("falls back to POSTGRES_URL (Vercel integrations), DATABASE_URL wins", () => {
+    expect(parseEnv({ POSTGRES_URL: "postgres://a/db" }).DATABASE_URL).toBe("postgres://a/db");
+    expect(parseEnv({ POSTGRES_URL: "postgres://a/db" }).dbDriver).toBe("postgres");
+    expect(
+      parseEnv({ DATABASE_URL: "postgres://b/db", POSTGRES_URL: "postgres://a/db" }).DATABASE_URL,
+    ).toBe("postgres://b/db");
+  });
+
+  it("accepts a PEM DATABASE_SSL_CA with escaped newlines", () => {
+    const e = parseEnv({ DATABASE_SSL_CA: "-----BEGIN CERTIFICATE-----\\nabc\\n-----END CERTIFICATE-----" });
+    expect(e.DATABASE_SSL_CA).toBe("-----BEGIN CERTIFICATE-----\nabc\n-----END CERTIFICATE-----");
+    expect(() => parseEnv({ DATABASE_SSL_CA: "nope" })).toThrow(/DATABASE_SSL_CA/);
+  });
+
   it("rejects non-postgres DATABASE_URLs with a clear message", () => {
     expect(() => parseEnv({ DATABASE_URL: "mysql://localhost/db" })).toThrow(
       /DATABASE_URL: must start with postgres/,

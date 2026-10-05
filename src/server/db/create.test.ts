@@ -7,6 +7,7 @@ import {
   DataDirLockedError,
   acquireDataDirLock,
   lockPathFor,
+  postgresConnectionOptions,
   releaseDataDirLock,
   resolveDbDriver,
 } from "./create";
@@ -22,6 +23,24 @@ describe("resolveDbDriver", () => {
     ["postgresql://u:p@host:5432/db", "postgres"],
   ] as const)("%s → %s", (url, driver) => {
     expect(resolveDbDriver(url)).toBe(driver);
+  });
+});
+
+describe("postgresConnectionOptions", () => {
+  const CA = "-----BEGIN CERTIFICATE-----\nabc\n-----END CERTIFICATE-----";
+
+  it("passes the URL through unchanged without a CA", () => {
+    const url = "postgres://u:p@host:6543/db?sslmode=require";
+    expect(postgresConnectionOptions(url, undefined)).toEqual({ connectionString: url });
+  });
+
+  it("verifies against the CA and drops ssl URL params that would override it", () => {
+    const opts = postgresConnectionOptions(
+      "postgres://u:p@host:6543/db?sslmode=require&supa=base-pooler.x&sslrootcert=x",
+      CA,
+    );
+    expect(opts.ssl).toEqual({ ca: CA, rejectUnauthorized: true });
+    expect(opts.connectionString).toBe("postgres://u:p@host:6543/db?supa=base-pooler.x");
   });
 });
 
