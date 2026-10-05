@@ -1,5 +1,5 @@
 /**
- * LocalFoodProvider – the public food database in our own Postgres, behind the same
+ * LocalFoodProvider: the public food database in our own Postgres, behind the same
  * FoodProvider contract as the external providers. Only public, non-archived foods.
  *
  * `searchFoods` is intentionally simple (token ILIKE + popularity); real ranking

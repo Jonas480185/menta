@@ -12,7 +12,7 @@ const jonas: BodyProfile = { ageYears: 33, sex: "male", heightCm: 180, weightKg:
 /** Female 25 y 165 cm 60 kg sedentary: BMR 1345.25, TDEE 1614.3. */
 const female25: BodyProfile = { ageYears: 25, sex: "female", heightCm: 165, weightKg: 60, activityLevel: "sedentary" };
 
-describe("calculateCalories – reference user (docs/product/README.md)", () => {
+describe("calculateCalories: reference user (docs/product/README.md)", () => {
   const calc = calculateCalories(jonas, { type: "lose", pace: "moderate", targetWeightKg: 78 });
 
   it("reproduces the documented chain 1.805 → 2.798 → −500 → 2.300", () => {

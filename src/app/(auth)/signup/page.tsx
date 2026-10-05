@@ -10,7 +10,7 @@ export default function SignupPage() {
   return (
     <AuthCard
       title="Konto erstellen"
-      description="In zwei Minuten startklar – deine Ziele richten wir direkt danach gemeinsam ein."
+      description="In zwei Minuten startklar. Deine Ziele richten wir direkt danach gemeinsam ein."
       footer={
         <>
           Schon ein Konto?{" "}

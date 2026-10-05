@@ -41,7 +41,7 @@ export function isIsoWeekday(n: unknown): n is IsoWeekday {
   return typeof n === "number" && Number.isInteger(n) && n >= 1 && n <= 7;
 }
 
-/** Validates, dedupes and sorts weekdays. Throws MacroInputError for anything outside 1–7. */
+/** Validates, dedupes and sorts weekdays. Throws MacroInputError for anything outside 1-7. */
 export function normalizeWeekdays(weekdays: readonly number[]): IsoWeekday[] {
   for (const d of weekdays) {
     if (!isIsoWeekday(d)) {
@@ -138,7 +138,7 @@ export interface ResolvableProfile {
 }
 
 /**
- * Picks the profile that applies to a day (precedence see module doc). Pure – the service loads
+ * Picks the profile that applies to a day (precedence see module doc). Pure: the service loads
  * profiles and overrides and delegates the decision here.
  */
 export function pickDayProfile<P extends ResolvableProfile>(

@@ -40,7 +40,7 @@ describe("recommendMacros", () => {
     expect(recommendMacros({ ...base, goal: "gain" }).macros.proteinG).toBe(144);
   });
 
-  it("adjusts protein by activity within 1.2–2.2 g/kg", () => {
+  it("adjusts protein by activity within 1.2-2.2 g/kg", () => {
     const base = { kcal: 2500, weightKg: 80 };
     expect(recommendMacros({ ...base, goal: "lose", activityLevel: "very_active" }).proteinGPerKg).toBe(2.2);
     expect(

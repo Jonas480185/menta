@@ -15,7 +15,7 @@ import { changeLabel, MIN_ENTRIES_FOR_TREND } from "./copy";
 import { LogWeightSheet } from "./log-weight-sheet";
 import { WeightTrendChart } from "./weight-trend-chart";
 
-/** Neutral delta chip – mint when the change points towards the goal, grey otherwise (never red). */
+/** Neutral delta chip: mint when the change points towards the goal, grey otherwise (never red). */
 export function WeightDeltaChip({
   kg,
   days,

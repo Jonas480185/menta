@@ -5,7 +5,7 @@ import { ensurePgliteDataDir } from "./data-dir";
 import { runSeed, SEED_STEPS } from "./seed/index";
 
 // Idempotent seed runner: `pnpm db:seed` (all steps) or `pnpm db:seed --only=foods,demo-data`.
-// Steps live in scripts/db/seed/*.ts. Stop `pnpm dev` first when using PGlite – only one
+// Steps live in scripts/db/seed/*.ts. Stop `pnpm dev` first when using PGlite: only one
 // process may open the data dir.
 async function main() {
   const only = process.argv

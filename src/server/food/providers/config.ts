@@ -1,6 +1,6 @@
 /**
  * Runtime configuration for external food providers, read from the validated server env
- * (`@/lib/env`, lazy + cached – tests call `resetEnvCache()` after `vi.stubEnv`).
+ * (`@/lib/env`, lazy + cached: tests call `resetEnvCache()` after `vi.stubEnv`).
  * Kept free of `server-only` so tsx scripts can import it.
  */
 import { env } from "@/lib/env";
@@ -34,7 +34,7 @@ const HOUR = 60 * MINUTE;
  * Documented upstream limits (checked 2026-09, see docs/architecture/food-data-strategy.md):
  * - OFF product reads: 15 req/min/IP     (openfoodfacts.github.io/openfoodfacts-server/api)
  * - OFF search (API v2 / search.pl): 10 req/min/IP
- * - OFF search-a-licious: no published limit – we self-limit to 30 req/min
+ * - OFF search-a-licious: no published limit, we self-limit to 30 req/min
  * - USDA FDC (api.data.gov): 1,000 req/h per key; DEMO_KEY 30 req/h & 50/day documented,
  *   the live `X-RateLimit-Limit` header for DEMO_KEY currently reports 10/h → we use 10/h.
  */

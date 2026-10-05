@@ -3,7 +3,7 @@ import { getDb, getDbDriver } from "@/server/db/client";
 import { logger } from "@/lib/logger";
 
 /**
- * GET /api/health – liveness + database check (`select 1`).
+ * GET /api/health: liveness + database check (`select 1`).
  * 200 `{ ok: true, db: "pglite" | "postgres", latencyMs }` · 503 `{ ok: false, db, error }`.
  * Never cached; the database is opened lazily on the first request, not at build time.
  */

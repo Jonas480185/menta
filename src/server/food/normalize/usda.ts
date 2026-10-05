@@ -136,7 +136,7 @@ function classifyPortion(p: UsdaPortion): PortionClass | null {
   const unitPart = unitName === "undetermined" ? "" : unitName;
   const text = [unitPart, p.modifier ?? "", p.description ?? ""].join(" ").toLowerCase();
   if (/\bfl\.? ?oz\b|\boz\b|\bounces?\b|\blbs?\b|\bpounds?\b|\bquarts?\b|\bpints?\b|\bgallons?\b/.test(text)) {
-    return null; // imperial weights/volumes – redundant with "100 g"
+    return null; // imperial weights/volumes: redundant with "100 g"
   }
   const prep = PREP_NOTES.filter(([re]) => re.test(text)).map(([, n]) => n);
   const size = SIZE_NOTES.find(([re]) => re.test(text))?.[1] ?? null;

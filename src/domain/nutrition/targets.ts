@@ -11,7 +11,7 @@ import type {
  * "Zustände Kalorien-Ring"):
  *   under   < 0.90
  *   near    0.90 ≤ r < 1.00   „Fast geschafft“
- *   reached 1.00 ≤ r ≤ 1.05   „Ziel erreicht“ (5 % tolerance – a few kcal over is still "reached")
+ *   reached 1.00 ≤ r ≤ 1.05   „Ziel erreicht“ (5 % tolerance: a few kcal over is still "reached")
  *   over    r > 1.05          „… über Ziel“ (`over` token, never an alarm)
  * The same thresholds apply to macros so ring and bars never disagree.
  */
@@ -23,7 +23,7 @@ export const STATUS_THRESHOLDS = {
 
 /**
  * consumed / target as an unclamped ratio (1.2 = 120 %). Returns `null` when there is no
- * meaningful target (≤ 0, null or not finite) – the UI then shows the amount without a bar.
+ * meaningful target (≤ 0, null or not finite): the UI then shows the amount without a bar.
  * Negative consumption (impossible for valid entries) is treated as 0.
  */
 export function progressRatio(consumed: number, target: number | null | undefined): number | null {
@@ -86,7 +86,7 @@ export function kcalBudget(targets: Pick<DailyTargets, "calories">, options: Act
  *   kcal   = target + activityKcal − consumed
  *   macros = target − consumed
  *   fiber  = target − consumed (unknown consumption counts as 0); null without a fiber target
- * Unrounded – round for display only.
+ * Unrounded: round for display only.
  */
 export function computeRemaining(
   targets: TargetValues,

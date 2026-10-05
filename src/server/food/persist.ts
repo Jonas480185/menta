@@ -6,7 +6,7 @@
  *
  * - Identity: (source, source_id) is unique (partial unique index).
  * - Barcode dedupe across sources: the richer/better record stays active; the other one is
- *   archived (`is_archived = true`, never deleted – diary entries/favorites may reference it).
+ *   archived (`is_archived = true`, never deleted: diary entries/favorites may reference it).
  * - Servings are synced by label/unit+grams so re-imports keep serving ids stable
  *   (food_usage.last_serving_id / meal_entries.serving_id stay valid).
  * - `popularity` never decreases on re-import (usage-based popularity is preserved).
@@ -312,7 +312,7 @@ async function upsertBatch(db: DbOrTx, batch: readonly NormalizedFood[], opts: U
     }
     for (const [k, v] of idByKey) ids.set(k, v);
 
-    // Rows skipped by the newer-data guard are not returned – resolve their ids.
+    // Rows skipped by the newer-data guard are not returned: resolve their ids.
     const skipped = winners.filter((p) => !idByKey.has(p.key));
     if (skipped.length) {
       const rows = await tx
@@ -468,7 +468,7 @@ export async function getFoodDetailsByIds(db: DbOrTx, ids: readonly string[]): P
   return valid.map((id) => byId.get(id)).filter((f): f is FoodDetails => !!f);
 }
 
-/** Single food incl. servings, or null. Does not check visibility – callers scope access. */
+/** Single food incl. servings, or null. Does not check visibility: callers scope access. */
 export async function getFoodDetails(db: DbOrTx, id: string): Promise<FoodDetails | null> {
   return (await getFoodDetailsByIds(db, [id]))[0] ?? null;
 }

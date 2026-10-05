@@ -50,7 +50,7 @@ export async function getCurrentWeight(ctx: ServiceContext): Promise<CurrentWeig
   return { weightKg: profile.startWeightKg, source: "start", date: null, bodyFatPct: null };
 }
 
-/** Shorthand for getCurrentWeight(ctx)?.weightKg – latest entry, else start weight, else null. */
+/** Shorthand for getCurrentWeight(ctx)?.weightKg: latest entry, else start weight, else null. */
 export async function getCurrentWeightKg(ctx: ServiceContext): Promise<number | null> {
   return (await getCurrentWeight(ctx))?.weightKg ?? null;
 }

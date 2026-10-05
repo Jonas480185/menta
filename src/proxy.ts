@@ -11,7 +11,7 @@ import { buildCsp, createNonce, NONCE_HEADER } from "@/server/security/csp";
 
 /**
  * Optimistic auth redirects based on the presence of the session cookie only (no DB).
- * NOT a security boundary – every protected page/action still calls requireUser() /
+ * NOT a security boundary: every protected page/action still calls requireUser() /
  * getServiceContext(), which validate the session against the database.
  */
 export function proxy(request: NextRequest) {

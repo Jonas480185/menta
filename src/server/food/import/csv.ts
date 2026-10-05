@@ -39,7 +39,7 @@ export async function* parseCsv(chunks: AsyncIterable<string | Buffer>, opts: Cs
             start = i + 1;
             continue;
           }
-          inQuotes = false; // closing quote – fall through to normal handling
+          inQuotes = false; // closing quote: fall through to normal handling
         } else if (c === quote) {
           field += text.slice(start, i);
           pendingQuote = true;

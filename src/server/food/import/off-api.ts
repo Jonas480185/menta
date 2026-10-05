@@ -137,7 +137,7 @@ export async function* fetchOffPopularProducts(opts: OffApiFetchOptions): AsyncG
           data = res.data;
         } catch (err) {
           if (err instanceof HttpError && (err.status === 401 || err.status === 403)) {
-            log(`  ${category ?? "all"} page ${page}: not available anonymously – next partition`);
+            log(`  ${category ?? "all"} page ${page}: not available anonymously, next partition`);
             break;
           }
           throw err;

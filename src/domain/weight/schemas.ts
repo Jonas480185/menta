@@ -1,7 +1,7 @@
 import { ISO_DATE_RE } from "@/lib/dates";
 import { z } from "@/lib/zod";
 
-/** Plausible body-weight range for entries (the DB allows 20–400 kg). */
+/** Plausible body-weight range for entries (the DB allows 20-400 kg). */
 export const WEIGHT_MIN_KG = 30;
 export const WEIGHT_MAX_KG = 300;
 export const BODY_FAT_MIN_PCT = 2;

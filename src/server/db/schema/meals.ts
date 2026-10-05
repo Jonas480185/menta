@@ -35,14 +35,14 @@ export const meals = pgTable(
     /** Optional lucide icon name / emoji-free key, e.g. "sunrise". */
     icon: text("icon"),
     sortOrder: integer("sort_order").notNull().default(0),
-    /** "HH:MM" – used to preselect the meal when logging. */
+    /** "HH:MM", used to preselect the meal when logging. */
     defaultTime: text("default_time"),
     isArchived: boolean("is_archived").notNull().default(false),
     ...timestamps,
   },
   (t) => [
     index("meals_user_idx").on(t.userId, t.sortOrder),
-    /** Target of the composite FK meal_entries(meal_id, user_id) – an entry can only live in its owner's meal. */
+    /** Target of the composite FK meal_entries(meal_id, user_id): an entry can only live in its owner's meal. */
     unique("meals_id_user_uq").on(t.id, t.userId),
     check(
       "meals_default_time_format",
@@ -56,7 +56,7 @@ export const meals = pgTable(
  *
  * Nutrient values are a SNAPSHOT computed at log time (and recomputed when the entry's
  * amount changes). Rationale: foods from external providers get refreshed and user foods
- * can be edited – historic diaries must not silently change. Daily totals are aggregated
+ * can be edited: historic diaries must not silently change. Daily totals are aggregated
  * from these rows on read (see Daily Nutrition Engine) and are never stored separately.
  *
  * Owner: Meal Logging.
@@ -73,7 +73,7 @@ export const mealEntries = pgTable(
      * Restricted: a meal slot can't be deleted while it holds entries (slots are archived).
      * Enforced by the composite FK `meal_entries_meal_owner_fk` (meal_id, user_id) below,
      * which additionally guarantees the meal belongs to the same user. NO ACTION instead of
-     * RESTRICT so the check runs at end of statement – otherwise the user-delete cascade
+     * RESTRICT so the check runs at end of statement: otherwise the user-delete cascade
      * (meals and entries in one statement) fails with 23001.
      */
     mealId: uuid("meal_id").notNull(),

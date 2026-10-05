@@ -1,6 +1,6 @@
 /**
  * Builds the committed offline seed snapshot (data/seed/*.jsonl.gz + manifest.json) from
- * local raw data – no network access:
+ * local raw data: no network access:
  *   - curated German basics (data/curated/generic-foods.de.json, nutrients via USDA fdcId)
  *   - USDA Foundation Foods + SR Legacy (data/raw/usda, downloaded by import-usda.ts)
  *   - Open Food Facts, popular German products (data/raw/off, cached by import-off.ts --fetch)

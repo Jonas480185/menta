@@ -1,6 +1,6 @@
 /**
  * Open Food Facts provider.
- * - Search: search-a-licious (search.openfoodfacts.org) – fast Elasticsearch-backed search with
+ * - Search: search-a-licious (search.openfoodfacts.org), fast Elasticsearch-backed search with
  *   German language preference; results are re-ranked so products sold in the requested country
  *   come first (a Lucene country filter destroys relevance for multi-word queries).
  * - Barcode / product: API v2 `/api/v2/product/{code}` with a restricted `fields` list.

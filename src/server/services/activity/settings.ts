@@ -12,7 +12,7 @@ export async function setAddActivityCalories(ctx: ServiceContext, enabled: boole
   return row.addActivityCalories;
 }
 
-/** Sets the daily step goal (0–100,000). */
+/** Sets the daily step goal (0-100,000). */
 export async function setStepGoal(ctx: ServiceContext, stepGoal: number): Promise<number> {
   const value = parseInput(StepGoalSchema, stepGoal);
   const row = await updateProfile(ctx, { stepGoal: value });

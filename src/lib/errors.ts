@@ -8,7 +8,7 @@ export type AppErrorCode =
   | "EXTERNAL"
   | "INTERNAL";
 
-/** HTTP status per error code – used by route handlers (see toErrorResponse in ./result). */
+/** HTTP status per error code: used by route handlers (see toErrorResponse in ./result). */
 export const APP_ERROR_STATUS: Record<AppErrorCode, number> = {
   UNAUTHORIZED: 401,
   FORBIDDEN: 403,
@@ -54,7 +54,7 @@ export const conflict = (message = "Dieser Eintrag existiert bereits.") => new A
 export const validationError = (fieldErrors: FieldErrors, message = "Bitte Eingaben prüfen.") =>
   new AppError("VALIDATION", message, fieldErrors);
 export const rateLimited = () =>
-  new AppError("RATE_LIMITED", "Zu viele Anfragen – bitte warte einen Moment und versuche es erneut.");
+  new AppError("RATE_LIMITED", "Zu viele Anfragen. Bitte warte einen Moment und versuche es erneut.");
 export const externalError = (
   message = "Der Dienst ist gerade nicht erreichbar. Bitte später erneut versuchen.",
 ) => new AppError("EXTERNAL", message);

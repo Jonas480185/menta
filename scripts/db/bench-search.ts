@@ -453,7 +453,7 @@ const percentile = (xs: number[], p: number) => {
 
 async function main() {
   console.log(
-    `Food search benchmark – ${ROWS.toLocaleString("de-DE")} foods, ${RUNS} runs/query (PGlite, in-memory)\n`,
+    `Food search benchmark: ${ROWS.toLocaleString("de-DE")} foods, ${RUNS} runs/query (PGlite, in-memory)\n`,
   );
   const t0 = performance.now();
   const db = await createDatabase({
@@ -543,7 +543,7 @@ async function main() {
 }
 
 main().catch((err: unknown) => {
-  // Drizzle errors embed the full (huge) statement – print only the driver cause.
+  // Drizzle errors embed the full (huge) statement: print only the driver cause.
   const cause = (err as { cause?: unknown }).cause ?? err;
   console.error(
     cause instanceof Error ? `${cause.name}: ${cause.message}` : cause,

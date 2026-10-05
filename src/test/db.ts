@@ -4,7 +4,7 @@ import type { ServiceContext } from "@/server/context";
 
 /**
  * Fresh in-memory Postgres (PGlite) with all migrations applied.
- * ~1s startup – create once per test file (beforeAll), not per test.
+ * ~1s startup: create once per test file (beforeAll), not per test.
  */
 export async function createTestDb(): Promise<Db> {
   return createDatabase({ pgliteDataDir: "memory://", migrate: true, url: "" });

@@ -32,13 +32,13 @@ export interface EditableWeightEntry {
 }
 
 export interface LogWeightFormProps {
-  /** The user's today (their timezone) – default date and upper bound. */
+  /** The user's today (their timezone): default date and upper bound. */
   today: IsoDate;
   /** Prefill for new entries (usually the latest logged weight). */
   lastWeightKg?: number | null;
   /** Edit an existing entry instead of logging a new one. */
   entry?: EditableWeightEntry | null;
-  /** Weight per day already logged – shows a "replaces" hint when the chosen day has one. */
+  /** Weight per day already logged: shows a "replaces" hint when the chosen day has one. */
   existing?: Readonly<Record<IsoDate, number>>;
   onSaved?: () => void;
 }
@@ -53,7 +53,7 @@ function issuesToFieldErrors(
   return out;
 }
 
-/** The form inside LogWeightSheet – exported for embedding and tests. */
+/** The form inside LogWeightSheet: exported for embedding and tests. */
 export function LogWeightForm({ today, lastWeightKg, entry, existing, onSaved }: LogWeightFormProps) {
   const id = useId();
   const [date, setDate] = useState<IsoDate>(entry?.date ?? today);
@@ -146,8 +146,8 @@ export function LogWeightForm({ today, lastWeightKg, entry, existing, onSaved }:
           </p>
         ) : jump && reference !== null ? (
           <p id={`${id}-weight-hint`} className="text-body-sm text-muted-foreground">
-            Großer Sprung zum letzten Eintrag ({formatWeightKg(reference)}) – Tippfehler? Tageswerte schwanken
-            um 1–2 kg, das ist normal.
+            Großer Sprung zum letzten Eintrag ({formatWeightKg(reference)}). Tippfehler? Tageswerte schwanken
+            um 1 bis 2 kg, das ist normal.
           </p>
         ) : null}
       </div>
@@ -239,7 +239,7 @@ export interface LogWeightSheetProps extends Omit<LogWeightFormProps, "onSaved">
 }
 
 /**
- * "Gewicht eintragen" – bottom sheet on phones, dialog on desktop. Logs (or edits) one day's
+ * "Gewicht eintragen": bottom sheet on phones, dialog on desktop. Logs (or edits) one day's
  * weight via the logWeightAction server action; the form resets every time it opens.
  */
 export function LogWeightSheet({

@@ -21,9 +21,9 @@ export interface CalorieBudgetProps extends Omit<React.ComponentProps<"div">, "c
 }
 
 /**
- * The Today hero (docs/design/visual-language.md §1): kcal ring with ONE big number –
+ * The Today hero (docs/design/visual-language.md §1): kcal ring with ONE big number:
  * remaining ("680 kcal übrig"), the goal when nothing is logged ("2.300 kcal Ziel") or
- * the surplus ("120 kcal drüber") – plus the equation Gegessen / Aktivität / Ziel.
+ * the surplus ("120 kcal drüber"): plus the equation Gegessen / Aktivität / Ziel.
  * Side by side from ≈ 360 px container width, stacked below.
  */
 function CalorieBudget({

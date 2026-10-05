@@ -2,7 +2,7 @@
  * Brand constants.
  *
  * Use these for non-CSS contexts: metadata, PWA manifest, OG images, e-mails, aria labels.
- * UI components must NOT read colors from here – use the semantic design tokens from
+ * UI components must NOT read colors from here: use the semantic design tokens from
  * `src/app/globals.css`. See docs/brand/identity.md for the rules.
  */
 
@@ -17,17 +17,17 @@ export const BRAND = {
   taglineEn: "Clarity on your plate.",
   /** One-sentence product description (German), e.g. for meta description and manifest. */
   description:
-    "Kalorien, Makros und Gewichtstrend im Blick – ruhig, präzise und ohne Schuldgefühle. Mit Milo als Coach an deiner Seite.",
+    "Kalorien, Makros und Gewichtstrend im Blick. Mit Milo als Coach an deiner Seite.",
   /** English description variant. */
   descriptionEn:
-    "Calories, macros and weight trend at a glance – calm, precise and guilt-free. With Milo as your coach.",
+    "Calories, macros and weight trend at a glance. With Milo as your coach.",
   /** BCP 47 locale of the primary UI language. */
   locale: "de-DE",
   /** Name of the mascot / coach character. */
   mascotName: "Milo",
   /**
    * Core brand colors (hex). Brand-level reference values only.
-   * - primary: Menta Mint – fills, marks, progress. Not for text on light backgrounds (contrast 2.0:1).
+   * - primary: Menta Mint, fills, marks, progress. Not for text on light backgrounds (contrast 2.0:1).
    * - primaryDeep: text-safe mint for light backgrounds (5.0:1 on paper, 5.4:1 on white).
    * - primarySoft: quiet mint tint for large surfaces/highlights on light backgrounds.
    * - onPrimary: content color on mint fills (9.0:1).

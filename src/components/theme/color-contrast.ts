@@ -29,7 +29,7 @@ export function luminance(hex: string): number {
   return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
 }
 
-/** Contrast ratio between two hex colors, 1–21. */
+/** Contrast ratio between two hex colors, 1-21. */
 export function contrastRatio(a: string, b: string): number {
   const la = luminance(a);
   const lb = luminance(b);

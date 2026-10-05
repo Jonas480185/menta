@@ -10,7 +10,7 @@ const { stiffness, damping, mass } = spring.ring;
 /**
  * Motion value that springs (design token `spring.ring`) from 0 to `target` on mount and
  * between values on update. Jumps instantly under `prefers-reduced-motion` or when
- * `animate` is false – the final state is always correct without animation.
+ * `animate` is false: the final state is always correct without animation.
  */
 export function useProgressSpring(target: number, animate = true): MotionValue<number> {
   const reduced = useReducedMotion();

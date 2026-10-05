@@ -3,14 +3,14 @@ import type { ActivityType } from "./types";
 /**
  * MET values (metabolic equivalents, 1 MET ≈ resting energy expenditure ≈ 1 kcal · kg⁻¹ · h⁻¹).
  *
- * Source: Compendium of Physical Activities –
+ * Source: Compendium of Physical Activities:
  *   Ainsworth BE et al. 2011 Compendium of Physical Activities: a second update of codes and MET values.
- *   Med Sci Sports Exerc. 2011;43(8):1575–1581. doi:10.1249/MSS.0b013e31821ece12
- *   Herrmann SD et al. 2024 Adult Compendium of Physical Activities. J Sport Health Sci. 2024;13(1):6–12.
+ *   Med Sci Sports Exerc. 2011;43(8):1575-1581. doi:10.1249/MSS.0b013e31821ece12
+ *   Herrmann SD et al. 2024 Adult Compendium of Physical Activities. J Sport Health Sci. 2024;13(1):6-12.
  *   https://pacompendium.com
  *
  * `compendium` is the Compendium entry (code + English description) the value is taken from.
- * Values are averages for adults; individual expenditure varies by ±20–30 %.
+ * Values are averages for adults; individual expenditure varies by ±20-30 %.
  */
 export interface MetActivity {
   /** Stable key, stored in activities.details.metKey. */
@@ -31,7 +31,7 @@ export const MET_ACTIVITIES: readonly MetActivity[] = [
     met: 3.5,
     type: "cardio",
     keywords: ["spazieren", "laufen", "walking", "spaziergang"],
-    compendium: "17190 walking, 2.8–3.2 mph, level, moderate pace",
+    compendium: "17190 walking, 2.8-3.2 mph, level, moderate pace",
   },
   {
     key: "walking_brisk",
@@ -79,7 +79,7 @@ export const MET_ACTIVITIES: readonly MetActivity[] = [
     met: 8.0,
     type: "cardio",
     keywords: ["fahrrad", "rennrad", "cycling", "bike", "spinning"],
-    compendium: "01040 bicycling, 12–13.9 mph, leisure, moderate effort",
+    compendium: "01040 bicycling, 12-13.9 mph, leisure, moderate effort",
   },
   {
     key: "swimming",
@@ -95,7 +95,7 @@ export const MET_ACTIVITIES: readonly MetActivity[] = [
     met: 3.5,
     type: "strength",
     keywords: ["gym", "fitnessstudio", "hanteln", "gewichte", "kraft", "weights"],
-    compendium: "02054 resistance (weight) training, multiple exercises, 8–15 reps, moderate effort",
+    compendium: "02054 resistance (weight) training, multiple exercises, 8-15 reps, moderate effort",
   },
   {
     key: "strength_vigorous",

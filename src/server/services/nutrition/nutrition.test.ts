@@ -24,9 +24,9 @@ import {
 } from "./index";
 
 let db: Db;
-let oats: TestFood; // 100 g: 372 kcal, 13.5 P, 58.7 C, 7 F, 10 fiber, 1.2 sugar – serving 40 g
+let oats: TestFood; // 100 g: 372 kcal, 13.5 P, 58.7 C, 7 F, 10 fiber, 1.2 sugar, serving 40 g
 let skyr: TestFood; // 100 g: 63 kcal, 11 P, 4 C, 0.2 F, fiber unknown
-let apple: TestFood; // 100 g: 52 kcal, 0.3 P, 14 C, 0.2 F, 2.4 fiber – serving 150 g
+let apple: TestFood; // 100 g: 52 kcal, 0.3 P, 14 C, 0.2 F, 2.4 fiber, serving 150 g
 
 beforeAll(async () => {
   db = await createTestDb();

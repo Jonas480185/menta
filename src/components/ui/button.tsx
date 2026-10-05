@@ -18,7 +18,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        /** Mint fill with ink text – one per view. */
+        /** Mint fill with ink text: one per view. */
         primary: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
         secondary: "bg-secondary text-secondary-foreground hover:bg-accent",
         /** Mint-tinted, e.g. the "+" add buttons in meal cards. */

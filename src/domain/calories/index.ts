@@ -1,5 +1,5 @@
 /**
- * Calorie Engine – pure, framework-free. Safe for server and client components.
+ * Calorie Engine: pure, framework-free. Safe for server and client components.
  * Docs: docs/architecture/calorie-engine.md
  */
 export * from "./types";

@@ -1,5 +1,5 @@
 /**
- * Milo's interaction rules – pure and framework-free so they can be unit tested.
+ * Milo's interaction rules: pure and framework-free so they can be unit tested.
  * Randomness is injected (`rand` returns [0, 1)) to keep everything deterministic in tests.
  */
 import type { MiloMood } from "./milo";

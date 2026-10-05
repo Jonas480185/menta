@@ -61,7 +61,7 @@ describe("roundMg", () => {
 });
 
 describe("rounding is for display only", () => {
-  it("round(sum) can differ from sum(round) – always round the aggregate", () => {
+  it("round(sum) can differ from sum(round): always round the aggregate", () => {
     const entries = [0.4, 0.4, 0.4];
     expect(roundKcal(entries.reduce((a, b) => a + b, 0))).toBe(1);
     expect(entries.map(roundKcal).reduce((a, b) => a + b, 0)).toBe(0);

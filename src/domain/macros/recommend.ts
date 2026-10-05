@@ -3,7 +3,7 @@
  *
  * Model (sources and reasoning: docs/architecture/macro-engine.md §4):
  *   Protein  = g/kg by goal (lose 2.0 · maintain 1.6 · gain 1.8) + activity adjustment (−0.2 … +0.2),
- *              clamped to 1.2–2.2 g/kg, times a *reference weight* (adjusted for high body weights),
+ *              clamped to 1.2-2.2 g/kg, times a *reference weight* (adjusted for high body weights),
  *              and capped at 40 % of the calories.
  *   Fat      = max(share of kcal by goal (lose 25 % · maintain 30 % · gain 25 %), 0.6 g/kg reference weight),
  *              capped at 40 % of the calories.
@@ -65,7 +65,7 @@ export interface MacroRecommendation extends MacroCalculation {
   proteinGPerKg: number;
   /** Effective fat per kg reference weight. */
   fatGPerKg: number;
-  /** German, one line per decision – shown under "Wie berechnet?". */
+  /** German, one line per decision: shown under "Wie berechnet?". */
   rationale: string[];
 }
 
@@ -112,7 +112,7 @@ export function recommendMacros(input: RecommendMacrosInput): MacroRecommendatio
   const rationale: string[] = [];
   if (Math.abs(refKg - weightKg) > 0.05) {
     rationale.push(
-      `Bezugsgewicht ${fmt(refKg)} kg statt ${fmt(weightKg)} kg – bei höherem Gewicht zählt nur ein Teil davon für den Proteinbedarf.`,
+      `Bezugsgewicht ${fmt(refKg)} kg statt ${fmt(weightKg)} kg, weil bei höherem Gewicht zählt nur ein Teil davon für den Proteinbedarf.`,
     );
   }
 
@@ -142,10 +142,10 @@ export function recommendMacros(input: RecommendMacrosInput): MacroRecommendatio
   if (fatG > fatCap) fatG = fatCap;
   if (fatFloor > fatByShare) {
     rationale.push(
-      `Fett mindestens ${fmt(FAT_MIN_G_PER_KG)} g pro kg – wichtig für Hormone und Vitaminaufnahme.`,
+      `Fett mindestens ${fmt(FAT_MIN_G_PER_KG)} g pro kg, wichtig für Hormone und Vitaminaufnahme.`,
     );
   } else {
-    rationale.push(`Fett ${Math.round(share * 100)} % der Kalorien – im Rahmen der DGE-Empfehlung (30 %).`);
+    rationale.push(`Fett ${Math.round(share * 100)} % der Kalorien, im Rahmen der DGE-Empfehlung (30 %).`);
   }
 
   // Carbs = remainder
@@ -154,7 +154,7 @@ export function recommendMacros(input: RecommendMacrosInput): MacroRecommendatio
     (kcal - proteinG * KCAL_PER_G.protein - fatG * KCAL_PER_G.fat) / KCAL_PER_G.carbs,
   );
   rationale.push(
-    "Kohlenhydrate füllen die restlichen Kalorien auf – dein wichtigster Energielieferant fürs Training.",
+    "Kohlenhydrate füllen die restlichen Kalorien auf und sind dein wichtigster Energielieferant fürs Training.",
   );
 
   const macros = fitMacrosToKcal(kcal, { proteinG, carbsG, fatG });
@@ -169,9 +169,9 @@ export function recommendMacros(input: RecommendMacrosInput): MacroRecommendatio
 }
 
 const GOAL_REASON: Record<GoalType, string> = {
-  lose: "– schützt deine Muskeln im Kaloriendefizit und sättigt gut.",
-  maintain: "– deckt den Bedarf bei regelmäßiger Bewegung gut ab.",
-  gain: "– unterstützt den Muskelaufbau im Kalorienüberschuss.",
+  lose: "schützt deine Muskeln im Kaloriendefizit und sättigt gut.",
+  maintain: "deckt den Bedarf bei regelmäßiger Bewegung gut ab.",
+  gain: "unterstützt den Muskelaufbau im Kalorienüberschuss.",
 };
 
 function clamp(v: number, min: number, max: number): number {

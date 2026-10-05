@@ -239,7 +239,7 @@ describe("reference search (searchFoodsReference)", () => {
     ).toContain("Bobs geheime Haferpampe");
   });
 
-  it("uses the prefix path for 1–2 character queries", async () => {
+  it("uses the prefix path for 1-2 character queries", async () => {
     const rows = await searchFoodsReference(db, {
       query: "Ha",
       userId: aliceId,
@@ -277,7 +277,7 @@ describe("index usage", () => {
     await db.execute(sql`analyze foods`);
   });
 
-  /** EXPLAIN with seq scans disabled – proves the query shape CAN use the partial indexes. */
+  /** EXPLAIN with seq scans disabled: proves the query shape CAN use the partial indexes. */
   async function plan(
     query: ReturnType<typeof buildFoodSearchSql>,
   ): Promise<string> {

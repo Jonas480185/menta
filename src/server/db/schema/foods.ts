@@ -60,7 +60,7 @@ export const foodBrands = pgTable(
 /**
  * Index predicate shared by all search indexes on `foods`: only live public foods are
  * indexed for full-database search. A user's own foods and recipes (private) are found
- * via `foods_owner_idx` instead – see docs/architecture/database.md §Search.
+ * via `foods_owner_idx` instead: see docs/architecture/database.md §Search.
  *
  * IMPORTANT for query authors: repeat this predicate LITERALLY in the WHERE clause
  * (`visibility = 'public' AND NOT is_archived`, not as bound parameters), otherwise the
@@ -71,7 +71,7 @@ export const PUBLIC_FOODS_PREDICATE = sql.raw(
 );
 
 /**
- * Normalized internal food model. The app never works with provider payloads directly –
+ * Normalized internal food model. The app never works with provider payloads directly:
  * providers map into this shape (see src/server/food/types.ts).
  *
  * All nutrient columns are per 100 units of `nutrientBasis` (100 g or 100 ml).
@@ -93,7 +93,7 @@ export const foods = pgTable(
     }),
     visibility: foodVisibilityEnum("visibility").notNull().default("public"),
     name: text("name").notNull(),
-    /** lowercase, diacritics folded, whitespace collapsed – see src/domain/food/normalize.ts */
+    /** lowercase, diacritics folded, whitespace collapsed: see src/domain/food/normalize.ts */
     nameNormalized: text("name_normalized").notNull(),
     brandId: uuid("brand_id").references(() => foodBrands.id, {
       onDelete: "set null",
@@ -181,7 +181,7 @@ export const foods = pgTable(
     index("foods_search_vector_idx")
       .using("gin", t.searchVector)
       .where(PUBLIC_FOODS_PREDICATE),
-    /** Exact match and short (1–2 char) prefix queries: `name_normalized LIKE 'ha%'`. */
+    /** Exact match and short (1-2 char) prefix queries: `name_normalized LIKE 'ha%'`. */
     index("foods_name_prefix_idx")
       .on(t.nameNormalized.op("text_pattern_ops"))
       .where(PUBLIC_FOODS_PREDICATE),

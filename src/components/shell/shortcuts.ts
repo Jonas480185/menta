@@ -1,5 +1,5 @@
 /**
- * Desktop keyboard shortcuts – pure mapping so it can be unit tested.
+ * Desktop keyboard shortcuts: pure mapping so it can be unit tested.
  * Single keys without modifiers (like Gmail/Linear), ignored while typing in a field.
  */
 

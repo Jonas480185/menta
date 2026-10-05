@@ -65,7 +65,7 @@ export function toIngredientFoodOption(f: FoodWithServings): IngredientFoodOptio
 /**
  * Loads foods (with servings) that `userId` may use as ingredients: public foods and the user's
  * own foods/recipes. Other users' private foods are silently excluded (callers treat missing ids
- * as "not found"). Archived foods are included – callers decide whether they're allowed.
+ * as "not found"). Archived foods are included: callers decide whether they're allowed.
  */
 export async function loadVisibleFoods(
   db: DbOrTx,

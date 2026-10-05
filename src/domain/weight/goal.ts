@@ -2,7 +2,7 @@ import { addDays, type IsoDate } from "@/lib/dates";
 
 /**
  * Goal-weight math (pure). Goals are direction-neutral: losing, maintaining and gaining are
- * treated the same way – "towards" / "away" relative to the user's own target.
+ * treated the same way: "towards" / "away" relative to the user's own target.
  */
 
 export type WeightGoalDirection = "lose" | "maintain" | "gain";
@@ -10,7 +10,7 @@ export type TrendDirection = "towards" | "away" | "stable";
 
 /** ± band around the target that counts as "on target" for maintain goals (and as reached). */
 export const MAINTAIN_BAND_KG = 1.5;
-/** |kg/week| below this is "stable" (≈ 0,4 kg per month – inside normal noise). */
+/** |kg/week| below this is "stable" (≈ 0,4 kg per month: inside normal noise). */
 export const STABLE_RATE_KG_PER_WEEK = 0.1;
 /** Projections further out than this are not shown (too uncertain). */
 export const MAX_PROJECTION_WEEKS = 104;
@@ -28,8 +28,8 @@ export interface GoalProgressInput {
 export interface GoalProgress {
   direction: WeightGoalDirection;
   /**
-   * Share of the way from start to target, clamped to 0–1 (0 when moving away from the start).
-   * `null` for maintain goals – use `inBand` instead.
+   * Share of the way from start to target, clamped to 0-1 (0 when moving away from the start).
+   * `null` for maintain goals: use `inBand` instead.
    */
   fraction: number | null;
   /** kg still to go (≥ 0). For maintain: distance to the edge of the band. */
@@ -107,7 +107,7 @@ export interface ProjectGoalDateInput {
   target: number;
   /** kg/week. */
   weeklyRate: number | null;
-  /** The user's today – the projection starts here. */
+  /** The user's today: the projection starts here. */
   today: IsoDate;
 }
 

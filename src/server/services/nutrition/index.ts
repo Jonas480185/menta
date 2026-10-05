@@ -1,5 +1,5 @@
 /**
- * Daily Nutrition Engine – server services. See docs/architecture/nutrition-engine.md.
+ * Daily Nutrition Engine: server services. See docs/architecture/nutrition-engine.md.
  * Pure math lives in @/domain/nutrition.
  */
 export {

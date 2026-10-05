@@ -38,7 +38,7 @@ const MISSING = {
 /**
  * Calculates BMR → TDEE → daily target for the context user from their stored profile and current
  * weight (latest weight entry, else start weight). `overrides` replace stored values for this one
- * calculation – onboarding and the settings preview compute before anything is saved. Read-only.
+ * calculation: onboarding and the settings preview compute before anything is saved. Read-only.
  *
  *   await calculateCaloriesForUser(ctx)                                   // stored data
  *   await calculateCaloriesForUser(ctx, { weightKg: 82, goalPace: "slow" }) // preview

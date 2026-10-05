@@ -1,5 +1,5 @@
 /**
- * Milo – Menta's mascot. Built from the brand mark (circle whose top-right quarter becomes a
+ * Milo: Menta's mascot. Built from the brand mark (circle whose top-right quarter becomes a
  * leaf point, two ink eyes) plus a little sprout, eye shine, cheeks and a soft belly shade.
  * Mood is expressed with eyes, mouth and small accents only, so the silhouette stays
  * recognizable from 16 px to 200 px.
@@ -41,12 +41,12 @@ export const MILO_LABEL: Record<MiloMood, string> = {
   goal_reached: "Milo: Ziel erreicht",
 };
 
-/** Square viewBox with room for the sprout above the body (body spans 0–100). */
+/** Square viewBox with room for the sprout above the body (body spans 0-100). */
 export const MILO_VIEWBOX = "-9 -14 118 118";
 const ICON_VIEWBOX = "-4 -4 108 108";
 
 const BODY = "M50 0h37.5A12.5 12.5 0 0 1 100 12.5V50A50 50 0 1 1 50 0z";
-/** Mascot ink – eyes stay dark on mint in both themes (brand rule). */
+/** Mascot ink: eyes stay dark on mint in both themes (brand rule). */
 export const MILO_INK = "#0B0F0E";
 const SHINE = "#FFFFFF";
 const INK_SOFT = "var(--color-foreground, #0B0F0E)";
@@ -288,7 +288,7 @@ export function Milo({ mood = "neutral", size = 96, animated = true, className, 
   );
 }
 
-/** Convenience icon variant (16–32 px). */
+/** Convenience icon variant (16-32 px). */
 export function MiloIcon(props: Omit<MiloProps, "size"> & { size?: number }) {
   return <Milo {...props} size={props.size ?? 24} animated={false} />;
 }

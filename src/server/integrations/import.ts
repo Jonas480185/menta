@@ -15,7 +15,7 @@ export interface ImportResult {
 }
 
 /**
- * Persists provider items for the user – idempotent per (user, source, externalId): re-importing the
+ * Persists provider items for the user: idempotent per (user, source, externalId): re-importing the
  * same upstream id updates the row instead of creating a duplicate. All items are validated first
  * (payloads are external input); one invalid item rejects the whole batch (AppError VALIDATION).
  * Runs in one transaction.
@@ -48,7 +48,7 @@ export async function importActivities(
         durationMin: item.durationMin ?? null,
         steps: item.steps ?? null,
         distanceKm: item.distanceKm ?? null,
-        // Steps never carry kcal (covered by the TDEE activity level) – see activity-integrations.md.
+        // Steps never carry kcal (covered by the TDEE activity level): see activity-integrations.md.
         caloriesBurned: item.type === "steps" ? null : (item.caloriesBurned ?? null),
         startedAt: item.startedAt ? new Date(item.startedAt) : null,
         details: item.details ?? null,
@@ -70,7 +70,7 @@ export async function importActivities(
   });
 }
 
-/** Daily steps → import items (type "steps", no kcal – see docs/architecture/activity-integrations.md). */
+/** Daily steps → import items (type "steps", no kcal: see docs/architecture/activity-integrations.md). */
 export function stepsToImportItems(items: readonly DailyStepsItem[]): ActivityImportItem[] {
   return items.map((s) => ({
     externalId: s.externalId ?? `steps:${s.date}`,

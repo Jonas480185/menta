@@ -1,7 +1,7 @@
 import { addDays, isoWeekday, ISO_DATE_RE, type IsoDate } from "./dates";
 
 /**
- * German display formatting – use these everywhere in the UI instead of ad-hoc toFixed()/toLocaleString().
+ * German display formatting: use these everywhere in the UI instead of ad-hoc toFixed()/toLocaleString().
  *
  * Conventions:
  * - Numbers: de-DE grouping/decimals ("1.620", "2,5"), real minus sign "−" (U+2212), never "-0".
@@ -9,7 +9,7 @@ import { addDays, isoWeekday, ISO_DATE_RE, type IsoDate } from "./dates";
  *   Tests: compare with `NBSP` or normalize whitespace (Testing Library / Playwright do this by default).
  * - Missing/invalid numbers (null, undefined, NaN, ±Infinity) render as "–".
  * - Dates use fixed German tables (not Intl) so server and browser render identically
- *   (ICU versions differ, e.g. "Sep." vs "Sept.") – no hydration mismatches.
+ *   (ICU versions differ, e.g. "Sep." vs "Sept."): no hydration mismatches.
  * - Round only for display; never feed formatted values back into calculations.
  */
 
@@ -102,7 +102,7 @@ export function formatWeightKg(value: Num, options: { signed?: boolean } = {}): 
   );
 }
 
-/** Ratio (0–1) as percent: 0.25 → "25 %" · 1.234 → "123 %". */
+/** Ratio (0-1) as percent: 0.25 → "25 %" · 1.234 → "123 %". */
 export function formatPercent(ratio: Num, options: { maxFractionDigits?: number } = {}): string {
   const pct = isFiniteNumber(ratio) ? ratio * 100 : ratio;
   return withUnit(formatNumber(pct, { maxFractionDigits: options.maxFractionDigits ?? 0 }), "%");
@@ -153,7 +153,7 @@ export function formatWeekdayShort(date: IsoDate): string {
   return WEEKDAYS_SHORT[parts(date).weekdayIndex];
 }
 
-/** "22. Sep." – compact, e.g. chart axes. Adds the year when `withYear` is true ("22. Sep. 2025"). */
+/** "22. Sep.": compact, e.g. chart axes. Adds the year when `withYear` is true ("22. Sep. 2025"). */
 export function formatDateShort(date: IsoDate, options: { withYear?: boolean } = {}): string {
   const p = parts(date);
   return `${p.day}. ${MONTHS_SHORT[p.monthIndex]}${options.withYear ? ` ${p.year}` : ""}`;
@@ -189,7 +189,7 @@ export function formatRelativeDay(date: IsoDate, today: IsoDate): string {
  *
  * Rules: if both separators occur, the last one is the decimal separator; a separator that occurs
  * more than once is a thousands separator (groups of 3 digits required, "1.2.3" → null); a single
- * separator is always the decimal separator – so "1.500" is 1.5, not 1500.
+ * separator is always the decimal separator: so "1.500" is 1.5, not 1500.
  */
 export function parseDecimalInput(input: string | null | undefined): number | null {
   if (input == null) return null;

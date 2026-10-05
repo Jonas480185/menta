@@ -19,7 +19,7 @@ export const extensionsStep: SeedStep = {
     const missing = REQUIRED.filter((e) => !rows.some((r) => r.extname === e));
     if (missing.length) {
       throw new Error(
-        `Missing extensions: ${missing.join(", ")}. Enable them on the server (CREATE EXTENSION …) – see docs/architecture/database.md §10.`,
+        `Missing extensions: ${missing.join(", ")}. Enable them on the server (CREATE EXTENSION …): see docs/architecture/database.md §10.`,
       );
     }
     return { status: "done", message: REQUIRED.join(", ") };

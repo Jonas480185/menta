@@ -68,7 +68,7 @@ export async function toggleFavorite(ctx: ServiceContext, foodId: string): Promi
   return true;
 }
 
-/** Recent/frequent bookkeeping – call inside the logging transaction. */
+/** Recent/frequent bookkeeping: call inside the logging transaction. */
 export async function recordFoodUsage(
   db: DbOrTx,
   userId: string,
@@ -237,7 +237,7 @@ export async function searchFoods(
   // German curated rows beat their English USDA twins; suspect data sinks.
   const penalty = (r: (typeof rows)[number]) =>
     (r.source === "usda" ? 0.5 : 0) + (r.data_quality === "suspect" ? 1 : 0);
-  // Tier 0: own history (recent/frequent/favorite) whose name starts with the query – re-logging
+  // Tier 0: own history (recent/frequent/favorite) whose name starts with the query, re-logging
   // must be instant. Tier 1: up to 3 exact name matches. Tier 2: everything else by group/score.
   let exactSlots = 3;
   const ranked = rows

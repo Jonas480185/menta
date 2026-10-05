@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 export const THEMES = ["light", "dark", "system"] as const;
 export type ThemePreference = (typeof THEMES)[number];
 
-/** localStorage key – keep stable, users' choice lives here. */
+/** localStorage key: keep stable, users' choice lives here. */
 export const THEME_STORAGE_KEY = "theme";
 
 /**

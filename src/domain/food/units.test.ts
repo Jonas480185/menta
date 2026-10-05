@@ -25,7 +25,7 @@ describe("parseAmount", () => {
   });
 });
 
-describe("parseServing – plain weights and volumes", () => {
+describe("parseServing: plain weights and volumes", () => {
   it.each([
     ["30 g", { label: "30 g", amount: 30, unit: "g", grams: 30 }],
     ["30g", { label: "30 g", amount: 30, unit: "g", grams: 30 }],
@@ -62,7 +62,7 @@ describe("parseServing – plain weights and volumes", () => {
   });
 });
 
-describe("parseServing – counted units", () => {
+describe("parseServing: counted units", () => {
   it.each([
     ["1 Stück (60 g)", { label: "1 Stück (60 g)", amount: 1, unit: "piece", grams: 60 }],
     ["2 Scheiben = 50g", { label: "2 Scheiben (50 g)", amount: 2, unit: "slice", grams: 50 }],

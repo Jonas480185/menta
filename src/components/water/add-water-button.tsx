@@ -15,14 +15,14 @@ export interface AddWaterButtonProps extends Omit<ButtonProps, "onClick" | "chil
   /** Default 250 ml. */
   amountMl?: number;
   /**
-   * Called inside the transition right before the server action – pass a `useOptimistic` setter
+   * Called inside the transition right before the server action: pass a `useOptimistic` setter
    * to show the new total immediately. React rolls it back automatically when the action fails.
    */
   onOptimisticAdd?: (amountMl: number) => void;
 }
 
 /**
- * One-tap water logging ("+ 250 ml"): optimistic, toast with "Rückgängig". Rapid taps are fine –
+ * One-tap water logging ("+ 250 ml"): optimistic, toast with "Rückgängig". Rapid taps are fine:
  * each tap is its own transition and entry.
  */
 export function AddWaterButton({

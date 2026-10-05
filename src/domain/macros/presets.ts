@@ -17,7 +17,7 @@ export const MACRO_PRESETS: readonly MacroPreset[] = [
   {
     id: "balanced",
     label: "Ausgewogen",
-    description: "Die solide Basis für die meisten Ziele – von allem genug.",
+    description: "Die solide Basis für die meisten Ziele, von allem genug.",
     percents: { protein: 30, carbs: 40, fat: 30 },
   },
   {
@@ -29,7 +29,7 @@ export const MACRO_PRESETS: readonly MacroPreset[] = [
   {
     id: "low_carb",
     label: "Low Carb",
-    description: "Weniger Kohlenhydrate, mehr Fett – für alle, die sich damit wohler fühlen.",
+    description: "Weniger Kohlenhydrate, mehr Fett. Für alle, die sich damit wohler fühlen.",
     percents: { protein: 35, carbs: 20, fat: 45 },
   },
   {
@@ -42,7 +42,7 @@ export const MACRO_PRESETS: readonly MacroPreset[] = [
     id: "keto",
     label: "Keto",
     description:
-      "Sehr wenig Kohlenhydrate, viel Fett. Braucht Eingewöhnung – nicht ideal für intensives Training.",
+      "Sehr wenig Kohlenhydrate, viel Fett. Braucht Eingewöhnung und ist nicht ideal für intensives Training.",
     percents: { protein: 25, carbs: 5, fat: 70 },
   },
 ] as const;

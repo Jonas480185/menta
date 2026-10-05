@@ -18,14 +18,14 @@ const inter = Inter({
   display: "swap",
 });
 
-/* Nunito (rounded, variable): page titles and section headings – matches Milo's soft shapes. */
+/* Nunito (rounded, variable): page titles and section headings, matches Milo's soft shapes. */
 const nunito = Nunito({
   variable: "--font-nunito",
   subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
-/* Mono is only for code/debug surfaces – not preloaded. */
+/* Mono is only for code/debug surfaces: not preloaded. */
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -55,7 +55,7 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  // CSP nonce from src/proxy.ts (makes every page dynamic – they all are user-specific anyway).
+  // CSP nonce from src/proxy.ts (makes every page dynamic: they all are user-specific anyway).
   const nonce = (await headers()).get(NONCE_HEADER) ?? undefined;
   return (
     <html

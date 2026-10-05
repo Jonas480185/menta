@@ -6,7 +6,7 @@ import type { ServiceContext } from "@/server/context";
 import { activities } from "@/server/db/schema";
 import { parseInput } from "./internal";
 
-/** externalId of the single manual steps row per day – makes the upsert use the partial unique index. */
+/** externalId of the single manual steps row per day: makes the upsert use the partial unique index. */
 export function manualStepsExternalId(date: IsoDate): string {
   return `manual-steps:${date}`;
 }

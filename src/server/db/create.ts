@@ -36,7 +36,7 @@ export function resolveDbDriver(url: string | undefined): DbDriver {
  * Creates a Drizzle instance for either real Postgres or embedded PGlite.
  * Kept free of `server-only` so scripts (seed/import) and tests can use it.
  *
- * App code must NOT call this – use `getDb()` from ./client (process-wide singleton).
+ * App code must NOT call this: use `getDb()` from ./client (process-wide singleton).
  * Each call opens a new connection pool / PGlite instance.
  */
 export async function createDatabase(opts: CreateDatabaseOptions = {}): Promise<Db> {
@@ -70,7 +70,7 @@ export async function createDatabase(opts: CreateDatabaseOptions = {}): Promise<
     // PGlite only creates the leaf directory; make sure `.data/` exists on a fresh checkout.
     const { mkdir } = await import("node:fs/promises");
     await mkdir(path.dirname(absDir), { recursive: true });
-    // PGlite has no inter-process locking – a second process silently corrupts the data dir.
+    // PGlite has no inter-process locking: a second process silently corrupts the data dir.
     acquireDataDirLock(absDir);
   }
 
@@ -97,7 +97,7 @@ export async function createDatabase(opts: CreateDatabaseOptions = {}): Promise<
 //
 // PGlite (Postgres-in-WASM) does not lock its data directory. If `pnpm dev` and
 // `pnpm db:seed` (or `next start`) open the same directory, both run happily and the
-// directory is corrupted afterwards (`RuntimeError: Aborted()` on the next open –
+// directory is corrupted afterwards (`RuntimeError: Aborted()` on the next open:
 // verified with @electric-sql/pglite 0.5.8). This advisory PID lock
 // (`<dataDir>.lock` next to the directory) turns that into an immediate, explicit error.
 // Stale locks (dead process, e.g. after SIGKILL) are taken over; released on exit.
@@ -112,9 +112,9 @@ export class DataDirLockedError extends Error {
   ) {
     super(
       pid === process.pid
-        ? `PGlite data dir ${dataDir} is already open in this process – use getDb() instead of createDatabase().`
+        ? `PGlite data dir ${dataDir} is already open in this process: use getDb() instead of createDatabase().`
         : `PGlite data dir ${dataDir} is in use by process ${pid}. PGlite allows only ONE process per data ` +
-            `dir – stop the other process (usually \`pnpm dev\` / \`pnpm start\`) before running db scripts.`,
+            `dir: stop the other process (usually \`pnpm dev\` / \`pnpm start\`) before running db scripts.`,
     );
     this.name = "DataDirLockedError";
   }

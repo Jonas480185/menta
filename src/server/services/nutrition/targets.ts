@@ -12,9 +12,9 @@ import { assertIsoDate, todayFor } from "./dates";
  * Daily targets & the `daily_nutrition` snapshot (Daily Nutrition Engine).
  *
  * Snapshot rules (docs/architecture/nutrition-engine.md):
- * - Past days (date < today in ctx.timezone) with a snapshot row are FROZEN – goal changes never
+ * - Past days (date < today in ctx.timezone) with a snapshot row are FROZEN: goal changes never
  *   rewrite history. Only an explicit `setDayProfile` for that date changes them.
- * - Today/future: targets are LIVE – the explicitly chosen profile (profile_overridden and the profile
+ * - Today/future: targets are LIVE, the explicitly chosen profile (profile_overridden and the profile
  *   still exists), else `resolveGoalProfileForDate` (weekday schedule → default).
  * - The snapshot row is written by `ensureDailyNutrition` (logging), `setDayProfile` and refreshed by
  *   `refreshTargetsFrom` (goal changes), so it always equals the live targets while the day is current.
@@ -118,7 +118,7 @@ function sameSnapshot(row: DailyNutritionRow, v: ReturnType<typeof snapshotValue
  * - date < today and a snapshot exists → the frozen snapshot.
  * - otherwise → live targets (override → resolved profile); a snapshot is the last fallback when no
  *   profile can be resolved any more.
- * Read-only – never writes.
+ * Read-only: never writes.
  */
 export async function getDailyTargets(ctx: ServiceContext, date: IsoDate): Promise<DailyTargets | null> {
   assertIsoDate(date);
@@ -151,7 +151,7 @@ export async function ensureDailyNutrition(ctx: ServiceContext, date: IsoDate): 
 
   const insert = ctx.db.insert(dailyNutrition).values({ userId: ctx.userId, date, ...values });
   if (isPast) {
-    // A concurrent writer may have created the row in the meantime – its snapshot wins.
+    // A concurrent writer may have created the row in the meantime: its snapshot wins.
     await insert.onConflictDoNothing({ target: [dailyNutrition.userId, dailyNutrition.date] });
   } else {
     await insert.onConflictDoUpdate({ target: [dailyNutrition.userId, dailyNutrition.date], set: values });
@@ -160,10 +160,10 @@ export async function ensureDailyNutrition(ctx: ServiceContext, date: IsoDate): 
 }
 
 /**
- * Re-snapshots every existing `daily_nutrition` row from `fromDate` on (clamped to today – past days
+ * Re-snapshots every existing `daily_nutrition` row from `fromDate` on (clamped to today: past days
  * stay frozen) to the live targets. Goal/Macro services call this after a profile was created,
  * edited, archived, re-scheduled or the default changed: `await refreshTargetsFrom(ctx)`.
- * Days without a row need nothing – their targets are resolved live on read.
+ * Days without a row need nothing: their targets are resolved live on read.
  * Returns the number of rows that changed.
  */
 export async function refreshTargetsFrom(
@@ -187,7 +187,7 @@ export async function refreshTargetsFrom(
   let updated = 0;
   for (const row of rows) {
     const live = await liveTargets(ctx, row.day.date, row);
-    if (!live) continue; // no profile left – keep the last known targets
+    if (!live) continue; // no profile left: keep the last known targets
     const values = snapshotValues(live);
     if (sameSnapshot(row.day, values)) continue;
     await ctx.db
@@ -203,7 +203,7 @@ const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/
 
 /**
  * Explicitly assigns a goal profile to one date ("Heute ist Trainingstag"), or clears the assignment
- * with `null` (back to the weekday schedule/default). Works for past dates too – an explicit choice by
+ * with `null` (back to the weekday schedule/default). Works for past dates too: an explicit choice by
  * the user is the one way to change a frozen day.
  *
  * @throws AppError NOT_FOUND when the profile doesn't exist, is archived or belongs to someone else.
@@ -249,7 +249,7 @@ export async function setDayProfile(
     // No row → nothing was assigned; targets are resolved live.
     if (!row) return getDailyTargets(tx, date);
 
-    // Re-snapshot with what applies without the override (also for past days – the user asked for it).
+    // Re-snapshot with what applies without the override (also for past days: the user asked for it).
     const resolved = await resolveGoalProfileForDate(tx, date);
     if (!resolved) return targetsFromSnapshot(row, null);
     const values = snapshotValues({ targets: targetsFromProfile(resolved), profileOverridden: false });

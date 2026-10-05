@@ -116,7 +116,7 @@ export function LogSearch({
       ) : items.length === 0 ? (
         <div className="rounded-card bg-card p-6 text-center">
           <p className="text-body text-muted-foreground">
-            {query.trim() ? "Nichts gefunden." : "Noch keine zuletzt verwendeten Lebensmittel – such einfach los."}
+            {query.trim() ? "Nichts gefunden." : "Noch keine zuletzt verwendeten Lebensmittel. Such einfach los."}
           </p>
           {query.trim() && (
             <Button asChild variant="soft" className="mt-4">

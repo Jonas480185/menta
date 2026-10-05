@@ -31,7 +31,7 @@ export type ProviderAvailability =
  *
  * Providers are bound to one user (created by a factory with the ServiceContext) so that OAuth tokens or
  * device links can be looked up without changing this interface. Providers only FETCH and NORMALISE
- * data – persisting always goes through `importActivities`, which validates and de-duplicates.
+ * data: persisting always goes through `importActivities`, which validates and de-duplicates.
  *
  * Swapping or adding a provider = implementing this interface + registering the factory in registry.ts.
  */

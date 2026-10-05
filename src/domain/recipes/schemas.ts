@@ -1,7 +1,7 @@
 import { z } from "@/lib/zod";
 
 /**
- * Zod schemas for recipe input – shared by services, server actions and the client builder
+ * Zod schemas for recipe input: shared by services, server actions and the client builder
  * (German messages). Ingredient grams are always derived on the server from the serving
  * (serving.grams × quantity); without a serving, `quantity` is the amount in base units (g/ml).
  */

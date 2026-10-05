@@ -33,7 +33,7 @@ function adjustmentLabel(calc: CalorieCalculation): string {
 }
 
 function weeklyHint(calc: CalorieCalculation): string {
-  if (calc.adjustment === 0) return "Du isst so viel, wie du verbrauchst – dein Gewicht bleibt etwa gleich.";
+  if (calc.adjustment === 0) return "Du isst so viel, wie du verbrauchst. Dein Gewicht bleibt etwa gleich.";
   const kg = formatNumber(Math.abs(calc.weeklyChangeKg), { maxFractionDigits: 2 });
   return calc.adjustment < 0
     ? `Damit verlierst du etwa ${kg}${NBSP}kg pro Woche.`
@@ -55,7 +55,7 @@ export function describeCalorieCalculation(calc: CalorieCalculation): CalorieBre
       label: "Grundumsatz",
       kcal: bmr,
       value: formatKcal(bmr),
-      hint: "Das verbraucht dein Körper in völliger Ruhe – für Atmung, Herzschlag und Wärme.",
+      hint: "Das verbraucht dein Körper in völliger Ruhe, etwa für Atmung, Herzschlag und Wärme.",
     },
     {
       key: "tdee",

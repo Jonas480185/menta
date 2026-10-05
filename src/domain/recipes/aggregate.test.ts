@@ -21,7 +21,7 @@ const curry = [
 ];
 
 describe("aggregateRecipe", () => {
-  it("Chicken Curry – 1800 kcal, 4 Portionen → 450 kcal / 42 g P / 38 g C / 14 g F per Portion", () => {
+  it("Chicken Curry: 1800 kcal, 4 Portionen → 450 kcal / 42 g P / 38 g C / 14 g F per Portion", () => {
     const r = aggregateRecipe({ ingredients: curry, servings: 4 });
     expect(r.totals.kcal).toBeCloseTo(1800, 6);
     expect(r.perServing.kcal).toBeCloseTo(450, 6);

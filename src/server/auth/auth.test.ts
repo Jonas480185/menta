@@ -79,7 +79,7 @@ describe("better-auth integration (email + password)", () => {
     expect(authErrorMessage(err)).toBe("Für diese E-Mail gibt es bereits ein Konto.");
   });
 
-  it("enforces the password length policy (8–128)", async () => {
+  it("enforces the password length policy (8-128)", async () => {
     const short = await errorOf(
       auth.api.signUpEmail({ body: { name: "Kurz", email: "kurz@example.com", password: "1234567" } }),
     );

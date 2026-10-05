@@ -3,7 +3,7 @@
  *
  * Each entry carries a German name, a category, typical German household servings and the
  * fdcId of the best-matching USDA SR Legacy / Foundation food. Nutrients are NOT stored in the
- * JSON – they are resolved from the USDA bulk data at import time (single source of truth,
+ * JSON: they are resolved from the USDA bulk data at import time (single source of truth,
  * CC0), so the curated list stays small and reviewable.
  */
 import { readFile } from "node:fs/promises";

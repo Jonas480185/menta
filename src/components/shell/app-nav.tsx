@@ -96,7 +96,7 @@ export function AppNav({ userName }: { userName?: string | null }) {
       </nav>
 
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-border bg-card/70 px-3 py-5 backdrop-blur-xl lg:flex">
-        <Link href="/today" aria-label="Menta – Heute" className="focus-ring mb-6 flex w-fit items-center rounded-lg px-2.5 py-1">
+        <Link href="/today" aria-label="Menta, Heute" className="focus-ring mb-6 flex w-fit items-center rounded-lg px-2.5 py-1">
           <Logo size={30} />
         </Link>
 

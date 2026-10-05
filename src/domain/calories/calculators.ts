@@ -15,7 +15,7 @@ export interface CalculatorDefinition {
   requires?: readonly (keyof BodyProfile)[];
   /** Extra availability check on top of validateBodyProfile (default: always true). */
   canCalculate?(profile: BodyProfile): boolean;
-  /** Raw formula – input is already validated. kcal/day, unrounded. */
+  /** Raw formula: input is already validated. kcal/day, unrounded. */
   bmr(profile: BodyProfile): number;
 }
 
@@ -58,7 +58,7 @@ function bySex(sex: Sex, values: { male: number; female: number }): number {
 export const mifflinStJeor = defineCalculator({
   id: "mifflin_st_jeor",
   name: "Mifflin-St Jeor",
-  description: "Aktueller Standard für Erwachsene – die genaueste Schätzung ohne Körperfettmessung.",
+  description: "Aktueller Standard für Erwachsene und die genaueste Schätzung ohne Körperfettmessung.",
   bmr: (p) => 10 * p.weightKg + 6.25 * p.heightCm - 5 * p.ageYears + bySex(p.sex, { male: 5, female: -161 }),
 });
 
@@ -71,7 +71,7 @@ export const mifflinStJeor = defineCalculator({
 export const harrisBenedictRevised = defineCalculator({
   id: "harris_benedict_revised",
   name: "Harris-Benedict (revidiert)",
-  description: "Klassische Formel, überarbeitet 1984 – schätzt meist etwas höher als Mifflin-St Jeor.",
+  description: "Klassische Formel, überarbeitet 1984. Schätzt meist etwas höher als Mifflin-St Jeor.",
   bmr: (p) => {
     const male = 88.362 + 13.397 * p.weightKg + 4.799 * p.heightCm - 5.677 * p.ageYears;
     const female = 447.593 + 9.247 * p.weightKg + 3.098 * p.heightCm - 4.33 * p.ageYears;
@@ -86,12 +86,12 @@ function hasValidBodyFat(p: BodyProfile): p is BodyProfile & { bodyFatPct: numbe
 
 /**
  * Katch-McArdle: BMR = 370 + 21.6 · lean body mass (kg), LBM = kg · (1 − body fat % / 100).
- * Sex-independent; needs a body fat percentage – calculateBMR throws CalorieInputError without it.
+ * Sex-independent; needs a body fat percentage: calculateBMR throws CalorieInputError without it.
  */
 export const katchMcArdle = defineCalculator({
   id: "katch_mcardle",
   name: "Katch-McArdle",
-  description: "Rechnet mit deiner fettfreien Masse – sinnvoll, wenn du deinen Körperfettanteil kennst.",
+  description: "Rechnet mit deiner fettfreien Masse. Sinnvoll, wenn du deinen Körperfettanteil kennst.",
   requires: ["bodyFatPct"],
   canCalculate: hasValidBodyFat,
   bmr: (p) => {
@@ -99,7 +99,7 @@ export const katchMcArdle = defineCalculator({
       const { min, max } = BODY_LIMITS.bodyFatPct;
       throw new CalorieInputError(
         "bodyFatPct",
-        `Für Katch-McArdle brauchen wir deinen Körperfettanteil (${min}–${max} %).`,
+        `Für Katch-McArdle brauchen wir deinen Körperfettanteil (${min} bis ${max} %).`,
       );
     }
     const leanMassKg = p.weightKg * (1 - p.bodyFatPct / 100);

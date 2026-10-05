@@ -11,7 +11,7 @@ const cardVariants = cva("flex flex-col gap-4 rounded-card py-card text-card-for
       /** Elevation 1: soft shadow in light mode, hairline border in dark mode. */
       default: cardSurface,
       outline: "border border-border bg-card",
-      /** Inset well without shadow – for nested / secondary blocks (never stack shadows). */
+      /** Inset well without shadow: for nested / secondary blocks (never stack shadows). */
       muted: "bg-surface-inset",
     },
     interactive: {
@@ -26,7 +26,7 @@ const cardVariants = cva("flex flex-col gap-4 rounded-card py-card text-card-for
 });
 
 export interface CardProps extends React.ComponentProps<"div">, VariantProps<typeof cardVariants> {
-  /** Render the child (e.g. `<Link>`) as the card – use with `interactive` for tappable cards. */
+  /** Render the child (e.g. `<Link>`) as the card: use with `interactive` for tappable cards. */
   asChild?: boolean;
 }
 

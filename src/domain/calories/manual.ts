@@ -13,7 +13,7 @@ export interface ManualTargetCheck {
   differenceFromCalculated: number;
   /** Expected weekly change vs. the TDEE (kg, negative = loss). */
   weeklyChangeKg: number;
-  /** True when the manual target is below the safety floor – allowed, but shown as a hint. */
+  /** True when the manual target is below the safety floor: allowed, but shown as a hint. */
   belowFloor: boolean;
   floorKcal: number;
   warnings: CalorieWarning[];
@@ -40,7 +40,7 @@ export function checkManualTarget(calc: CalorieCalculation, manualKcal: number):
     ? [
         {
           code: "manual_below_floor",
-          message: `Dein Ziel liegt unter ${formatKcal(calc.floorKcal)} – weniger empfehlen wir nicht ohne ärztliche Begleitung. Du kannst es trotzdem so speichern.`,
+          message: `Dein Ziel liegt unter ${formatKcal(calc.floorKcal)}. Weniger empfehlen wir nicht ohne ärztliche Begleitung. Du kannst es trotzdem so speichern.`,
         },
       ]
     : [];

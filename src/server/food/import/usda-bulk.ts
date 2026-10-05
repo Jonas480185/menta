@@ -1,7 +1,7 @@
 /**
  * USDA FoodData Central bulk CSV datasets (Foundation Foods, SR Legacy): download (cached in
  * data/raw/usda, gitignored), extract, stream-parse into UsdaFoodRecord.
- * License: CC0 1.0 / public domain – please cite "USDA FoodData Central".
+ * License: CC0 1.0 / public domain, please cite "USDA FoodData Central".
  */
 import { createWriteStream, existsSync } from "node:fs";
 import { mkdir, rename } from "node:fs/promises";

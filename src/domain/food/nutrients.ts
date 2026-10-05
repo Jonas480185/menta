@@ -1,5 +1,5 @@
 /**
- * Nutrient constants, conversions and the micronutrient catalog – pure, framework-free.
+ * Nutrient constants, conversions and the micronutrient catalog: pure, framework-free.
  */
 import { KCAL_PER_G } from "@/domain/nutrition/types";
 

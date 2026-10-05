@@ -17,7 +17,7 @@ export const SESSION_UPDATE_AGE = DAY;
 export interface CreateAuthOptions {
   secret?: string;
   baseURL?: string;
-  /** Include the Next.js cookie plugin (default true). Tests outside Next can keep it – it no-ops. */
+  /** Include the Next.js cookie plugin (default true). Tests outside Next can keep it: it no-ops. */
   nextCookies?: boolean;
 }
 

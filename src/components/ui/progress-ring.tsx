@@ -44,7 +44,7 @@ export interface ProgressRingProps extends Omit<React.ComponentProps<"div">, "ch
 /**
  * Circular progress (SVG, starts at 12 o'clock, round caps). Past 100 % the arc stays
  * complete in its tone and a slightly thinner second lap in `over` grows on top after a
- * 2° gap (capped at one extra lap) – visible by shape and colour, never alarming.
+ * 2° gap (capped at one extra lap): visible by shape and colour, never alarming.
  */
 function ProgressRing({
   value,

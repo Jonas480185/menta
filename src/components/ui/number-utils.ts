@@ -1,7 +1,7 @@
 /**
  * Stepping and serving helpers for NumberInput / QuantityStepper. Pure and unit-tested.
  * Display formatting and input parsing live in `@/lib/format` (`formatNumber`,
- * `parseDecimalInput`) – this module only adds what the input controls need on top.
+ * `parseDecimalInput`): this module only adds what the input controls need on top.
  */
 
 import { formatNumber } from "@/lib/format";

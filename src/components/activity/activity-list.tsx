@@ -71,7 +71,7 @@ export function ActivityList({ date, entries, isToday }: ActivityListProps) {
         size="sm"
         icon={<Dumbbell />}
         title={isToday ? "Heute noch keine Aktivität eingetragen." : "An diesem Tag ist keine Aktivität eingetragen."}
-        description={isToday ? "Sport, Spaziergang oder Training – trage es über „Aktivität hinzufügen“ ein." : undefined}
+        description={isToday ? "Sport, Spaziergang oder Training? Trag es über „Aktivität hinzufügen“ ein." : undefined}
       />
     );
   }

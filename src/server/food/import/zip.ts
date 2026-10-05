@@ -1,5 +1,5 @@
 /**
- * Minimal, dependency-free ZIP reader (stored + deflate, no ZIP64/encryption) – enough for
+ * Minimal, dependency-free ZIP reader (stored + deflate, no ZIP64/encryption): enough for
  * the USDA FoodData Central CSV bundles. Entries are streamed to disk.
  */
 import { createReadStream, createWriteStream } from "node:fs";

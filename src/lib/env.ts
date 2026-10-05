@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /**
- * Server environment – validated with Zod, parsed lazily on first access.
+ * Server environment: validated with Zod, parsed lazily on first access.
  *
  *   import { env } from "@/lib/env";
  *   if (env.FOOD_EXTERNAL_PROVIDERS_ENABLED) …
@@ -118,7 +118,7 @@ export class EnvError extends Error {
   }
 }
 
-/** Pure parser (no caching) – use in tests. Empty strings are treated as unset. */
+/** Pure parser (no caching): use in tests. Empty strings are treated as unset. */
 export function parseEnv(source: Record<string, string | undefined>): ServerEnv {
   const cleaned: Record<string, string> = {};
   for (const [key, value] of Object.entries(source)) {
@@ -136,7 +136,7 @@ let cached: ServerEnv | undefined;
 /** Parsed + cached server env. Throws EnvError with all problems listed. */
 export function getEnv(): ServerEnv {
   if (typeof window !== "undefined" && process.env.NODE_ENV !== "test") {
-    throw new Error("@/lib/env is server-only – pass values to client components as props.");
+    throw new Error("@/lib/env is server-only: pass values to client components as props.");
   }
   cached ??= parseEnv(process.env);
   return cached;

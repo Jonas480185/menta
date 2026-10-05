@@ -1,6 +1,6 @@
 /**
  * Engagement domain: streaks, achievements and Milo's coaching rules.
- * Pure and deterministic (ISO date strings, no Math.random) – safe for SSR and tests.
+ * Pure and deterministic (ISO date strings, no Math.random): safe for SSR and tests.
  */
 
 export type MiloMoodKey =
@@ -27,7 +27,7 @@ export interface Streak {
   todayLogged: boolean;
 }
 
-/** Today not yet logged does not break the streak – it counts through yesterday. */
+/** Today not yet logged does not break the streak: it counts through yesterday. */
 export function computeStreak(loggedDates: readonly string[], today: string): Streak {
   const set = new Set(loggedDates);
   const todayLogged = set.has(today);
@@ -43,7 +43,7 @@ export function computeStreak(loggedDates: readonly string[], today: string): St
   return { current, longest, todayLogged };
 }
 
-/** Share of the last `window` days (incl. today) with at least one entry, 0–100. */
+/** Share of the last `window` days (incl. today) with at least one entry, 0-100. */
 export function consistencyScore(loggedDates: readonly string[], today: string, window = 28): number {
   const set = new Set(loggedDates);
   let hits = 0;
@@ -124,7 +124,7 @@ type Rule = { key: string; applies: (c: MascotContext) => boolean; build: (c: Ma
 const mealNamed = (c: MascotContext, re: RegExp) => c.emptyMeals.find((m) => re.test(m.name));
 const logHref = (mealId?: string) => (mealId ? `/log?meal=${mealId}` : "/log");
 
-/** Ordered by priority – the first applicable, non-dismissed rule wins. */
+/** Ordered by priority: the first applicable, non-dismissed rule wins. */
 export const MASCOT_RULES: readonly Rule[] = [
   {
     key: "achievement",
@@ -134,7 +134,7 @@ export const MASCOT_RULES: readonly Rule[] = [
   {
     key: "welcome",
     applies: (c) => c.isNewUser && c.entryCount === 0,
-    build: () => ({ key: "welcome", mood: "happy", text: "Hi, ich bin Milo. Logge dein erstes Essen – ich halte den Überblick.", action: { label: "Loslegen", href: "/log" } }),
+    build: () => ({ key: "welcome", mood: "happy", text: "Hi, ich bin Milo. Logge dein erstes Essen, ich halte den Überblick.", action: { label: "Loslegen", href: "/log" } }),
   },
   {
     key: "streak_milestone",
@@ -169,7 +169,7 @@ export const MASCOT_RULES: readonly Rule[] = [
   {
     key: "over_target",
     applies: (c) => !!c.targetKcal && c.consumedKcal > c.targetKcal * 1.05,
-    build: () => ({ key: "over_target", mood: "neutral", text: "Heute etwas über dem Ziel – das gleicht sich über die Woche aus. Morgen geht es entspannt weiter." }),
+    build: () => ({ key: "over_target", mood: "neutral", text: "Heute etwas über dem Ziel. Das gleicht sich über die Woche aus. Morgen geht es entspannt weiter." }),
   },
   {
     key: "close_to_target",
@@ -194,7 +194,7 @@ export const MASCOT_RULES: readonly Rule[] = [
   {
     key: "late_evening",
     applies: (c) => c.hour >= 22 || c.hour < 5,
-    build: (c) => ({ key: "late_evening", mood: "sleepy", text: c.entryCount > 0 ? `Heute ${c.entryCount} Einträge – gute Nacht!` : "Gute Nacht! Morgen ist ein neuer Tag." }),
+    build: (c) => ({ key: "late_evening", mood: "sleepy", text: c.entryCount > 0 ? `Heute ${c.entryCount} Einträge. Gute Nacht!` : "Gute Nacht! Morgen ist ein neuer Tag." }),
   },
   {
     key: "default",

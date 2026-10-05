@@ -31,7 +31,7 @@ export interface StatTileProps extends Omit<React.ComponentProps<"div">, "childr
   size?: "sm" | "md";
 }
 
-/** Compact KPI tile with a big tabular value – numbers are the hero. */
+/** Compact KPI tile with a big tabular value: numbers are the hero. */
 function StatTile({
   label,
   value,

@@ -60,7 +60,7 @@ export async function signOutAction(): Promise<void> {
   try {
     await auth.api.signOut({ headers: requestHeaders });
   } catch {
-    // Session already gone – clear whatever cookies are left.
+    // Session already gone: clear whatever cookies are left.
     clearAuthCookies(await cookies());
   }
   redirect(LOGIN_PATH);

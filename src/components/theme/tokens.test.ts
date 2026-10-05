@@ -79,7 +79,7 @@ const GRAPHIC_PAIRS: Array<[fg: string, bg: string]> = [
  */
 const LIGHT_FILL_EXCEPTIONS = ["--carbs", "--fiber", "--water"];
 
-/** Skeleton contract (foundation) – must never disappear. */
+/** Skeleton contract (foundation): must never disappear. */
 const CONTRACT = [
   "--radius",
   "--background",

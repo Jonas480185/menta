@@ -62,7 +62,7 @@ export function zodFieldErrors(err: ZodError): FieldErrors {
 
 /** Postgres SQLSTATE → AppError for constraint violations that are user errors, not bugs. */
 function fromPostgresError(err: unknown): AppError | undefined {
-  // drizzle wraps driver errors (DrizzleQueryError) – the SQLSTATE lives on the cause.
+  // drizzle wraps driver errors (DrizzleQueryError): the SQLSTATE lives on the cause.
   for (let e: unknown = err, depth = 0; e && typeof e === "object" && depth < 4; depth++) {
     const code = (e as { code?: unknown }).code;
     if (code === "23505")
@@ -91,7 +91,7 @@ export function toErrorResult(err: unknown): ActionResult<never> {
 }
 
 /**
- * Wraps a server-action body: returns ok(data) or a mapped error result. Never throws –
+ * Wraps a server-action body: returns ok(data) or a mapped error result. Never throws:
  * except for Next.js control flow (redirect/notFound), which must propagate.
  *
  *   export async function addEntry(input: unknown) {
@@ -113,7 +113,7 @@ export async function runAction<T>(fn: () => Promise<T>): Promise<ActionResult<T
   }
 }
 
-/** Returns data or throws an AppError – for server-side callers that want exceptions back. */
+/** Returns data or throws an AppError: for server-side callers that want exceptions back. */
 export function unwrap<T>(result: ActionResult<T>): T {
   if (result.ok) return result.data;
   throw new AppError(result.error.code, result.error.message, result.error.fieldErrors);

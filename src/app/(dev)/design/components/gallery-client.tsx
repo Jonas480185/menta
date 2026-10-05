@@ -159,7 +159,7 @@ function NutritionSection() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>ProgressRing – Zustände</CardTitle>
+            <CardTitle>ProgressRing: Zustände</CardTitle>
             <CardDescription>0 %, 72 %, genau 100 %, 125 % und 230 % (Überlauf gedeckelt).</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap items-center gap-4">
@@ -661,7 +661,7 @@ function LayoutSection() {
         <EmptyState
           icon={<Inbox />}
           title="Noch nichts geloggt"
-          description="Füge dein erstes Lebensmittel hinzu – Milo freut sich schon."
+          description="Füge dein erstes Lebensmittel hinzu, Milo freut sich schon."
           action={
             <Button>
               <Plus /> Lebensmittel hinzufügen

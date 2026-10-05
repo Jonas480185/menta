@@ -7,7 +7,7 @@ function num(n: number | null | undefined): number {
 /**
  * Totals of one day's activity rows.
  *
- * - `activeKcal` = Σ calories_burned over ALL rows – identical to what the nutrition engine adds to the
+ * - `activeKcal` = Σ calories_burned over ALL rows: identical to what the nutrition engine adds to the
  *   budget when "Aktivitätskalorien addieren" is on, so card and budget always agree.
  * - `minutes` / `count` only consider non-steps rows.
  * - `steps`: steps rows are summed per source, then the highest source wins. A phone and a watch (or a

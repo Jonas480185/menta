@@ -1,5 +1,5 @@
 /**
- * Plausibility validation for food nutrient data – pure, framework-free.
+ * Plausibility validation for food nutrient data: pure, framework-free.
  *
  * Used by every import path (providers, bulk import, seed) before anything is persisted:
  * hard errors reject a record, soft findings become `qualityFlags` and determine
@@ -63,7 +63,7 @@ export const SUSPECT_FLAGS: ReadonlySet<string> = new Set([
 /**
  * Flags that stay informational for trusted (curated, reviewed) data: USDA lab values use
  * food-specific Atwater factors, so high-fibre foods (bran, cocoa powder) legitimately deviate
- * from 4/4/9 – the reviewed kcal value is correct.
+ * from 4/4/9: the reviewed kcal value is correct.
  */
 export const TRUSTED_TOLERATED_FLAGS: ReadonlySet<string> = new Set(["energy_mismatch"]);
 const MISSING_CORE_FLAGS = ["missing_kcal", "missing_protein", "missing_carbs", "missing_fat"] as const;

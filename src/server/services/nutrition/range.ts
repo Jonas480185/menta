@@ -19,12 +19,12 @@ export interface DailyTotalsRow {
 
 /** SUM of a double column as number (SQL SUM over double precision is already float8). */
 const sumOf = (col: AnyColumn) => sql<number>`coalesce(sum(${col}), 0)`.mapWith(Number);
-/** SUM of an optional nutrient: sum of known values, NULL only if all are NULL – like `sumTotals`. */
+/** SUM of an optional nutrient: sum of known values, NULL only if all are NULL, like `sumTotals`. */
 const sumOptional = (col: AnyColumn) => sql<number | null>`sum(${col})`.mapWith(Number);
 
 /**
  * Per-day consumed totals + target snapshot for every LOGGED day (≥ 1 entry) in [from, to], ascending.
- * One GROUP BY over the (user_id, date) index – a year of data is a single fast query.
+ * One GROUP BY over the (user_id, date) index: a year of data is a single fast query.
  * Days without entries are omitted (they are "not logged", not "0 kcal").
  */
 export async function getDailyTotals(

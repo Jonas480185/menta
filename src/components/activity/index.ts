@@ -1,4 +1,4 @@
-/** Activity UI – reusable by the dashboard and the /activity page. */
+/** Activity UI: reusable by the dashboard and the /activity page. */
 export { ActivityCard, type ActivityCardProps } from "./activity-card";
 export { ActivityList, type ActivityListProps } from "./activity-list";
 export { AddActivitySheet, type AddActivitySheetProps } from "./add-activity-sheet";

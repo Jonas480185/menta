@@ -12,7 +12,7 @@ export const RECIPE_BASE_UNIT = "g";
 /**
  * Creates or updates the private `foods` row linked to a recipe (source "recipe",
  * sourceId = recipe id) so the recipe can be searched, favorited and logged like a food:
- * per-100 g nutrients from `aggregate.per100g` and two servings – "1 Portion (≈ N g)" (default)
+ * per-100 g nutrients from `aggregate.per100g` and two servings: "1 Portion (≈ N g)" (default)
  * and "100 g". Servings are updated in place so their ids (used by food_usage/meal entries) stay
  * stable. Un-archives the food and sets `recipes.food_id` when needed. Run inside the recipe's
  * transaction. Returns the food id.

@@ -13,7 +13,7 @@ describe("nutrient helpers", () => {
   });
 });
 
-describe("validateNutrients – valid data", () => {
+describe("validateNutrients: valid data", () => {
   it("accepts a clean label (oat flakes) as complete", () => {
     const r = validateNutrients(oats);
     expect(r.valid).toBe(true);
@@ -54,7 +54,7 @@ describe("validateNutrients – valid data", () => {
   });
 });
 
-describe("validateNutrients – hard errors", () => {
+describe("validateNutrients: hard errors", () => {
   it.each([
     ["negative value", { ...oats, proteinG: -1 }, "negative_value"],
     ["NaN", { ...oats, fatG: Number.NaN }, "not_a_number"],
@@ -71,7 +71,7 @@ describe("validateNutrients – hard errors", () => {
   });
 });
 
-describe("validateNutrients – soft flags", () => {
+describe("validateNutrients: soft flags", () => {
   it("flags energy mismatch (kJ typed into kcal)", () => {
     const r = validateNutrients({ kcal: 1566, proteinG: 13.5, carbsG: 58.7, fatG: 7 });
     // 1566 > 900 is also a hard error; use a smaller mismatch for the flag alone

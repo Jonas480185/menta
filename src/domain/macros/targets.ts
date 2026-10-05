@@ -1,5 +1,5 @@
 /**
- * One entry point for all three macro modes – used by the Goals service and, because it is pure,
+ * One entry point for all three macro modes: used by the Goals service and, because it is pure,
  * by client components for live previews ("Diese Makros ergeben 2.298 kcal").
  */
 import { macrosFromGrams, macrosFromPercent } from "./math";

@@ -42,7 +42,7 @@ export const DAY_PROFILE_KINDS: Readonly<Record<DayProfileKind, DayProfileKindMe
     kind: "training",
     label: "Trainingstag",
     defaultName: "Trainingstag",
-    description: "+250 kcal, vor allem aus Kohlenhydraten – Energie für dein Training.",
+    description: "+250 kcal, vor allem aus Kohlenhydraten, als Energie für dein Training.",
     kcalDelta: 250,
     fatShiftKcal: 0,
     derivable: true,
@@ -60,7 +60,7 @@ export const DAY_PROFILE_KINDS: Readonly<Record<DayProfileKind, DayProfileKindMe
     kind: "high_carb",
     label: "High Carb",
     defaultName: "High-Carb-Tag",
-    description: "+200 kcal und mehr Kohlenhydrate statt Fett – ideal für harte Einheiten.",
+    description: "+200 kcal und mehr Kohlenhydrate statt Fett, ideal für harte Einheiten.",
     kcalDelta: 200,
     fatShiftKcal: 150,
     derivable: true,
@@ -79,7 +79,7 @@ export const DAY_PROFILE_KINDS: Readonly<Record<DayProfileKind, DayProfileKindMe
     label: "Refeed",
     defaultName: "Refeed-Tag",
     description:
-      "Geplanter Tag mit mehr Kohlenhydraten (+500 kcal) und wenig Fett – eine Pause von der Diät.",
+      "Geplanter Tag mit mehr Kohlenhydraten (+500 kcal) und wenig Fett als Pause von der Diät.",
     kcalDelta: 500,
     fatShiftKcal: 200,
     derivable: true,
@@ -88,7 +88,7 @@ export const DAY_PROFILE_KINDS: Readonly<Record<DayProfileKind, DayProfileKindMe
     kind: "custom",
     label: "Eigenes",
     defaultName: "Eigenes Profil",
-    description: "Startet mit deinen Standardwerten – passe Kalorien und Makros frei an.",
+    description: "Startet mit deinen Standardwerten. Passe Kalorien und Makros frei an.",
     kcalDelta: 0,
     fatShiftKcal: 0,
     derivable: true,
@@ -122,7 +122,7 @@ export interface DerivedDayProfile {
   /** Derived profiles store explicit grams (protein & fat fixed, carbs balance). */
   macroMode: "grams";
   calculation: MacroCalculation;
-  /** Differences to the base profile – for "+250 kcal · +62 g KH" labels. */
+  /** Differences to the base profile: for "+250 kcal · +62 g KH" labels. */
   delta: { kcal: number; proteinG: number; carbsG: number; fatG: number };
 }
 

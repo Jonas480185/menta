@@ -1,5 +1,5 @@
 /**
- * Energy estimates for activities – NET calories.
+ * Energy estimates for activities: NET calories.
  *
  * Why net (MET − 1) instead of gross (MET)?
  * The daily calorie target is derived from TDEE = BMR × activity factor, which already contains the
@@ -35,7 +35,7 @@ export function estimateActivityKcal({ met, weightKg, durationMin }: ActivityKca
 
 /**
  * Assumptions for step estimates: an average cadence of 100 steps/min, which marks moderate-intensity
- * walking (Tudor-Locke C et al., Br J Sports Med 2018;52:776–788), at ~3.5 MET (Compendium 17190,
+ * walking (Tudor-Locke C et al., Br J Sports Med 2018;52:776-788), at ~3.5 MET (Compendium 17190,
  * walking at a moderate pace). → net (3.5 − 1) × kg per 6,000 steps.
  */
 export const STEP_CADENCE_PER_MIN = 100;

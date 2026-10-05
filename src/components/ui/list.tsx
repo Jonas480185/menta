@@ -37,7 +37,7 @@ function ListGroup({ title, footer, className, children, ...props }: ListGroupPr
 interface ListItemBaseProps {
   title: React.ReactNode;
   description?: React.ReactNode;
-  /** Leading visual – typically `<ListItemIcon>`, an Avatar or a food thumbnail. */
+  /** Leading visual: typically `<ListItemIcon>`, an Avatar or a food thumbnail. */
   leading?: React.ReactNode;
   /** Trailing value text or control (value, Badge, Switch, MacroChips). */
   trailing?: React.ReactNode;

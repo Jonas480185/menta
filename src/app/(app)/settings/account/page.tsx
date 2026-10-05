@@ -70,7 +70,7 @@ export default async function AccountSettingsPage() {
 
       <Section
         title="Deine Daten"
-        description="Lade alles herunter, was du hier gespeichert hast – Profil, Ziele, Mahlzeiten, Einträge, eigene Lebensmittel, Rezepte, Gewicht, Aktivitäten und Wasser – als JSON-Datei."
+        description="Lade alles herunter, was du hier gespeichert hast: Profil, Ziele, Mahlzeiten, Einträge, eigene Lebensmittel, Rezepte, Gewicht, Aktivitäten und Wasser, als JSON-Datei."
       >
         <a href="/settings/account/export" download className={buttonClass("secondary", "w-full sm:w-auto")}>
           <Download aria-hidden className="size-5" />

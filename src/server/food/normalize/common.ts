@@ -1,5 +1,5 @@
 /**
- * Helpers shared by provider normalizers. Pure – no network, no DB.
+ * Helpers shared by provider normalizers. Pure: no network, no DB.
  */
 import type { NormalizedServing } from "@/server/food/types";
 import { baseServing } from "@/domain/food/units";

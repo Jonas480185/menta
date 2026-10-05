@@ -25,7 +25,7 @@ export const newPasswordSchema = z
   .min(PASSWORD_MIN_LENGTH, `Das Passwort braucht mindestens ${PASSWORD_MIN_LENGTH} Zeichen.`)
   .max(PASSWORD_MAX_LENGTH, `Das Passwort darf höchstens ${PASSWORD_MAX_LENGTH} Zeichen lang sein.`);
 
-/** Existing passwords are only checked for presence – the server verifies them. */
+/** Existing passwords are only checked for presence: the server verifies them. */
 export const currentPasswordSchema = z.string().min(1, "Bitte gib dein Passwort ein.");
 
 export const loginSchema = z.object({

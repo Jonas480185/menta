@@ -18,7 +18,7 @@ export function entriesUntilTrendText(entryCount: number): string {
   return `Noch ${missing} ${missing === 1 ? "Messung" : "Messungen"} bis zur Trendlinie.`;
 }
 
-/** "−0,6 kg" – signed, one decimal. */
+/** "−0,6 kg": signed, one decimal. */
 export function formatWeightDelta(kg: number | null): string {
   return formatWeightKg(kg === null ? null : Math.abs(kg) < 0.05 ? 0 : kg, { signed: true });
 }
@@ -60,15 +60,15 @@ export function trendMessage({ entryCount, change7d, goal }: TrendMessageInput):
       return "Zielgewicht erreicht! Magst du ein neues Ziel setzen oder dein Gewicht halten?";
     }
     if (progress.direction === "maintain" && progress.inBand && direction !== "away") {
-      return "Dein Gewicht ist stabil – genau wie geplant.";
+      return "Dein Gewicht ist stabil, genau wie geplant.";
     }
     if (direction === "towards") {
       return moved
-        ? `Dein Gewichtstrend ist um ${deltaText}${NBSP}kg ${verb} – in Richtung deines Ziels.`
+        ? `Dein Gewichtstrend ist um ${deltaText}${NBSP}kg ${verb}, in Richtung deines Ziels.`
         : "Dein Gewichtstrend bewegt sich in Richtung deines Ziels.";
     }
     if (direction === "away" && moved) {
-      return `Dein Gewichtstrend ist um ${deltaText}${NBSP}kg ${verb}. Schwankungen sind normal – schau dir den Verlauf über 2–3 Wochen an.`;
+      return `Dein Gewichtstrend ist um ${deltaText}${NBSP}kg ${verb}. Schwankungen sind normal. Schau dir den Verlauf über 2 bis 3 Wochen an.`;
     }
     return "Dein Gewichtstrend ist stabil.";
   }

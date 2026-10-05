@@ -6,7 +6,7 @@ import { createAuthClient } from "better-auth/react";
  *   const { data, error } = await signIn.email({ email, password });
  *   const { data: session, isPending } = useSession();
  *
- * Errors come back as `{ code, message, status }` – map them with
+ * Errors come back as `{ code, message, status }`: map them with
  * authErrorMessage() from src/server/auth/messages.ts (German copy).
  */
 export const authClient = createAuthClient();

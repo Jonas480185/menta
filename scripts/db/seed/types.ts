@@ -1,7 +1,7 @@
 import type { Db } from "../../../src/server/db/create";
 
 /**
- * A seed step. Steps MUST be idempotent – `pnpm db:seed` is run repeatedly (after every
+ * A seed step. Steps MUST be idempotent: `pnpm db:seed` is run repeatedly (after every
  * `db:reset`, in CI, by every developer). Use upserts (`onConflictDoNothing/Update`) keyed on
  * natural keys (e.g. foods (source, source_id), user email), never blind inserts.
  */

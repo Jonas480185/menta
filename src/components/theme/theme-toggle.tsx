@@ -13,7 +13,7 @@ const OPTIONS: Record<ThemePreference, { label: string; icon: LucideIcon }> = {
 
 const subscribeNoop = () => () => {};
 
-/** true after hydration – the stored theme is unknown on the server. */
+/** true after hydration: the stored theme is unknown on the server. */
 function useMounted() {
   return useSyncExternalStore(
     subscribeNoop,

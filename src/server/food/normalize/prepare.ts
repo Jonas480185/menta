@@ -68,7 +68,7 @@ export function prepareFood(
   trusted: (f: NormalizedFood) => boolean,
 ): { ok: true; value: PreparedFood } | { ok: false; errors: ValidationIssue[] } {
   if (!PUBLIC_SOURCES.has(food.source)) {
-    // user/recipe foods have an owner (foods_owner_matches_source) – not handled here
+    // user/recipe foods have an owner (foods_owner_matches_source): not handled here
     return { ok: false, errors: [{ code: "unsupported_source", field: "source", message: `Quelle ${food.source} wird hier nicht importiert.` }] };
   }
   if (!food.sourceId) {
@@ -117,7 +117,7 @@ export interface DedupeResult {
   duplicates: number;
 }
 
-/** In-memory dedupe by key, then by barcode – the richer record wins (ties: first seen). */
+/** In-memory dedupe by key, then by barcode: the richer record wins (ties: first seen). */
 export function dedupePrepared(items: Iterable<PreparedFood>): DedupeResult {
   const byKey = new Map<string, PreparedFood>();
   const aliases = new Map<string, string>();

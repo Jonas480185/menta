@@ -13,7 +13,7 @@ export interface RecipeNutritionSummaryProps {
 
 /**
  * Per-portion hero (kcal + macro split) and the secondary facts: whole recipe, per 100 g and
- * grams per portion. Pure presentational – values come from aggregateRecipe().
+ * grams per portion. Pure presentational: values come from aggregateRecipe().
  */
 export function RecipeNutritionSummary({
   nutrition,

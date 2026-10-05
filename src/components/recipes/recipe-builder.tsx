@@ -250,7 +250,7 @@ export function RecipeBuilder({ initial }: RecipeBuilderProps) {
                   size="sm"
                   icon={<UtensilsCrossed />}
                   title="Noch keine Zutaten"
-                  description="Füge die Zutaten mit ihrer Menge hinzu – die Nährwerte rechnen wir live mit."
+                  description="Füge die Zutaten mit ihrer Menge hinzu, die Nährwerte rechnen wir live mit."
                 />
               ) : (
                 <ul aria-labelledby={ids.ingredients} className="-mx-2 flex flex-col divide-y divide-border">
@@ -263,7 +263,7 @@ export function RecipeBuilder({ initial }: RecipeBuilderProps) {
                           type="button"
                           onClick={() => openEdit(ing.key)}
                           className="flex min-h-14 min-w-0 flex-1 cursor-pointer items-center gap-3 rounded-control px-2 py-2 text-left focus-ring transition-colors duration-150 hover:bg-accent"
-                          aria-label={`${ing.food.name}, ${draftAmountLabel(ing)} – bearbeiten`}
+                          aria-label={`${ing.food.name}, ${draftAmountLabel(ing)} bearbeiten`}
                         >
                           <span className="flex min-w-0 flex-1 flex-col gap-0.5">
                             <span className="truncate text-body font-medium text-foreground">
@@ -368,7 +368,7 @@ export function RecipeBuilder({ initial }: RecipeBuilderProps) {
 function tooLowMessage(n: RecipeAggregate) {
   const min = formatGrams(Math.ceil(n.minTotalWeightG));
   return n.hasCookedWeight
-    ? `Zu niedrig für diese Zutaten – mindestens ${min}.`
+    ? `Zu niedrig für diese Zutaten, mindestens ${min}.`
     : `Bitte gib das Gewicht nach dem Kochen an (mindestens ${min}).`;
 }
 

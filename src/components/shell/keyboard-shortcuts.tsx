@@ -25,7 +25,7 @@ export function Kbd({ children, className }: { children: React.ReactNode; classN
   );
 }
 
-/** Global desktop shortcuts (n, /, 1–4, w, g, ?, ⌘K) and the "?" help dialog. */
+/** Global desktop shortcuts (n, /, 1-4, w, g, ?, ⌘K) and the "?" help dialog. */
 export function KeyboardShortcuts() {
   const router = useRouter();
   const [help, setHelp] = useState(false);

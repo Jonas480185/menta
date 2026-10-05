@@ -69,7 +69,7 @@ describe("parseBarcode", () => {
     expect(parseBarcode(" 4 000417-025005 ")?.code).toBe("4000417025005");
   });
 
-  it("treats 9–11 digit inputs as GTINs that lost leading zeros", () => {
+  it("treats 9-11 digit inputs as GTINs that lost leading zeros", () => {
     expect(parseBarcode("49000028911")?.code).toBe("0049000028911");
   });
 

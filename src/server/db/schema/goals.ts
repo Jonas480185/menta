@@ -66,7 +66,7 @@ export const goalProfiles = pgTable(
     proteinG: doublePrecision("protein_g").notNull(),
     carbsG: doublePrecision("carbs_g").notNull(),
     fatG: doublePrecision("fat_g").notNull(),
-    /** Only set when macroMode = percent (0–100, sum = 100). */
+    /** Only set when macroMode = percent (0-100, sum = 100). */
     proteinPct: doublePrecision("protein_pct"),
     carbsPct: doublePrecision("carbs_pct"),
     fatPct: doublePrecision("fat_pct"),
@@ -111,7 +111,7 @@ export const goalProfiles = pgTable(
 );
 
 /**
- * Per-day record (DailyNutrition). Consumed totals are NOT stored here – they are
+ * Per-day record (DailyNutrition). Consumed totals are NOT stored here: they are
  * aggregated from meal_entries on read. This row freezes the targets that applied
  * on that day, so changing goals later does not rewrite history.
  *
@@ -121,7 +121,7 @@ export const goalProfiles = pgTable(
  *   goals change; past days keep their snapshot.
  * - `profileOverridden` = user explicitly chose a profile for this date. If that profile is
  *   deleted later, goal_profile_id becomes null (targets stay frozen); readers treat
- *   "overridden but no profile" like "not overridden". Deliberately NOT a CHECK constraint –
+ *   "overridden but no profile" like "not overridden". Deliberately NOT a CHECK constraint:
  *   it would make the ON DELETE SET NULL fail.
  */
 export const dailyNutrition = pgTable(

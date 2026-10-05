@@ -35,7 +35,7 @@ export interface UseActionReturn<TData, TArgs extends unknown[]> {
   execute: (...args: TArgs) => Promise<ActionResult<TData>>;
   isPending: boolean;
   error: ActionError | null;
-  /** Always an object (empty when no errors) – `fieldErrors.grams?.[0]`. */
+  /** Always an object (empty when no errors): `fieldErrors.grams?.[0]`. */
   fieldErrors: FieldErrors;
   data: TData | undefined;
   reset: () => void;

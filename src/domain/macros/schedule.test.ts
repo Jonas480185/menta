@@ -14,7 +14,7 @@ describe("normalizeWeekdays", () => {
     expect(normalizeWeekdays([])).toEqual([]);
   });
 
-  it("rejects values outside 1–7", () => {
+  it("rejects values outside 1-7", () => {
     expect(() => normalizeWeekdays([0])).toThrow(MacroInputError);
     expect(() => normalizeWeekdays([8])).toThrow(MacroInputError);
     expect(() => normalizeWeekdays([1.5])).toThrow(MacroInputError);
@@ -65,7 +65,7 @@ describe("findWeekdayConflicts / validateWeekdaySchedule", () => {
   });
 });
 
-describe("pickDayProfile – precedence", () => {
+describe("pickDayProfile: precedence", () => {
   const all = [
     { id: "def", isDefault: true, weekdays: [], archived: false },
     { id: "train", isDefault: false, weekdays: [1, 3], archived: false },

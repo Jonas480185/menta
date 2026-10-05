@@ -11,7 +11,7 @@
  *   pnpm exec tsx scripts/food/import-off.ts --file=openfoodfacts-products.jsonl.gz [--country=en:germany|all] [--limit=N]
  *   … [--dry-run]
  *
- * Data: © Open Food Facts contributors, ODbL 1.0 – attribution required in the UI.
+ * Data: © Open Food Facts contributors, ODbL 1.0, attribution required in the UI.
  */
 import "dotenv/config";
 import { fetchOffPopularProducts, fetchOffSearchALiciousProducts } from "../../src/server/food/import/off-api";

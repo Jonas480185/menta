@@ -2,7 +2,7 @@ import { z } from "@/lib/zod";
 import { BODY_LIMITS } from "./constants";
 
 /**
- * Zod schemas for calorie input – shared by server actions and client forms (German messages).
+ * Zod schemas for calorie input: shared by server actions and client forms (German messages).
  * Ranges come from BODY_LIMITS (height/weight = DB CHECKs).
  */
 
@@ -68,7 +68,7 @@ export const TimezoneSchema = z
   }, "Bitte eine gültige Zeitzone wählen.");
 
 /**
- * Patch for `updateProfile()` (src/server/services/profile) – every field optional, unknown keys
+ * Patch for `updateProfile()` (src/server/services/profile): every field optional, unknown keys
  * rejected (bmr/tdee/onboarding timestamps are not user-editable). Ranges match the DB CHECKs.
  * Cross-field rules that need the stored row (gain + fast, age on "today") live in the service.
  */
@@ -95,7 +95,7 @@ export const ProfilePatchSchema = z
 export type ProfilePatch = z.infer<typeof ProfilePatchSchema>;
 
 /**
- * Values that override the stored profile for a single calculation – lets onboarding/settings
+ * Values that override the stored profile for a single calculation: lets onboarding/settings
  * preview the result before saving. `weightKg` replaces the current weight, `ageYears` wins over
  * `birthDate`.
  */

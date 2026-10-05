@@ -1,6 +1,6 @@
 /**
  * Core nutrition value types shared by every domain module.
- * Pure TypeScript – no framework or DB imports allowed in src/domain/**.
+ * Pure TypeScript: no framework or DB imports allowed in src/domain/**.
  *
  * Units: energy kcal, macros g, sodium/minerals mg.
  */
@@ -24,7 +24,7 @@ export interface NutrientTotals extends Macros {
 }
 
 /**
- * Nutrients per 100 units of the food's basis (100 g or 100 ml) – the "FoodNutrients"
+ * Nutrients per 100 units of the food's basis (100 g or 100 ml): the "FoodNutrients"
  * value object stored on every food.
  */
 export interface NutrientProfile extends Macros {
@@ -50,7 +50,7 @@ export interface DailyTargets extends Macros {
   goalProfileName: string | null;
 }
 
-/** Optional nutrients of NutrientTotals – `null` means "unknown", never "zero". */
+/** Optional nutrients of NutrientTotals: `null` means "unknown", never "zero". */
 export const OPTIONAL_TOTAL_KEYS = ["fiberG", "sugarG", "saturatedFatG", "sodiumMg"] as const;
 export type OptionalTotalKey = (typeof OPTIONAL_TOTAL_KEYS)[number];
 

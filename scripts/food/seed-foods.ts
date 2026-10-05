@@ -27,7 +27,7 @@ export async function seedFoods(db: Db, opts: SeedFoodsOptions = {}): Promise<{ 
   const log = opts.log ?? ((m: string) => console.log(m));
   const manifest = await readSnapshotManifest(dir);
   if (!manifest) {
-    log(`no food snapshot in ${dir} – run scripts/food/build-seed-snapshot.ts`);
+    log(`no food snapshot in ${dir}: run scripts/food/build-seed-snapshot.ts`);
     return { inserted: 0, updated: 0 };
   }
   const fetchedAt = new Date(manifest.builtAt);

@@ -50,10 +50,10 @@ export interface WeightTrend {
   /** Trend change over 7 / 30 days (kg, negative = decreasing). */
   change7d: number | null;
   change30d: number | null;
-  /** kg/week from the last 14–28 days of the trend, null with too little data. */
+  /** kg/week from the last 14-28 days of the trend, null with too little data. */
   weeklyRate: number | null;
   goal: WeightGoalSummary | null;
-  /** Number of entries up to `to` (all time) – < 3 → UI shows no trend line yet. */
+  /** Number of entries up to `to` (all time): < 3 → UI shows no trend line yet. */
   entryCount: number;
   firstEntryDate: IsoDate | null;
 }

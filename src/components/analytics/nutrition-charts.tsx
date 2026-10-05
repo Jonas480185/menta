@@ -22,7 +22,7 @@ function tip(unit: string) {
 }
 
 /**
- * Dashed goal line. `extendDomain` stretches the y-axis up to the goal – without it Recharts silently
+ * Dashed goal line. `extendDomain` stretches the y-axis up to the goal: without it Recharts silently
  * drops the line whenever every logged day stays below the goal.
  */
 function TargetLine({ y }: { y: number }) {

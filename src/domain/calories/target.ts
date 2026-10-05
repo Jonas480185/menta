@@ -103,23 +103,23 @@ export function weeklyChangeKgFor(dailyBalanceKcal: number): number {
 
 export const WARNING_MESSAGES = {
   deficitCapped: (maxDeficit: number) =>
-    `Dein Defizit ist auf ${formatSignedKcal(-maxDeficit)} begrenzt – höchstens 25 % deines Erhaltungsbedarfs. So bleibt es gut durchhaltbar.`,
+    `Dein Defizit ist auf ${formatSignedKcal(-maxDeficit)} begrenzt, also höchstens 25 % deines Erhaltungsbedarfs. So bleibt es gut durchhaltbar.`,
   floorApplied: (floor: number) =>
-    `Dein Tagesziel bleibt bei mindestens ${formatKcal(floor)}. Weniger empfehlen wir nicht ohne ärztliche Begleitung – dafür geht es etwas langsamer voran.`,
+    `Dein Tagesziel bleibt bei mindestens ${formatKcal(floor)}. Weniger empfehlen wir nicht ohne ärztliche Begleitung. Dafür geht es etwas langsamer voran.`,
   lowMaintenance: () =>
     "Dein geschätzter Erhaltungsbedarf ist sehr niedrig. Sprich bei Unsicherheit gern mit einer Ärztin oder einem Arzt.",
   targetAboveCurrent: () =>
-    "Dein Zielgewicht liegt über deinem aktuellen Gewicht. Passt „Abnehmen“ als Ziel – oder möchtest du lieber halten oder zunehmen?",
+    "Dein Zielgewicht liegt über deinem aktuellen Gewicht. Passt „Abnehmen“ als Ziel, oder möchtest du lieber halten oder zunehmen?",
   targetBelowCurrent: () =>
-    "Dein Zielgewicht liegt unter deinem aktuellen Gewicht. Passt „Zunehmen“ als Ziel – oder möchtest du lieber halten oder abnehmen?",
+    "Dein Zielgewicht liegt unter deinem aktuellen Gewicht. Passt „Zunehmen“ als Ziel, oder möchtest du lieber halten oder abnehmen?",
   goalReached: () => "Du bist schon bei deinem Zielgewicht. Magst du auf „Gewicht halten“ wechseln?",
   paceAdjusted: () =>
-    "Beim Zunehmen empfehlen wir höchstens ein moderates Tempo – wir rechnen deshalb mit „Moderat“.",
+    "Beim Zunehmen empfehlen wir höchstens ein moderates Tempo. Wir rechnen deshalb mit „Moderat“.",
   calculatorFallback: (name: string, fallbackName: string) =>
-    `Für ${name} fehlt ein gültiger Körperfettanteil – wir rechnen deshalb mit ${fallbackName}.`,
+    `Für ${name} fehlt ein gültiger Körperfettanteil. Wir rechnen deshalb mit ${fallbackName}.`,
   underAdultAge: () =>
-    "Die Formeln wurden für Erwachsene entwickelt. Im Wachstum ist der Bedarf oft höher – sprich im Zweifel mit einer Ärztin oder einem Arzt.",
-  overAdultAge: () => "Die Formeln sind für dein Alter wenig erprobt – nimm das Ergebnis als groben Richtwert.",
+    "Die Formeln wurden für Erwachsene entwickelt. Im Wachstum ist der Bedarf oft höher. Sprich im Zweifel mit einer Ärztin oder einem Arzt.",
+  overAdultAge: () => "Die Formeln sind für dein Alter wenig erprobt. Nimm das Ergebnis als groben Richtwert.",
 } as const;
 
 /** Treat |current − target| below this as "already there" (kg). */
@@ -130,7 +130,7 @@ export interface ComputeTargetInput {
   bmr: number;
   profile: BodyProfile;
   goal: GoalSettings;
-  /** Warnings produced before this step (e.g. calculator fallback) – kept first. */
+  /** Warnings produced before this step (e.g. calculator fallback): kept first. */
   warnings?: CalorieWarning[];
 }
 
@@ -171,7 +171,7 @@ export function computeCalorieTarget(input: ComputeTargetInput): CalorieCalculat
   // 2) Target = rounded TDEE + adjustment, rounded to 10 kcal ("2.798 − 500 = 2.300").
   let target = round10(roundedTdee + adjustment);
 
-  // 3) Safety floor – only relevant when eating in a deficit.
+  // 3) Safety floor: only relevant when eating in a deficit.
   const floorKcal = safetyFloorKcal(profile, bmr, tdee);
   let floorApplied = false;
   if (adjustment < 0 && target < floorKcal) {

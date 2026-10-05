@@ -1,5 +1,5 @@
 /**
- * Goals service: goal profiles ("day profiles") – read, upsert default, create,
+ * Goals service: goal profiles ("day profiles"), read, upsert default, create,
  * update, archive, weekday schedule. Macro math is delegated to src/domain/macros.
  *
  * IMPORTANT for callers (server actions): every successful write here changes which
@@ -52,12 +52,12 @@ export interface GoalProfileWriteResult {
 const DEFAULT_PROFILE_NAME = "Standard";
 const MSG_ARCHIVED = "Archivierte Profile können nicht mehr bearbeitet werden.";
 const MSG_DEFAULT_WEEKDAYS =
-  "Dein Standardprofil gilt automatisch an allen Tagen ohne eigenes Profil – ihm werden keine Wochentage zugeordnet.";
+  "Dein Standardprofil gilt automatisch an allen Tagen ohne eigenes Profil, deshalb werden ihm keine Wochentage zugeordnet.";
 const MSG_NO_DEFAULT = "Lege zuerst dein Standardziel fest.";
 
 // ── Reads ───────────────────────────────────────────────────────────────────
 
-/** The user's profiles – default first, then by creation. Archived ones only on request. */
+/** The user's profiles: default first, then by creation. Archived ones only on request. */
 export async function listGoalProfiles(
   ctx: ServiceContext,
   opts: { includeArchived?: boolean } = {},
@@ -270,7 +270,7 @@ export async function updateGoalProfile(
 }
 
 /**
- * Archives a profile (soft delete – past daily_nutrition snapshots keep referencing it; overrides
+ * Archives a profile (soft delete: past daily_nutrition snapshots keep referencing it; overrides
  * to it fall back to schedule/default). The default profile can't be archived → VALIDATION.
  * Idempotent for already archived profiles.
  */
@@ -281,7 +281,7 @@ export async function archiveGoalProfile(ctx: ServiceContext, id: string): Promi
     if (current.isDefault) {
       throw new AppError(
         "VALIDATION",
-        "Dein Standardprofil kann nicht archiviert werden – du kannst es aber jederzeit anpassen.",
+        "Dein Standardprofil kann nicht archiviert werden, du kannst es aber jederzeit anpassen.",
       );
     }
     if (current.archivedAt) return current;

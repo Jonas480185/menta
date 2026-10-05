@@ -89,7 +89,7 @@ export default async function RecipeDetailPage({ params }: PageProps<"/recipes/[
           <NutrientTable n={nutrition.per100g} incomplete={nutrition.incomplete} />
           {nutrition.incomplete.length > 0 && (
             <p className="mt-3 text-caption text-muted-foreground">
-              „mind.“ – nicht für alle Zutaten sind diese Werte bekannt.
+              „mind.“ bedeutet: Nicht für alle Zutaten sind diese Werte bekannt.
             </p>
           )}
         </CardContent>

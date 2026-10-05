@@ -18,5 +18,5 @@ export function useMediaQuery(query: string): boolean {
   );
 }
 
-/** Tailwind `lg` (1024 px) – where the sidebar replaces the bottom nav. */
+/** Tailwind `lg` (1024 px): where the sidebar replaces the bottom nav. */
 export const DESKTOP_QUERY = "(min-width: 1024px)";

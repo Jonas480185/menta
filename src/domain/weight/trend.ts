@@ -1,7 +1,7 @@
 import { addDays, type IsoDate } from "@/lib/dates";
 
 /**
- * Weight trend math (pure). Daily scale readings are noisy (water, salt, digestion: ±1–2 kg),
+ * Weight trend math (pure). Daily scale readings are noisy (water, salt, digestion: ±1-2 kg),
  * so everything user-facing is built on a smoothed trend rather than single readings.
  *
  * Dates are ISO calendar days ("YYYY-MM-DD", the user's local day). Weights in kg.
@@ -78,7 +78,7 @@ export interface TrendOptions {
 /**
  * Exponentially smoothed trend, one value per calendar day from the first entry up to the
  * last entry (or `until`, if later). Gap-aware: after a gap of `g` days the next entry is
- * weighted with `1 − (1 − alpha)^g` – exactly what `g` daily updates would do – so weekly
+ * weighted with `1 − (1 − alpha)^g`, exactly what `g` daily updates would do, so weekly
  * weighers get a responsive trend and daily weighers a calm one. Days without an entry carry
  * the last trend value. The first entry seeds the trend.
  */
@@ -121,7 +121,7 @@ export const WEEKLY_RATE_MIN_POINTS = 3;
 
 /**
  * Rate of change in kg/week: least-squares slope over the trend points of the last
- * 14–28 calendar days (ending at the latest point). Pass trend values on measured days
+ * 14-28 calendar days (ending at the latest point). Pass trend values on measured days
  * (carried-forward gap days would flatten the slope). Negative = decreasing.
  * `null` when the points cover fewer than 14 days or there are fewer than 3 points.
  */

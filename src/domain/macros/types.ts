@@ -1,5 +1,5 @@
 /**
- * Macro Engine – shared types. Pure TypeScript (no framework/DB imports).
+ * Macro Engine: shared types. Pure TypeScript (no framework/DB imports).
  * Units: energy kcal, macros g. Energy factors 4/4/9 (see KCAL_PER_G).
  *
  * Docs: docs/architecture/macro-engine.md
@@ -8,7 +8,7 @@ import type { Macros } from "@/domain/nutrition/types";
 
 export type { Macros };
 
-/** Share of energy per macro in percent (0–100); protein + carbs + fat = 100. */
+/** Share of energy per macro in percent (0-100); protein + carbs + fat = 100. */
 export interface MacroPercents {
   protein: number;
   carbs: number;
@@ -34,7 +34,7 @@ export type DayProfileKind = "default" | "training" | "rest" | "high_carb" | "lo
 export type MacroWarningCode =
   /** Protein + fat alone exceed the calorie target → carbs clamped to 0. */
   | "carbs_negative"
-  /** Carbs < 50 g/day – fine for keto, but worth a hint. */
+  /** Carbs < 50 g/day: fine for keto, but worth a hint. */
   | "carbs_very_low"
   /** Fat below ~0.5 g/kg or < 20 % kcal (hormonal health). */
   | "fat_low"
@@ -49,7 +49,7 @@ export interface MacroWarning {
   message: string;
 }
 
-/** Result of every target calculation – the "these macros equal X kcal" transparency payload. */
+/** Result of every target calculation: the "these macros equal X kcal" transparency payload. */
 export interface MacroCalculation {
   /** The calorie target the grams were fitted to. */
   kcal: number;
@@ -59,7 +59,7 @@ export interface MacroCalculation {
   macroKcal: number;
   /** macroKcal − kcal (usually −2 … +2). */
   diffKcal: number;
-  /** Effective energy shares of the rounded grams (unrounded, sum = 100 – round for display only). */
+  /** Effective energy shares of the rounded grams (unrounded, sum = 100: round for display only). */
   percents: MacroPercents;
   warnings: MacroWarning[];
 }

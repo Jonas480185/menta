@@ -81,8 +81,8 @@ export async function weightForEstimates(
 }
 
 /**
- * Logs an activity. With `metKey` the name/type come from the MET table and – unless `caloriesBurned`
- * is given – the kcal are estimated as (MET − 1) × current weight × hours. A custom activity needs a
+ * Logs an activity. With `metKey` the name/type come from the MET table and: unless `caloriesBurned`
+ * is given: the kcal are estimated as (MET − 1) × current weight × hours. A custom activity needs a
  * `name` and `caloriesBurned`.
  */
 export async function addActivity(ctx: ServiceContext, input: AddActivityInput): Promise<ActivityEntry> {

@@ -41,7 +41,7 @@ export function kcalFromGrams(grams: Macros): number {
   return grams.proteinG * KCAL_PER_G.protein + grams.carbsG * KCAL_PER_G.carbs + grams.fatG * KCAL_PER_G.fat;
 }
 
-/** Energy per macro plus total – for "150 g Protein = 600 kcal" style breakdowns. */
+/** Energy per macro plus total: for "150 g Protein = 600 kcal" style breakdowns. */
 export function macroEnergyBreakdown(grams: Macros): {
   proteinKcal: number;
   carbsKcal: number;
@@ -151,7 +151,7 @@ export function macrosFromPercent(kcal: number, percents: MacroPercents): MacroC
  * Grams mode: protein and fat are fixed by the user (rounded to whole grams, never adjusted),
  * carbs fill the remaining energy: C = (kcal − 4P − 9F) / 4.
  * If protein + fat already exceed the target, carbs are 0 and the result carries a
- * `carbs_negative` warning (macroKcal > kcal) – services reject that case.
+ * `carbs_negative` warning (macroKcal > kcal): services reject that case.
  */
 export function macrosFromGrams(
   kcal: number,
@@ -169,7 +169,7 @@ export function macrosFromGrams(
     calc.warnings = [
       {
         code: "carbs_negative",
-        message: `Protein und Fett ergeben schon ${formatInt(calc.macroKcal)} kcal – ${formatInt(over)} kcal mehr als dein Ziel. Reduziere Protein oder Fett, oder erhöhe das Kalorienziel.`,
+        message: `Protein und Fett ergeben schon ${formatInt(calc.macroKcal)} kcal, also ${formatInt(over)} kcal mehr als dein Ziel. Reduziere Protein oder Fett, oder erhöhe das Kalorienziel.`,
       },
       ...calc.warnings.filter((w) => w.code !== "carbs_very_low"),
     ];
@@ -179,7 +179,7 @@ export function macrosFromGrams(
 
 // ── Shared helpers ──────────────────────────────────────────────────────────
 
-/** Validates percents (each 0–100, sum 100 ± 0.5) and scales them to sum exactly 100. */
+/** Validates percents (each 0-100, sum 100 ± 0.5) and scales them to sum exactly 100. */
 export function normalizePercents(percents: MacroPercents): MacroPercents {
   for (const key of ["protein", "carbs", "fat"] as const) {
     const v = percents[key];
@@ -235,7 +235,7 @@ export function assessMacros(kcal: number, macros: Macros, weightKg?: number): M
   if (macros.carbsG < VERY_LOW_CARBS_G) {
     warnings.push({
       code: "carbs_very_low",
-      message: "Sehr wenig Kohlenhydrate – passt zu Keto, für Training kann Energie fehlen.",
+      message: "Sehr wenig Kohlenhydrate. Passt zu Keto, für Training kann Energie fehlen.",
     });
   }
   const fatShare = kcal > 0 ? (macros.fatG * KCAL_PER_G.fat) / kcal : 0;
@@ -244,7 +244,7 @@ export function assessMacros(kcal: number, macros: Macros, weightKg?: number): M
     warnings.push({
       code: "fat_low",
       message:
-        "Wenig Fett – für Hormone und fettlösliche Vitamine sind mindestens ~20 % der Kalorien sinnvoll.",
+        "Wenig Fett. Für Hormone und fettlösliche Vitamine sind mindestens ~20 % der Kalorien sinnvoll.",
     });
   }
   if (weightKg && macros.proteinG / weightKg > 2.5) {

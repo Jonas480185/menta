@@ -1,6 +1,6 @@
 /**
  * TypeScript mirror of the design tokens that JS needs (Recharts, motion, SVG rings).
- * Values are CSS variable references, so they follow light/dark automatically –
+ * Values are CSS variable references, so they follow light/dark automatically:
  * never copy hex values into components. Source of truth: src/app/globals.css.
  */
 
@@ -23,7 +23,7 @@ export interface NutrientColor {
   fill: string;
   /** Tinted background for chips, badges, highlighted rows. */
   soft: string;
-  /** Colored text – AA on card, background and `soft`. */
+  /** Colored text: AA on card, background and `soft`. */
   strong: string;
 }
 
@@ -52,7 +52,7 @@ export const chartColors = {
   },
 } as const;
 
-/** Durations in seconds (motion) – mirror of --duration-* in globals.css. */
+/** Durations in seconds (motion): mirror of --duration-* in globals.css. */
 export const duration = {
   instant: 0.1,
   fast: 0.15,
@@ -61,7 +61,7 @@ export const duration = {
   slower: 0.5,
 } as const;
 
-/** Cubic-bezier easings – mirror of --ease-* in globals.css. */
+/** Cubic-bezier easings: mirror of --ease-* in globals.css. */
 export const ease = {
   out: [0.16, 1, 0.3, 1],
   in: [0.7, 0, 0.84, 0],
@@ -81,11 +81,11 @@ export const spring = {
   snappy: { type: "spring", stiffness: 500, damping: 32, mass: 1 },
   /** Sheets, cards, layout shifts. */
   gentle: { type: "spring", stiffness: 220, damping: 28, mass: 1 },
-  /** Celebration (goal reached, Milo) – the one place for extra bounce. */
+  /** Celebration (goal reached, Milo): the one place for extra bounce. */
   bouncy: { type: "spring", stiffness: 380, damping: 16, mass: 1 },
 } as const;
 
-/** Theme colors for <meta name="theme-color"> – must equal --background. */
+/** Theme colors for <meta name="theme-color">: must equal --background. */
 export const themeColor = {
   light: "#f6f8f7",
   dark: "#0b0f0e",

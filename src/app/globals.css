@@ -13,7 +13,7 @@
  *
  *  Token NAMES are a contract (components build on them). Add, never rename.
  *  Components use semantic utilities only: bg-card, text-muted-foreground,
- *  (text-primary-strong for mint text – text-primary is fill-only on light),
+ *  (text-primary-strong for mint text: text-primary is fill-only on light),
  *  bg-protein-soft text-protein-strong, shadow-md, rounded-card, ease-spring …
  *  Never raw hex / Tailwind palette classes (bg-zinc-100, text-emerald-600).
  *
@@ -28,7 +28,7 @@
  * 1 · PRIMITIVES (theme-independent)
  * ------------------------------------------------------------------------- */
 :root {
-  /* Mint – brand hue (≈158°). 500 is the signature #1FC98E. */
+  /* Mint: brand hue (≈158°). 500 is the signature #1FC98E. */
   --mint-50: #edfbf5;
   --mint-100: #d2f6e7;
   --mint-200: #a6ecd1;
@@ -41,7 +41,7 @@
   --mint-900: #0b4d38;
   --mint-950: #042b1f;
 
-  /* Ink – cool neutral (zinc/slate blend). */
+  /* Ink: cool neutral (zinc/slate blend). */
   --ink-0: #ffffff;
   --ink-25: #fafbfb;
   --ink-50: #f6f8f7;
@@ -86,7 +86,7 @@
 }
 
 /* ---------------------------------------------------------------------------
- * 2 · SEMANTICS – LIGHT   (`.light` = force-light island inside dark UI)
+ * 2 · SEMANTICS: LIGHT   (`.light` = force-light island inside dark UI)
  * ------------------------------------------------------------------------- */
 :root,
 .light {
@@ -107,7 +107,7 @@
   --surface-3: var(--ink-0); /* dialog, toast */
 
   /* Brand & actions */
-  --brand: var(--mint-500); /* signature mint – fills, illustrations, ring */
+  --brand: var(--mint-500); /* signature mint: fills, illustrations, ring */
   --brand-foreground: var(--ink-950);
   --primary: var(--mint-500); /* Menta Mint: CTA fill, never text on light */
   --primary-foreground: var(--ink-950); /* ink on mint (white on mint fails) */
@@ -145,7 +145,7 @@
   --scrollbar-thumb: var(--ink-300);
 
   /*
-   * Nutrition semantics – three shades each:
+   * Nutrition semantics: three shades each:
    *   --x          graphic fill (ring, bar, dot, chart series, icon)
    *   --x-soft     tinted background (chips, badges, highlighted rows)
    *   --x-strong   colored TEXT, AA on card, background and --x-soft
@@ -188,7 +188,7 @@
   --chart-axis: var(--ink-600);
   --chart-target: var(--ink-500);
 
-  /* Elevation shadows – soft, layered, cool-tinted */
+  /* Elevation shadows: soft, layered, cool-tinted */
   --elevation-xs: 0 0 0 1px rgb(16 24 40 / 0.045), 0 1px 2px 0 rgb(16 24 40 / 0.05);
   --elevation-sm: 0 0 0 1px rgb(16 24 40 / 0.045), 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 1px 3px 0 rgb(16 24 40 / 0.06);
   --elevation-md: 0 0 0 1px rgb(16 24 40 / 0.05), 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 4px 12px -2px rgb(16 24 40 / 0.08);
@@ -197,7 +197,7 @@
 }
 
 /* ---------------------------------------------------------------------------
- * 2 · SEMANTICS – DARK (near-black, elevation by lighter tints + hairlines)
+ * 2 · SEMANTICS: DARK (near-black, elevation by lighter tints + hairlines)
  * ------------------------------------------------------------------------- */
 .dark {
   color-scheme: dark;
@@ -281,7 +281,7 @@
   --chart-axis: #9aa3a0;
   --chart-target: #7a8481;
 
-  /* Dark: shadows barely read – a top highlight + deep shadow does the lifting */
+  /* Dark: shadows barely read, a top highlight + deep shadow does the lifting */
   --elevation-xs: inset 0 0 0 1px rgb(255 255 255 / 0.045), 0 1px 2px 0 rgb(0 0 0 / 0.4);
   --elevation-sm: inset 0 0 0 1px rgb(255 255 255 / 0.05), 0 1px 2px 0 rgb(0 0 0 / 0.45);
   --elevation-md: inset 0 0 0 1px rgb(255 255 255 / 0.07), 0 4px 12px -2px rgb(0 0 0 / 0.5);
@@ -373,18 +373,18 @@
   --color-chart-target: var(--chart-target);
 
   /* Radius (skeleton names kept; card = xl = 20px) */
-  --radius-xs: calc(var(--radius) - 10px); /*  6px – checkbox, tiny tags */
-  --radius-sm: calc(var(--radius) - 6px); /* 10px – chips, small buttons */
-  --radius-md: calc(var(--radius) - 4px); /* 12px – buttons, inputs */
-  --radius-lg: var(--radius); /* 16px – list rows, tiles */
-  --radius-xl: calc(var(--radius) + 4px); /* 20px – cards */
-  --radius-2xl: calc(var(--radius) + 8px); /* 24px – hero cards */
-  --radius-3xl: calc(var(--radius) + 12px); /* 28px – bottom sheet top */
+  --radius-xs: calc(var(--radius) - 10px); /*  6px: checkbox, tiny tags */
+  --radius-sm: calc(var(--radius) - 6px); /* 10px: chips, small buttons */
+  --radius-md: calc(var(--radius) - 4px); /* 12px: buttons, inputs */
+  --radius-lg: var(--radius); /* 16px: list rows, tiles */
+  --radius-xl: calc(var(--radius) + 4px); /* 20px: cards */
+  --radius-2xl: calc(var(--radius) + 8px); /* 24px: hero cards */
+  --radius-3xl: calc(var(--radius) + 12px); /* 28px: bottom sheet top */
   --radius-control: var(--radius-md);
   --radius-card: var(--radius-xl);
   --radius-sheet: var(--radius-3xl);
 
-  /* Shadows – theme-aware via --elevation-* */
+  /* Shadows: theme-aware via --elevation-* */
   --shadow-xs: var(--elevation-xs);
   --shadow-sm: var(--elevation-sm);
   --shadow-md: var(--elevation-md);
@@ -708,7 +708,7 @@
     touch-action: manipulation;
   }
 
-  /* Search inputs bring their own clear button – hide the native one (WebKit/Blink). */
+  /* Search inputs bring their own clear button: hide the native one (WebKit/Blink). */
   input[type="search"]::-webkit-search-cancel-button,
   input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;

@@ -2,7 +2,7 @@ import type { NutrientBasis, NutrientProfile } from "@/domain/nutrition/types";
 
 /**
  * Food Provider contract. The application only ever talks to providers through this
- * interface and only ever consumes the normalized shapes below – never raw provider JSON.
+ * interface and only ever consumes the normalized shapes below: never raw provider JSON.
  *
  * Implementations: OpenFoodFactsProvider, UsdaProvider, LocalFoodProvider,
  * UserFoodProvider. Orchestration/ranking across providers lives in the Food Search

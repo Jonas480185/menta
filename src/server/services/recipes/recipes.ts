@@ -198,7 +198,7 @@ function assertPlausible(agg: RecipeAggregate) {
   if (agg.totalWeightG + 1e-6 >= agg.minTotalWeightG) return;
   const min = `${formatNumber(Math.ceil(agg.minTotalWeightG))}${NBSP}g`;
   if (agg.hasCookedWeight) {
-    const message = `Das Gewicht nach dem Kochen ist zu niedrig – bei diesen Zutaten mindestens ${min}.`;
+    const message = `Das Gewicht nach dem Kochen ist zu niedrig, bei diesen Zutaten mindestens ${min}.`;
     throw validationError({ totalWeightG: [message] }, message);
   }
   const message = `Die Nährwerte pro 100 g wären unplausibel hoch. Bitte gib das Gewicht nach dem Kochen an (mindestens ${min}).`;
@@ -320,7 +320,7 @@ export async function getRecipe(ctx: ServiceContext, id: string): Promise<Recipe
     .orderBy(asc(recipeIngredients.sortOrder), asc(recipeIngredients.createdAt));
 
   // Ingredients reference foods by FK, so they always exist. Visibility can only be lost if a
-  // formerly public food became private – then the ingredient is still shown (it's the user's data).
+  // formerly public food became private: then the ingredient is still shown (it's the user's data).
   const byId = await loadVisibleFoods(
     ctx.db,
     ctx.userId,

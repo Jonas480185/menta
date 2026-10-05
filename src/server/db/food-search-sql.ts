@@ -7,7 +7,7 @@ import { queryRows } from "./sql";
  * REFERENCE food search SQL. Documented in
  * docs/architecture/database.md §6 and benchmarked by scripts/db/bench-search.ts.
  *
- * Food Search builds ranking/orchestration on top of this – tune the weights,
+ * Food Search builds ranking/orchestration on top of this: tune the weights,
  * add recents/favorites boosts, but keep the WHERE clauses index-shaped:
  *
  *   - public foods: `visibility = 'public' AND NOT is_archived` must stay LITERAL SQL so the
@@ -23,13 +23,13 @@ export interface FoodSearchWeights {
   exact: number;
   /** name starts with query */
   prefix: number;
-  /** word_similarity(query, name) ∈ [0,1] – typo tolerant, query may be part of a longer name */
+  /** word_similarity(query, name) ∈ [0,1]: typo tolerant, query may be part of a longer name */
   wordSimilarity: number;
-  /** similarity(query, name) ∈ [0,1] – favours names that are not much longer than the query */
+  /** similarity(query, name) ∈ [0,1]: favours names that are not much longer than the query */
   similarity: number;
   /** word_similarity(query, brand) ∈ [0,1] */
   brand: number;
-  /** ts_rank_cd(search_vector, tsquery, 32) ∈ [0,1) – field weights A(name) > B(brand) > C(category) */
+  /** ts_rank_cd(search_vector, tsquery, 32) ∈ [0,1): field weights A(name) > B(brand) > C(category) */
   fts: number;
   /** ln(1 + popularity) / ln(1 + 1e6), capped at 1 */
   popularity: number;
@@ -154,7 +154,7 @@ export function buildFoodSearchSql(input: FoodSearchSqlInput): SQL | null {
   const qualityScore = sql`(case f.data_quality when 'verified' then 0.1 when 'suspect' then -0.3 else 0 end)`;
 
   if (nq.short) {
-    // 1–2 characters: prefix only (btree text_pattern_ops), popular first.
+    // 1-2 characters: prefix only (btree text_pattern_ops), popular first.
     const own = input.userId
       ? sql`union all
           select ${RESULT_COLUMNS},
@@ -208,7 +208,7 @@ export function buildFoodSearchSql(input: FoodSearchSqlInput): SQL | null {
               or f.name_normalized like ${nq.likePrefix}))`
     : sql``;
 
-  // Stage 1 – candidate generation: one bounded, index-driven branch per access path.
+  // Stage 1: candidate generation: one bounded, index-driven branch per access path.
   //  - exact / prefix / FTS: "most popular among matches". Their selectivity estimates are good,
   //    so for a very common token ("milch") the planner walks foods_popularity_idx backwards and
   //    stops after `cap` hits; for a rare token it bitmap-scans the index and sorts a few rows.
@@ -216,9 +216,9 @@ export function buildFoodSearchSql(input: FoodSearchSqlInput): SQL | null {
   //    sub-select → one-time filter, the branch is skipped entirely otherwise). `<%` costs
   //    ~2.5 µs/row and the planner underestimates that, so the branch sorts by `popularity + 0`
   //    (not indexable) to force the GIN bitmap instead of a long popularity-index walk or an
-  //    early-stop seq scan – both measured 50–600 ms on misestimates.
+  //    early-stop seq scan: both measured 50-600 ms on misestimates.
   //  - trigram brand: same forced-bitmap shape, always on (brand hit sets are small).
-  // UNION dedups. Stage 2 – score only the candidates (≤ sum of caps rows).
+  // UNION dedups. Stage 2: score only the candidates (≤ sum of caps rows).
   return sql`
     with fts as materialized (
       select f.id from foods f where ${PUB} and f.search_vector @@ ${tsq}

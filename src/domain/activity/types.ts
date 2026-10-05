@@ -16,7 +16,7 @@ export const ACTIVITY_SOURCES = [
 ] as const;
 export type ActivitySource = (typeof ACTIVITY_SOURCES)[number];
 
-/** Minimal shape `summarizeActivities` needs – satisfied by DB rows and DTOs alike. */
+/** Minimal shape `summarizeActivities` needs: satisfied by DB rows and DTOs alike. */
 export interface ActivityLike {
   type: ActivityType;
   source: ActivitySource;
@@ -26,11 +26,11 @@ export interface ActivityLike {
 }
 
 export interface ActivityTotals {
-  /** Sum of `calories_burned` of all rows – exactly what the daily budget adds (see nutrition engine). */
+  /** Sum of `calories_burned` of all rows: exactly what the daily budget adds (see nutrition engine). */
   activeKcal: number;
   /** Minutes of all non-steps activities. */
   minutes: number;
-  /** Steps of the day (per source summed, then the highest source wins – see summarizeActivities). */
+  /** Steps of the day (per source summed, then the highest source wins: see summarizeActivities). */
   steps: number;
   /** Number of non-steps activities. */
   count: number;

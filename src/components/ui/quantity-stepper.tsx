@@ -17,7 +17,7 @@ export interface QuantityStepperProps extends Omit<React.ComponentProps<"div">, 
   /** Default 0. */
   min?: number;
   max?: number;
-  /** Default 1. Use 0.25 / 0.5 for servings – values render as ¼ ½ ¾. */
+  /** Default 1. Use 0.25 / 0.5 for servings: values render as ¼ ½ ¾. */
   step?: number;
   /** Accessible name of the value, e.g. "Portionen". Required. */
   label: string;

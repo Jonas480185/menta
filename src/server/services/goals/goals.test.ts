@@ -73,7 +73,7 @@ const dayProfile = (name: string, weekdays: number[] = []) => ({
   grams: { proteinG: 150, fatG: 70 },
 });
 
-describe("upsertDefaultGoalProfile – persistence consistency", () => {
+describe("upsertDefaultGoalProfile: persistence consistency", () => {
   it("percent mode: stores fitted grams + the user's percents (4P+4C+9F ≈ target)", async () => {
     const ctx = await createTestUser(db);
     const { profile, calculation } = await upsertDefaultGoalProfile(ctx, {
@@ -493,7 +493,7 @@ describe("user isolation", () => {
   });
 });
 
-describe("resolveGoalProfileForDate – precedence", () => {
+describe("resolveGoalProfileForDate: precedence", () => {
   it("returns null without any profile", async () => {
     const ctx = await createTestUser(db);
     expect(await resolveGoalProfileForDate(ctx, MONDAY)).toBeNull();

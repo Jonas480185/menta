@@ -6,7 +6,7 @@ import type { NutrientBasis, NutrientProfile } from "@/domain/nutrition/types";
  * A recipe is a list of ingredients (each: nutrients per 100 units of its basis + the amount
  * used in base units) cooked into `servings` portions. Totals are the plain sum of every
  * ingredient's contribution. The optional cooked weight (`totalWeightG`) only changes how
- * dense the dish is – i.e. the per-100 g values and the grams of one portion – never the
+ * dense the dish is, i.e. the per-100 g values and the grams of one portion, never the
  * totals or the nutrients of one portion (water evaporates, nutrients don't).
  *
  * Optional nutrients (fiber, sugar, …) follow "sum of known" semantics: ingredients without a
@@ -76,7 +76,7 @@ export interface RecipeAggregate {
   hasCookedWeight: boolean;
   /**
    * Smallest cooked weight for which the per-100 g values stay physically plausible
-   * (≤ 1000 kcal, ≤ 100 g per nutrient, P+C+F ≤ 105 g per 100 g – same limits as the foods table).
+   * (≤ 1000 kcal, ≤ 100 g per nutrient, P+C+F ≤ 105 g per 100 g: same limits as the foods table).
    */
   minTotalWeightG: number;
   /** Optional nutrients known for some but not all ingredients (totals are a lower bound). */
@@ -203,7 +203,7 @@ export function minPlausibleWeightG(totals: RecipeNutrients): number {
  * Aggregates ingredient nutrients into totals, per-portion and per-100 g values.
  * Throws `RecipeInputError` for invalid input. An empty ingredient list yields zeros
  * (useful for a live summary while building); services require at least one ingredient.
- * No rounding – round only for display.
+ * No rounding: round only for display.
  */
 export function aggregateRecipe(input: AggregateRecipeInput): RecipeAggregate {
   validate(input);

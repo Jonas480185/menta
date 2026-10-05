@@ -18,7 +18,7 @@ const wrapperClasses = [
 const variantClasses = {
   /** Outlined field on cards and sheets (forms). */
   default: { plain: "h-11 px-3.5", wrapper: "h-11 border-input bg-card" },
-  /** Borderless inset well, 48 px – the food search field. */
+  /** Borderless inset well, 48 px: the food search field. */
   inset: {
     plain: "h-12 border-transparent bg-surface-inset px-4",
     wrapper: "h-12 border-transparent bg-surface-inset px-4",

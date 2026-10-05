@@ -3,7 +3,7 @@
  * - `readCachedOffPages`: products from search pages cached by off-api.ts (data/raw/off):
  *   v2 search pages (`api-*.json`, `products`) and search-a-licious pages (`sal-*.json`, `hits`).
  * - `readOffJsonl`: streams the official JSONL dump (`openfoodfacts-products.jsonl.gz`,
- *   ~7 GB gzipped / 3.5 M products) line by line – constant memory, optional country filter.
+ *   ~7 GB gzipped / 3.5 M products) line by line: constant memory, optional country filter.
  *
  * Data: © Open Food Facts contributors, Open Database License (ODbL) 1.0.
  */

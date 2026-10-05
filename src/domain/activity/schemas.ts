@@ -42,7 +42,7 @@ const NameSchema = z
   .max(ACTIVITY_LIMITS.name.max, "Maximal 60 Zeichen.");
 
 /**
- * New activity. Either `metKey` (from the MET table – name/type/kcal derived) or a custom `name`
+ * New activity. Either `metKey` (from the MET table: name/type/kcal derived) or a custom `name`
  * with explicit `caloriesBurned`. `caloriesBurned` always overrides the estimate.
  */
 export const AddActivitySchema = z
@@ -103,7 +103,7 @@ export const AddWaterSchema = z.object({
     .int("Bitte ganze Milliliter angeben.")
     .min(ACTIVITY_LIMITS.waterMl.min, "Mindestens 1 ml.")
     .max(ACTIVITY_LIMITS.waterMl.max, "Maximal 5.000 ml pro Eintrag."),
-  /** ISO timestamp – set when restoring a deleted entry (undo). */
+  /** ISO timestamp: set when restoring a deleted entry (undo). */
   loggedAt: z.iso.datetime({ offset: true }).optional(),
 });
 export type AddWaterInput = z.input<typeof AddWaterSchema>;
@@ -115,7 +115,7 @@ export const WaterGoalSchema = z
   .max(ACTIVITY_LIMITS.waterGoalMl.max, "Maximal 10.000 ml.");
 
 /**
- * One activity (or daily steps row) delivered by an integration provider. Validated before import –
+ * One activity (or daily steps row) delivered by an integration provider. Validated before import:
  * provider payloads are external input.
  */
 export const ActivityImportItemSchema = z.object({

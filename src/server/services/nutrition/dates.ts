@@ -2,7 +2,7 @@ import { ISO_DATE_RE, todayInTimezone, type IsoDate } from "@/lib/dates";
 import { validationError } from "@/lib/errors";
 import type { ServiceContext } from "@/server/context";
 
-/** "Today" in the user's timezone – the boundary between frozen (past) and live days. */
+/** "Today" in the user's timezone: the boundary between frozen (past) and live days. */
 export function todayFor(ctx: ServiceContext): IsoDate {
   return todayInTimezone(ctx.timezone);
 }

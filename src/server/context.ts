@@ -2,7 +2,7 @@ import type { DbOrTx } from "./db/create";
 
 /**
  * Every server-side service function takes a ServiceContext as its first argument.
- * Services never read cookies/sessions themselves – that keeps them unit-testable
+ * Services never read cookies/sessions themselves: that keeps them unit-testable
  * against an in-memory database (see src/test/db.ts).
  *
  *   await addEntry(ctx, input)

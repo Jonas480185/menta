@@ -34,7 +34,7 @@ export interface WeekStripProps {
 }
 
 /**
- * Week at a glance (Yazio / MyFitnessPal pattern): Mon–Sun with a mini kcal ring per day.
+ * Week at a glance (Yazio / MyFitnessPal pattern): Mon-Sun with a mini kcal ring per day.
  * Tapping a past day opens it in the diary; future days are shown but not linked.
  */
 export function WeekStrip({ days, selected, today, todayHref, className }: WeekStripProps) {

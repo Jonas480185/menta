@@ -21,7 +21,7 @@ type Status = "idle" | "scanning" | "looking" | "unsupported" | "denied";
 
 /**
  * Camera scanner via the native BarcodeDetector API (Chrome/Android, Safari 17+ behind flag).
- * Always offers manual EAN entry – the lookup flow is identical.
+ * Always offers manual EAN entry: the lookup flow is identical.
  */
 export function BarcodeScanner({ query }: { query: string }) {
   const router = useRouter();
@@ -112,7 +112,7 @@ export function BarcodeScanner({ query }: { query: string }) {
           e.preventDefault();
           const code = manual.replace(/\D/g, "");
           if (code.length >= 8) void lookup(code);
-          else setError("Bitte einen gültigen Barcode (8–14 Ziffern) eingeben.");
+          else setError("Bitte einen gültigen Barcode mit 8 bis 14 Ziffern eingeben.");
         }}
       >
         <Input aria-label="Barcode" inputMode="numeric" placeholder="z. B. 4000417025005" value={manual} onChange={(e) => setManual(e.target.value)} wrapperClassName="flex-1" />

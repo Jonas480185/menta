@@ -5,7 +5,7 @@ import { Tooltip as TooltipPrimitive } from "radix-ui";
 import { cn } from "@/lib/utils";
 
 /**
- * Tooltips only appear on hover / keyboard focus – never put essential information in
+ * Tooltips only appear on hover / keyboard focus: never put essential information in
  * them (touch users will not see it). Use them to label icon buttons on desktop.
  */
 function TooltipProvider({

@@ -94,7 +94,7 @@ export const demoDataStep: SeedStep = {
       await db.insert(waterEntries).values({ userId: u.id, date, amountMl: 1500 + ((i * 250) % 1250) });
       days++;
     }
-    // The app evaluates achievements after user actions – do it once for the seeded history.
+    // The app evaluates achievements after user actions: do it once for the seeded history.
     const unlocked = await evaluateAchievements(ctx);
     log(`demo user ${DEMO_EMAIL} / ${DEMO_PASSWORD}: ${days} days added (${found.length}/${PLAN.length} foods found), ${unlocked.length} achievements unlocked`);
   },

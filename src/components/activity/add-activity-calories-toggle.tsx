@@ -12,7 +12,7 @@ export interface AddActivityCaloriesToggleProps {
   className?: string;
 }
 
-/** "Aktivitätskalorien zum Tagesbudget addieren" – toggles user_profiles.add_activity_calories. */
+/** "Aktivitätskalorien zum Tagesbudget addieren": toggles user_profiles.add_activity_calories. */
 export function AddActivityCaloriesToggle({ enabled, className }: AddActivityCaloriesToggleProps) {
   const id = useId();
   const { execute, isPending } = useAction(setAddActivityCaloriesAction, {
@@ -34,7 +34,7 @@ export function AddActivityCaloriesToggle({ enabled, className }: AddActivityCal
       </div>
       <p className="mt-1 text-body-sm text-muted-foreground">
         Verbrannte Kalorien aus eingetragenen Aktivitäten erhöhen dann dein Kalorienziel für den Tag. Schritte
-        zählen nicht dazu – sie stecken schon in deinem Aktivitätslevel.
+        zählen nicht dazu, sie stecken schon in deinem Aktivitätslevel.
       </p>
     </div>
   );

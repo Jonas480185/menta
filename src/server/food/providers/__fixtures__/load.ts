@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-/** Loads a recorded API response from this directory (tests only – no network). */
+/** Loads a recorded API response from this directory (tests only: no network). */
 export function loadFixture<T = Record<string, unknown>>(name: string): T {
   return JSON.parse(readFileSync(path.join(__dirname, name), "utf8")) as T;
 }

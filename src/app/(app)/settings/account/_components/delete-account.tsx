@@ -51,7 +51,7 @@ export function DeleteAccount() {
 
   const onSubmit = handleSubmit(async (values) => {
     setFormError(null);
-    // On success the action redirects to /login – this component unmounts.
+    // On success the action redirects to /login: this component unmounts.
     const res = await deleteAccountAction(values);
     if (res.ok) return;
     if (res.error.fieldErrors?.password) {

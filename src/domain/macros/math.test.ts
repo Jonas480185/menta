@@ -172,7 +172,7 @@ describe("macrosFromGrams", () => {
   });
 });
 
-describe("fitMacrosToKcal – rounding strategy property test", () => {
+describe("fitMacrosToKcal: rounding strategy property test", () => {
   it("keeps 4P + 4C + 9F within ±5 kcal and all grams integer ≥ 0 over 5000 random percent inputs", () => {
     const rand = rng(42);
     for (let i = 0; i < 5000; i++) {

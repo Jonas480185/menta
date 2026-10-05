@@ -180,7 +180,7 @@ export function WaterPanel({ date, isToday, goalMl, entries, timezone }: WaterPa
         open={goalOpen}
         onOpenChange={setGoalOpen}
         title="Wasserziel"
-        description="Richtwert für Erwachsene: etwa 1,5–2,5 l am Tag, bei Hitze und Sport mehr."
+        description="Richtwert für Erwachsene: etwa 1,5 bis 2,5 l am Tag, bei Hitze und Sport mehr."
         label="Tagesziel"
         unit="ml"
         initialValue={goalMl}

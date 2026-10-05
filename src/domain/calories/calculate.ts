@@ -14,7 +14,7 @@ export interface CalculateCaloriesOptions {
 
 /**
  * Main entry point: BMR → TDEE → target for a profile and goal, with graceful calculator fallback.
- * Pure – safe to import in client components for live previews.
+ * Pure: safe to import in client components for live previews.
  *
  *   calculateCalories(
  *     { ageYears: 33, sex: "male", heightCm: 180, weightKg: 84, activityLevel: "moderate" },

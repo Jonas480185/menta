@@ -9,5 +9,5 @@ export const createHealthConnectProvider = () =>
   createUnavailableProvider(
     "health_connect",
     "Health Connect",
-    "Health Connect funktioniert nur über eine Android-App. Die kommt später – bis dahin trägst du Aktivitäten hier manuell ein.",
+    "Health Connect funktioniert nur über eine Android-App. Die kommt später, bis dahin trägst du Aktivitäten hier manuell ein.",
   );

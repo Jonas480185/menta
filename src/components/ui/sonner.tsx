@@ -14,7 +14,7 @@ export interface UndoToastOptions extends Omit<ExternalToast, "action"> {
 }
 
 /**
- * Standard "done – undo?" toast for cheap, reversible actions, e.g.
+ * Standard "done: undo?" toast for cheap, reversible actions, e.g.
  * `undoToast("Eintrag gelöscht", { onUndo: () => restore(entry) })`.
  * Prefer this over a confirm dialog when the action can be undone.
  */

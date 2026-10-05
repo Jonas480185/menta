@@ -45,7 +45,7 @@ export interface MiloBuddyProps {
   className?: string;
   /** Allow dragging Milo around (he springs back). Default true. */
   draggable?: boolean;
-  /** Called whenever Milo reacts to the user – e.g. to show the line in a speech bubble. */
+  /** Called whenever Milo reacts to the user: e.g. to show the line in a speech bubble. */
   onReact?: (line: string, reaction: MiloReaction) => void;
 }
 
@@ -419,7 +419,7 @@ export function MiloBuddy({ mood = "neutral", size = 112, className, draggable =
     [react],
   );
 
-  const label = `${MILO_LABEL[mood]} – antippen, gedrückt halten oder ziehen`;
+  const label = `${MILO_LABEL[mood]}. Antippen, gedrückt halten oder ziehen`;
 
   return (
     <motion.button

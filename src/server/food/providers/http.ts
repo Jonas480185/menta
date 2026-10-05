@@ -1,7 +1,7 @@
 /**
  * Shared HTTP helper for food providers: per-request timeout, limited retries with
  * exponential backoff on 429/5xx/network errors (honouring Retry-After) and a token-bucket
- * rate limiter per upstream endpoint. No `server-only` import – scripts use it too.
+ * rate limiter per upstream endpoint. No `server-only` import: scripts use it too.
  */
 import type { RateLimit } from "./config";
 
@@ -168,7 +168,7 @@ export async function fetchJson<T = unknown>(url: string, opts: FetchJsonOptions
         if (!err.retryable) throw err;
         lastError = err;
       } else if (opts.signal?.aborted) {
-        throw err; // caller cancelled – never retry
+        throw err; // caller cancelled: never retry
       } else {
         const isTimeout = timeout.aborted;
         lastError = new HttpError(

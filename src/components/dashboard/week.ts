@@ -15,7 +15,7 @@ export function weekStart(date: IsoDate): IsoDate {
 }
 
 /**
- * The seven days (Mon–Sun) around `date`, merged with logged-day rows. Days without a row are
+ * The seven days (Mon-Sun) around `date`, merged with logged-day rows. Days without a row are
  * "not logged"; their target falls back to `fallbackTarget` (e.g. today's live target).
  */
 export function buildWeek(

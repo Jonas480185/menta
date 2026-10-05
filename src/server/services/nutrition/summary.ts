@@ -57,7 +57,7 @@ export interface DaySummary {
   consumed: NutrientTotals;
   /** null without targets. kcal includes `activityKcal`. */
   remaining: NutrientRemaining | null;
-  /** Activity kcal counted towards the budget – 0 unless user_profiles.add_activity_calories. */
+  /** Activity kcal counted towards the budget: 0 unless user_profiles.add_activity_calories. */
   activityKcal: number;
   /** null without targets. */
   status: DayNutrientStatus | null;

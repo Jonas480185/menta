@@ -1,5 +1,5 @@
 /**
- * Canonical text normalization for food names/brands – used when WRITING
+ * Canonical text normalization for food names/brands: used when WRITING
  * foods.name_normalized / brand_normalized and when normalizing search queries,
  * so both sides always match.
  *

@@ -17,7 +17,7 @@ import {
 import { timestamps } from "./_shared";
 import { user } from "./auth";
 
-/** WeightEntry – one per user per day. Owner: Weight Tracking. */
+/** WeightEntry: one per user per day. Owner: Weight Tracking. */
 export const weightEntries = pgTable(
   "weight_entries",
   {
@@ -50,7 +50,7 @@ export const activityTypeEnum = pgEnum("activity_type", [
   "sport",
   "other",
 ]);
-/** Integration source – manual today, wearables later. */
+/** Integration source: manual today, wearables later. */
 export const activitySourceEnum = pgEnum("activity_source", [
   "manual",
   "apple_health",
@@ -134,7 +134,7 @@ export const userAchievements = pgTable(
   (t) => [primaryKey({ columns: [t.userId, t.achievementKey] })],
 );
 
-/** Mascot interaction log – avoids repeating messages, records dismissals. Owner: Mascot Engine. */
+/** Mascot interaction log: avoids repeating messages, records dismissals. Owner: Mascot Engine. */
 export const mascotInteractions = pgTable(
   "mascot_interactions",
   {

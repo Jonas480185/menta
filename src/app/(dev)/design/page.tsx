@@ -72,7 +72,7 @@ const TYPE_SCALE = [
   ["text-title", "title · 28", "Heute"],
   ["text-heading", "heading · 20", "Mahlzeiten"],
   ["text-headline", "headline · 17", "Haferflocken mit Beeren"],
-  ["text-body", "body · 16", "Ruhig, präzise und ohne Schuldgefühle – Zahlen sind die Helden."],
+  ["text-body", "body · 16", "Zahlen sind die Helden, Essen wird nie bewertet."],
   ["text-body-sm", "body-sm · 14", "80 g · 1 Portion · Frühstück"],
   ["text-caption", "caption · 12", "kcal übrig"],
   ["text-overline uppercase text-muted-foreground", "overline · 12", "Makros"],

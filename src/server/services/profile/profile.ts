@@ -33,9 +33,9 @@ export async function getProfile(ctx: ServiceContext): Promise<ProfileRow> {
  * Validates and applies a partial profile update, returns the updated row.
  *
  * - `patch` is parsed with ProfilePatchSchema (strict: unknown keys, bmr/tdee etc. are rejected).
- * - Cross-field rules against the merged row: age 14–120 on the user's today, "maintain" clears the
+ * - Cross-field rules against the merged row: age 14-120 on the user's today, "maintain" clears the
  *   pace, "gain" has no "fast" pace, the calculator id must exist.
- * - Does NOT recalculate BMR/TDEE – call `recalculateAndStore(ctx)` (services/calories) afterwards
+ * - Does NOT recalculate BMR/TDEE: call `recalculateAndStore(ctx)` (services/calories) afterwards
  *   when body data, activity or goal changed.
  *
  * Throws AppError("VALIDATION") with German fieldErrors.

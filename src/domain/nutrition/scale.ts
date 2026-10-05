@@ -14,7 +14,7 @@ function assertAmount(name: string, value: number): void {
   }
 }
 
-/** per-100 value × amount / 100 – multiply first, then divide (fewer rounding artefacts for whole grams). */
+/** per-100 value × amount / 100: multiply first, then divide (fewer rounding artefacts for whole grams). */
 function scale(per100: number, amount: number): number {
   return (per100 * amount) / 100;
 }
@@ -28,7 +28,7 @@ function scaleOptional(per100: number | null | undefined, amount: number): numbe
  * values are given per 100 base units.
  *
  * - kcal/protein/carbs/fat are always numbers.
- * - Optional nutrients (fiber, sugar, saturated fat, sodium) stay `null` when unknown – an unknown
+ * - Optional nutrients (fiber, sugar, saturated fat, sodium) stay `null` when unknown: an unknown
  *   value is never turned into 0.
  * - Sodium falls back to the salt value (salt / 2.5) when only salt is known (EU labels print salt).
  * - No rounding: values are stored as computed; round only for display (rounding.ts).
@@ -54,7 +54,7 @@ export function scaleNutrients(profilePer100: NutrientProfile, amount: number): 
 export interface EntryNutrientsInput {
   /** Nutrients per 100 g/ml of the food. */
   per100: NutrientProfile;
-  /** Base units (g/ml) of ONE serving – `food_servings.grams`, 100 for the "100 g" serving. */
+  /** Base units (g/ml) of ONE serving: `food_servings.grams`, 100 for the "100 g" serving. */
   servingGrams: number;
   /** Number of servings, e.g. 1.5. Must be > 0. */
   quantity: number;
@@ -68,7 +68,7 @@ export interface EntryNutrients {
 }
 
 /**
- * The nutrient snapshot of a meal entry – exactly what Meal Logging stores on `meal_entries`
+ * The nutrient snapshot of a meal entry: exactly what Meal Logging stores on `meal_entries`
  * (`grams` plus the NutrientTotals columns). Recomputed whenever the entry's amount changes.
  *
  *   computeEntryNutrients({ per100: oats, servingGrams: 40, quantity: 1.5 })

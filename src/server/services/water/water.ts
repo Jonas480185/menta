@@ -30,7 +30,7 @@ function toWaterEntry(row: typeof waterEntries.$inferSelect): WaterEntry {
 }
 
 /**
- * Logs water for a day (1–5,000 ml per entry). `loggedAt` defaults to now; pass the original
+ * Logs water for a day (1-5,000 ml per entry). `loggedAt` defaults to now; pass the original
  * timestamp to restore a deleted entry (undo).
  */
 export async function addWater(
@@ -78,7 +78,7 @@ export async function getWaterSummary(ctx: ServiceContext, date: IsoDate): Promi
   };
 }
 
-/** Sets the daily water goal in ml (0–10,000). */
+/** Sets the daily water goal in ml (0-10,000). */
 export async function setWaterGoal(ctx: ServiceContext, goalMl: number): Promise<number> {
   const value = parseInput(WaterGoalSchema, goalMl);
   const row = await updateProfile(ctx, { waterGoalMl: value });

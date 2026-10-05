@@ -44,7 +44,7 @@ export interface ActivityProviderStatus {
   availability: ProviderAvailability;
 }
 
-/** All registered sources with their availability – for a "Datenquellen" settings list. */
+/** All registered sources with their availability: for a "Datenquellen" settings list. */
 export async function listActivityProviders(ctx: ServiceContext): Promise<ActivityProviderStatus[]> {
   return Promise.all(
     listActivityProviderIds().map(async (id) => {

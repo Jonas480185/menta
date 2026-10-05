@@ -7,7 +7,7 @@ import { listActivities, weightForEstimates, type ActivityEntry } from "./entrie
 
 export interface ActivitySummary {
   date: IsoDate;
-  /** Σ calories_burned of the day – the amount the budget adds when `addActivityCalories` is on. */
+  /** Σ calories_burned of the day: the amount the budget adds when `addActivityCalories` is on. */
   activeKcal: number;
   steps: number;
   stepGoal: number;
@@ -17,7 +17,7 @@ export interface ActivitySummary {
   entries: ActivityEntry[];
   /** user_profiles.add_activity_calories. */
   addActivityCalories: boolean;
-  /** Net kcal of the steps – informational only, not part of `activeKcal`. */
+  /** Net kcal of the steps: informational only, not part of `activeKcal`. */
   stepsKcalEstimate: number;
   /** Weight used for estimates; `weightIsFallback` = no weight known, 70 kg assumed. */
   weightKg: number;

@@ -1,5 +1,5 @@
 /**
- * Display rounding. NEVER round before storing or before summing – round the final aggregate
+ * Display rounding. NEVER round before storing or before summing: round the final aggregate
  * (the sum of rounded entry values can differ from the rounded day total).
  * All helpers round half away from zero (so −2.5 → −3 like 2.5 → 3) and never return −0.
  */

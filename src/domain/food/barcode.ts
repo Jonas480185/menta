@@ -1,5 +1,5 @@
 /**
- * Barcode (GTIN) normalization – pure, framework-free.
+ * Barcode (GTIN) normalization: pure, framework-free.
  *
  * Supported: EAN-8 (GTIN-8), UPC-A (GTIN-12), EAN-13 (GTIN-13), GTIN-14.
  * All of them are the same number space once left-padded to 14 digits, so
@@ -9,7 +9,7 @@
  * Canonical form (what we store in `foods.barcode` and use as OFF source id):
  * - GTIN-8 range  (14-digit form starts with 000000) → 8 digits
  * - GTIN-12/13    (14-digit form starts with 0)      → 13 digits (UPC-A gets a leading 0)
- * - GTIN-14       (indicator digit 1–9)              → 14 digits
+ * - GTIN-14       (indicator digit 1-9)              → 14 digits
  *
  * This matches how Open Food Facts keys its products (it also left-pads UPC-A to 13 digits).
  */
@@ -57,7 +57,7 @@ export function isValidGtin(code: string): boolean {
 /**
  * Parses any user/provider barcode input. Returns null for inputs that cannot be a GTIN
  * (non-digits only, fewer than 8 or more than 14 digits, all zeros).
- * Inputs with 9–11 digits are treated as GTIN-13s that lost leading zeros (seen in
+ * Inputs with 9-11 digits are treated as GTIN-13s that lost leading zeros (seen in
  * spreadsheets / CSV dumps).
  */
 export function parseBarcode(input: string): ParsedBarcode | null {

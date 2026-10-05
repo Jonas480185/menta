@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 const fmt = new Intl.NumberFormat("de-DE");
 
-/** Sample values – styleguide only, never shown in product UI. */
+/** Sample values: styleguide only, never shown in product UI. */
 const KCAL = { eaten: 1620, goal: 2300 };
 const MACROS: Array<{ key: NutrientKey; label: string; value: number; goal: number }> = [
   { key: "protein", label: "Protein", value: 92, goal: 140 },

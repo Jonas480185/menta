@@ -46,7 +46,7 @@ const getProfileState = cache(async (userId: string) => {
 
   let [row] = await select();
   if (!row) {
-    // Signup hook failed or the user predates it – create profile + default meals now.
+    // Signup hook failed or the user predates it: create profile + default meals now.
     await bootstrapNewUser(db, userId);
     [row] = await select();
   }
@@ -108,7 +108,7 @@ export async function getOnboardingStatus(ctx: ServiceContext): Promise<{ comple
  */
 export async function requireOnboardedContext(): Promise<ServiceContext> {
   const ctx = await getServiceContext();
-  const profile = await getProfileState(ctx.userId); // cached – no extra query
+  const profile = await getProfileState(ctx.userId); // cached: no extra query
   if (!profile.onboardingCompleted) redirect(ONBOARDING_PATH);
   return ctx;
 }

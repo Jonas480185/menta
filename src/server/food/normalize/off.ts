@@ -2,7 +2,7 @@
  * Open Food Facts product → NormalizedFood. Pure; used by the live provider, the API
  * importer and the dump importer (JSONL products have the same shape as API v2 products).
  *
- * Data license: ODbL (database) / DbCL (contents) / CC BY-SA (images) – attribution required.
+ * Data license: ODbL (database) / DbCL (contents) / CC BY-SA (images), attribution required.
  */
 import { z } from "zod";
 import type { NormalizedFood, NormalizedServing } from "@/server/food/types";

@@ -6,7 +6,7 @@ import { env } from "@/lib/env";
  */
 export function getAuthSecret(): string {
   if (env.authSecretIsPlaceholder && env.isProduction) {
-    console.warn("[auth] BETTER_AUTH_SECRET is a known placeholder – set a real secret.");
+    console.warn("[auth] BETTER_AUTH_SECRET is a known placeholder: set a real secret.");
   }
   return env.BETTER_AUTH_SECRET;
 }

@@ -5,7 +5,7 @@ const sizeMap = { sm: "icon-sm", md: "icon", lg: "icon-lg" } as const;
 export interface IconButtonProps extends Omit<ButtonProps, "size" | "aria-label"> {
   /** Required accessible name (German), e.g. "Eintrag löschen". */
   label: string;
-  /** Visual size – every size keeps a ≥ 44 px hit area on touch devices. */
+  /** Visual size: every size keeps a ≥ 44 px hit area on touch devices. */
   size?: keyof typeof sizeMap;
 }
 

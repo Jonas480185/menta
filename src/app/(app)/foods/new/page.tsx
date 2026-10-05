@@ -12,7 +12,7 @@ export default async function NewFoodPage({ searchParams }: PageProps<"/foods/ne
     <main className="mx-auto w-full max-w-content space-y-4 px-gutter py-6">
       <PageHeader
         title="Neues Lebensmittel"
-        subtitle={barcode ? `Produkt mit Barcode ${barcode} ist noch unbekannt – leg es einfach an.` : undefined}
+        subtitle={barcode ? `Produkt mit Barcode ${barcode} ist noch unbekannt. Leg es einfach an.` : undefined}
         back={{ href: barcode ? "/log" : "/foods", label: "Zurück" }}
       />
       <UserFoodForm

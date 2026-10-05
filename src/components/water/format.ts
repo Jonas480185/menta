@@ -1,6 +1,6 @@
 import { formatLiters, formatMl, formatNumber } from "@/lib/format";
 
-/** Water amounts: ml below 1 l ("750 ml"), litres from 1 l ("1,25 l" – two decimals so 250-ml steps stay visible). */
+/** Water amounts: ml below 1 l ("750 ml"), litres from 1 l ("1,25 l", two decimals so 250-ml steps stay visible). */
 export function formatWaterAmount(ml: number): string {
   return Math.abs(ml) < 1000 ? formatMl(ml) : formatLiters(ml, { maxFractionDigits: 2 });
 }

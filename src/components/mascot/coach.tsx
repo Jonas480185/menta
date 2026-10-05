@@ -27,7 +27,7 @@ function writeNumber(key: string, value: number) {
   try {
     localStorage.setItem(key, String(value));
   } catch {
-    /* storage unavailable – purely cosmetic */
+    /* storage unavailable: purely cosmetic */
   }
   listeners.forEach((l) => l());
 }

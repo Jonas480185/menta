@@ -5,7 +5,7 @@ import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "@/lib/utils";
 
 /**
- * Draggable bottom sheet (vaul) – the primary mobile surface for logging, portion
+ * Draggable bottom sheet (vaul): the primary mobile surface for logging, portion
  * pickers and quick actions. Exported twice: `Drawer*` (shadcn naming) and
  * `BottomSheet*` (product naming). Both are the same components.
  *

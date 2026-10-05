@@ -38,7 +38,7 @@ export interface UpsertWeightResult {
 }
 
 /**
- * Logs the weight of one day – one entry per user and day; a second entry for the same day
+ * Logs the weight of one day: one entry per user and day; a second entry for the same day
  * replaces the first. Dates in the future (user's timezone) are rejected.
  */
 export async function upsertWeight(
@@ -117,7 +117,7 @@ export async function getLatestWeight(ctx: ServiceContext): Promise<WeightEntry 
   return row ?? null;
 }
 
-/** Oldest entry, or null – e.g. to resolve the "Alle" range or a fallback start weight. */
+/** Oldest entry, or null: e.g. to resolve the "Alle" range or a fallback start weight. */
 export async function getFirstWeight(ctx: ServiceContext): Promise<WeightEntry | null> {
   const [row] = await ctx.db
     .select(columns)

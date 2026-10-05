@@ -37,7 +37,7 @@ export default async function RecipesPage() {
           className="mt-6"
           icon={<ChefHat />}
           title="Koch einmal, logge immer wieder."
-          description="Leg ein Rezept mit seinen Zutaten an – danach trägst du eine Portion mit einem Tipp ein."
+          description="Leg ein Rezept mit seinen Zutaten an. Danach trägst du eine Portion mit einem Tipp ein."
           action={
             <Button asChild>
               <Link href="/recipes/new">

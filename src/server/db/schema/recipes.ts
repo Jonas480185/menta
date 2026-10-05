@@ -62,8 +62,8 @@ export const recipeIngredients = pgTable(
       .references(() => recipes.id, { onDelete: "cascade" }),
     /**
      * A food used in a recipe can't be deleted (archive it instead). NO ACTION rather than
-     * RESTRICT: the check runs at the end of the statement, so deleting a user – which cascades
-     * to their foods AND their recipes/ingredients in one statement – still succeeds, while a
+     * RESTRICT: the check runs at the end of the statement, so deleting a user, which cascades
+     * to their foods AND their recipes/ingredients in one statement: still succeeds, while a
      * direct DELETE of a used food fails with 23503.
      */
     foodId: uuid("food_id")

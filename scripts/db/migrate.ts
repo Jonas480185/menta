@@ -3,7 +3,7 @@ import { createDatabase } from "../../src/server/db/create";
 import { ensurePgliteDataDir } from "./data-dir";
 
 // Applies all pending migrations (PGlite in .data/pglite or DATABASE_URL).
-// Stop `pnpm dev` first when using PGlite – only one process may open the data dir.
+// Stop `pnpm dev` first when using PGlite: only one process may open the data dir.
 async function main() {
   ensurePgliteDataDir();
   await createDatabase({ migrate: true });

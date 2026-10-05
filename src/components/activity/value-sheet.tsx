@@ -32,7 +32,7 @@ export interface ValueSheetProps {
   children?: React.ReactNode;
 }
 
-/** Small sheet with one number field – custom water amount, steps, goals. */
+/** Small sheet with one number field: custom water amount, steps, goals. */
 export function ValueSheet({
   open,
   onOpenChange,

@@ -1,5 +1,5 @@
 /**
- * Calorie Engine – value types.
+ * Calorie Engine: value types.
  * Pure TypeScript: no framework or DB imports. Units: kcal/day, kg, cm, years.
  *
  * The string unions mirror the Postgres enums in src/server/db/schema/profile.ts
@@ -19,7 +19,7 @@ export interface BodyProfile {
   heightCm: number;
   /** Current weight (latest weight entry, else start weight). */
   weightKg: number;
-  /** Body fat in percent (0–100). Required by Katch-McArdle only. */
+  /** Body fat in percent (0-100). Required by Katch-McArdle only. */
   bodyFatPct?: number | null;
   activityLevel: ActivityLevel;
 }
@@ -31,7 +31,7 @@ export interface GoalSettings {
   targetWeightKg?: number | null;
 }
 
-/** Machine-readable reason for a warning – lets the UI pick an icon/tone without parsing text. */
+/** Machine-readable reason for a warning: lets the UI pick an icon/tone without parsing text. */
 export type CalorieWarningCode =
   | "deficit_capped"
   | "floor_applied"
@@ -52,11 +52,11 @@ export interface CalorieWarning {
 }
 
 /**
- * Result of a calorie calculation – everything the UI needs for the transparent chain
+ * Result of a calorie calculation: everything the UI needs for the transparent chain
  * "Grundumsatz → × Aktivität = Erhaltungsbedarf → ± Anpassung = Tagesziel".
  *
  * `bmr` and `tdee` are unrounded (round only for display / storage); `adjustment` and `target`
- * are whole kcal – `target` is rounded to 10 kcal (a recommendation, not a measurement).
+ * are whole kcal: `target` is rounded to 10 kcal (a recommendation, not a measurement).
  */
 export interface CalorieCalculation {
   calculatorId: string;

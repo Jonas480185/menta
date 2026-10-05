@@ -1,4 +1,4 @@
-/** Weight UI – reusable by the dashboard and analytics. */
+/** Weight UI: reusable by the dashboard and analytics. */
 export * from "./copy";
 export {
   LogWeightForm,

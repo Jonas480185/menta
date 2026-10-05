@@ -3,7 +3,7 @@
  *
  * - Scripts: only same-origin plus scripts carrying the per-request nonce (`strict-dynamic` lets those
  *   load their chunks). Next.js and next-themes pick the nonce up during SSR.
- * - Styles: `'unsafe-inline'` is required – motion, Recharts and React write `style` attributes, which
+ * - Styles: `'unsafe-inline'` is required, motion, Recharts and React write `style` attributes, which
  *   nonces cannot cover. Style injection is far less dangerous than script injection.
  * - The app loads no third-party resources: everything else is `'self'`.
  * - Development needs `'unsafe-eval'` for React's error overlay / stack reconstruction.

@@ -1,5 +1,5 @@
 /**
- * Serving / quantity parsing – pure, framework-free.
+ * Serving / quantity parsing: pure, framework-free.
  *
  * Turns free-text portion descriptions from providers and users
  * ("30 g", "250 ml", "1 Stück (60 g)", "2 Scheiben = 50g", "1 EL (15 ml)", "½ Packung",
@@ -182,7 +182,7 @@ interface Measure {
   value: number;
   base: MeasureUnit;
   index: number;
-  /** Declared inside parentheses or after "=" – the most explicit kind of weight. */
+  /** Declared inside parentheses or after "=": the most explicit kind of weight. */
   explicit: boolean;
   metric: boolean;
 }
@@ -285,7 +285,7 @@ export interface ParseServingOptions {
   /** Basis of the food's nutrient values; servings are expressed in it. Default "g". */
   basis?: NutrientBasis;
   densityGPerMl?: number | null;
-  /** Package content in basis units – resolves "½ Packung" etc. */
+  /** Package content in basis units: resolves "½ Packung" etc. */
   packageSize?: number | null;
   /** Keep this label instead of generating one (e.g. curated data). */
   label?: string;

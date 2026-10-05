@@ -110,7 +110,7 @@ export async function updateUserFood(ctx: ServiceContext, id: string, raw: UserF
   });
 }
 
-/** Archives (soft-deletes) – diary entries and recipes keep working. */
+/** Archives (soft-deletes): diary entries and recipes keep working. */
 export async function archiveUserFood(ctx: ServiceContext, id: string) {
   await getOwn(ctx, id);
   await ctx.db.update(foods).set({ isArchived: true }).where(eq(foods.id, id));

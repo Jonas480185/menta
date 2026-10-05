@@ -16,7 +16,7 @@ import {
 
 type RecipeRef = { id: string; foodId: string };
 
-/** Recipe foods show up in search, favorites and "Meine" – refresh those surfaces too. */
+/** Recipe foods show up in search, favorites and "Meine": refresh those surfaces too. */
 function revalidateRecipes(id?: string) {
   revalidatePath("/recipes");
   if (id) revalidatePath(`/recipes/${id}`);

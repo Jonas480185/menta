@@ -13,7 +13,7 @@ import { ACTIVITY_LEVELS, ACTIVITY_MULTIPLIERS } from "./constants";
 import { CalorieInputError, isCalorieInputError } from "./errors";
 import type { ActivityLevel, BodyProfile } from "./types";
 
-/** Reference people – all expected values below are computed by hand. */
+/** Reference people: all expected values below are computed by hand. */
 const male30: BodyProfile = { ageYears: 30, sex: "male", heightCm: 180, weightKg: 80, activityLevel: "moderate" };
 const female25: BodyProfile = { ageYears: 25, sex: "female", heightCm: 165, weightKg: 60, activityLevel: "sedentary" };
 const unspecified30: BodyProfile = { ...male30, sex: "unspecified" };

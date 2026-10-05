@@ -41,7 +41,7 @@ export function sumTotals(list: readonly NutrientTotals[]): NutrientTotals {
 /**
  * Energy from macronutrients with the Atwater general factors (4/4/9, alcohol 7):
  *   kcal = 4·protein + 4·carbs + 9·fat (+ 7·alcohol)
- * Used for plausibility checks and the macro split – the label kcal of a food stays authoritative.
+ * Used for plausibility checks and the macro split: the label kcal of a food stays authoritative.
  */
 export function kcalFromMacros(macros: Macros & { alcoholG?: number | null }): number {
   return (
@@ -52,7 +52,7 @@ export function kcalFromMacros(macros: Macros & { alcoholG?: number | null }): n
   );
 }
 
-/** Share of energy from each macro as a RATIO 0–1 (format with `formatPercent`). */
+/** Share of energy from each macro as a RATIO 0-1 (format with `formatPercent`). */
 export interface MacroEnergySplit {
   protein: number;
   carbs: number;

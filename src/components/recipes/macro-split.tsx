@@ -17,7 +17,7 @@ export interface MacroSplitProps {
 
 /**
  * Energy split of a dish: one stacked bar (share of kcal from P/C/F, 4/4/9) plus a three-column
- * legend with grams and percentage. No targets – recipes describe food, not progress.
+ * legend with grams and percentage. No targets: recipes describe food, not progress.
  */
 export function MacroSplit({ proteinG, carbsG, fatG, className }: MacroSplitProps) {
   const values = { proteinG, carbsG, fatG };

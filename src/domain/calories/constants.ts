@@ -2,7 +2,7 @@ import type { ActivityLevel, GoalPace, GoalType, Sex } from "./types";
 
 /**
  * Calorie Engine parameters. Every number here is documented (with sources) in
- * docs/architecture/calorie-engine.md – change both together.
+ * docs/architecture/calorie-engine.md: change both together.
  */
 
 /** Energy content of 1 kg body weight change (Wishnofsky rule of thumb, ≈ 7700 kcal/kg). */
@@ -25,7 +25,7 @@ export const SAFETY = {
 /** Hard input limits. Height/weight match the DB CHECKs on user_profiles / weight_entries. */
 export const BODY_LIMITS = {
   ageYears: { min: 14, max: 120 },
-  /** The formulas were derived from adults – below/above this we add a gentle hint. */
+  /** The formulas were derived from adults: below/above this we add a gentle hint. */
   adultAgeYears: { min: 18, max: 100 },
   heightCm: { min: 50, max: 300 },
   weightKg: { min: 20, max: 400 },
@@ -45,7 +45,7 @@ export interface ActivityLevelInfo {
 
 /**
  * Activity levels (PAL multipliers after McArdle/Katch; the classic Harris-Benedict factors),
- * ordered from least to most active – render them in this order.
+ * ordered from least to most active: render them in this order.
  */
 export const ACTIVITY_LEVELS: readonly ActivityLevelInfo[] = [
   {
@@ -58,19 +58,19 @@ export const ACTIVITY_LEVELS: readonly ActivityLevelInfo[] = [
     id: "light",
     multiplier: 1.375,
     label: "Leicht aktiv",
-    description: "Sitzender Job mit etwas Bewegung im Alltag oder 1–3 Trainings pro Woche.",
+    description: "Sitzender Job mit etwas Bewegung im Alltag oder 1 bis 3 Trainings pro Woche.",
   },
   {
     id: "moderate",
     multiplier: 1.55,
     label: "Moderat aktiv",
-    description: "Viel auf den Beinen, z. B. Verkauf oder Pflege, oder 3–5 Trainings pro Woche.",
+    description: "Viel auf den Beinen, z. B. Verkauf oder Pflege, oder 3 bis 5 Trainings pro Woche.",
   },
   {
     id: "active",
     multiplier: 1.725,
     label: "Sehr aktiv",
-    description: "Körperlich fordernder Job, z. B. Handwerk, oder 6–7 Trainings pro Woche.",
+    description: "Körperlich fordernder Job, z. B. Handwerk, oder 6 bis 7 Trainings pro Woche.",
   },
   {
     id: "very_active",
@@ -125,7 +125,7 @@ export const GOAL_PACES: readonly GoalPaceInfo[] = [
     approxWeeklyKg: -0.25,
     label: "Langsam abnehmen (≈ 0,25 kg/Woche)",
     shortLabel: "Entspannt",
-    description: "Kaum spürbar im Alltag – gut, wenn du langfristig dranbleiben willst.",
+    description: "Kaum spürbar im Alltag. Gut, wenn du langfristig dranbleiben willst.",
   },
   {
     goal: "lose",
@@ -161,7 +161,7 @@ export const GOAL_PACES: readonly GoalPaceInfo[] = [
     approxWeeklyKg: 0.25,
     label: "Moderat zunehmen (≈ 0,25 kg/Woche)",
     shortLabel: "Moderat",
-    description: "Schnellere Zunahme – gut, wenn du bisher schwer zunimmst.",
+    description: "Schnellere Zunahme. Gut, wenn du bisher schwer zunimmst.",
   },
 ];
 

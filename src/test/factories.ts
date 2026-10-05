@@ -39,7 +39,7 @@ export interface TestFoodOverrides extends Partial<
 
 /**
  * Inserts a public food (source "curated") with servings. name_normalized/brand_normalized are
- * always derived via normalizeFoodText() – exactly like the real import pipeline.
+ * always derived via normalizeFoodText(): exactly like the real import pipeline.
  */
 export async function createTestFood(
   db: DbOrTx,
@@ -132,7 +132,7 @@ export async function createTestGoalProfile(
 export type MealEntryRow = typeof mealEntries.$inferSelect;
 
 export interface TestEntryInput {
-  /** Meal slot id – typically one of createTestUser(...).mealIds. */
+  /** Meal slot id: typically one of createTestUser(...).mealIds. */
   mealId: string;
   date: string;
   /** Food to log. Omit for a "quick add" style entry (then pass kcal etc. yourself). */

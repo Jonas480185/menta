@@ -21,7 +21,7 @@ export interface StepsCardProps {
   date: IsoDate;
   steps: number;
   stepGoal: number;
-  /** Net kcal of the steps – informational only, never added to the budget. */
+  /** Net kcal of the steps: informational only, never added to the budget. */
   stepsKcalEstimate: number;
   weightIsFallback: boolean;
   /** Detail link (dashboard usage). Omit / pass `null` to render a plain heading (the /activity page itself). */
@@ -31,7 +31,7 @@ export interface StepsCardProps {
 
 /**
  * Steps of the day: progress vs. the daily goal, an informational (not budget-relevant) kcal
- * estimate, and an edit sheet (manual entry – see docs/architecture/activity-integrations.md).
+ * estimate, and an edit sheet (manual entry: see docs/architecture/activity-integrations.md).
  */
 export function StepsCard({ date, steps, stepGoal, stepsKcalEstimate, weightIsFallback, href, className }: StepsCardProps) {
   const [editOpen, setEditOpen] = useState(false);
@@ -94,7 +94,7 @@ export function StepsCard({ date, steps, stepGoal, stepsKcalEstimate, weightIsFa
         open={editOpen}
         onOpenChange={setEditOpen}
         title="Schritte"
-        description="Alltagsschritte fließen nicht ins Kalorienbudget – sie stecken bereits in deinem Aktivitätslevel."
+        description="Alltagsschritte fließen nicht ins Kalorienbudget, sie stecken bereits in deinem Aktivitätslevel."
         label="Schritte"
         unit="Schritte"
         initialValue={steps}

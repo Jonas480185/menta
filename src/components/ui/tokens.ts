@@ -26,7 +26,7 @@ export type Tone =
   | "muted";
 
 /**
- * Graphic fill as text colour – drives SVG strokes / icons via `currentColor`
+ * Graphic fill as text colour: drives SVG strokes / icons via `currentColor`
  * (rings, dots). Not for small text: use `toneStrong`.
  */
 export const toneGraphic: Record<Tone, string> = {
@@ -105,7 +105,7 @@ export const toneStrong: Record<Tone, string> = {
 };
 
 /**
- * Keyboard focus indicator – the design-system `focus-ring` utility (2 px `--ring`
+ * Keyboard focus indicator: the design-system `focus-ring` utility (2 px `--ring`
  * outline, 2 px offset), identical to the global `:focus-visible` style.
  */
 export const focusRing = "focus-ring";
@@ -142,7 +142,7 @@ export const fieldClasses = [
 ].join(" ");
 
 /**
- * Floating surface (Popover, Select, DropdownMenu) – elevation level 2: shadow in light,
+ * Floating surface (Popover, Select, DropdownMenu): elevation level 2: shadow in light,
  * hairline in dark. Radix keeps the element mounted until the exit animation ends.
  */
 export const floatingSurface = [
@@ -162,6 +162,6 @@ export const menuItem = [
 export const overlayScrim =
   "fixed inset-0 z-50 bg-overlay data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out";
 
-/** Card surface – elevation level 1: soft shadow in light, hairline border in dark. */
+/** Card surface: elevation level 1: soft shadow in light, hairline border in dark. */
 export const cardSurface =
   "rounded-card border border-transparent bg-card text-card-foreground shadow-sm dark:border-border";

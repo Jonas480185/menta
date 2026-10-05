@@ -10,7 +10,7 @@ describe("weekStart", () => {
 });
 
 describe("buildWeek", () => {
-  it("returns Mon–Sun and merges logged rows", () => {
+  it("returns Mon-Sun and merges logged rows", () => {
     const week = buildWeek("2026-10-07", [{ date: "2026-10-06", kcal: 1800, target: 2000 }], 2100);
     expect(week.map((d) => d.date)).toEqual([
       "2026-10-05",

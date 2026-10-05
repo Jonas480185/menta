@@ -320,7 +320,7 @@ describe("CHECK constraints", () => {
     // Other profiles (training/rest/...) are unlimited.
     await createTestGoalProfile(ctx, { kind: "training", weekdays: [1, 3, 5] });
     await createTestGoalProfile(ctx, { kind: "rest", weekdays: [2, 4] });
-    // Switching the default: demote the old one first, then promote – inside one transaction.
+    // Switching the default: demote the old one first, then promote, inside one transaction.
     const other = await createTestGoalProfile(ctx, { kind: "refeed" });
     await db.transaction(async (tx) => {
       await tx
