@@ -10,6 +10,8 @@
 Kalorien und Nährstoffe im Tagebuch festhalten.<br>
 Ziele festlegen und Veränderungen über mehrere Wochen auswerten.
 
+**[Live-Demo ansehen](https://menta-jonas.vercel.app)** · Login: `demo@menta.app` / `menta-demo-2026`
+
 ![Next.js](https://img.shields.io/badge/Next.js_16-000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React_19-149ECA?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript_strict-3178C6?logo=typescript&logoColor=white)
@@ -17,6 +19,7 @@ Ziele festlegen und Veränderungen über mehrere Wochen auswerten.
 ![Drizzle](https://img.shields.io/badge/Drizzle_ORM-C5F74F?logo=drizzle&logoColor=black)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-06B6D4?logo=tailwindcss&logoColor=white)
 [![CI](https://github.com/Jonas480185/menta/actions/workflows/ci.yml/badge.svg)](https://github.com/Jonas480185/menta/actions/workflows/ci.yml)
+[![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-1FC98E)](LICENSE)
 
 [Lokal starten](#lokal-starten) · [Funktionen](#funktionen) · [Screenshots](#screenshots) · [Technischer Aufbau](#technischer-aufbau)
 
@@ -176,6 +179,7 @@ Der Kamera-Scan benötigt die Browserfunktion `BarcodeDetector`. Wenn sie nicht 
 
 ## Datenquellen und Lizenzen
 
+- Menta: Quellcode unter der [MIT-Lizenz](LICENSE).
 - [Open Food Facts](https://world.openfoodfacts.org): Lebensmitteldaten unter ODbL; die Quellenangabe wird in der App angezeigt.
 - [USDA FoodData Central](https://fdc.nal.usda.gov): Daten im Public Domain / unter CC0.
 - [Nunito](https://fonts.google.com/specimen/Nunito): Schrift unter der SIL Open Font License.
