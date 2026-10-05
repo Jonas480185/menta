@@ -6,7 +6,8 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NumberInput } from "@/components/ui/number-input";
 import { SegmentedControl } from "@/components/ui/segmented-control";
-import { Milo, type MiloMood } from "@/components/mascot/milo";
+import { type MiloMood } from "@/components/mascot/milo";
+import { MiloBuddy } from "@/components/mascot/milo-buddy";
 import {
   ACTIVITY_LEVELS,
   GOAL_PACES,
@@ -171,7 +172,7 @@ export function OnboardingWizard({ today }: { today: string }) {
       </div>
 
       <div className="flex flex-1 flex-col gap-5">
-        <Milo mood={MOOD[step]} size={step === "welcome" ? 120 : 64} className={step === "welcome" ? "mx-auto mt-8" : ""} />
+        <MiloBuddy key={step} mood={MOOD[step]} size={step === "welcome" ? 128 : 72} className={step === "welcome" ? "mx-auto mt-8" : ""} />
 
         {step === "welcome" && (
           <div className="space-y-3 text-center">

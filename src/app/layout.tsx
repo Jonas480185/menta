@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Inter } from "next/font/google";
+import { Geist_Mono, Inter, Nunito } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/theme/toaster";
 import { BRAND } from "@/content/brand";
@@ -13,6 +13,13 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "latin-ext"],
   axes: ["opsz"],
+  display: "swap",
+});
+
+/* Nunito (rounded, variable): page titles and section headings – matches Milo's soft shapes. */
+const nunito = Nunito({
+  variable: "--font-nunito",
+  subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
@@ -50,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="de"
       suppressHydrationWarning
-      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${nunito.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="bg-background text-foreground flex min-h-full flex-col">
         <ThemeProvider>

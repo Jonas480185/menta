@@ -26,10 +26,10 @@ export function CaloriesChart({ data, target }: { data: DayPoint[]; target: numb
   return (
     <div className="h-56" role="img" aria-label="Kalorien pro Tag">
       <ResponsiveContainer>
-        <BarChart data={data} margin={{ top: 8, right: 4, left: -16, bottom: 0 }}>
+        <BarChart data={data} margin={{ top: 8, right: 4, left: 0, bottom: 0 }}>
           <CartesianGrid vertical={false} stroke="var(--color-chart-grid, var(--border))" />
           <XAxis dataKey="date" {...axis} tickFormatter={(d: string) => formatDateShort(d)} minTickGap={24} />
-          <YAxis {...axis} width={48} />
+          <YAxis {...axis} width={44} tickFormatter={(v: number) => formatNumber(v)} />
           <Tooltip {...tip("kcal")} cursor={{ fill: "var(--accent)" }} />
           {target && <ReferenceLine y={target} stroke="var(--color-chart-target, var(--foreground))" strokeDasharray="4 4" />}
           <Bar dataKey="kcal" fill="var(--kcal)" radius={[6, 6, 0, 0]} maxBarSize={24} />
@@ -43,10 +43,10 @@ export function ProteinChart({ data, target }: { data: DayPoint[]; target: numbe
   return (
     <div className="h-48" role="img" aria-label="Protein pro Tag">
       <ResponsiveContainer>
-        <LineChart data={data} margin={{ top: 8, right: 4, left: -16, bottom: 0 }}>
+        <LineChart data={data} margin={{ top: 8, right: 4, left: 0, bottom: 0 }}>
           <CartesianGrid vertical={false} stroke="var(--color-chart-grid, var(--border))" />
           <XAxis dataKey="date" {...axis} tickFormatter={(d: string) => formatDateShort(d)} minTickGap={24} />
-          <YAxis {...axis} width={48} />
+          <YAxis {...axis} width={44} tickFormatter={(v: number) => formatNumber(v)} />
           <Tooltip {...tip("g")} />
           {target && <ReferenceLine y={target} stroke="var(--color-chart-target, var(--foreground))" strokeDasharray="4 4" />}
           <Line dataKey="proteinG" stroke="var(--protein)" strokeWidth={2.5} dot={false} connectNulls />

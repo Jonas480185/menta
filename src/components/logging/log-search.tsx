@@ -33,6 +33,11 @@ export function LogSearch({
   quickPicks: FoodListItem[];
 }) {
   const [query, setQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  // Desktop: start typing right away (no virtual keyboard to pop up on fine pointers).
+  useEffect(() => {
+    if (window.matchMedia("(pointer: fine)").matches) inputRef.current?.focus();
+  }, []);
   const [result, setResult] = useState<SearchResult | null>(null);
   const [loading, setLoading] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
@@ -75,10 +80,12 @@ export function LogSearch({
           <span className="sr-only">Lebensmittel suchen</span>
           <Search className="pointer-events-none absolute top-1/2 left-3.5 size-5 -translate-y-1/2 text-muted-foreground" />
           <input
+            ref={inputRef}
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Lebensmittel, Marke oder Barcode"
+            aria-keyshortcuts="/"
             className="focus-ring h-12 w-full rounded-control border border-input bg-card pr-10 pl-11 text-body placeholder:text-muted-foreground"
             autoComplete="off"
           />

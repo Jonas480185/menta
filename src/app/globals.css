@@ -189,9 +189,9 @@
   --chart-target: var(--ink-500);
 
   /* Elevation shadows – soft, layered, cool-tinted */
-  --elevation-xs: 0 1px 2px 0 rgb(16 24 40 / 0.05);
-  --elevation-sm: 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 1px 3px 0 rgb(16 24 40 / 0.06);
-  --elevation-md: 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 4px 12px -2px rgb(16 24 40 / 0.08);
+  --elevation-xs: 0 0 0 1px rgb(16 24 40 / 0.045), 0 1px 2px 0 rgb(16 24 40 / 0.05);
+  --elevation-sm: 0 0 0 1px rgb(16 24 40 / 0.045), 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 1px 3px 0 rgb(16 24 40 / 0.06);
+  --elevation-md: 0 0 0 1px rgb(16 24 40 / 0.05), 0 1px 2px 0 rgb(16 24 40 / 0.04), 0 4px 12px -2px rgb(16 24 40 / 0.08);
   --elevation-lg: 0 2px 4px -1px rgb(16 24 40 / 0.04), 0 12px 24px -4px rgb(16 24 40 / 0.1);
   --elevation-xl: 0 4px 8px -2px rgb(16 24 40 / 0.05), 0 24px 48px -12px rgb(16 24 40 / 0.18);
 }
@@ -282,9 +282,9 @@
   --chart-target: #7a8481;
 
   /* Dark: shadows barely read – a top highlight + deep shadow does the lifting */
-  --elevation-xs: 0 1px 2px 0 rgb(0 0 0 / 0.4);
-  --elevation-sm: inset 0 1px 0 0 rgb(255 255 255 / 0.03), 0 1px 2px 0 rgb(0 0 0 / 0.45);
-  --elevation-md: inset 0 1px 0 0 rgb(255 255 255 / 0.04), 0 4px 12px -2px rgb(0 0 0 / 0.5);
+  --elevation-xs: inset 0 0 0 1px rgb(255 255 255 / 0.045), 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --elevation-sm: inset 0 0 0 1px rgb(255 255 255 / 0.05), 0 1px 2px 0 rgb(0 0 0 / 0.45);
+  --elevation-md: inset 0 0 0 1px rgb(255 255 255 / 0.07), 0 4px 12px -2px rgb(0 0 0 / 0.5);
   --elevation-lg: inset 0 1px 0 0 rgb(255 255 255 / 0.05), 0 12px 24px -4px rgb(0 0 0 / 0.55);
   --elevation-xl: inset 0 1px 0 0 rgb(255 255 255 / 0.06), 0 24px 48px -12px rgb(0 0 0 / 0.65);
 }
@@ -394,6 +394,8 @@
   /* Fonts (variables set by next/font in src/app/layout.tsx) */
   --font-sans:
     var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display:
+    var(--font-nunito), var(--font-inter), ui-rounded, ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* Layout component tokens → p-gutter, gap-section, pb-bottom-nav, h-header … */
@@ -417,11 +419,11 @@
   --text-title: 1.75rem; /* 28 page title */
   --text-title--line-height: 1.15;
   --text-title--letter-spacing: -0.022em;
-  --text-title--font-weight: 650;
+  --text-title--font-weight: 800;
   --text-heading: 1.25rem; /* 20 card / section heading */
   --text-heading--line-height: 1.3;
   --text-heading--letter-spacing: -0.012em;
-  --text-heading--font-weight: 600;
+  --text-heading--font-weight: 750;
   --text-headline: 1.0625rem; /* 17 list-row title, emphasized body */
   --text-headline--line-height: 1.35;
   --text-headline--letter-spacing: -0.006em;
@@ -668,10 +670,23 @@
   }
 
   body {
-    background: var(--background);
+    /* soft mint wash behind the top of every screen */
+    background:
+      radial-gradient(70rem 26rem at 50% -10rem, color-mix(in oklab, var(--primary) 11%, transparent), transparent 70%)
+        no-repeat,
+      var(--background);
     color: var(--foreground);
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
+  }
+
+  /* Titles and section headings use the rounded display face. */
+  h1,
+  h2.text-heading,
+  h2.text-title,
+  .text-title,
+  .text-heading {
+    font-family: var(--font-display);
   }
 
   ::selection {
@@ -710,12 +725,16 @@
   }
 }
 
-/* Milo idle animation (mascot). Disabled for reduced motion. */
-@keyframes milo-breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.02, 0.98); } }
+/* Milo idle animation (static mascot). Disabled for reduced motion. */
+@keyframes milo-breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.025, 0.975); } }
 @keyframes milo-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
 @keyframes milo-pop { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.15); opacity: 1; } 100% { transform: scale(1); } }
+@keyframes milo-sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(7deg); } }
+@keyframes milo-flicker { 0%, 100% { transform: scale(1, 1); } 30% { transform: scale(0.94, 1.08); } 60% { transform: scale(1.05, 0.95); } }
 @media (prefers-reduced-motion: no-preference) {
   .milo-animated .milo-body { animation: milo-breathe 3.6s ease-in-out infinite; }
   .milo-animated .milo-eyes { transform-box: fill-box; transform-origin: center; animation: milo-blink 4.8s infinite; }
+  .milo-animated .milo-sprout { animation: milo-sway 2.8s ease-in-out infinite; }
   .milo-animated .milo-spark { transform-box: fill-box; transform-origin: center; animation: milo-pop 600ms var(--ease-spring, ease-out) both; }
+  .milo-animated .milo-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: milo-flicker 900ms ease-in-out infinite; }
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Flame, Lock, Trophy } from "lucide-react";
 import { PageHeader } from "@/components/ui/page-header";
-import { Milo } from "@/components/mascot/milo";
+import { MiloBuddy } from "@/components/mascot/milo-buddy";
 import { formatDateShort } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { getServiceContext } from "@/server/auth/context";
@@ -14,10 +14,10 @@ export default async function AchievementsPage() {
   const [streak, achievements] = await Promise.all([getStreak(ctx), listAchievements(ctx)]);
   const unlocked = achievements.filter((a) => a.unlockedAt).length;
   return (
-    <main className="mx-auto w-full max-w-content space-y-5 px-gutter py-6">
+    <main className="mx-auto w-full max-w-content space-y-5 px-gutter py-6 lg:max-w-4xl lg:px-8">
       <PageHeader title="Erfolge" back={{ href: "/settings", label: "Profil" }} />
       <section className="flex items-center gap-4 rounded-card bg-card p-card shadow-xs">
-        <Milo mood={streak.current >= 3 ? "streak" : "neutral"} size={72} />
+        <MiloBuddy mood={streak.current >= 3 ? "streak" : "happy"} size={80} />
         <div className="grid flex-1 grid-cols-3 text-center">
           <div>
             <div className="tabular text-stat-sm">{streak.current}</div>
@@ -36,7 +36,7 @@ export default async function AchievementsPage() {
       <h2 className="text-heading">
         {unlocked} von {achievements.length} freigeschaltet
       </h2>
-      <ul className="grid grid-cols-2 gap-3">
+      <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
         {achievements.map((a) => (
           <li
             key={a.key}
