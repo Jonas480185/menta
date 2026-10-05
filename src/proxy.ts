@@ -7,6 +7,7 @@ import {
   PATHNAME_HEADER,
   safeNextPath,
 } from "@/server/auth/redirects";
+import { buildCsp, createNonce, NONCE_HEADER } from "@/server/security/csp";
 
 /**
  * Optimistic auth redirects based on the presence of the session cookie only (no DB).
@@ -30,7 +31,15 @@ export function proxy(request: NextRequest) {
   // Let server components know the requested URL, so requireUser() can build `?next=`.
   const headers = new Headers(request.headers);
   headers.set(PATHNAME_HEADER, `${pathname}${search}`);
-  return NextResponse.next({ request: { headers } });
+
+  // Per-request CSP nonce: Next.js reads the CSP from the request headers and stamps its scripts.
+  const nonce = createNonce();
+  const csp = buildCsp(nonce, { dev: process.env.NODE_ENV === "development" });
+  headers.set(NONCE_HEADER, nonce);
+  headers.set("Content-Security-Policy", csp);
+  const response = NextResponse.next({ request: { headers } });
+  response.headers.set("Content-Security-Policy", csp);
+  return response;
 }
 
 export const config = {

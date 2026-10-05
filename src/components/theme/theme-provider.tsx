@@ -17,7 +17,7 @@ export const THEME_STORAGE_KEY = "theme";
  * - Transitions are suppressed while switching so colors don't animate.
  * - MotionConfig makes every `motion` animation honor prefers-reduced-motion.
  */
-export function ThemeProvider({ children }: { children: ReactNode }) {
+export function ThemeProvider({ children, nonce }: { children: ReactNode; nonce?: string }) {
   return (
     <NextThemesProvider
       attribute="class"
@@ -27,6 +27,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       disableTransitionOnChange
       storageKey={THEME_STORAGE_KEY}
       themes={["light", "dark"]}
+      nonce={nonce}
     >
       <MotionConfig reducedMotion="user">{children}</MotionConfig>
     </NextThemesProvider>

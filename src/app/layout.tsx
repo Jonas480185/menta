@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import { Geist_Mono, Inter, Nunito } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/theme/toaster";
 import { BRAND } from "@/content/brand";
+import { NONCE_HEADER } from "@/server/security/csp";
 import "./globals.css";
 
 /*
@@ -52,7 +54,9 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  // CSP nonce from src/proxy.ts (makes every page dynamic – they all are user-specific anyway).
+  const nonce = (await headers()).get(NONCE_HEADER) ?? undefined;
   return (
     <html
       lang="de"
@@ -60,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${nunito.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="bg-background text-foreground flex min-h-full flex-col">
-        <ThemeProvider>
+        <ThemeProvider nonce={nonce}>
           {children}
           <Toaster />
         </ThemeProvider>

@@ -1,6 +1,21 @@
 import type { NextConfig } from "next";
 
+/** Security headers for every response (the CSP itself is per request, see src/proxy.ts). */
+const SECURITY_HEADERS = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+  // Camera only for the barcode scanner on our own origin; everything else off.
+  { key: "Permissions-Policy", value: "camera=(self), microphone=(), geolocation=(), payment=(), usb=()" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+];
+
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  async headers() {
+    return [{ source: "/:path*", headers: SECURITY_HEADERS }];
+  },
   /**
    * Load the database drivers with native Node `require` instead of bundling them.
    * PGlite resolves its WASM (`pglite.wasm`, `pglite.data`) and extension bundles

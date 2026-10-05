@@ -2,3 +2,7 @@ allowBuilds:
   esbuild: true
   sharp: true
   unrs-resolver: true
+
+# Security: @esbuild-kit (via drizzle-kit) pins esbuild 0.18 – GHSA-67mh-4wv8-2f99 (dev server only).
+overrides:
+  "@esbuild-kit/core-utils>esbuild": "^0.25.0"
