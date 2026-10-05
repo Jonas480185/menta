@@ -2,6 +2,7 @@
   "name": "menta",
   "description": "Ernährungstagebuch mit Lebensmittelsuche, Rezepten und Auswertungen. Erfasst Kalorien, Nährstoffe, Gewicht und Aktivität. Lokal mit Beispieldaten startbar.",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "author": "Jonas Lunkwitz (https://github.com/Jonas480185)",
   "repository": {
