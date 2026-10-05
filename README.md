@@ -1,120 +1,197 @@
-# Menta – Nutrition & Fitness Tracker
+<div align="center">
 
-„Klarheit auf dem Teller.“ Kalorien, Makros, Gewicht, Aktivität und Wasser tracken – schnell, modern, mit
-Maskottchen **Milo** als funktionalem Coach. UI-Sprache: Deutsch. Light & Dark Mode, mobile-first.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="public/brand/menta-lockup-dark.svg">
+  <img src="public/brand/menta-lockup-light.svg" alt="Menta" height="64">
+</picture>
 
-Demo-Login nach `pnpm db:seed`: **demo@menta.app / menta-demo-2026** (21 Tage Beispiel-Tagebuch).
+### Klarheit auf dem Teller.
 
-## Setup
+Ein moderner Kalorien- und Makro-Tracker mit Maskottchen **Milo** als Coach –<br>
+ruhig, präzise und ohne Schuldgefühle.
+
+![Next.js](https://img.shields.io/badge/Next.js_16-000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React_19-149ECA?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript_strict-3178C6?logo=typescript&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Drizzle](https://img.shields.io/badge/Drizzle_ORM-C5F74F?logo=drizzle&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-06B6D4?logo=tailwindcss&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-1.270_passing-1FC98E)
+
+</div>
+
+<br>
+
+![Menta – Übersicht](docs/media/hero.png)
+
+## Überblick
+
+Menta macht das Tracken von Ernährung so schnell und angenehm wie möglich: Lebensmittel in zwei Taps loggen,
+Kalorien und Makros auf einen Blick sehen und den Gewichtstrend statt täglicher Schwankungen verfolgen.
+Die App ist mobile-first gebaut, funktioniert aber genauso gut am Desktop – mit Tastenkürzeln und mehrspaltigen
+Layouts. UI-Sprache ist Deutsch, Light und Dark Mode werden vollständig unterstützt.
+
+**Highlights**
+
+- 🔎 **Schnelle Suche** über ~18.000 lokale Lebensmittel plus Live-Fallback auf Open Food Facts – Verlauf und Favoriten zuerst
+- 📷 **Barcode-Scan** per Kamera mit Anlage-Flow für unbekannte Produkte
+- 🎯 **Transparente Zielberechnung** (Mifflin-St Jeor, PAL, Tempo) mit Makro-Modi und Tagesprofilen
+- 📈 **Fortschritt** von 7 Tagen bis 1 Jahr, geglätteter Gewichtstrend, Serien und Erfolge
+- 🌱 **Milo** – ein interaktiver Coach, der kontextabhängig hilft (und sich streicheln lässt)
+- ⌨️ **Desktop-optimiert** mit Seitenleiste, Tastenkürzeln (`N`, `/`, `⌘K`, `1–4`, `?`) und Zwei-Spalten-Layouts
+
+## Screens
+
+![Tagebuch, Suche, Portion, Fortschritt und Erfolge](docs/media/screens.png)
+
+### Milo, der Coach
+
+<table>
+<tr>
+<td width="52%"><img src="docs/media/milo.gif" alt="Milo reagiert auf Tippen, Doppeltippen, Gedrückthalten und Ziehen"></td>
+<td>
+
+Milo gibt kontextabhängige Hinweise – Frühstück vergessen, Protein-Ziel erreicht, Serie in Gefahr –
+nach 15 priorisierten Regeln, nie mit erhobenem Zeigefinger.
+
+Und er ist interaktiv:
+
+- **Tippen** – hüpfen, wackeln, drehen, kichern
+- **Doppeltippen** – Salto mit Konfetti
+- **Gedrückt halten** – aufladen und Power-Up
+- **Ziehen** – fliegt mit und federt zurück
+- **Streicheln** mit der Maus – Herzaugen
+- Augen folgen dem Zeiger, Blinzeln, Idle-Animationen
+
+Respektiert `prefers-reduced-motion` und ist per Tastatur bedienbar.
+
+</td>
+</tr>
+</table>
+
+### Desktop
+
+![Desktop-Ansicht in Light und Dark Mode](docs/media/desktop.png)
+
+### Dark Mode
+
+![Dark Mode](docs/media/dark.png)
+
+## Funktionen
+
+| Bereich | Umfang |
+|---|---|
+| **Konto & Onboarding** | Registrierung/Login (better-auth), 8-stufiges Onboarding mit nachvollziehbarer Kalorien- und Makroberechnung |
+| **Loggen** | Suche mit Verlauf-Ranking, Schnellauswahl (Zuletzt / Häufig / Favoriten mit letzter Portion), Barcode, Portionen, Mahlzeit oder Tag kopieren, Rückgängig |
+| **Lebensmittel & Rezepte** | Eigene Lebensmittel mit Validierung, Rezepte mit Live-Nährwerten pro Portion – loggbar wie jedes Lebensmittel |
+| **Ziele** | Berechnet oder manuell, Makro-Modi Prozent / Gramm / Empfehlung, Tagesprofile (Training, Ruhetag, Refeed …) pro Wochentag |
+| **Körper & Aktivität** | Gewicht mit geglättetem 7-Tage-Trend und Zielprognose, Aktivitäten (MET-basiert), Wasser |
+| **Auswertung** | Kalorien, Protein, Zielerreichung und Beständigkeit über 7T / 30T / 3M / 6M / 1J |
+| **Motivation** | Serien, 13 Erfolge, Milo-Coach mit kontextabhängigen Hinweisen |
+
+## Tech-Stack
+
+| | |
+|---|---|
+| **Framework** | Next.js 16 (App Router, React 19, Server Components, Server Actions, Turbopack) |
+| **Sprache** | TypeScript (strict), Zod für jede externe Eingabe |
+| **Daten** | PostgreSQL mit Drizzle ORM · lokal **PGlite** (PostgreSQL 17 als WASM – kein DB-Server nötig) |
+| **Auth** | better-auth (E-Mail + Passwort) |
+| **UI** | Tailwind CSS v4 (CSS-first Design Tokens), Radix-Primitives, motion, Recharts, lucide |
+| **Tests** | Vitest + Testing Library (Unit & DB-Integration), Playwright (E2E) |
+
+## Architektur
+
+```
+src/
+  domain/            Reine Fachlogik ohne Framework-Abhängigkeiten – vollständig unit-getestet
+                     (Nährwert-Mathe, Kalorien- & Makro-Engine, Gewichtstrend, Aktivität, Engagement)
+  server/
+    db/              Drizzle-Schema, Migrationen, Such-SQL
+    food/            Provider-Abstraktion (Open Food Facts, USDA, lokal), Normalisierung, Import-Pipeline
+    services/        Use-Cases als fn(ctx, input) – immer auf ctx.userId gescoped, gegen echte DB getestet
+  app/               Routen: Server Components lesen über Services, Mutationen über Server Actions
+  components/        UI-Bibliothek (ui/) und Feature-Komponenten
+```
+
+**Technische Entscheidungen, die sich lohnen anzusehen**
+
+- **Nährwert-Snapshots im Tagebuch** – Einträge speichern ihre Nährwerte zum Logzeitpunkt. Aktualisierte oder
+  bearbeitete Lebensmittel verändern die Historie nie still; Tagessummen werden live per SQL aggregiert, es gibt
+  keine redundante Summentabelle, die invalidiert werden müsste.
+- **Eingefrorene Tagesziele** – `daily_nutrition` hält die Ziele vergangener Tage fest, sodass Zieländerungen
+  alte Auswertungen nicht verfälschen.
+- **Hybride Lebensmitteldaten** – Open Food Facts (Markenprodukte, Barcodes), USDA FoodData Central (generische
+  Lebensmittel, Mikronährstoffe) und 446 kuratierte deutsche Grundnahrungsmittel; normalisiert, validiert,
+  dedupliziert und mit Positiv-/Negativ-Cache.
+- **Suche** – generierte `tsvector`-Spalte, Trigram-GIN- und Präfix-Index, zweistufige Abfrage: bei 1 Mio.
+  Lebensmitteln meist 3–60 ms. Ranking: Verlauf → exakte Treffer → Favoriten → eigene → Datenbank.
+- **Datenintegrität** – 39 CHECK-Constraints sichern plausible Werte direkt in der Datenbank.
+- **Barrierefreiheit** – semantische Design-Tokens, Kontraste nach WCAG AA, sichtbarer Fokus, Touch-Ziele ≥ 44 px,
+  `prefers-reduced-motion` überall respektiert.
+
+Ausführliche Dokumentation: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) ·
+[Datenbank](docs/architecture/database.md) · [Lebensmitteldaten](docs/architecture/food-data-strategy.md) ·
+[Kalorien-Engine](docs/architecture/calorie-engine.md) · [Makro-Engine](docs/architecture/macro-engine.md) ·
+[Design-System](docs/design/design-system.md) · [Marke](docs/brand/identity.md)
+
+## Qualität
+
+- **1.270 Tests** in 71 Dateien – Fachlogik, Services gegen frische In-Memory-PostgreSQL-Instanzen,
+  Komponenten und ein E2E-Flow (Registrierung → Onboarding → Suche → Loggen → Portion ändern)
+- Quality Gate: `pnpm typecheck && pnpm lint && pnpm test && pnpm build`
+
+## Lokal starten
+
+Voraussetzungen: Node.js ≥ 20 und pnpm.
 
 ```bash
 pnpm install
-cp .env.example .env        # Defaults funktionieren lokal ohne Änderungen
-pnpm db:seed                # Migrationen + 17.986 Lebensmittel + Demo-User (≈ 6 s)
-pnpm dev                    # http://localhost:3000
+cp .env.example .env     # die Defaults funktionieren lokal ohne Änderungen
+pnpm db:seed             # Migrationen, ~18.000 Lebensmittel und ein Demo-Account (≈ 6 s)
+pnpm dev                 # http://localhost:3000
 ```
 
-Kein Postgres-Server nötig: lokal läuft **PGlite** (echtes PostgreSQL 17 als WASM, Daten in `.data/pglite`).
-Nur ein Prozess darf das Datenverzeichnis öffnen – Dev-Server stoppen, bevor `db:seed`/`db:migrate` läuft.
+Demo-Login: **demo@menta.app** / **menta-demo-2026** – drei Wochen Beispiel-Tagebuch inklusive Gewicht und Wasser.
+
+Es wird kein PostgreSQL-Server benötigt: lokal läuft PGlite mit Daten in `.data/pglite`.
+Für Produktion `DATABASE_URL` auf eine PostgreSQL-Instanz (≥ 14, Extensions `pg_trgm` und `unaccent`) setzen.
 
 | Befehl | Zweck |
 |---|---|
-| `pnpm dev` / `pnpm build && pnpm start` | Entwicklung / Production |
-| `pnpm typecheck && pnpm lint && pnpm test && pnpm build` | Quality Gate (`pnpm check`) |
-| `pnpm test:e2e` | Playwright gegen laufenden Server (`E2E_BASE_URL`, Default `http://localhost:3200`) |
-| `pnpm db:generate` / `db:migrate` / `db:seed` / `db:reset` | Migrationen & Seed |
-| `pnpm db:bench-search` | Such-Benchmark mit 200k–1M synthetischen Foods |
-| `tsx scripts/food/import-*.ts` | Food-Import-Pipeline (USDA, kuratiert, Open Food Facts API/Dump) |
+| `pnpm dev` · `pnpm build && pnpm start` | Entwicklung · Produktion |
+| `pnpm check` | Typecheck, Lint, Tests und Build |
+| `pnpm test:e2e` | Playwright-E2E gegen einen laufenden Server |
+| `pnpm db:migrate` · `pnpm db:seed` · `pnpm db:reset` | Datenbank |
 
-## Environment Variables
+<details>
+<summary><b>Umgebungsvariablen</b></summary>
 
 | Variable | Default | Beschreibung |
 |---|---|---|
-| `DATABASE_URL` | leer | `postgres://…` → echtes PostgreSQL (Produktion). Leer → PGlite |
-| `PGLITE_DATA_DIR` | `./.data/pglite` | PGlite-Datenverzeichnis |
-| `BETTER_AUTH_SECRET` | Dev-Fallback | **Pflicht in Produktion**, ≥ 32 Zeichen (`openssl rand -base64 32`) |
-| `BETTER_AUTH_URL`, `BETTER_AUTH_TRUSTED_ORIGINS` | leer | Öffentliche URL / zusätzliche Origins |
+| `DATABASE_URL` | leer | `postgres://…` für echtes PostgreSQL, leer = PGlite |
+| `PGLITE_DATA_DIR` | `./.data/pglite` | Datenverzeichnis für PGlite |
+| `BETTER_AUTH_SECRET` | Dev-Fallback | **In Produktion Pflicht**, ≥ 32 Zeichen (`openssl rand -base64 32`) |
+| `BETTER_AUTH_URL` | leer | Öffentliche URL der App |
 | `USDA_API_KEY` | `DEMO_KEY` | USDA FoodData Central |
-| `OFF_USER_AGENT` | App-Name | Pflicht-User-Agent für Open Food Facts |
-| `FOOD_EXTERNAL_PROVIDERS_ENABLED` | `true` | `false` = Offline-Modus (nur lokale DB) |
-| `LOG_LEVEL`, `DB_POOL_MAX` | – | Logging / Pool-Größe |
+| `OFF_USER_AGENT` | App-Name | User-Agent für Open Food Facts |
+| `FOOD_EXTERNAL_PROVIDERS_ENABLED` | `true` | `false` = Offline-Modus, nur lokale Datenbank |
 
-## Architecture
+</details>
 
-Next.js 16 (App Router, React 19, Turbopack) · TypeScript strict · Tailwind v4 + eigene Komponentenbibliothek
-(Radix/shadcn-Konventionen) · Drizzle ORM · PostgreSQL/PGlite · better-auth · Zod · Recharts · motion.
+## Datenquellen & Lizenzen
 
-```
-src/domain/         reine Logik (Nährwert-Mathe, Kalorien, Makros, Gewichtstrend, Aktivität, Engagement/Milo) – unit-getestet
-src/server/services Use-Cases: fn(ctx = { db, userId, timezone }, input) – gegen In-Memory-Postgres getestet
-src/server/food/    FoodProvider-Abstraktion (OFF, USDA, Local), Normalisierung, Validierung, Import-Pipeline
-src/app/            Routen; Server Components lesen via Services, Mutationen via Server Actions (ActionResult)
-src/components/     ui/ (Bibliothek), Feature-Komponenten
-```
+- Lebensmitteldaten von [Open Food Facts](https://world.openfoodfacts.org) (ODbL) – Attribution in der App sichtbar
+- [USDA FoodData Central](https://fdc.nal.usda.gov) (Public Domain / CC0)
+- Wortmarke auf Basis von [Nunito](https://fonts.google.com/specimen/Nunito) (SIL Open Font License)
 
-Details: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/architecture/technical.md`](docs/architecture/technical.md),
-Produkt: [`docs/product/`](docs/product/), Design: [`docs/design/`](docs/design/), Marke: [`docs/brand/`](docs/brand/).
+## Ausblick
 
-## Database
+Passwort-Reset und E-Mail-Verifizierung · Anbindung von Wearables (die Provider-Schnittstelle ist vorbereitet) ·
+Barcode-Scan per Kamera ist auf Browser mit `BarcodeDetector` angewiesen, sonst manuelle Eingabe.
 
-Schema in `src/server/db/schema/*.ts`, Migrationen in `drizzle/` (`0000_extensions` aktiviert `pg_trgm` + `unaccent`).
-Kernentscheidungen: Nährwerte **pro 100 g/ml**; Tagebuch-Einträge speichern einen **Nährwert-Snapshot** (Historie
-ändert sich nicht, wenn Foods aktualisiert werden); Tagessummen werden live per SQL aggregiert (keine Redundanz,
-nichts zu invalidieren); `daily_nutrition` friert die **Ziele** vergangener Tage ein; Rezepte besitzen eine
-verknüpfte `foods`-Zeile und sind damit such-/logg-/favorisierbar wie Lebensmittel. 39 CHECK-Constraints sichern
-plausible Werte. Suche: generierte `tsvector`-Spalte + Trigram-GIN + Präfix-Index, zweistufige Such-SQL
-(1 Mio. Foods: meist 3–60 ms). → [`docs/architecture/database.md`](docs/architecture/database.md)
+---
 
-## Food Provider Strategy
-
-Hybrid: **Open Food Facts** (DE/EU-Markenprodukte, Barcodes, ODbL) + **USDA FoodData Central** (generische
-Lebensmittel, Mikronährstoffe, CC0) + **446 kuratierte deutsche Grundnahrungsmittel** (deutsche Namen, Werte aus USDA).
-Offline-Snapshot (1,55 MB) mit 17.986 Foods wird beim Seed importiert. Suche: lokal zuerst
-(Historie → exakte Treffer → Favoriten → eigene → Datenbank), bei < 8 Treffern Live-Fallback auf Open Food Facts
-(Timeout 2 s), Ergebnisse werden normalisiert, validiert, dedupliziert, lokal gespeichert und in
-`external_lookup_cache` gecacht (Suche 7 Tage, Barcode 30 Tage, Negativ-Cache 1 Tag). Pipeline:
-Raw → Parser → Normalizer → Validation → Dedup → DB. → [`docs/architecture/food-data-strategy.md`](docs/architecture/food-data-strategy.md)
-
-## Calorie Calculation
-
-`CalorieCalculator`-Interface mit Registry; Default **Mifflin-St Jeor** (+ Harris-Benedict rev., Katch-McArdle).
-TDEE = BMR × PAL (1,2 … 1,9). Tempo: −250/−500/−750 bzw. +150/+300 kcal (Defizit max. 25 % des TDEE),
-Sicherheitsuntergrenzen mit Hinweis, 7.700 kcal/kg für Wochen-/Zielprognose, transparente Aufschlüsselung
-(„Erhaltungsbedarf 2.773 kcal · Defizit −500 kcal · Tagesziel 2.273 kcal“). Ziel jederzeit manuell überschreibbar.
-→ [`docs/architecture/calorie-engine.md`](docs/architecture/calorie-engine.md)
-
-## Macro Calculation
-
-Modi **Prozent**, **Gramm** (Protein + Fett fix, Carbs = Rest) und **Empfehlung** (Protein g/kg nach Ziel,
-Fett-Untergrenze, Carbs Rest). 4/4/9 kcal/g, Rundung so, dass 4P+4C+9F ≤ ±5 kcal vom Ziel abweicht; die UI zeigt
-immer „= X kcal“. **Tagesprofile** (Trainings-/Ruhetag, High/Low Carb, Refeed) per Wochentag oder Datum.
-→ [`docs/architecture/macro-engine.md`](docs/architecture/macro-engine.md), [`docs/architecture/nutrition-engine.md`](docs/architecture/nutrition-engine.md)
-
-## Features (Definition of Done)
-
-Account & Login · Onboarding (8 Schritte) · Kalorien-/Makroziele berechnet oder manuell · Suche über 18k lokale
-Foods + Open Food Facts live · Barcode-Scan (Kamera via `BarcodeDetector`, manuelle Eingabe, unbekannt →
-Produkt anlegen) · eigene Lebensmittel · Loggen in ≤ 2 Taps (Zuletzt/Häufig/Favoriten mit letzter Portion),
-Portionen ändern, duplizieren, löschen mit Rückgängig, Mahlzeit/Tag kopieren · Rezepte mit Live-Nährwerten ·
-Gewicht mit geglättetem Trend · Aktivität (MET) & Wasser · Fortschritt 7T/30T/3M/6M/1J · Streaks, 13 Achievements,
-Milo-Coach mit 15 kontextabhängigen Regeln (ohne Schuldzuweisungen) · Light/Dark · alles persistent.
-
-## Testing
-
-- **Unit + Integration (Vitest)**: 70 Dateien, > 1.240 Tests – Nährwert-Mathe, Kalorien/Makros, Rezepte,
-  Gewichtstrend, Suche/Ranking, Logging, Auth, Constraints; DB-Tests gegen frische In-Memory-PGlite.
-- **E2E (Playwright)**: `e2e/core-flow.spec.ts` – Signup → Onboarding → Suche → Loggen → Portion ändern → Reload.
-
-## Deployment
-
-Beliebiger Node-Host (z. B. Vercel/Fly/Render): `DATABASE_URL` auf PostgreSQL ≥ 14 mit Extensions `pg_trgm` und
-`unaccent`, `BETTER_AUTH_SECRET` setzen, `pnpm build && pnpm start`. Migrationen laufen beim ersten DB-Zugriff
-automatisch (oder `pnpm db:migrate`), Foods per `pnpm db:seed` (Demo-User-Schritt in Produktion auslassen:
-`pnpm db:seed --only=extensions,foods`). Open-Food-Facts-Attribution (ODbL) ist in Suche und Food-Details sichtbar.
-
-
-## Bekannte Grenzen
-
-Kein Passwort-Reset/E-Mail-Verifizierung (kein Mail-Provider) · Wearable-Integrationen sind als austauschbare
-Provider-Schnittstelle vorbereitet, aber nicht angebunden · Kamera-Scan benötigt einen Browser mit
-`BarcodeDetector` (Chrome/Android), sonst manuelle Eingabe · Rezepte nutzen einen eigenen Zutaten-Picker (DB-Suche).
+<div align="center">
+Entwickelt von <a href="https://github.com/Jonas480185">Jonas Lunkwitz</a>
+</div>

@@ -708,6 +708,13 @@
     touch-action: manipulation;
   }
 
+  /* Search inputs bring their own clear button – hide the native one (WebKit/Blink). */
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]) {
     cursor: pointer;
