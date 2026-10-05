@@ -1,6 +1,6 @@
 {
   "name": "menta",
-  "description": "Moderner Kalorien- und Makro-Tracker mit Maskottchen Milo – Next.js 16, React 19, TypeScript, PostgreSQL/Drizzle",
+  "description": "Moderner Kalorien- und Makro-Tracker mit Maskottchen Milo. Next.js 16, React 19, TypeScript, PostgreSQL/Drizzle",
   "version": "0.1.0",
   "private": true,
   "author": "Jonas Lunkwitz (https://github.com/Jonas480185)",
