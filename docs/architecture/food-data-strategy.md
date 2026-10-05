@@ -23,13 +23,13 @@ Barcodes für Markenprodukte, Mikronährstoffe für generische Lebensmittel, kei
 
 | Quelle | Inhalt | Warum (nicht) |
 |---|---|---|
-| **Open Food Facts (OFF)** | Crowd-sourced Markenprodukte weltweit, stark in DE/FR; Barcode, Nährwerttabelle (EU-Label), Bilder, Nutri-Score | **Ja** – beste freie Barcode-Abdeckung für DE. Qualität schwankt → Validierung + Flags. |
-| **USDA Foundation Foods** | ~470 analytisch gemessene Grundnahrungsmittel, sehr detaillierte Nährstoffe, halbjährliche Releases | **Ja** – höchste Qualität. |
-| **USDA SR Legacy** | 7 793 generische Lebensmittel (Stand 2018, eingefroren), Mikronährstoffe, Portionsgrößen | **Ja** – breite generische Abdeckung, Basis für kuratierte DE-Liste. |
-| **USDA FNDDS** (Survey) | ~5 000 „wie gegessen“-Lebensmittel/Gerichte der US-Ernährungserhebung | Später – US-Gerichte, wenig DE-Relevanz; Rezepte decken Gerichte besser ab. |
-| **USDA Branded** | ~450 k US-Markenprodukte mit GTIN, Label-Daten | **Nein** im Seed – US-Marken, kaum DE-Treffer, groß (GBs). Über die USDA-API als Fallback erreichbar. |
-| **BLS** (Bundeslebensmittelschlüssel, Max Rubner-Institut) | Deutsche Referenzdatenbank für generische Lebensmittel und Gerichte | **Noch nicht** – fachlich ideal für DE; Lizenz war historisch kostenpflichtig/restriktiv für App-Weitergabe. Aktuellen Lizenzstatus (BLS 4.x) prüfen → siehe §11. |
-| **Kommerzielle APIs** (Nutritionix, Edamam, FatSecret, Spoonacular …) | Gepflegte Datenbanken, teils NLP-Parsing | **Nein** – laufende Kosten pro Request/Nutzer, ToS beschränken typischerweise dauerhaftes Speichern/Caching (widerspricht lokal-zuerst + Tagebuch-Snapshots), DE-Markenabdeckung nicht besser als OFF, Vendor-Lock-in. |
+| **Open Food Facts (OFF)** | Crowd-sourced Markenprodukte weltweit, stark in DE/FR; Barcode, Nährwerttabelle (EU-Label), Bilder, Nutri-Score | **Ja**: beste freie Barcode-Abdeckung für DE. Qualität schwankt → Validierung + Flags. |
+| **USDA Foundation Foods** | ~470 analytisch gemessene Grundnahrungsmittel, sehr detaillierte Nährstoffe, halbjährliche Releases | **Ja**: höchste Qualität. |
+| **USDA SR Legacy** | 7 793 generische Lebensmittel (Stand 2018, eingefroren), Mikronährstoffe, Portionsgrößen | **Ja**: breite generische Abdeckung, Basis für kuratierte DE-Liste. |
+| **USDA FNDDS** (Survey) | ~5 000 „wie gegessen“-Lebensmittel/Gerichte der US-Ernährungserhebung | Später: US-Gerichte, wenig DE-Relevanz; Rezepte decken Gerichte besser ab. |
+| **USDA Branded** | ~450 k US-Markenprodukte mit GTIN, Label-Daten | **Nein** im Seed: US-Marken, kaum DE-Treffer, groß (GBs). Über die USDA-API als Fallback erreichbar. |
+| **BLS** (Bundeslebensmittelschlüssel, Max Rubner-Institut) | Deutsche Referenzdatenbank für generische Lebensmittel und Gerichte | **Noch nicht**: fachlich ideal für DE; Lizenz war historisch kostenpflichtig/restriktiv für App-Weitergabe. Aktuellen Lizenzstatus (BLS 4.x) prüfen → siehe §11. |
+| **Kommerzielle APIs** (Nutritionix, Edamam, FatSecret, Spoonacular …) | Gepflegte Datenbanken, teils NLP-Parsing | **Nein**: laufende Kosten pro Request/Nutzer, ToS beschränken typischerweise dauerhaftes Speichern/Caching (widerspricht lokal-zuerst + Tagebuch-Snapshots), DE-Markenabdeckung nicht besser als OFF, Vendor-Lock-in. |
 
 ### Kriterien
 
@@ -37,12 +37,12 @@ Barcodes für Markenprodukte, Mikronährstoffe für generische Lebensmittel, kei
 |---|---|---|---|---|---|
 | Datenqualität | mittel (crowd-sourced, ~2 % geflaggt in unserem Sample) | sehr hoch (Labor) | mittel (Label) | sehr hoch | hoch |
 | Abdeckung DE/EU | sehr gut (Hunderttausende DE-Produkte) | generisch, keine Marken | schwach (US) | sehr gut (generisch) | mittel |
-| Barcodes | Kernstärke (EAN-13/8) | – | UPC/GTIN (US) | – | teils |
+| Barcodes | Kernstärke (EAN-13/8) |, | UPC/GTIN (US) |, | teils |
 | Makros | ja (pro 100 g/ml) | ja | ja | ja | ja |
 | Mikronährstoffe | lückenhaft | sehr gut (Vitamine, Mineralstoffe) | wenige | sehr gut | teils |
 | Sprache | mehrsprachig (`product_name_de`) | Englisch | Englisch | Deutsch | meist Englisch |
-| Limits | API v2 Suche 10 req/min, **anonym nur Seiten 1–10 je Suche (Seite 11 → HTTP 401)**, `page_size=100` → häufig 503; Produkt ~100 req/min (wir: 15/min); search-a-licious ohne publiziertes Limit (wir: 30/min), max. 10 000 Treffer je Query; **Dumps frei** | Bulk-CSV frei; API 1 000 req/h je Key, `DEMO_KEY` real 10 req/h | wie USDA | Lizenz | bezahlte Kontingente |
-| Geschwindigkeit | Produkt-API ~0,2–1 s; v2-Suche langsam, am 2026-09-26 >2 h durchgehend 503; search-a-licious ~0,3 s | Bulk lokal: 8 262 Datensätze in ~0,7 s geladen | – | – | schnell |
+| Limits | API v2 Suche 10 req/min, **anonym nur Seiten 1-10 je Suche (Seite 11 → HTTP 401)**, `page_size=100` → häufig 503; Produkt ~100 req/min (wir: 15/min); search-a-licious ohne publiziertes Limit (wir: 30/min), max. 10 000 Treffer je Query; **Dumps frei** | Bulk-CSV frei; API 1 000 req/h je Key, `DEMO_KEY` real 10 req/h | wie USDA | Lizenz | bezahlte Kontingente |
+| Geschwindigkeit | Produkt-API ~0,2-1 s; v2-Suche langsam, am 2026-09-26 >2 h durchgehend 503; search-a-licious ~0,3 s | Bulk lokal: 8 262 Datensätze in ~0,7 s geladen |, |, | schnell |
 | Lizenz | **ODbL 1.0** (DB), DbCL (Inhalte), Bilder CC BY-SA 3.0 → Attribution + Share-Alike für abgeleitete DB | **CC0 / Public Domain** (Zitierung erbeten) | CC0 | historisch kostenpflichtig | proprietär |
 
 ## 3. Zielarchitektur
@@ -59,7 +59,7 @@ Suche/Barcode ─► LocalFoodProvider (foods) ─► zu wenig Treffer? ─► O
                     └──────────────────────────────────────────────────────┘
 ```
 
-- **Provider-Vertrag**: `FoodProvider` (`src/server/food/types.ts`) – `searchFoods`, `getFood`, `getFoodByBarcode`;
+- **Provider-Vertrag**: `FoodProvider` (`src/server/food/types.ts`), `searchFoods`, `getFood`, `getFoodByBarcode`;
   App-Code sieht nur `NormalizedFood`, nie Roh-JSON. Implementierungen: `OpenFoodFactsProvider`, `UsdaProvider`,
   `LocalFoodProvider`.
 - **HTTP**: `fetchJson` mit Timeout, Retries mit Backoff (429/5xx, `Retry-After`) und Token-Bucket je Endpoint
@@ -89,7 +89,7 @@ Weiche Flags (gespeichert, beeinflussen `dataQuality`):
 
 | Flag | Regel | Qualität |
 |---|---|---|
-| `energy_mismatch` | kcal weicht > max(20 kcal, 20 %) von 4/4/9 (+7 Alkohol) ab; Ballaststoffe mit 0/2/4 kcal probiert (EU- vs. US-KH-Definition) | `suspect` (bei `trusted`/kuratiert nur informativ – USDA nutzt lebensmittelspezifische Atwater-Faktoren, z. B. Kleie, Kakaopulver) |
+| `energy_mismatch` | kcal weicht > max(20 kcal, 20 %) von 4/4/9 (+7 Alkohol) ab; Ballaststoffe mit 0/2/4 kcal probiert (EU- vs. US-KH-Definition) | `suspect` (bei `trusted`/kuratiert nur informativ: USDA nutzt lebensmittelspezifische Atwater-Faktoren, z. B. Kleie, Kakaopulver) |
 | `sugar_exceeds_carbs`, `saturated_fat_exceeds_fat` | Teilmenge > Obermenge (+0,5 g / 2 %) | `suspect` |
 | `missing_kcal/protein/carbs/fat` | Kernwert fehlt | `partial` |
 | `energy_derived`, `salt_derived`, `sodium_derived`, `energy_from_kj`, `carbs_clamped` | abgeleitete Werte | informativ |
@@ -112,7 +112,7 @@ pnpm exec tsx scripts/food/seed-foods.ts [--only=curated,usda,off]    # = Seed-S
 
 ## 5. Kuratierte deutsche Basis-Lebensmittel
 
-`data/curated/generic-foods.de.json` – 446 Einträge in 18 Kategorien (Obst, Gemüse, Kartoffeln, Brot & Backwaren,
+`data/curated/generic-foods.de.json`: 446 Einträge in 18 Kategorien (Obst, Gemüse, Kartoffeln, Brot & Backwaren,
 Getreide/Nudeln/Reis, Milchprodukte inkl. Quark/Skyr/Joghurt, Käse, Eier, Fleisch, Wurst & Aufschnitt,
 Fisch & Meeresfrüchte, Hülsenfrüchte & Soja, Nüsse & Samen, Öle & Fette, Getränke, Süßes & Snacks,
 Saucen & Gewürze, Gerichte). Jeder Eintrag: stabile `id` (= `source_id`, nie ändern), `nameDe`, `category`,
@@ -129,7 +129,7 @@ Grenzen: US-Referenzwerte (z. B. Milch 3,25 % statt 3,5 %, Quark ≈ Cottage Che
 1. **Identität** = `(source, source_id)` (partieller Unique-Index). Re-Importe sind Upserts.
 2. **Im Batch**: gleicher Schlüssel → der „reichere“ Datensatz gewinnt; danach gleicher Barcode → dito.
 3. **Gegen die DB, quellübergreifend nach Barcode** (OFF ↔ USDA Branded ↔ spätere Quellen): reicherer Datensatz bleibt
-   aktiv, der andere wird **archiviert** (`is_archived = true`, nie gelöscht – Tagebucheinträge/Favoriten referenzieren ihn).
+   aktiv, der andere wird **archiviert** (`is_archived = true`, nie gelöscht: Tagebucheinträge/Favoriten referenzieren ihn).
 4. **Reichhaltigkeit** (`foodRichness`): Qualitätsrang × 100 + 20 für Deutsch + 2 je Nährstofffeld + Mikronährstoffe (≤ 10)
    + Portionen (≤ 5) + Marke 2 + Bild 2.
 5. **Neuere Daten gewinnen**: Upsert überschreibt nur, wenn `fetched_at` der Zeile ≤ dem neuen Wert ist
@@ -137,7 +137,7 @@ Grenzen: US-Referenzwerte (z. B. Milch 3,25 % statt 3,5 %, Quark ≈ Cottage Che
 6. `popularity` sinkt nie (nutzungsbasierte Popularität bleibt erhalten).
 7. **Portionen** werden per Label/Einheit+Gramm synchronisiert → IDs bleiben stabil (`food_usage.last_serving_id`,
    `meal_entries.serving_id`).
-8. Kein unscharfes Namens-Dedupe zwischen Quellen (z. B. kuratiert „Banane“ ↔ USDA „Bananas, raw“) – das ist Ranking-
+8. Kein unscharfes Namens-Dedupe zwischen Quellen (z. B. kuratiert „Banane“ ↔ USDA „Bananas, raw“): das ist Ranking-
    Aufgabe der Suche: kuratierte deutsche Einträge vor USDA-Einträgen gleicher `fdcId` zeigen (§11).
 
 ## 7. Aktualisierung / TTL
@@ -151,7 +151,7 @@ Grenzen: US-Referenzwerte (z. B. Milch 3,25 % statt 3,5 %, Quark ≈ Cottage Che
 | kuratiert | – | versioniert im Repo, per Seed |
 | user/recipe | – | gehören dem Nutzer, nie extern aktualisiert |
 
-Tagebuchwerte sind Snapshots – Aktualisierungen ändern vergangene Einträge nie.
+Tagebuchwerte sind Snapshots: Aktualisierungen ändern vergangene Einträge nie.
 
 ## 8. Attribution (Pflicht in der UI)
 
@@ -180,7 +180,7 @@ Zeilen- und Portionenzahl (36 110) unverändert.
 
 - `import-off.ts --file=openfoodfacts-products.jsonl.gz` streamt den Dump (≈ 7 GB gzip, mehrere Mio. Produkte)
   zeilenweise mit konstantem Speicher; `--country=en:germany` filtert vor `JSON.parse` per Substring (der teure Teil
-  ist Gunzip + Parse, ~10–20 min für den Weltdump auf einem Laptop). Chunks à 2 000, Transaktionen à 500 Foods.
+  ist Gunzip + Parse, ~10-20 min für den Weltdump auf einem Laptop). Chunks à 2 000, Transaktionen à 500 Foods.
 - Gemessener Durchsatz der Upsert-Stufe auf PGlite: ~4 000 Foods/s (OFF 9 311 in 2,1 s) → DE-Teilmenge (Größenordnung
   einige 100 k Produkte) in wenigen Minuten; in Produktion gegen echtes Postgres (`DATABASE_URL`).
 - Nicht in Git: der volle Import gehört in einen periodischen Job (z. B. wöchentlich Dump, täglich OFF-Delta-Exporte
@@ -193,6 +193,6 @@ Zeilen- und Portionenzahl (36 110) unverändert.
 
 - **BLS** prüfen: Lizenz BLS 4.x; wenn nutzbar, kuratierte Liste auf BLS-Nährwerte umstellen (deutsche Referenz statt US).
 - Kuratiert ↔ USDA-Doppelungen im Ranking auflösen: USDA-Zeilen, deren fdcId kuratiert referenziert wird, abwerten.
-- Popularitäts-Prior für kuratierte Einträge (derzeit 0) – z. B. aus Nutzungsdaten nach Launch.
+- Popularitäts-Prior für kuratierte Einträge (derzeit 0): z. B. aus Nutzungsdaten nach Launch.
 - USDA FNDDS für typische Gerichte, falls Rezepte die Lücke nicht schließen.
 - Live-Refresh-Job für veraltete OFF-Produkte (§7) implementieren (Food-Search/Barcode-Service).

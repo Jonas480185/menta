@@ -12,7 +12,7 @@ Grundumsatz (BMR) → × Aktivitätsfaktor (PAL) = Erhaltungsbedarf (TDEE) → �
 | Services (server-only) | `src/server/services/calories/**` | Berechnung für den eingeloggten Nutzer, Speichern von BMR/TDEE |
 | Services (server-only) | `src/server/services/profile/**` | Profil lesen/ändern, aktuelles Gewicht |
 
-Einheiten: kcal/Tag, kg, cm, Jahre. Gerundet wird **nur für Anzeige/Speicherung** – `bmr`/`tdee` bleiben
+Einheiten: kcal/Tag, kg, cm, Jahre. Gerundet wird **nur für Anzeige/Speicherung**: `bmr`/`tdee` bleiben
 ungerundet, `target` ist eine Empfehlung und wird auf 10 kcal gerundet.
 
 ---
@@ -37,7 +37,7 @@ CalorieCalculation { bmr, tdee, adjustment, target, warnings, … }
         └─ recalculateAndStore(ctx) → user_profiles.bmr_kcal / tdee_kcal
 ```
 
-Die Engine schreibt **keine** `goal_profiles` – das Tagesziel samt Makros gehört der Macro Engine,
+Die Engine schreibt **keine** `goal_profiles`: das Tagesziel samt Makros gehört der Macro Engine,
 siehe §8.
 
 ---
@@ -50,11 +50,11 @@ siehe §8.
 | `SAFETY.maxDeficitShareOfTdee` | 0,25 | Defizit höchstens 25 % des TDEE |
 | `SAFETY.minTargetKcal` | ♀ 1200 · ♂ 1500 · unspecified 1350 | absolute Untergrenze beim Abnehmen |
 | `SAFETY.roundingStepKcal` | 10 | Rundung des Tagesziels |
-| `BODY_LIMITS.ageYears` | 14–120 | harte Grenze (Validierung) |
-| `BODY_LIMITS.adultAgeYears` | 18–100 | außerhalb → freundlicher Hinweis (`age_outside_range`) |
-| `BODY_LIMITS.heightCm` | 50–300 | = DB-CHECK `user_profiles_height_range` |
-| `BODY_LIMITS.weightKg` | 20–400 | = DB-CHECKs `user_profiles_weight_range`, `weight_entries_weight_range` |
-| `BODY_LIMITS.bodyFatPct` | 2–70 | plausibler Bereich für Katch-McArdle, sonst Fallback |
+| `BODY_LIMITS.ageYears` | 14-120 | harte Grenze (Validierung) |
+| `BODY_LIMITS.adultAgeYears` | 18-100 | außerhalb → freundlicher Hinweis (`age_outside_range`) |
+| `BODY_LIMITS.heightCm` | 50-300 | = DB-CHECK `user_profiles_height_range` |
+| `BODY_LIMITS.weightKg` | 20-400 | = DB-CHECKs `user_profiles_weight_range`, `weight_entries_weight_range` |
+| `BODY_LIMITS.bodyFatPct` | 2-70 | plausibler Bereich für Katch-McArdle, sonst Fallback |
 
 ### Aktivitätsfaktoren (`ACTIVITY_LEVELS`, PAL)
 
@@ -78,7 +78,7 @@ Reihenfolge = Anzeige-Reihenfolge.
 | lose | fast | −750 | −0,68 („≈ 0,7“) | Ambitioniert |
 | gain | slow | +150 | +0,14 („≈ 0,15“) | Entspannt |
 | gain | moderate | +300 | +0,27 („≈ 0,25“) | Moderat |
-| maintain | – | 0 | 0 | – |
+| maintain |, | 0 | 0 |, |
 
 Kein Tempo gespeichert → `moderate` (`DEFAULT_GOAL_PACE`). `gain` + `fast` gibt es nicht: die Domain rechnet mit
 `moderate` und warnt (`pace_adjusted`), `updateProfile` lehnt es ab. Die Labels versprechen nur, was die
@@ -93,15 +93,15 @@ teilen sich `defineCalculator()` → `computeCalorieTarget()`.
 
 | id | Name | BMR (kcal/Tag) | Quelle |
 |---|---|---|---|
-| `mifflin_st_jeor` **(Default)** | Mifflin-St Jeor | `10·kg + 6,25·cm − 5·Alter + s`, s = +5 ♂ / −161 ♀ | Mifflin MD et al., *Am J Clin Nutr* 1990;51:241–247 |
-| `harris_benedict_revised` | Harris-Benedict (revidiert) | ♂ `88,362 + 13,397·kg + 4,799·cm − 5,677·Alter`; ♀ `447,593 + 9,247·kg + 3,098·cm − 4,330·Alter` | Roza AM, Shizgal HM, *Am J Clin Nutr* 1984;40:168–182 |
+| `mifflin_st_jeor` **(Default)** | Mifflin-St Jeor | `10·kg + 6,25·cm − 5·Alter + s`, s = +5 ♂ / −161 ♀ | Mifflin MD et al., *Am J Clin Nutr* 1990;51:241-247 |
+| `harris_benedict_revised` | Harris-Benedict (revidiert) | ♂ `88,362 + 13,397·kg + 4,799·cm − 5,677·Alter`; ♀ `447,593 + 9,247·kg + 3,098·cm − 4,330·Alter` | Roza AM, Shizgal HM, *Am J Clin Nutr* 1984;40:168-182 |
 | `katch_mcardle` | Katch-McArdle | `370 + 21,6 · LBM`, LBM = kg · (1 − KFA/100) | Katch & McArdle, *Nutrition, Weight Control and Exercise* (1975/1983) |
 
 **Geschlecht „unspecified“**: arithmetisches Mittel der männlichen und weiblichen Konstante bzw. Gleichung
 (Mifflin: s = −78). Katch-McArdle ist geschlechtsunabhängig.
 
 **Fallback**: Unbekannte `calculator_id` (veralteter DB-Wert) → still Mifflin-St Jeor. Katch-McArdle ohne gültigen
-Körperfettanteil (2–70 %) → Mifflin-St Jeor mit Hinweis `calculator_fallback`. Der Körperfettanteil kommt aus dem
+Körperfettanteil (2-70 %) → Mifflin-St Jeor mit Hinweis `calculator_fallback`. Der Körperfettanteil kommt aus dem
 neuesten `weight_entries.body_fat_pct` (oder als Override).
 
 Referenzwerte (Tests):
@@ -131,13 +131,13 @@ Referenzwerte (Tests):
    das Datum.
 
 Alle Hinweise sind freundliche deutsche Sätze (`warnings: string[]`) plus maschinenlesbare Codes
-(`warningDetails: { code, message }[]`) – die UI wählt Ton/Icon über den Code, nie über den Text. Keine Schuld,
-keine Verbote: „Weniger empfehlen wir nicht ohne ärztliche Begleitung – dafür geht es etwas langsamer voran.“
+(`warningDetails: { code, message }[]`), die UI wählt Ton/Icon über den Code, nie über den Text. Keine Schuld,
+keine Verbote: „Weniger empfehlen wir nicht ohne ärztliche Begleitung, dafür geht es etwas langsamer voran.“
 
 ### Manuelles Ziel (`checkManualTarget`)
 
 Der Nutzer darf das Ziel jederzeit selbst festlegen („Selbst festlegen“). Werte in `MANUAL_TARGET_LIMITS`
-(800–10.000 kcal) werden akzeptiert; unter `floorKcal` gibt es nur einen **nicht blockierenden** Hinweis
+(800-10.000 kcal) werden akzeptiert; unter `floorKcal` gibt es nur einen **nicht blockierenden** Hinweis
 (`manual_below_floor`). Außerhalb der Grenzen → `CalorieInputError("target")`.
 
 ---
@@ -172,11 +172,11 @@ Woche  = −500 × 7 / 7700 = −0,45 kg → 6 kg in 14 Wochen
 1. In `src/domain/calories/calculators.ts`:
    ```ts
    export const cunningham = defineCalculator({
-     id: "cunningham",                 // stabil – landet in user_profiles.calculator_id
+     id: "cunningham",                 // stabil, landet in user_profiles.calculator_id
      name: "Cunningham",
      description: "Ein deutscher Satz für die Einstellungen.",
      requires: ["bodyFatPct"],         // optional
-     canCalculate: hasValidBodyFat,    // optional – false → Fallback auf Mifflin mit Hinweis
+     canCalculate: hasValidBodyFat,    // optional, false → Fallback auf Mifflin mit Hinweis
      bmr: (p) => 500 + 22 * p.weightKg * (1 - p.bodyFatPct! / 100),
    });
    ```
@@ -190,7 +190,7 @@ TDEE, Tempo, Deckel, Untergrenze, Warnungen und Breakdown kommen automatisch mit
 
 ## 7. API-Referenz
 
-### Domain – `@/domain/calories` (rein, client-tauglich)
+### Domain: `@/domain/calories` (rein, client-tauglich)
 
 ```ts
 // Hauptfunktion
@@ -234,7 +234,7 @@ class CalorieInputError extends Error { field: string }   isCalorieInputError(er
 `CalorieCalculation`: `calculatorId, bmr, activityMultiplier, tdee, adjustment, target, requestedAdjustment,
 floorKcal, floorApplied, capApplied, weeklyChangeKg, estimatedWeeksToGoal, warnings, warningDetails`.
 
-### Services – `@/server/services/profile`
+### Services: `@/server/services/profile`
 
 ```ts
 getProfile(ctx: ServiceContext): Promise<ProfileRow>                        // NOT_FOUND ohne Zeile
@@ -245,14 +245,14 @@ getCurrentWeightKg(ctx: ServiceContext): Promise<number | null>
 ```
 
 `updateProfile`: Zod-strict (unbekannte/geschützte Felder wie `bmrKcal` → `VALIDATION`), Alter aus
-Geburtsdatum 14–120 am heutigen Tag, `maintain` löscht das Tempo, `gain` + `fast` → Feldfehler (geerbtes `fast`
+Geburtsdatum 14-120 am heutigen Tag, `maintain` löscht das Tempo, `gain` + `fast` → Feldfehler (geerbtes `fast`
 wird beim Wechsel auf `gain` zu `moderate`), `calculatorId` muss registriert sein, `timezone` muss eine gültige
-IANA-Zone sein. Rechnet **nicht** neu – danach `recalculateAndStore(ctx)` aufrufen.
+IANA-Zone sein. Rechnet **nicht** neu: danach `recalculateAndStore(ctx)` aufrufen.
 
 `getCurrentWeight`: neuester `weight_entries`-Eintrag mit `date ≤ heute` (Zeitzone des Nutzers; zukünftige
 Einträge zählen nicht), sonst `start_weight_kg`, sonst `null`. Körperfett = neuester Eintrag mit Wert. Nur lesend.
 
-### Services – `@/server/services/calories`
+### Services: `@/server/services/calories`
 
 ```ts
 calculateCaloriesForUser(ctx: ServiceContext, overrides?: CalorieOverrides): Promise<UserCalorieCalculation>
@@ -311,11 +311,11 @@ export async function saveGoalAction(input: unknown) {
 - **Live-Vorschau** im Onboarding: entweder rein im Client `calculateCalories(body, goal)` (Domain ist
   client-tauglich) oder serverseitig `calculateCaloriesForUser(ctx, overrides)`, wenn gespeicherte Werte (z. B.
   aktuelles Gewicht) einfließen sollen.
-- **Manuelles Ziel**: `checkManualTarget(calc, kcal)` für den Hinweis, dann direkt an Macro Engine übergeben – die
+- **Manuelles Ziel**: `checkManualTarget(calc, kcal)` für den Hinweis, dann direkt an Macro Engine übergeben, die
   Engine überschreibt manuelle Ziele nie.
 - **Neues Gewicht** (Gewichts-Tracking): optional `recalculateAndStore(ctx)` nach dem Speichern, damit
   „Erhaltungsbedarf“ aktuell bleibt. Ob das gespeicherte Tagesziel automatisch nachgezogen wird, entscheidet der
   Aufrufer (nur, wenn das Ziel nicht manuell gesetzt ist).
 
 Die Signaturen von `upsertDefaultGoalProfile` und `refreshTargetsFrom` sind hier nur
-skizziert – maßgeblich ist der jeweilige Service.
+skizziert: maßgeblich ist der jeweilige Service.

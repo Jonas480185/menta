@@ -46,13 +46,13 @@ erDiagram
 
 `external_lookup_cache` is standalone (keyed by provider + query/barcode).
 
-## 2. Tables – rationale
+## 2. Tables: rationale
 
 | Spec entity | Table | Key decisions |
 |---|---|---|
 | User | `user`, `session`, `account`, `verification` | better-auth shape, text ids. Everything user-owned cascades from `user.id`. |
-| UserProfile | `user_profiles` (PK = user_id) | 1:1, body data + preferences. Current weight is **not** stored here – it's the latest `weight_entries` row. |
-| NutritionGoal | `goal_profiles` | Day profiles (`kind`: default/training/rest/high_carb/low_carb/refeed/custom). `weekdays smallint[]` (ISO 1–7) schedules a profile automatically. Exactly one active default per user (partial unique index). Archive via `archived_at` instead of deleting. |
+| UserProfile | `user_profiles` (PK = user_id) | 1:1, body data + preferences. Current weight is **not** stored here: it's the latest `weight_entries` row. |
+| NutritionGoal | `goal_profiles` | Day profiles (`kind`: default/training/rest/high_carb/low_carb/refeed/custom). `weekdays smallint[]` (ISO 1-7) schedules a profile automatically. Exactly one active default per user (partial unique index). Archive via `archived_at` instead of deleting. |
 | DailyNutrition | `daily_nutrition` (PK user_id+date) | Per-date **target snapshot** + optional per-date override (`goal_profile_id`, `profile_overridden`). No consumed totals (see §3). |
 | Food / FoodNutrients | `foods` | One table for every food: database foods (`usda`/`off`/`curated`, `owner_user_id` null), user foods (`source='user'`) and recipe foods (`source='recipe'`). Nutrients are columns per 100 g/ml + `micronutrients jsonb` for the long tail. |
 | FoodBrand | `food_brands` + denormalized `foods.brand_name/brand_normalized` | Brand rows for dedup/filters; the denormalized copy keeps search a single-table query. |
@@ -72,7 +72,7 @@ erDiagram
 
 | Data | Decision | Why |
 |---|---|---|
-| Entry nutrients (`meal_entries.kcal…`) | **Snapshot** at log time, recomputed only when the entry itself changes | Provider foods get refreshed and user foods edited – a past diary must never silently change. Also makes day totals a single-table `SUM`. |
+| Entry nutrients (`meal_entries.kcal…`) | **Snapshot** at log time, recomputed only when the entry itself changes | Provider foods get refreshed and user foods edited: a past diary must never silently change. Also makes day totals a single-table `SUM`. |
 | Entry display data (`food_name`, `brand_name`, `serving_label`, `serving_grams`) | **Snapshot** | The entry stays readable after the food is deleted (FK → set null). |
 | Daily consumed totals | **Computed** on read: `SUM(...) FROM meal_entries WHERE user_id=? AND date=?` (index `meal_entries_user_date_idx`) | Nothing to invalidate; < 5 ms even for heavy users. Ranges (analytics) use the same index with `date BETWEEN`. |
 | Daily targets | **Frozen** in `daily_nutrition` | Changing goals must not rewrite past adherence. Today/future rows are refreshed from the resolved profile, past rows are kept. If the referenced profile is deleted, `goal_profile_id` becomes null and the frozen targets stay. |
@@ -88,7 +88,7 @@ erDiagram
 - Floats are `double precision`; round only for display.
 - `*_normalized` columns are written by the app via `normalizeFoodText()` (lowercase, diacritics folded, ß→ss,
   punctuation collapsed). `unaccent()` is not IMMUTABLE, so it can't be used in generated columns or index
-  expressions – the app-side normalization is the single source of truth and is applied to both data and queries.
+  expressions: the app-side normalization is the single source of truth and is applied to both data and queries.
 - Drizzle `casing: "snake_case"`: TS `proteinG` ↔ column `protein_g`.
 
 ## 5. Integrity rules
@@ -99,7 +99,7 @@ erDiagram
 |---|---|
 | a user | Everything user-owned cascades (profile, goals, daily rows, meals, entries, own foods + recipes, favorites, usage, weight, water, activities, achievements, mascot log, sessions). Public foods are untouched. |
 | a meal slot with entries | **Rejected** (23503). Slots are archived (`is_archived`). |
-| a food | `meal_entries.food_id/serving_id` → null (snapshot kept); favorites, usage, servings cascade; `recipes.food_id` → null. **Rejected** if the food is an ingredient of any recipe – archive it (`is_archived`) instead. |
+| a food | `meal_entries.food_id/serving_id` → null (snapshot kept); favorites, usage, servings cascade; `recipes.food_id` → null. **Rejected** if the food is an ingredient of any recipe: archive it (`is_archived`) instead. |
 | a serving | Entries/ingredients/usage keep working (`serving_id` → null, label + grams are snapshotted). |
 | a goal profile | `daily_nutrition.goal_profile_id` → null, frozen targets remain. Prefer archiving. |
 
@@ -108,7 +108,7 @@ The two "rejected" FKs (`recipe_ingredients.food_id`, `meal_entries (meal_id, us
 RI constraints fired inside a cascade at the end of each cascaded sub-statement, so with an immediate
 RESTRICT the user delete failed depending on trigger order. Deferred, the check runs at COMMIT when the cascade
 is complete. Consequence for services: inside an explicit transaction the violation surfaces at **commit**, not
-at the `DELETE` – check usage first (e.g. "is this food used in a recipe?") and show a friendly message.
+at the `DELETE`: check usage first (e.g. "is this food used in a recipe?") and show a friendly message.
 
 `meal_entries (meal_id, user_id) → meals (id, user_id)` is a composite FK: an entry can only reference a meal
 slot of the **same user** (defence in depth on top of `ctx.userId` scoping).
@@ -119,37 +119,37 @@ slot of the **same user** (defence in depth on top of `ctx.userId` scoping).
 |---|---|
 | Food nutrients ≥ 0 (kcal, macros, fiber, sugar, sat. fat, salt, minerals) | `foods_nutrients_non_negative` |
 | Plausibility per 100 g: each macro ≤ 100 g, P+C+F ≤ 105 g (5 g rounding tolerance), kcal ≤ 1000. Per 100 ml the limits double (dense liquids: honey ≈ 115 g sugar/100 ml). | `foods_nutrients_plausible` |
-| Stricter checks (kcal vs. 4/4/9, sugar ≤ carbs, …) are **not** constraints – providers disagree on definitions (US carbs include fiber). The importer sets `data_quality`/`quality_flags` instead. | – |
+| Stricter checks (kcal vs. 4/4/9, sugar ≤ carbs, …) are **not** constraints, providers disagree on definitions (US carbs include fiber). The importer sets `data_quality`/`quality_flags` instead. |, |
 | User/recipe foods have an owner, database foods never do; private foods need an owner | `foods_owner_matches_source`, `foods_private_has_owner` |
 | Names not blank | `foods_name_not_blank`, `recipes_name_not_blank`, `goal_profiles_name_not_blank`, `meal_entries_food_name_not_blank`, `activities_name_not_blank` |
 | Serving `grams > 0`, `amount > 0` | `food_servings_*` |
 | Entry `quantity > 0`, `grams ≥ 0`, `serving_grams ≥ 0` (0 allowed for quick-add calories), nutrients ≥ 0 | `meal_entries_*` |
-| Weight 20–400 kg, body fat 0–100 % | `weight_entries_*`, `user_profiles_weight_range` |
-| Height 50–300 cm | `user_profiles_height_range` |
+| Weight 20-400 kg, body fat 0-100 % | `weight_entries_*`, `user_profiles_weight_range` |
+| Height 50-300 cm | `user_profiles_height_range` |
 | Water `amount_ml > 0` | `water_entries_amount_positive` |
-| Goal `calorie_target > 0`; macro grams ≥ 0 (a zero-carb profile is legitimate); percents 0–100; optional targets > 0; weekdays ⊆ {1..7}; an archived profile can't be default | `goal_profiles_*` |
+| Goal `calorie_target > 0`; macro grams ≥ 0 (a zero-carb profile is legitimate); percents 0-100; optional targets > 0; weekdays ⊆ {1..7}; an archived profile can't be default | `goal_profiles_*` |
 | Daily targets: kcal > 0, macros ≥ 0 | `daily_nutrition_*` |
 | Recipe servings > 0, total weight > 0; ingredient quantity/grams > 0 | `recipes_*`, `recipe_ingredients_*` |
 | Activity values ≥ 0 | `activities_values_non_negative` |
 | `meals.default_time` is `HH:MM` | `meals_default_time_format` |
 
 Uniqueness: one active default goal profile per user (`goal_profiles_one_default_per_user`, partial:
-`is_default AND archived_at IS NULL` – switch defaults by demoting then promoting inside one transaction);
+`is_default AND archived_at IS NULL`: switch defaults by demoting then promoting inside one transaction);
 one weight entry per day; `foods (source, source_id)` for idempotent imports; `recipes.food_id`; activity
 `(user_id, source, external_id)`. Not enforced in SQL: overlapping weekdays between two profiles (needs
 `btree_gist`; the Goals service validates it).
 
 ## 6. Food search (reference SQL)
 
-Implementation: `src/server/db/food-search-sql.ts` – `buildFoodSearchSql()`, `searchFoodsReference(db, input)`,
+Implementation: `src/server/db/food-search-sql.ts`, `buildFoodSearchSql()`, `searchFoodsReference(db, input)`,
 `normalizeSearchQuery()`, tunable `DEFAULT_FOOD_SEARCH_WEIGHTS` and `DEFAULT_CANDIDATE_CAPS`.
 Tests: `src/server/db/search.test.ts`. **Food Search** builds the search service/ranking on top of it (add recents,
-favorites, provider fallback) – keep the WHERE clauses index-shaped.
+favorites, provider fallback): keep the WHERE clauses index-shaped.
 
 ### Search columns
 
-- `name_normalized`, `brand_normalized` – app-normalized text (§4).
-- `search_vector tsvector GENERATED ALWAYS AS (...) STORED` – weighted document:
+- `name_normalized`, `brand_normalized`: app-normalized text (§4).
+- `search_vector tsvector GENERATED ALWAYS AS (...) STORED`: weighted document:
   `A` = name_normalized, `B` = brand_normalized, `C` = category (folded inline with
   `lower/replace/translate`, which are IMMUTABLE). Config `simple`: no stemming/stop words (mixed DE/EN data,
   prefix search instead of stemming). Never written by the app (`$inferInsert` excludes it).
@@ -158,15 +158,15 @@ favorites, provider fallback) – keep the WHERE clauses index-shaped.
 
 | Query shape | Index |
 |---|---|
-| `name_normalized = q`, `name_normalized LIKE 'q%'` | `foods_name_prefix_idx` (btree `text_pattern_ops` – works under any collation) |
+| `name_normalized = q`, `name_normalized LIKE 'q%'` | `foods_name_prefix_idx` (btree `text_pattern_ops`: works under any collation) |
 | word-prefix full text `search_vector @@ to_tsquery('simple','hafer:* & flo:*')` | `foods_search_vector_idx` (GIN) |
 | typo / compound words `q <% name_normalized` (word_similarity ≥ 0.6), also `%`, `LIKE '%x%'` | `foods_name_trgm_idx` (GIN `gin_trgm_ops`) |
 | fuzzy brand `q <% brand_normalized` | `foods_brand_trgm_idx` |
-| top-N by popularity | `foods_popularity_idx` (ASC btree, scanned backwards – see note) |
+| top-N by popularity | `foods_popularity_idx` (ASC btree, scanned backwards: see note) |
 | the user's own foods + recipes | `foods_owner_idx (owner_user_id, name_normalized) WHERE owner_user_id IS NOT NULL` |
 
 **The public-foods predicate must be literal SQL** (`visibility = 'public' AND NOT is_archived`, exported as
-`PUBLIC_FOODS_PREDICATE` from the schema) – with bound parameters the planner can't prove the partial-index
+`PUBLIC_FOODS_PREDICATE` from the schema): with bound parameters the planner can't prove the partial-index
 predicate. Why partial: at scale, private user foods can outnumber public ones; they must not bloat the
 public search indexes or produce thousands of heap rechecks for other users' rows.
 
@@ -180,7 +180,7 @@ Note on `DESC` indexes: drizzle's `.desc()` emits `DESC NULLS LAST`, which does 
 so no tsquery syntax can be injected; `to_tsquery` re-tokenizes `1,5`/`3.5` exactly like `to_tsvector`
 did. `q` shorter than 3 characters uses the short path (trigrams need ≥ 3 chars).
 
-### Reference query (≥ 3 characters) – two stages
+### Reference query (≥ 3 characters): two stages
 
 ```sql
 -- $q = normalizeFoodText(input), $tsq = 'tok1:* & tok2:*', $prefix = escape_like($q) || '%', $user
@@ -229,19 +229,19 @@ Design notes (all measured, see §7):
   `foods_popularity_idx` backwards and stops after `cap` hits; for a rare token it bitmap-scans the GIN index
   and sorts a handful of rows. Their row estimates (tsvector stats, btree) are accurate.
 - **Trigram is different:** `<%` costs ~2.5 µs/row and the planner underestimates that, so an
-  ordered/unordered `LIMIT` made it walk the popularity index or seq-scan (50–600 ms on misestimates).
+  ordered/unordered `LIMIT` made it walk the popularity index or seq-scan (50-600 ms on misestimates).
   `ORDER BY popularity + 0` (not indexable) forces the GIN bitmap. And the name-trigram branch only runs when
   FTS found fewer than its cap (typos, compound words in small result sets); the uncorrelated sub-select
   becomes a one-time filter, so the branch is skipped entirely otherwise.
 - **Trade-off:** for a very common token, compound matches not starting with it ("Hafer*milch*" for `milch`)
   only appear if they're among the 300 most popular FTS hits. Typing more ("hafermilch") finds them directly.
 - **Umlaut transliteration** (`ae/oe/ue` typed for `ä/ö/ü`) is not handled: `normalizeFoodText` folds `ä→a`,
-  so "haehnchen" ≠ "hahnchen" (trigram similarity 0.6 – borderline). Suggestion for Food Search: when the query
+  so "haehnchen" ≠ "hahnchen" (trigram similarity 0.6: borderline). Suggestion for Food Search: when the query
   contains `ae|oe|ue`, also search the variant with `a|o|u` (second `$q`) and merge.
 - `pg_trgm.word_similarity_threshold` (default 0.6) and `similarity_threshold` (0.3) are server defaults; tune
   per transaction with `SET LOCAL` if needed.
 
-### Short queries (1–2 characters)
+### Short queries (1-2 characters)
 
 ```sql
 SELECT … FROM foods f WHERE <public> AND f.name_normalized LIKE 'ha%'
@@ -269,7 +269,7 @@ while other builds/tests were running in parallel (load average ≈ 5.6, so abso
 pessimistic). Native Postgres (multi-threaded I/O, JIT-free but native code) was **not** available to measure;
 expect it to be faster, but re-run the benchmark against a staging server before relying on that.
 
-### 200 000 foods (53 MB table; search indexes: name trigram 13 MB, brand trigram 9.3 MB, FTS 6.4 MB, prefix 3.7 MB, popularity 1.8 MB) – load 18 s
+### 200 000 foods (53 MB table; search indexes: name trigram 13 MB, brand trigram 9.3 MB, FTS 6.4 MB, prefix 3.7 MB, popularity 1.8 MB), load 18 s
 
 | Query | p50 ms | p95 ms | Indexes used |
 |---|---:|---:|---|
@@ -289,7 +289,7 @@ expect it to be faster, but re-run the benchmark against a staging server before
 | own foods list | 0.2 | 0.4 | owner |
 | **baseline anti-pattern** `lower(name) LIKE '%haferflocken%'` | 78.0 | 85.2 | **Seq Scan** |
 
-Evolution during design (200k rows, same machine): single-stage OR query – `milch` **709 ms** (seq scan +
+Evolution during design (200k rows, same machine): single-stage OR query, `milch` **709 ms** (seq scan +
 scoring 40k rows) → two-stage with popularity-ordered branches: `milch` 9.6 ms but `haferflocken` 64 ms
 (trigram branch walked the popularity index) → final design above.
 
@@ -316,7 +316,7 @@ scoring 40k rows) → two-stage with popularity-ordered branches: `milch` 9.6 ms
 | **baseline** `lower(name) LIKE '%…%'` | 311.2 | 312.2 | **Seq Scan** |
 
 5× more rows → the seq-scan baseline grows 4× (78 → 311 ms), the reference queries stay flat except
-mid-frequency tokens. **Known weak spot:** for a token matching ~0.5–5 % of rows (`pastinake`), the planner
+mid-frequency tokens. **Known weak spot:** for a token matching ~0.5-5 % of rows (`pastinake`), the planner
 walks `foods_popularity_idx` backwards through ~50k rows to collect the popularity-ordered caps (it prices the
 per-row `@@`/`=` filter as nearly free; in WASM it is ~1 µs/row). `SET random_page_cost = 1.1` did not change
 the plan. Options if production numbers confirm it: smaller FTS/exact caps (`candidateCaps`), a bounded
@@ -380,10 +380,10 @@ Rules:
    reconciled by hand.
 3. **Custom SQL** (things drizzle-kit can't express: extensions, DEFERRABLE, functions, data fixes) goes into
    `pnpm drizzle-kit generate --custom --name=<slug>` files. They are not reflected in snapshots, so they are
-   never regenerated – keep them when squashing/regenerating, and re-apply their content if a generated
+   never regenerated: keep them when squashing/regenerating, and re-apply their content if a generated
    migration re-creates the affected object (e.g. if an FK in `0002_deferred_fks.sql` is dropped/re-added
    because its `onDelete` changed, add a new custom migration re-applying `DEFERRABLE`).
-4. **Journal conflicts** (`meta/_journal.json`): never merge by hand – take `main`'s version, delete your
+4. **Journal conflicts** (`meta/_journal.json`): never merge by hand, take `main`'s version, delete your
    branch's migration files, regenerate.
 5. **After deploy** (once production exists): no more squashing; migrations are append-only and must be
    backwards compatible for one release (add column → backfill → switch reads → drop later).
@@ -395,19 +395,19 @@ Rules:
 - Production = regular PostgreSQL ≥ 15 via `DATABASE_URL` (node-postgres pool). Migrations run on start
   (`createDatabase({ migrate: true })`) or via `pnpm db:migrate`.
 - **Extensions:** `pg_trgm` and `unaccent` must be available. `0000_extensions.sql` runs
-  `CREATE EXTENSION IF NOT EXISTS`, which needs sufficient privileges – on managed services (RDS, Cloud SQL,
+  `CREATE EXTENSION IF NOT EXISTS`, which needs sufficient privileges: on managed services (RDS, Cloud SQL,
   Neon, Supabase) allow-list/enable them first or run the statements as the admin role. The `extensions` seed
   step fails loudly if they're missing.
 - Text search config `simple` is built in; no dictionary files needed.
 - Backups: daily `pg_dump -Fc` (or the provider's PITR) + retention ≥ 7 days. The `foods` catalogue can be
-  re-imported, user data (`user*`, entries, goals, weight…) cannot – restore
+  re-imported, user data (`user*`, entries, goals, weight…) cannot: restore
   tests should focus on those tables.
 - Planner: `random_page_cost = 1.1` is the usual SSD setting (had no effect on the reference plans in the
   benchmark, but is generally recommended).
 - Maintenance: autovacuum defaults are fine; after a bulk food import run `ANALYZE foods` (planner stats drive the
-  search branch choices). GIN `fastupdate` is on by default – bulk imports into large tables are faster with
+  search branch choices). GIN `fastupdate` is on by default: bulk imports into large tables are faster with
   indexes dropped/recreated or `gin_pending_list_limit` raised.
-- Dev/test: PGlite (`.data/pglite`, one process per data dir – stop `pnpm dev` before `db:migrate`/`db:seed`).
+- Dev/test: PGlite (`.data/pglite`, one process per data dir, stop `pnpm dev` before `db:migrate`/`db:seed`).
 
 ## 11. Test harness & seeding
 
@@ -421,8 +421,8 @@ Rules:
   `src/server/db/search.test.ts` (generated tsvector, FTS/trigram, umlaut/ß folding, visibility, index usage).
 - Seeding: `pnpm db:seed [--only=foods,demo-data]` runs `scripts/db/seed/index.ts` → `SEED_STEPS` in order
   (`{ name, description, run(ctx) }`, timing logged, stops on first failure, every step idempotent):
-  1. `extensions` – verifies `pg_trgm`/`unaccent`.
-  2. `foods` – **Food Data Import's plug-in point:** dynamically imports `scripts/food/seed-foods.ts` and calls
+  1. `extensions`: verifies `pg_trgm`/`unaccent`.
+  2. `foods`: **Food Data Import's plug-in point:** dynamically imports `scripts/food/seed-foods.ts` and calls
      `seedFoods(db)` (must be idempotent: upsert on `(source, source_id)`); skipped while the file doesn't exist.
-  3. `demo-data` – no-op until better-auth is merged; a demo user is wired there (create via better-auth
+  3. `demo-data`: no-op until better-auth is merged; a demo user is wired there (create via better-auth
      server API, find-or-create by email, insert history only for empty dates).

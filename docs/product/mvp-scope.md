@@ -11,7 +11,7 @@
 | **MVP+ (Should)** | Geplant und spezifiziert; wird gebaut, wenn der Must-Teil grün ist. Fehlt es, wird es im Review als Gap gelistet, blockiert aber nicht. |
 | **Später** | Bewusst nicht in dieser Runde. Datenmodell/Architektur lassen es zu, UI zeigt keine Platzhalter („Kommt bald“ ist verboten). |
 
-## MVP (Must) – Feature-Matrix
+## MVP (Must): Feature-Matrix
 
 | Bereich | Feature | DoD | Module |
 |---|---|---|---|
@@ -67,7 +67,7 @@
 | Mahlzeit-Fotos / KI-Erkennung | – | Storage, Datenschutz, Kosten |
 | Push-Benachrichtigungen / Erinnerungen | `mascot_interactions` als Frequenz-Log | Service Worker + Opt-in-Flow |
 | Offline-Logging mit Sync-Warteschlange | – | Konfliktauflösung |
-| Soziale Features (Freunde, Challenges) | – | Nicht Kern der Priorität 1–5 |
+| Soziale Features (Freunde, Challenges) | – | Nicht Kern der Priorität 1-5 |
 | Essensplanung / Einkaufslisten | Zukunftsdaten im Tagebuch erlaubt | Eigenes Produkt |
 | Intervallfasten-Timer | – | Nebenprodukt |
 | Weitere Kalorienformeln (Katch-McArdle) | `calculator_id` + `CalorieCalculator`-Interface | Mifflin reicht für MVP |

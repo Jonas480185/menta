@@ -9,7 +9,7 @@
 | Breakpoint | Muster |
 |---|---|
 | < 768 px | **Bottom Bar** (fix, Safe-Area beachten), 5 Ziele, Labels immer sichtbar |
-| 768–1023 px | **Icon-Rail** links (Icons + Tooltips + Labels unter Icons) |
+| 768-1023 px | **Icon-Rail** links (Icons + Tooltips + Labels unter Icons) |
 | ≥ 1024 px | **Sidebar** mit Labels, Primäraktion „+ Eintragen“ als Button oben, darunter Sekundärgruppe |
 
 **Bottom Bar:** Heute · Tagebuch · **(+) Loggen** · Fortschritt · Profil
@@ -23,7 +23,7 @@
 | Profil | `/settings` | `/settings`, `/foods`, `/recipes` |
 
 Regeln:
-- **(+)** ist visuell hervorgehoben (größer, Primärfarbe) und öffnet `/log` **direkt** – kein Zwischenmenü, weil
+- **(+)** ist visuell hervorgehoben (größer, Primärfarbe) und öffnet `/log` **direkt**: kein Zwischenmenü, weil
   Food Logging > 90 % der Log-Aktionen ausmacht. Wasser, Gewicht und Aktivität werden über ihre Karten auf `/today`
   geloggt (1 Tap).
 - Kontext wird weitergereicht: (+) auf `/diary/2026-09-24` → `/log?date=2026-09-24`; „+“ an einer Mahlzeit →
@@ -65,7 +65,7 @@ Regeln:
 `error.tsx` = Milo `thinking`, „Da ist etwas schiefgelaufen. Deine Daten sind sicher.“ + „Erneut versuchen“;
 `not-found` = „Diese Seite gibt es nicht.“ + „Zu Heute“.
 
-## 3. `/today` – „Wie stehe ich heute da?“
+## 3. `/today`: „Wie stehe ich heute da?“
 
 Die Seite beantwortet **eine** Frage. Alles andere ist untergeordnet. Reihenfolge Mobile (oben → unten):
 
@@ -78,14 +78,14 @@ Die Seite beantwortet **eine** Frage. Alles andere ist untergeordnet. Reihenfolg
 | 5 | Mahlzeiten | S | Je Mahlzeit: Icon, Name, „540 kcal · 3 Einträge“, „+“ (→ `/log?meal=`). Leere Mahlzeit: „Wie gestern (520 kcal)“ oder „Eintragen“ |
 | 6 | Kachel-Raster 2×2 | T | Wasser „1.250 / 2.500 ml“ + „+250 ml“ · Gewicht „83,4 kg · −0,6 kg / 7 T“ + „Eintragen“ · Aktivität „6.420 Schritte · 320 kcal“ · Serie „12 Tage“ |
 
-Desktop (≥ 1024): zwei Spalten – links Ring, Makros, Mahlzeiten; rechts Milo, Wasser, Gewicht, Aktivität, Serie.
+Desktop (≥ 1024): zwei Spalten, links Ring, Makros, Mahlzeiten; rechts Milo, Wasser, Gewicht, Aktivität, Serie.
 
 **Zustände Kalorien-Ring**
 | Zustand | Bedingung | Darstellung |
 |---|---|---|
 | Normal | Konsum < 90 % | Ring in `kcal`-Farbe, „680 kcal übrig“ |
-| Nahe Ziel | 90–100 % | gleiche Farbe, Text „Fast geschafft – noch 120 kcal“ |
-| Erreicht | 100–105 % | Ring geschlossen, „Ziel erreicht“ |
+| Nahe Ziel | 90-100 % | gleiche Farbe, Text „Fast geschafft: noch 120 kcal“ |
+| Erreicht | 100-105 % | Ring geschlossen, „Ziel erreicht“ |
 | Über Ziel | > 105 % | Ring voll + zweite Umrundung im `over`-Token, Mitte „310“ + „kcal über Ziel“. Kein Warn-Icon, kein Alarmton |
 | Leer | 0 Einträge | Ring leer, „2.300 kcal verfügbar“ |
 
@@ -96,10 +96,10 @@ Für Protein gilt Überschreiten als neutral („Ziel übertroffen“), nicht al
 „Gewicht eintragen“ (Sheet).
 **Empty State (neuer Tag / neuer Nutzer):** Ring leer, Milo-Karte ersetzt Makros nicht, sondern steht über den
 Mahlzeiten: „Neuer Tag, neue Runde. Starte mit dem Frühstück?“ + „Wie gestern“ (falls vorhanden).
-**Loading:** Skeleton mit exakt gleicher Geometrie (Ring-Kreis, 3 Balken, 4 Zeilen, 4 Kacheln) – kein Layout-Sprung.
+**Loading:** Skeleton mit exakt gleicher Geometrie (Ring-Kreis, 3 Balken, 4 Zeilen, 4 Kacheln), kein Layout-Sprung.
 **Error:** Teilfehler pro Karte (z. B. Gewicht lädt nicht → Karte zeigt „Gerade nicht verfügbar“), Seite bleibt nutzbar.
 
-## 4. `/log` – Suchen & Eintragen
+## 4. `/log`: Suchen & Eintragen
 
 Ziel: vom Öffnen bis „gespeichert“ in 2 Taps (bekannt) bzw. 4 Taps (neu). Reihenfolge:
 
@@ -121,7 +121,7 @@ Ziel: vom Öffnen bis „gespeichert“ in 2 Taps (bekannt) bzw. 4 Taps (neu). R
 - **Loading:** Suchergebnisse als 5 Skeleton-Zeilen nach 150 ms (vorher nichts, um Flackern zu vermeiden).
 - **Error:** Suche-API-Fehler → „Suche gerade nicht möglich. Deine zuletzt genutzten Lebensmittel funktionieren weiter.“
 
-## 5. `/log/food/[foodId]` – Portion & Menge
+## 5. `/log/food/[foodId]`: Portion & Menge
 
 Reihenfolge folgt dem Denkweg **Lebensmittel → Portion → Menge → Mahlzeit → Speichern**:
 
@@ -140,7 +140,7 @@ Speichern neu und ist maßgeblich. **Loading:** Skeleton für Kopf + Ergebnis. *
 „Dieses Lebensmittel gibt es nicht mehr.“ + zurück zur Suche; beim Bearbeiten eines Eintrags mit gelöschtem Food
 wird der Snapshot bearbeitet (nur Menge skalierbar).
 
-## 6. `/diary/[date]` – Tagebuch
+## 6. `/diary/[date]`: Tagebuch
 
 | # | Element | Rang | Inhalt |
 |---|---|---|---|
@@ -156,7 +156,7 @@ wird der Snapshot bearbeitet (nur Menge skalierbar).
   „Gestern übernehmen (1.980 kcal)“ (nur wenn Vortag Einträge hat) + „Eintragen“.
 - **Loading:** Skeleton pro Mahlzeit-Sektion. **Error:** ungültiges Datum in URL → Redirect auf heute.
 
-## 7. `/onboarding` – 8 Schritte
+## 7. `/onboarding`: 8 Schritte
 
 Fortschrittsbalken oben („Schritt 3 von 8“), „Zurück“ immer möglich, jeder Schritt speichert serverseitig.
 
@@ -190,8 +190,8 @@ Abschluss setzt `onboarding_completed_at`, legt das Default-`goal_profile` an un
 | `/progress/weight` | Gewicht | Aktueller Trendwert + Veränderung | Chart, Ziel, Prognose, Liste | „Gewicht eintragen“ | < 3 Einträge: kein Trend |
 | `/activity` | Aktivität & Wasser | Tages-Summe verbrannte kcal / Wasser | Liste der Einträge, Datumswahl | „Aktivität hinzufügen“, „+250 ml“ | „Noch keine Aktivität heute.“ |
 | `/achievements` | Erfolge | Aktuelle Serie + längste Serie | Freigeschaltete / gesperrte Erfolge mit Fortschritt | – | „Dein erster Erfolg wartet: 3 Tage in Folge eintragen.“ |
-| `/settings` | Profil-Hub | Name + aktuelles Ziel („2.300 kcal · Abnehmen“) | Gruppen: Meine Inhalte · Ziele & Plan · Konto & App | – | – |
+| `/settings` | Profil-Hub | Name + aktuelles Ziel („2.300 kcal · Abnehmen“) | Gruppen: Meine Inhalte · Ziele & Plan · Konto & App |, |, |
 | `/settings/goals` | Ziele | Tagesprofile mit kcal + Makros | Rechenweg, Makromodus, Wochentage | „Speichern“ | – |
 | `/settings/meals` | Mahlzeiten | Sortierbare Liste | Name, Standardzeit, archivieren | „Mahlzeit hinzufügen“ | Letzte aktive Mahlzeit nicht archivierbar |
 | `/settings/profile` | Körperdaten & App | Körperdaten, Aktivität, Ziel | Theme (System/Hell/Dunkel), Wasser-/Schrittziel, Aktivitätskalorien anrechnen | „Speichern“ → Neuberechnung anbieten | – |
-| `/settings/account` | Konto | E-Mail, Passwort ändern | Abmelden, Konto löschen (Bestätigung mit Eingabe) | – | – |
+| `/settings/account` | Konto | E-Mail, Passwort ändern | Abmelden, Konto löschen (Bestätigung mit Eingabe) |, |, |

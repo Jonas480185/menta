@@ -1,6 +1,6 @@
 # Domain Boundaries (Bounded Contexts)
 
-> Owner: Product Architecture. Ergänzt `docs/ARCHITECTURE.md §3–4`. Legt fest, welcher Kontext welche Tabellen **schreibt**,
+> Owner: Product Architecture. Ergänzt `docs/ARCHITECTURE.md §3-4`. Legt fest, welcher Kontext welche Tabellen **schreibt**,
 > welche Services er anbietet und in welche Richtung Abhängigkeiten erlaubt sind. Ziel: keine Zyklen, klare
 > Ownership, jeder Kontext einzeln testbar.
 
@@ -16,11 +16,11 @@
 | **Body / Weight** | Wie entwickelt sich das Gewicht? | `weight_entries` | `domain/weight/**`, `services/weight/**` | Weight Tracking |
 | **Activity & Water** | Wie viel Bewegung und Wasser? | `activities`, `water_entries` | `domain/activity/**`, `services/{activity,water}/**`, `server/integrations/**` | Activity & Water |
 | **Engagement** | Was verdient Anerkennung, und was sagt Milo? | `user_achievements`, `mascot_interactions` | `domain/{gamification,mascot}/**`, `services/{gamification,mascot}/**` | Gamification, Mascot Engine, Mascot Design |
-| **Analytics** | Welche Muster zeigen sich über Zeit? | – (nur lesend) | `domain/analytics/**`, `services/analytics/**` | Analytics |
+| **Analytics** | Welche Muster zeigen sich über Zeit? |: (nur lesend) | `domain/analytics/**`, `services/analytics/**` | Analytics |
 
 ## 2. Ownership-Details und Grenzfälle
 
-**Identity** – liefert ausschließlich `userId` (über `getServiceContext()`). Kein anderer Kontext liest `session`
+**Identity**: liefert ausschließlich `userId` (über `getServiceContext()`). Kein anderer Kontext liest `session`
 oder `account`. Konto löschen = `ON DELETE CASCADE` auf alle Nutzertabellen; das ist der einzige Kontext, der
 Löschungen quer auslöst (durch die DB, nicht durch Aufrufe).
 
@@ -30,30 +30,30 @@ Löschungen quer auslöst (durch die DB, nicht durch Aufrufe).
 - `start_weight_kg`/`target_weight_kg` gehören hierher; das **aktuelle** Gewicht gehört Body/Weight.
 - `services/onboarding` schreibt `user_profiles` und legt über den Goals-Service das Default-Profil an. Die
   Standard-Mahlzeiten (Logging-Kontext) legt die Onboarding-**Server Action** über den Meals-Service an, falls
-  sie nicht schon bei Signup entstanden sind – nicht der Onboarding-Service selbst (Richtung, siehe §3).
+  sie nicht schon bei Signup entstanden sind: nicht der Onboarding-Service selbst (Richtung, siehe §3).
 
 **Food Catalog**
 - `foods` hat drei Schreiber mit getrennten Zeilen: Import/Provider (`source ∈ usda/off/curated`),
-  User Foods (`source = user`), Recipes (`source = recipe` – nur über einen Catalog-Service
+  User Foods (`source = user`), Recipes (`source = recipe`: nur über einen Catalog-Service
   `upsertRecipeFood()`, nie per direktem Insert aus `services/recipes`).
 - `food_usage` wird bei jedem Log aktualisiert, aber **Logging schreibt die Tabelle nicht direkt**, sondern ruft
   einen Catalog-Service `recordFoodUsage(ctx, { foodId, servingId, quantity, mealId })`.
 - Favoriten schreibt nur der Catalog (`toggleFavorite`); UI-Einstiege in 17 und 08 rufen denselben Service.
-- Private Foods sind nur für `owner_user_id = ctx.userId` sichtbar – jede Suche/Detail-Abfrage filtert darauf.
+- Private Foods sind nur für `owner_user_id = ctx.userId` sichtbar: jede Suche/Detail-Abfrage filtert darauf.
 
-**Recipes** – kennt Food Catalog (Zutaten sind `foods`). Nährwerte des Rezepts = Summe der Zutaten, normiert auf
+**Recipes**: kennt Food Catalog (Zutaten sind `foods`). Nährwerte des Rezepts = Summe der Zutaten, normiert auf
 100 g (Endgewicht oder Zutatensumme). Rezeptänderung aktualisiert die verknüpfte `foods`-Zeile, nie Einträge.
 
 **Logging / Diary**
 - `meal_entries` enthalten **Snapshots** (Name, Portion, Nährwerte). Nach dem Schreiben ist ein Eintrag unabhängig
   vom Catalog lesbar.
 - `daily_nutrition` friert Ziele pro Tag ein; die Werte kommen aus `resolveGoalProfileForDate` (Profile & Goals).
-- Tagessummen werden immer live aggregiert (`getDaySummary(ctx, date)`, Daily Nutrition Engine) – kein anderer Kontext
+- Tagessummen werden immer live aggregiert (`getDaySummary(ctx, date)`, Daily Nutrition Engine): kein anderer Kontext
   berechnet eigene Summen aus `meal_entries`.
 
-**Body / Weight** – Trend und Prognose sind reine Domain-Funktionen. Liest `target_weight_kg` aus Profile & Goals.
+**Body / Weight**: Trend und Prognose sind reine Domain-Funktionen. Liest `target_weight_kg` aus Profile & Goals.
 
-**Activity & Water** – liest `water_goal_ml`, `step_goal`, `add_activity_calories` aus Profile & Goals. Liefert
+**Activity & Water**: liest `water_goal_ml`, `step_goal`, `add_activity_calories` aus Profile & Goals. Liefert
 `getActivitySummary(ctx, date)` inkl. verbrannter kcal; ob diese aufs Budget angerechnet werden, entscheidet die
 Daily Engine (Logging/Diary) anhand des Profil-Flags.
 
@@ -64,7 +64,7 @@ Daily Engine (Logging/Diary) anhand des Profil-Flags.
   Serie, letzte Interaktionen), Ausgabe = eine Nachricht oder `null`. `mascot_interactions` protokolliert
   `shown` / `dismissed` / `action_taken`.
 
-**Analytics** – schreibt nichts. Liest über die öffentlichen Services von Logging (Tagessummen und eingefrorene
+**Analytics**: schreibt nichts. Liest über die öffentlichen Services von Logging (Tagessummen und eingefrorene
 Tagesziele aus `daily_nutrition` je Zeitraum), Profile & Goals (aktuelles Ziel), Body (Trend), Activity. Eigene SQL-Aggregationen nur als
 Read-Model innerhalb von `services/analytics`, niemals Schreibzugriffe.
 

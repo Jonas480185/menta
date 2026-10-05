@@ -8,7 +8,7 @@ in `src/server/db/schema/goals.ts`.
 | ------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `domain/macros/math.ts`         | kcal ↔ g ↔ %, Rundungsstrategie, Konsistenzprüfung, Warnungen                                    |
 | `domain/macros/recommend.ts`    | Auto-Modus: Protein-/Fett-Empfehlung, Bezugsgewicht                                              |
-| `domain/macros/targets.ts`      | `computeMacroTargets(spec)` – ein Einstieg für alle drei Modi (auch für Live-Vorschau im Client) |
+| `domain/macros/targets.ts`      | `computeMacroTargets(spec)`: ein Einstieg für alle drei Modi (auch für Live-Vorschau im Client) |
 | `domain/macros/presets.ts`      | Prozent-Presets (Ausgewogen, Proteinreich, Low Carb, Ausdauer, Keto)                             |
 | `domain/macros/day-profiles.ts` | Profilarten + `deriveDayProfile` (Trainingstag, Ruhetag, …)                                      |
 | `domain/macros/schedule.ts`     | Wochentagsplan, Konfliktprüfung, `pickDayProfile` (Auflösungsreihenfolge)                        |
@@ -24,7 +24,7 @@ in `src/server/db/schema/goals.ts`.
   (`MACRO_KCAL_TOLERANCE`), Grammwerte ganzzahlig. Der Service speichert nie andere Werte.
 - Gespeichert wird immer in **Gramm** (Quelle der Wahrheit für Tracking). Im Prozentmodus werden zusätzlich
   die vom Nutzer gewählten Prozente (`protein_pct` …) für die erneute Anzeige gespeichert.
-- Grenzen: `calorieTarget` 1–20.000 kcal (ganzzahlig), Makros 0–2.000 g, Prozente je 0–100 mit Summe 100 ± 0,5.
+- Grenzen: `calorieTarget` 1-20.000 kcal (ganzzahlig), Makros 0-2.000 g, Prozente je 0-100 mit Summe 100 ± 0,5.
 
 ## 2. Die drei Makro-Modi
 
@@ -48,7 +48,7 @@ computeMacroTargets({ mode: "auto", kcal: 2300, weightKg: 75, goal: "lose", acti
 ```
 
 Jedes Ergebnis ist eine `MacroCalculation`:
-`{ kcal, macros, macroKcal, diffKcal, percents (effektiv, ungerundet), warnings[] }` – genau die Daten für
+`{ kcal, macros, macroKcal, diffKcal, percents (effektiv, ungerundet), warnings[] }`: genau die Daten für
 die Transparenzzeile „Diese Makros ergeben 2.402 kcal (+2)“. Weil `computeMacroTargets` rein ist, kann ein
 Client-Formular live dieselbe Rechnung zeigen, die der Service später speichert.
 
@@ -64,16 +64,16 @@ Problem: Rundet man alle drei Makros unabhängig, weicht 4P + 4C + 9F schnell um
 4. Übersteigt schon Protein allein das Ziel, balanciert Protein: `P = round(kcal / 4)`.
 
 Damit gilt immer |Δ| ≤ 5 kcal (`MACRO_KCAL_TOLERANCE`). Warum Kohlenhydrate? Protein ist die
-„Pflicht“-Größe (g/kg), Fett hat eine Untergrenze aus Gesundheitsgründen – KH sind die natürliche
+„Pflicht“-Größe (g/kg), Fett hat eine Untergrenze aus Gesundheitsgründen: KH sind die natürliche
 Stellschraube, und ±1 g KH (±4 kcal) ist die feinste Stufe. Angezeigt werden ganze Gramm; ganzzahlige
 Werte werden auch gespeichert, damit Anzeige und Rechnung übereinstimmen.
 
-## 4. Empfehlungen (Auto-Modus) – Formeln und Quellen
+## 4. Empfehlungen (Auto-Modus): Formeln und Quellen
 
 ### 4.1 Bezugsgewicht
 
 Bei hohem Körpergewicht überschätzt g/kg × Gesamtgewicht den Proteinbedarf (Fettmasse braucht kaum Protein).
-Daher wird – analog zum in der klinischen Ernährung üblichen _adjusted body weight_ – nur ein Teil des
+Daher wird, analog zum in der klinischen Ernährung üblichen _adjusted body weight_, nur ein Teil des
 Übergewichts gezählt:
 
 ```
@@ -95,14 +95,14 @@ Protein = g/kg × Bezugsgewicht, höchstens 40 % der kcal
 
 Begründung/Quellen:
 
-- Morton et al., _Br J Sports Med_ 52:376 – Meta-Analyse: Nutzen für Muskelzuwachs flacht bei
+- Morton et al., _Br J Sports Med_ 52:376, Meta-Analyse: Nutzen für Muskelzuwachs flacht bei
   ~1,6 g/kg/Tag ab (oberes KI ~2,2 g/kg) → Basis „halten“ 1,6, Obergrenze 2,2.
-- Jäger et al., _ISSN Position Stand: Protein and Exercise_, JISSN 14:20 – 1,4–2,0 g/kg für
+- Jäger et al., _ISSN Position Stand: Protein and Exercise_, JISSN 14:20, 1,4-2,0 g/kg für
   Trainierende.
-- Thomas, Erdman & Burke, _ACSM/AND/DC Joint Position: Nutrition and Athletic Performance_ –
-  1,2–2,0 g/kg → Untergrenze 1,2.
-- Helms et al., JISSN 11:20; Phillips & Van Loon, _J Sports Sci_ 29:S29 – im Kaloriendefizit
-  schützt mehr Protein (bis ~2,3–3,1 g/kg fettfreie Masse) die Muskulatur → „abnehmen“ 2,0.
+- Thomas, Erdman & Burke, _ACSM/AND/DC Joint Position: Nutrition and Athletic Performance_:
+  1,2-2,0 g/kg → Untergrenze 1,2.
+- Helms et al., JISSN 11:20; Phillips & Van Loon, _J Sports Sci_ 29:S29, im Kaloriendefizit
+  schützt mehr Protein (bis ~2,3-3,1 g/kg fettfreie Masse) die Muskulatur → „abnehmen“ 2,0.
 - Die DGE-Referenz (0,8 g/kg für Erwachsene) ist der Mindestbedarf, nicht das Optimum für aktive Menschen;
   alle Empfehlungen liegen darüber.
 - Deckel 40 % der kcal: verhindert absurde Werte bei sehr niedrigen Kalorienzielen.
@@ -116,7 +116,7 @@ Fett = max(Anteil nach Ziel × kcal / 9 (abnehmen 25 % · halten 30 % · zunehme
 ```
 
 Quellen: DGE-Referenzwerte (Richtwert 30 % der Energie), EFSA _Dietary Reference Values for fats_
-(20–35 % E), IOM _AMDR_ (20–35 % E). Die Untergrenze 0,6 g/kg bzw. die Warnung `fat_low` (< 20 % E oder
+(20-35 % E), IOM _AMDR_ (20-35 % E). Die Untergrenze 0,6 g/kg bzw. die Warnung `fat_low` (< 20 % E oder
 < 0,5 g/kg) schützt Hormonhaushalt und Aufnahme fettlöslicher Vitamine; bei Diäten wird 25 % statt 30 %
 gewählt, damit mehr Raum für Protein und KH bleibt.
 
@@ -185,7 +185,7 @@ Beispiel: Standard 2.300 kcal, 150/281/64 → Trainingstag 2.550 kcal, 150/344/6
 2. **Wochenplan**: aktives Nicht-Standard-Profil, dessen `weekdays` `isoWeekday(date)` enthält
    (bei Altdaten mit Überschneidung gewinnt das älteste Profil).
 3. **Standardprofil**.
-4. `null` – Onboarding noch nicht abgeschlossen.
+4. `null`: Onboarding noch nicht abgeschlossen.
 
 `resolveGoalProfilesForRange(ctx, from, to)` liefert dasselbe für einen Zeitraum mit zwei Queries
 .
@@ -205,7 +205,7 @@ listGoalProfiles(ctx, opts?: { includeArchived?: boolean }): Promise<GoalProfile
 getGoalProfile(ctx, id: string): Promise<GoalProfileRow>                                 // inkl. archivierter
 getDefaultGoalProfile(ctx): Promise<GoalProfileRow | null>
 
-// Schreiben – Ergebnis: { profile: GoalProfileRow; calculation: MacroCalculation }
+// Schreiben: Ergebnis: { profile: GoalProfileRow; calculation: MacroCalculation }
 upsertDefaultGoalProfile(ctx, input: UpsertDefaultGoalProfileInput): Promise<GoalProfileWriteResult>
 createGoalProfile(ctx, input: CreateGoalProfileInput): Promise<GoalProfileWriteResult>
 createDerivedGoalProfile(ctx, input: CreateDerivedGoalProfileInput): Promise<GoalProfileWriteResult>
@@ -218,7 +218,7 @@ setProfileWeekdays(ctx, id: string, weekdays: readonly number[]): Promise<GoalPr
 
 ```ts
 {
-  calorieTarget: number;                          // ganze kcal, 1–20.000
+  calorieTarget: number;                          // ganze kcal, 1-20.000
   calorieSource: "calculated" | "manual";         // calculated = vom Calorie Engine berechnet
   macroMode: "percent" | "grams" | "auto";
   percents?: { protein: number; carbs: number; fat: number };   // Pflicht bei percent
@@ -235,7 +235,7 @@ setProfileWeekdays(ctx, id: string, weekdays: readonly number[]): Promise<GoalPr
 ### 7.2 Beispiele
 
 ```ts
-// Onboarding / Einstellungen – legt das Standardprofil an oder aktualisiert es (atomarer Upsert)
+// Onboarding / Einstellungen: legt das Standardprofil an oder aktualisiert es (atomarer Upsert)
 const { profile, calculation } = await upsertDefaultGoalProfile(ctx, {
   calorieTarget: 2000,
   calorieSource: "calculated",
@@ -293,7 +293,7 @@ des Nutzers (`SELECT … FOR UPDATE`), damit zwei parallele Zuordnungen keinen D
 Das Standardprofil wird per `INSERT … ON CONFLICT (user_id) WHERE is_default AND archived_at IS NULL
 DO UPDATE` geschrieben.
 
-## 8. Integration – Pflicht für Aufrufer
+## 8. Integration: Pflicht für Aufrufer
 
 **Nach jedem erfolgreichen Schreibvorgang** (`upsertDefaultGoalProfile`, `createGoalProfile`,
 `createDerivedGoalProfile`, `updateGoalProfile`, `archiveGoalProfile`, `setProfileWeekdays`) müssen die

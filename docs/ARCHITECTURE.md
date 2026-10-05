@@ -1,4 +1,4 @@
-# Architektur – Grundsatzentscheidungen
+# Architektur: Lead Decisions (Foundation)
 
 > Dieses Dokument hält die **verbindlichen** Architekturentscheidungen fest.
 > Detaildokumente liegen unter `docs/architecture/`, `docs/product/`, `docs/design/`, `docs/brand/`.
@@ -10,7 +10,7 @@
 - Netzwerkzugriff auf Open Food Facts (API v2 + search-a-licious) und USDA FoodData Central (API + Bulk-Downloads) verifiziert.
 
 → Greenfield mit dem vorgeschlagenen Default-Stack. Da kein Postgres-Server verfügbar ist, nutzen wir
-**PGlite** (echtes PostgreSQL 17 als WASM, eingebettet) für Entwicklung und Tests – inkl. `pg_trgm`,
+**PGlite** (echtes PostgreSQL 17 als WASM, eingebettet) für Entwicklung und Tests: inkl. `pg_trgm`,
 `unaccent` und deutscher Volltextsuche (verifiziert). In Produktion zeigt `DATABASE_URL` auf einen
 normalen PostgreSQL-Server; Schema, Migrationen und Queries sind identisch.
 
@@ -18,7 +18,7 @@ normalen PostgreSQL-Server; Schema, Migrationen und Queries sind identisch.
 
 | Bereich | Wahl |
 |---|---|
-| Framework | Next.js 16 (App Router, Turbopack, React 19) – **Achtung:** `middleware.ts` heißt jetzt `proxy.ts`; Docs liegen unter `node_modules/next/dist/docs/` |
+| Framework | Next.js 16 (App Router, Turbopack, React 19): **Achtung:** `middleware.ts` heißt jetzt `proxy.ts`; Docs liegen unter `node_modules/next/dist/docs/` |
 | Sprache | TypeScript strict |
 | Styling | Tailwind CSS v4 (CSS-first `@theme`), shadcn/ui-Konventionen (Radix), `motion` für Animationen |
 | DB | PostgreSQL via Drizzle ORM · Dev/Test: PGlite · Prod: node-postgres |
@@ -78,7 +78,7 @@ Vollständig in `src/server/db/schema/*.ts` (jede Tabelle kommentiert). Details:
 | Gamification / Mascot | `user_achievements`, `mascot_interactions` (Streaks werden berechnet) |
 | Externer Cache | `external_lookup_cache` (Such- und Barcode-Lookups inkl. Negativ-Cache) |
 
-Warum Snapshots auf `meal_entries`? Externe Foods werden aktualisiert und eigene Foods editiert – ein historisches
+Warum Snapshots auf `meal_entries`? Externe Foods werden aktualisiert und eigene Foods editiert: ein historisches
 Tagebuch darf sich dadurch nicht still ändern. Tagessummen werden daraus per `SUM … GROUP BY` berechnet
 (Index `(user_id, date)`), es gibt keine redundante Summentabelle und damit nichts zu invalidieren.
 
@@ -129,7 +129,7 @@ Details und Import-Pipeline: `docs/architecture/food-data-strategy.md`.
 | Externe Suchanfragen | `external_lookup_cache` (key = provider+query) | `expires_at` (7 Tage) |
 | Barcode-Lookups (auch „nicht gefunden“) | `external_lookup_cache` | positiv 30 Tage, negativ 1 Tag |
 | Suchergebnisse im Client | In-Memory LRU pro Session (Query → Results) | Seitenwechsel / Log-Aktion |
-| Tagesaggregate | nicht gecacht – indexierte SUM-Query (< 5 ms) | – |
+| Tagesaggregate | nicht gecacht, indexierte SUM-Query (< 5 ms) |, |
 | Seiten | `revalidatePath()` nach Mutationen | pro Action |
 
 ## 8. Routen (verbindlich)

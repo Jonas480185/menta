@@ -1,4 +1,4 @@
-# Stimme & Tonalität – Menta
+# Stimme & Tonalität: Menta
 
 > Verbindlich für alle UI-Texte, Milo-Nachrichten, Fehlermeldungen, Benachrichtigungen und E-Mails.
 > UI-Sprache ist **Deutsch**. Englische Varianten nur, wo ausdrücklich angegeben.
@@ -7,11 +7,11 @@
 ## 1. Kurzfassung (für alle, die nur 60 Sekunden haben)
 
 1. **Zahlen zuerst, Wertung nie.** „1.840 von 2.100 kcal“ statt „Super gemacht!“.
-2. **Ruhig, präzise, warm.** Kurze Sätze. Kein Marketing-Sprech. Kein Ausrufezeichen-Gewitter.
+2. **Sachlich und freundlich.** Kurze Sätze. Kein Marketing-Sprech. Kein Ausrufezeichen-Gewitter.
 3. **Kein Essen ist gut oder schlecht.** Lebensmittel haben Nährwerte, keine Moral.
 4. **Kein Kommentar zum Körper.** Wir sprechen über Daten und Trends, nie über Aussehen.
 5. **Über dem Ziel ist eine Information, kein Fehler.** Keine Schuld, keine Strafe, kein Rot.
-6. **Feiern: klein und konkret.** „Protein-Ziel erreicht.“ – nicht „WOW, du bist unglaublich!!!“
+6. **Feiern: klein und konkret.** „Protein-Ziel erreicht.“, nicht „WOW, du bist unglaublich!!!“
 7. **Immer ein nächster Schritt.** Leere Zustände und Fehler sagen, was jetzt geht.
 8. **Du, nicht Sie.** Kleingeschrieben im Satz („dein Ziel“), großgeschrieben nur am Satzanfang.
 
@@ -41,11 +41,11 @@ Zurückhaltend ●●○○○ Expressiv  → zurückhaltend; Emotion zeigt Milo
 
 ### Form
 - **Satzschreibung** (Sentence case) in Buttons, Überschriften, Tabs: „Mahlzeit hinzufügen“, nicht „Mahlzeit Hinzufügen“.
-- **Buttons = Verb im Infinitiv**, 1–3 Wörter: „Speichern“, „Loggen“, „Rückgängig“, „Ziel anpassen“.
+- **Buttons = Verb im Infinitiv**, 1-3 Wörter: „Speichern“, „Loggen“, „Rückgängig“, „Ziel anpassen“.
 - **Punkt** am Ende vollständiger Sätze, auch in Toasts („Eintrag gelöscht.“). Keine Punkte in Buttons, Labels, Tabs.
 - **Ausrufezeichen:** höchstens eines pro Screen, nur bei echten Erfolgen. Standard ist der Punkt.
 - **Keine Emojis** in UI-Texten. Emotion transportiert Milo.
-- **Gedankenstrich** „–“ (Halbgeviertstrich mit Leerzeichen), nicht „-“.
+- **Keine Gedankenstriche** im Fließtext. Lieber zwei kurze Sätze, ein Komma oder einen Doppelpunkt. Bereiche mit „bis“ („2 bis 3 Wochen“).
 - **Anführungszeichen** „deutsch“, nicht "englisch".
 
 ### Zahlen & Einheiten
@@ -81,7 +81,7 @@ Zurückhaltend ●●○○○ Expressiv  → zurückhaltend; Emotion zeigt Milo
 **Essen ist neutral.** Wir beschreiben Nährwerte, nicht Charakter. Pizza ist nicht „Sünde“, Brokkoli nicht „brav“.
 
 - Keine Adjektive mit Moral: *gut, schlecht, gesund, ungesund, clean, dirty, erlaubt, verboten, Sünde, Cheat, Junk*.
-- Stattdessen Fakten: „proteinreich“, „ballaststoffreich“, „energiedicht“, „viel Zucker pro Portion“ – sachlich,
+- Stattdessen Fakten: „proteinreich“, „ballaststoffreich“, „energiedicht“, „viel Zucker pro Portion“, sachlich,
   ohne Unterton, und nur, wenn es für die aktuelle Aufgabe hilft.
 - Keine Kompensationslogik: nie „Das musst du morgen wieder reinholen“ oder „Verbrenne es mit 40 Min. Laufen“.
 - Keine Belohnungslogik: Essen ist nie Belohnung oder Strafe („Gönn dir, du hast es dir verdient“).
@@ -92,21 +92,21 @@ Zurückhaltend ●●○○○ Expressiv  → zurückhaltend; Emotion zeigt Milo
 - Gewicht ist ein Messwert mit natürlichem Rauschen. Wir betonen Trend und Durchschnitt, nicht Tageswerte.
 - Ziele (abnehmen, halten, zunehmen, Muskelaufbau) sind gleichwertig. Wir bewerten nicht, welches Ziel jemand hat.
 - Keine medizinischen Versprechen, keine Diagnosen. Bei Warnsignalen (sehr niedrige Zufuhr) sachlich auf Energie-
-  bedarf hinweisen und ggf. auf ärztlichen Rat verweisen – ohne Alarmismus.
+  bedarf hinweisen und ggf. auf ärztlichen Rat verweisen: ohne Alarmismus.
 
 ## 5. Tonalität nach Situation
 
 | Situation | Ton | Länge | Milo |
 |---|---|---|---|
 | Leerer Zustand | einladend, konkret | 1 Satz + Aktion | neutral / thinking |
-| Eintrag gespeichert | knapp, bestätigend | 2–5 Wörter | – (kein Milo bei Routine) |
+| Eintrag gespeichert | knapp, bestätigend | 2-5 Wörter |: (kein Milo bei Routine) |
 | Ziel erreicht | kurz, konkret, leise stolz | 1 Satz | goal_reached / happy |
-| Serie / Meilenstein | warm, anerkennend, faktisch | 1–2 Sätze | streak / celebrating |
-| Über dem Ziel | sachlich, entlastend, Perspektive | 1–2 Sätze | neutral / encouraging |
-| Unter dem Ziel (deutlich) | fürsorglich, sachlich | 1–2 Sätze | encouraging |
-| Gewichtstrend | analytisch, beruhigend | 1–2 Sätze | thinking / happy |
+| Serie / Meilenstein | warm, anerkennend, faktisch | 1-2 Sätze | streak / celebrating |
+| Über dem Ziel | sachlich, entlastend, Perspektive | 1-2 Sätze | neutral / encouraging |
+| Unter dem Ziel (deutlich) | fürsorglich, sachlich | 1-2 Sätze | encouraging |
+| Gewichtstrend | analytisch, beruhigend | 1-2 Sätze | thinking / happy |
 | Fehler | ehrlich, lösungsorientiert, ohne Schuld | 1 Satz + Aktion | thinking (nur bei ganzen Screens) |
-| Onboarding | einladend, erklärend („warum wir fragen“) | 1–2 Sätze pro Schritt | wechselnd |
+| Onboarding | einladend, erklärend („warum wir fragen“) | 1-2 Sätze pro Schritt | wechselnd |
 | Spät abends / Inaktivität | leise, ohne Druck | 1 Satz | sleepy |
 
 ### Feiern: subtil und spezifisch
@@ -114,7 +114,7 @@ Zurückhaltend ●●○○○ Expressiv  → zurückhaltend; Emotion zeigt Milo
 - Nenne **was** erreicht wurde und **mit welcher Zahl**: „Protein-Ziel erreicht: 142 von 140 g.“
 - Keine Superlative („unglaublich“, „perfekt“, „Held:in“), keine Dauerfeier. Jede Feier ist selten genug, um etwas zu bedeuten.
 - Große Momente (neue Rekord-Serie, Zielgewicht erreicht) dürfen **einmal** ein Ausrufezeichen und Milo „celebrating“ bekommen.
-- Kalorienziel „genau getroffen“ wird **nicht** gefeiert – das wäre Präzisionsdruck. Gefeiert werden Konsistenz
+- Kalorienziel „genau getroffen“ wird **nicht** gefeiert: das wäre Präzisionsdruck. Gefeiert werden Konsistenz
   (Serien, Loggen), Makro-Ziele, Wasser und Trends.
 
 ### Über-Ziel-Tage
@@ -125,7 +125,7 @@ Zurückhaltend ●●○○○ Expressiv  → zurückhaltend; Emotion zeigt Milo
 
 ### Fehler
 
-- **Was ist passiert – was kannst du tun.** In dieser Reihenfolge, kurz.
+- **Was ist passiert: was kannst du tun.** In dieser Reihenfolge, kurz.
 - Nie dem Menschen die Schuld geben („Du hast eine falsche Eingabe gemacht“). Wir sagen, was gebraucht wird.
 - Keine technischen Codes im Haupttext. (Code optional klein darunter für Support.)
 - Daten gehen nie „verloren“ ohne Hinweis: Wenn etwas nicht gespeichert wurde, sagen wir es klar.
@@ -149,7 +149,7 @@ Platzhalter in `{geschweiften Klammern}` werden zur Laufzeit ersetzt; Zahlen imm
 | Keine Suchtreffer | Keine Treffer für „{query}“. Prüfe die Schreibweise oder lege ein eigenes Lebensmittel an. |
 | Keine Favoriten | Noch keine Favoriten. Tippe beim Loggen auf den Stern, um Lebensmittel hier zu sammeln. |
 | Keine zuletzt verwendeten | Hier erscheinen deine zuletzt geloggten Lebensmittel. |
-| Keine Rezepte | Noch keine Rezepte. Leg dein erstes an – wir rechnen die Nährwerte pro Portion aus. |
+| Keine Rezepte | Noch keine Rezepte. Leg dein erstes an: wir rechnen die Nährwerte pro Portion aus. |
 | Keine Gewichtseinträge | Noch kein Gewicht eingetragen. Ein Eintrag pro Woche reicht für einen ersten Trend. |
 | Keine Aktivitäten | Heute noch keine Aktivität eingetragen. |
 | Noch zu wenig Daten für Analysen | Nach 3 geloggten Tagen siehst du hier deine ersten Wochenwerte. |
@@ -174,10 +174,10 @@ Platzhalter in `{geschweiften Klammern}` werden zur Laufzeit ersetzt; Zahlen imm
 |---|---|
 | Kalorien über Ziel (Label) | {n} kcal über dem Ziel |
 | Über Ziel (Milo / Hinweis) | Heute {n} kcal über deinem Ziel. Für deinen Trend zählt die Woche, nicht der einzelne Tag. |
-| Über Ziel, Wochenschnitt im Rahmen | {n} kcal über dem Tagesziel – dein Wochenschnitt liegt mit {avg} kcal weiter im Zielbereich. |
+| Über Ziel, Wochenschnitt im Rahmen | {n} kcal über dem Tagesziel: dein Wochenschnitt liegt mit {avg} kcal weiter im Zielbereich. |
 | Mehrere Tage über Ziel (Hinweis, sachlich) | Dein Schnitt der letzten 7 Tage liegt {n} kcal über deinem Ziel. Passt das Ziel noch zu deinem Alltag? [Ziel prüfen] |
-| Protein über Ziel | – (kein Hinweis; Überschreitung von Makrozielen wird nicht kommentiert) |
-| Deutlich unter Ziel, abends | Heute bist du deutlich unter deinem Ziel. Dein Körper braucht Energie – vielleicht passt noch eine Mahlzeit. |
+| Protein über Ziel |: (kein Hinweis; Überschreitung von Makrozielen wird nicht kommentiert) |
+| Deutlich unter Ziel, abends | Heute bist du deutlich unter deinem Ziel. Dein Körper braucht Energie: vielleicht passt noch eine Mahlzeit. |
 | Wiederholt sehr niedrige Zufuhr | Deine Zufuhr lag an mehreren Tagen deutlich unter deinem Bedarf. Sprich bei Unsicherheit gern mit einer Ärztin oder einem Arzt. |
 
 ### 6.4 Serien (Streaks)
@@ -197,11 +197,11 @@ Platzhalter in `{geschweiften Klammern}` werden zur Laufzeit ersetzt; Zahlen imm
 | Kontext | Text |
 |---|---|
 | Trend Richtung Ziel | Dein 7-Tage-Durchschnitt bewegt sich in Richtung deines Ziels. |
-| Trend Richtung Ziel (mit Zahl) | Dein 7-Tage-Durchschnitt ist um {delta} kg gesunken – in Richtung deines Ziels. |
+| Trend Richtung Ziel (mit Zahl) | Dein 7-Tage-Durchschnitt ist um {delta} kg gesunken: in Richtung deines Ziels. |
 | Trend stabil | Dein 7-Tage-Durchschnitt ist stabil. |
-| Trend stabil, Ziel = halten | Dein Gewicht ist stabil – genau wie geplant. |
-| Trend entgegen dem Ziel | Dein 7-Tage-Durchschnitt ist um {delta} kg gestiegen. Schwankungen sind normal – schau dir den Verlauf über 2–3 Wochen an. |
-| Tagessprung nach oben | Tageswerte schwanken um 1–2 kg – Wasser, Salz, Verdauung. Entscheidend ist der Trend. |
+| Trend stabil, Ziel = halten | Dein Gewicht ist stabil: genau wie geplant. |
+| Trend entgegen dem Ziel | Dein 7-Tage-Durchschnitt ist um {delta} kg gestiegen. Schwankungen sind normal: schau dir den Verlauf über 2-3 Wochen an. |
+| Tagessprung nach oben | Tageswerte schwanken um 1-2 kg: Wasser, Salz, Verdauung. Entscheidend ist der Trend. |
 | Eintrag gespeichert | Gewicht eingetragen: {kg} kg. |
 | Zielgewicht erreicht | Zielgewicht erreicht! Magst du ein neues Ziel setzen oder dein Gewicht halten? |
 | Erinnerung (opt-in) | Zeit fürs Wiegen? Am besten morgens, zur gleichen Uhrzeit. |
@@ -238,17 +238,17 @@ Destruktive Bestätigungsdialoge (nur für nicht rückgängig machbare Aktionen)
 - Titel: „Rezept löschen?“ · Text: „{name} wird dauerhaft gelöscht. Bereits geloggte Einträge bleiben erhalten.“ · Buttons: „Löschen“ / „Abbrechen“
 - Titel: „Konto löschen?“ · Text: „Alle deine Daten werden dauerhaft gelöscht. Das lässt sich nicht rückgängig machen.“ · Buttons: „Konto löschen“ / „Abbrechen“
 
-Einzelne Tagebuch-Einträge werden **ohne Dialog** gelöscht – mit Rückgängig-Toast.
+Einzelne Tagebuch-Einträge werden **ohne Dialog** gelöscht: mit Rückgängig-Toast.
 
 ### 6.8 Fehler
 
 | Kontext | Text | Aktion |
 |---|---|---|
-| Keine Verbindung | Keine Verbindung. Deine Eingabe ist noch da – versuch es gleich noch einmal. | Erneut versuchen |
+| Keine Verbindung | Keine Verbindung. Deine Eingabe ist noch da: versuch es gleich noch einmal. | Erneut versuchen |
 | Speichern fehlgeschlagen | Das hat nicht geklappt. Dein Eintrag wurde nicht gespeichert. | Erneut versuchen |
 | Unerwarteter Fehler (Seite) | Da ist etwas schiefgelaufen. Wir haben nichts von deinen Daten verändert. | Neu laden |
 | Seite nicht gefunden | Diese Seite gibt es nicht (mehr). | Zu Heute |
-| Barcode nicht gefunden | Diesen Barcode kennen wir noch nicht. Leg das Produkt an – dann ist es beim nächsten Scan da. | Produkt anlegen |
+| Barcode nicht gefunden | Diesen Barcode kennen wir noch nicht. Leg das Produkt an: dann ist es beim nächsten Scan da. | Produkt anlegen |
 | Kamera nicht verfügbar | Wir können nicht auf die Kamera zugreifen. Erlaube den Zugriff in den Browser-Einstellungen oder gib den Barcode ein. | Barcode eingeben |
 | Externe Datenbank langsam | Die Produktdatenbank antwortet gerade langsam. Lokale Treffer siehst du schon. | – |
 | Pflichtfeld leer | Bitte gib {feld} an. | – |
@@ -263,18 +263,18 @@ Einzelne Tagebuch-Einträge werden **ohne Dialog** gelöscht – mit Rückgängi
 
 | Schritt | Überschrift | Hilfstext |
 |---|---|---|
-| Willkommen | Willkommen bei Menta. | Ich bin Milo. Ich helfe dir, deine Ernährung klar im Blick zu behalten – ohne Druck. |
+| Willkommen | Willkommen bei Menta. | Ich bin Milo. Ich helfe dir, deine Ernährung klar im Blick zu behalten: ohne Druck. |
 | Ziel wählen | Was möchtest du erreichen? | Abnehmen, Gewicht halten, zunehmen oder Muskeln aufbauen. Du kannst das jederzeit ändern. |
 | Körperdaten | Ein paar Angaben zu dir | Daraus berechnen wir deinen Energiebedarf. Deine Daten bleiben privat. |
-| Aktivität | Wie aktiv ist dein Alltag? | Denk an einen normalen Tag – Sport tragen wir später separat ein. |
+| Aktivität | Wie aktiv ist dein Alltag? | Denk an einen normalen Tag: Sport tragen wir später separat ein. |
 | Tempo | Wie schnell soll es gehen? | Ein moderates Tempo ist leichter durchzuhalten. Wir empfehlen {rate} kg pro Woche. |
 | Ergebnis | Dein Tagesziel: {kcal} kcal | Aufgeteilt auf {p} g Protein, {c} g Kohlenhydrate und {f} g Fett. Du kannst alles anpassen. |
-| Mahlzeiten | Deine Mahlzeiten | Frühstück, Mittagessen, Abendessen und Snacks – benenne sie um oder füge eigene hinzu. |
+| Mahlzeiten | Deine Mahlzeiten | Frühstück, Mittagessen, Abendessen und Snacks: benenne sie um oder füge eigene hinzu. |
 | Fertig | Alles bereit. | Fang mit deiner nächsten Mahlzeit an. |
 
 Buttons: „Weiter“, „Zurück“, „Überspringen“ (nur optionale Schritte), am Ende „Los geht’s“.
 
-### 6.10 Milo – Beispiel-Nudges
+### 6.10 Milo: Beispiel-Nudges
 
 Milo spricht in der ersten Person, kurz, und immer mit Nutzen (Information oder machbarer nächster Schritt).
 
@@ -282,7 +282,7 @@ Milo spricht in der ersten Person, kurz, und immer mit Nutzen (Information oder 
 |---|---|
 | neutral | Guten Morgen. Heute sind {goal} kcal dein Ziel. |
 | thinking | Dir fehlen noch {n} g Protein. Skyr, Linsen oder Tofu wären eine einfache Ergänzung. |
-| encouraging | Heute war mehr los als geplant. Morgen ist ein neuer Tag – dein Wochentrend passt. |
+| encouraging | Heute war mehr los als geplant. Morgen ist ein neuer Tag: dein Wochentrend passt. |
 | happy | Wasserziel erreicht. |
 | celebrating | 30 Tage in Folge geloggt. Das ist jetzt Routine! |
 | streak | 7 Tage in Folge. Ich hab mitgezählt. |
@@ -305,12 +305,12 @@ Nie: „Du hast heute noch nichts eingetragen!“, „Deine Serie ist in Gefahr!
 | Du warst heute brav / gut. | Moralisiert (auch positiv) | Heute im Zielbereich. |
 | Du hast dein Limit überschritten! | „Limit“ + Ausrufezeichen = Alarm | {n} kcal über dem Ziel |
 | Achtung: zu viele Kalorien! | Alarmismus | {n} kcal über dem Ziel |
-| Sündigen, Sünde, Cheat Day, Cheat Meal | Diätkultur, Schuld | Kein Ersatz nötig – Essen einfach loggen. |
+| Sündigen, Sünde, Cheat Day, Cheat Meal | Diätkultur, Schuld | Kein Ersatz nötig: Essen einfach loggen. |
 | gesunde / ungesunde Lebensmittel | Moralische Bewertung | proteinreich, ballaststoffreich, energiedicht … (sachlich, nur wenn hilfreich) |
 | clean eating, Junkfood, Dickmacher | Diätkultur | konkrete Nährwerte nennen |
-| Das musst du morgen wieder reinholen. | Kompensation, Schuld | Morgen ist ein neuer Tag – dein Wochentrend zählt. |
-| Verbrenne es mit 40 Minuten Joggen. | Sport als Strafe | (nichts – kein Hinweis) |
-| Gönn dir, du hast es dir verdient! | Essen als Belohnung | (nichts – kein Hinweis) |
+| Das musst du morgen wieder reinholen. | Kompensation, Schuld | Morgen ist ein neuer Tag: dein Wochentrend zählt. |
+| Verbrenne es mit 40 Minuten Joggen. | Sport als Strafe | (nichts: kein Hinweis) |
+| Gönn dir, du hast es dir verdient! | Essen als Belohnung | (nichts: kein Hinweis) |
 | Nur noch 3 kg bis zur Traumfigur! | Körperbild | Noch {n} kg bis zu deinem Zielgewicht. |
 | Bikinifigur, Problemzonen, Speck, Kampf gegen die Kilos | Körperscham | (nicht verwenden) |
 | Du hast zugenommen. | Wertend, ignoriert Rauschen | Dein 7-Tage-Durchschnitt ist um {delta} kg gestiegen. Schwankungen sind normal. |
@@ -327,12 +327,12 @@ Nie: „Du hast heute noch nichts eingetragen!“, „Deine Serie ist in Gefahr!
 
 Frag dich bei jedem Text:
 
-1. Steht die relevante Zahl drin – und zwar vorne?
+1. Steht die relevante Zahl drin: und zwar vorne?
 2. Würde sich jemand an einem schlechten Tag davon beschämt fühlen?
 3. Bewertet der Text Essen oder Körper? → umschreiben.
 4. Gibt es einen nächsten Schritt (Button, Link, Hinweis)?
 5. Könnte man es kürzer sagen?
-6. Klingt es nach Menta – oder nach einer x-beliebigen Diät-App?
+6. Klingt es nach Menta: oder nach einer x-beliebigen Diät-App?
 
 ## 9. English variant (reference only)
 

@@ -1,7 +1,7 @@
 # Produktarchitektur
 
 > Owner: Product Architecture. Verbindliche Produkt-Spezifikation für alle UI-Bereiche
-> und die Abnahme. Technische Entscheidungen stehen in `docs/ARCHITECTURE.md` – bei Widerspruch
+> und die Abnahme. Technische Entscheidungen stehen in `docs/ARCHITECTURE.md`: bei Widerspruch
 > gilt ARCHITECTURE.md, und der Widerspruch wird geklärt.
 >
 > Konvention: Struktur und Begriffe auf Deutsch, technische Bezeichner (Routen, Tabellen, Services) im Original.
@@ -22,12 +22,12 @@
 
 1. Wir bauen den schnellsten und angenehmsten Weg, Essen zu tracken: Das Wiederholen einer bekannten Mahlzeit
    dauert zwei Taps, ein neues Lebensmittel unter 15 Sekunden.
-2. Jede Zahl ist korrekt und nachvollziehbar – Kalorien, Makros und Ziele werden transparent berechnet, und die
+2. Jede Zahl ist korrekt und nachvollziehbar: Kalorien, Makros und Ziele werden transparent berechnet, und die
    Vergangenheit ändert sich nie still.
 3. Eine skalierbare Lebensmitteldatenbank (Open Food Facts, USDA, kuratiertes deutsches Basis-Set, eigene
    Lebensmittel, Rezepte) findet das Gesuchte auch im deutschen Supermarkt.
-4. Das Dashboard beantwortet in einer Sekunde die Frage „Wie stehe ich heute da?“ – ruhig, modern und ohne
-   Schuldgefühle.
+4. Das Dashboard beantwortet in einer Sekunde die Frage „Wie stehe ich heute da?“, übersichtlich und ohne
+   Bewertung.
 5. Milo, unser Maskottchen, ist kein Deko-Element, sondern ein Coach, der leere Zustände auflöst, den nächsten
    sinnvollen Schritt vorschlägt und Fortschritt sichtbar feiert.
 

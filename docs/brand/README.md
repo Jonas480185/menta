@@ -1,8 +1,8 @@
-# Brand – Menta
+# Brand: Menta
 
 **Menta** · *Klarheit auf dem Teller.* (EN: *Clarity on your plate.*) · Coach & Mascot: **Milo**
 
-Ruhig, präzise, warm. Zahlen sind die Helden, Essen wird nie bewertet, Über-Ziel-Tage sind Information statt Schuld.
+Sachlich und freundlich: Zahlen stehen im Mittelpunkt, Essen wird nie bewertet, und Tage über dem Ziel sind eine Information, kein Vorwurf.
 
 ## Dokumente
 
@@ -33,8 +33,8 @@ BRAND_ASSETS.lockupLight; // "/brand/menta-lockup-light.svg"
 
 ## Die wichtigsten Regeln
 
-1. UI-Farben immer über Design-Tokens – `BRAND.colors` nur für Nicht-CSS-Kontexte (Manifest, OG, E-Mail).
-2. Mint `#1FC98E` ist Akzent (≤ 10 % der Fläche) und **nie Text auf hellem Grund** – dafür Mint Deep `#167957`.
+1. UI-Farben immer über Design-Tokens: `BRAND.colors` nur für Nicht-CSS-Kontexte (Manifest, OG, E-Mail).
+2. Mint `#1FC98E` ist Akzent (≤ 10 % der Fläche) und **nie Text auf hellem Grund**: dafür Mint Deep `#167957`.
 3. Auf Mint-Flächen steht Ink, nie Weiß.
-4. Logo nie verzerren, umfärben, nachsetzen oder mit Mimik versehen – Mimik gehört Milo.
+4. Logo nie verzerren, umfärben, nachsetzen oder mit Mimik versehen: Mimik gehört Milo.
 5. Texte: Zahlen zuerst, keine Moral über Essen, kein Kommentar zum Körper, keine Schuld (siehe voice-and-tone.md §7).

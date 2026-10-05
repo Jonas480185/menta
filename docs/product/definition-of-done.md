@@ -1,7 +1,7 @@
-# Definition of Done – Abnahmetests
+# Definition of Done: Abnahmetests
 
 > Owner: Product Architecture. Checkliste für das finale Review und Vorlage für E2E-Tests.
-> Jeder Punkt gilt erst als erfüllt, wenn **alle** erwarteten Ergebnisse eintreten – auf 375 × 812 (Mobile) **und**
+> Jeder Punkt gilt erst als erfüllt, wenn **alle** erwarteten Ergebnisse eintreten: auf 375 × 812 (Mobile) **und**
 > 1280 × 800 (Desktop), in **Hell und Dunkel**, gegen eine frisch migrierte Datenbank mit Seed-Daten.
 > Zahlen beziehen sich auf den Referenz-Nutzer aus [README](./README.md). Toleranz für kcal ± 1, für g ± 0,1.
 
@@ -59,7 +59,7 @@
 ### 7. Eigene Lebensmittel anlegen
 - **Schritte:** `/foods/new` → „Omas Müsli“, pro Portion 50 g: 190 kcal, 6 g P, 28 g KH, 5 g F → „Speichern & eintragen“.
 - **Erwartet:** Gespeichert pro 100 g (380 kcal, 12 / 56 / 10 g); Portion „1 Portion (50 g)“ existiert; Food
-  erscheint in `/foods`, im Tab „Meine“ und in der Suche – für einen zweiten Testnutzer **nicht**. Unbekannter
+  erscheint in `/foods`, im Tab „Meine“ und in der Suche: für einen zweiten Testnutzer **nicht**. Unbekannter
   Barcode → „Produkt anlegen“ öffnet `/foods/new?barcode=…` mit vorbefülltem Barcode; danach findet der Scan das Produkt.
 
 ### 8. Lebensmittel zu Mahlzeiten hinzufügen
@@ -115,7 +115,7 @@
   (letzte Portion); „Wie gestern“ und „Kopieren“ erzeugen neue Einträge mit korrekten Summen in ≤ 2 Taps.
 
 ### 17. Mobile UI nutzen
-- **Schritte:** Alle Journeys J1–J11 auf 375 × 812 und 390 × 844 mit Touch-Emulation, einmal im Querformat.
+- **Schritte:** Alle Journeys J1-J11 auf 375 × 812 und 390 × 844 mit Touch-Emulation, einmal im Querformat.
 - **Erwartet:** Keine horizontale Scrollbar, Bottom Bar mit 5 Zielen und korrektem Aktiv-Zustand, Safe-Area
   unten eingehalten, numerische Tastatur bei Zahlenfeldern (`inputmode`), Sticky-„Hinzufügen“ nicht von der
   Tastatur verdeckt, Fokus-Flows ohne Bottom Bar. Lighthouse Mobile: Accessibility ≥ 95, Performance ≥ 85 auf `/today`.
@@ -135,7 +135,7 @@
   Achievement wird in `/achievements` freigeschaltet. Mit `prefers-reduced-motion` keine Milo-Animation.
 
 ### 20. Alle Daten bleiben nach Reload erhalten
-- **Schritte:** Nach DoD 1–19: Browser komplett schließen, Dev-Server neu starten, erneut anmelden.
+- **Schritte:** Nach DoD 1-19: Browser komplett schließen, Dev-Server neu starten, erneut anmelden.
 - **Erwartet:** Profil, Ziele, Tagesprofile, Einträge (inkl. vergangener Tage), eigene Foods, Rezepte, Favoriten,
   Gewicht, Wasser, Aktivität, Achievements, ausgeblendete Milo-Nachrichten und Theme sind unverändert. Kein
   relevanter Zustand liegt nur in `localStorage`.

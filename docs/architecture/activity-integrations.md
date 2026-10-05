@@ -1,4 +1,4 @@
-# Aktivität, Schritte & Wasser – Datenmodell, Kalorienlogik, Integrationen
+# Aktivität, Schritte & Wasser: Datenmodell, Kalorienlogik, Integrationen
 
 Owner: Activity & Water. Code: `src/domain/activity`, `src/server/services/{activity,water}`, `src/server/integrations`,
 UI unter `src/app/(app)/activity` und `src/components/{activity,water}`.
@@ -19,7 +19,7 @@ Manuelle Schritte: genau **eine** Zeile pro Tag mit `source = manual`, `external
 **Netto statt brutto.** Workouts werden mit `(MET − 1) × kg × Stunden` geschätzt
 (`estimateActivityKcal`). Das Tagesziel basiert auf TDEE = Grundumsatz × Aktivitätsfaktor und enthält den
 Ruheumsatz (1 MET) für alle 24 Stunden bereits. Brutto-MET würde diese Stunde doppelt zählen.
-MET-Werte: Compendium of Physical Activities (Ainsworth et al. 2011, Herrmann et al. 2024) – Tabelle mit
+MET-Werte: Compendium of Physical Activities (Ainsworth et al. 2011, Herrmann et al. 2024): Tabelle mit
 Compendium-Code je Eintrag in `src/domain/activity/met.ts`.
 
 **Gewicht:** letzter Gewichtseintrag ≤ heute → Startgewicht aus dem Onboarding → 70 kg Fallback
@@ -28,12 +28,12 @@ Compendium-Code je Eintrag in `src/domain/activity/met.ts`.
 überschrieben hat. `caloriesBurned: null` im Update setzt auf die Schätzung zurück.
 
 **Schritte bringen keine kcal ins Budget.** Alltagsgehen steckt bereits im Aktivitätslevel (Onboarding-Schritt
-„Wie aktiv ist dein Alltag?“). Schrittzeilen haben daher immer `calories_burned = null` – auch importierte
+„Wie aktiv ist dein Alltag?“). Schrittzeilen haben daher immer `calories_burned = null`: auch importierte
 (`importActivities` verwirft kcal bei `type = steps`). `estimateStepsKcal` (100 Schritte/min bei 3,5 MET,
 netto) wird nur informativ angezeigt.
 
 **Budget:** Die Nutrition-Engine (`services/nutrition/summary.ts`) addiert `SUM(calories_burned)` des Tages,
-wenn `add_activity_calories` an ist. `getActivitySummary().activeKcal` ist exakt diese Summe – Karte und
+wenn `add_activity_calories` an ist. `getActivitySummary().activeKcal` ist exakt diese Summe: Karte und
 Budget zeigen immer denselben Wert (Test in `activity.test.ts`).
 
 **Schritte aus mehreren Quellen** werden nicht addiert: pro Quelle summiert, dann gewinnt die höchste
@@ -49,7 +49,7 @@ ActivityProvider (types.ts)          registry.ts                     import.ts
  fetchDailySteps(range)               registerActivityProvider(id, f)  syncActivityProvider(ctx, id, range)
 ```
 
-- Provider werden **pro Nutzer** über eine Factory mit `ServiceContext` erzeugt – so können Tokens/Geräte-Links
+- Provider werden **pro Nutzer** über eine Factory mit `ServiceContext` erzeugt: so können Tokens/Geräte-Links
   geladen werden, ohne das Interface zu ändern.
 - Provider **holen und normalisieren nur**. Geschrieben wird immer über `importActivities` → Validierung,
   Deduplizierung und Kalorienregeln gelten für jede Quelle gleich.
@@ -70,11 +70,11 @@ ActivityProvider (types.ts)          registry.ts                     import.ts
 Gemeinsame Bausteine für die Cloud-Anbieter (Garmin, Fitbit):
 
 1. Tabelle `user_integrations(user_id, provider, external_user_id, access_token (verschlüsselt), refresh_token,
-expires_at, scopes, last_synced_at)` – erfordert eine Schema-Änderung.
+expires_at, scopes, last_synced_at)`: Schema-Änderung, Aufgabe für den Lead.
 2. Einstellungen „Datenquellen“: Liste aus `listActivityProviders(ctx)`, Button „Verbinden“ startet OAuth,
    Callback speichert Tokens; „Trennen“ löscht Tokens (importierte Zeilen bleiben, optional löschbar).
 3. Sync: Webhook oder periodischer Job ruft `syncActivityProvider(ctx, id, { from, to })` für die letzten
-   7 Tage auf – durch die Idempotenz beliebig wiederholbar.
+   7 Tage auf: durch die Idempotenz beliebig wiederholbar.
 4. `fetch()` mit `AbortSignal.timeout()` und `cache: "no-store"`, Fehler als `externalError()`,
    Rate-Limits respektieren. Payloads mit Zod parsen, bevor sie normalisiert werden.
 5. Mapping: Workout-Typen der Quelle → `cardio`/`strength`/`sport`/`other`, Name auf Deutsch,

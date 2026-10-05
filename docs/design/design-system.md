@@ -10,12 +10,12 @@
 1. **Numbers are the hero.** One main number per card, big and tabular. Units are smaller and muted.
    Hierarchy comes from size and weight, not from color.
 2. **Calm by default, mint for the one thing that matters.** About 70 % paper or ink, 25 % neutral greys,
-   5–10 % mint (progress, the primary action, Milo). Never color whole screens.
+   5-10 % mint (progress, the primary action, Milo). Never color whole screens.
 3. **Data, not judgment.** Macro colors are neutral data colors. Over target is shown as information
    (`over`, calm orange), never as an error (`destructive`).
 4. **Precise and quiet surfaces.** Generous whitespace, 20 px card radius, soft layered shadows in light
    mode, hairlines and tint steps in dark mode. At most two font weights per card.
-5. **Motion explains.** Rings fill to the new value and new entries slide in. Motion is fast (150–300 ms),
+5. **Motion explains.** Rings fill to the new value and new entries slide in. Motion is fast (150-300 ms),
    uses springs for progress and always respects `prefers-reduced-motion`.
 6. **Accessible by construction.** Every text token pair is checked for WCAG AA in both themes by a test.
    Touch targets are at least 44 px, focus is always visible, and color never carries meaning alone.
@@ -28,7 +28,7 @@ The `ui-ux-pro-max` search (`"health fitness nutrition tracker premium calm mini
 | Recommendation | Decision |
 |---|---|
 | Inter single-family "precision" system for high-end productivity and fintech-style number UIs | **Adopted.** Inter with its optical-size axis, used for UI and numbers. |
-| UX rules: 4.5:1 contrast, `number-tabular`, `spring-physics`, `exit-faster-than-enter`, 150–300 ms, safe areas, 44 px targets, `color-not-decorative-only` | **Adopted** and encoded as tokens, utilities and tests |
+| UX rules: 4.5:1 contrast, `number-tabular`, `spring-physics`, `exit-faster-than-enter`, 150-300 ms, safe areas, 44 px targets, `color-not-decorative-only` | **Adopted** and encoded as tokens, utilities and tests |
 | Style "Vibrant & Block-based" / "Liquid Glass"; Lora + Raleway; cyan palette | **Rejected.** They conflict with the brief (calm, precise, not a mobile game) and the brand (Menta Mint). Glass effects also cost performance and contrast. |
 | Charts: gauge/bullet with a visible numeric value and % of target | **Adopted** for the ring and macro bars (see visual-language.md) |
 
@@ -282,13 +282,13 @@ Tokens: `--duration-instant` 100 · `fast` 150 · `base` 200 (default for `trans
 | Ring / bar fill | motion `spring.ring` (same curve as `ease-spring`). Animate `pathLength` or `scaleX`, **never `width`** |
 | Bottom sheet | vaul default drag physics. Open ≈ `animate-slide-up` (300 ms), close 200 ms |
 | List insert / remove | `animate-rise` for new items, collapse height with `spring.gentle` |
-| Stagger | 30–50 ms per item, maximum 6 items |
+| Stagger | 30-50 ms per item, maximum 6 items |
 | Celebration (goal reached, Milo) | `spring.bouncy` / `animate-pop`. This is the only place for real bounce |
 | Skeleton | `skeleton` utility (shimmer) |
 
 Rules:
 
-- Animate only `transform` and `opacity` (and SVG `pathLength`). Animate 1–2 elements per view, and never loop
+- Animate only `transform` and `opacity` (and SVG `pathLength`). Animate 1-2 elements per view, and never loop
   anything except loaders.
 - **Reduced motion:** the global CSS clamps all CSS animations and transitions to 0.01 ms, and
   `<MotionConfig reducedMotion="user">` (in `ThemeProvider`) disables transform animations in `motion`.

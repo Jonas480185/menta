@@ -1,4 +1,4 @@
-# Nutrition Engine – Referenz
+# Nutrition Engine: Referenz
 
 Zwei Schichten:
 
@@ -20,7 +20,7 @@ Import: `@/domain/nutrition` bzw. `@/server/services/nutrition` (Barrels).
   Das Ergebnis wird als **Snapshot** auf `meal_entries` gespeichert (Änderungen am Lebensmittel ändern die
   Historie nicht). Neu berechnen nur, wenn sich Menge/Portion des Eintrags ändert.
 - **Salz → Natrium:** Wenn nur Salz bekannt ist: `sodiumMg = saltG / 2.5 × 1000` (EU-VO 1169/2011).
-- **Atwater:** `kcalFromMacros = 4·P + 4·KH + 9·F (+ 7·Alkohol)` – nur Plausibilität/Split; die kcal des
+- **Atwater:** `kcalFromMacros = 4·P + 4·KH + 9·F (+ 7·Alkohol)`, nur Plausibilität/Split; die kcal des
   Etiketts bleiben maßgeblich.
 - **Makro-Energieanteil:** `macroEnergySplit` teilt durch die **Makro-Energie** (4/4/9), nicht durch die
   Etikett-kcal → die drei Anteile ergeben immer 100 %. Keine Makros → `{0,0,0}`.
@@ -74,7 +74,7 @@ Wer schreibt die Zeile?
   (gern in derselben Transaktion). Idempotent: vergangene Zeilen bleiben unberührt, heute/Zukunft wird auf die
   Live-Ziele gebracht (kein Write, wenn unverändert). Ohne Zielprofil wird nichts geschrieben.
 - **Goals/Macro** rufen nach jeder Zieländerung (Profil anlegen/ändern/archivieren/löschen,
-  Wochentage, Standardwechsel) `refreshTargetsFrom(ctx)` auf. `fromDate` wird auf heute **geklemmt** –
+  Wochentage, Standardwechsel) `refreshTargetsFrom(ctx)` auf. `fromDate` wird auf heute **geklemmt**:
   vergangene Tage werden nie neu berechnet.
 - **Tagesprofil wählen** (`setDayProfile`): setzt `profile_overridden = true` + Profil + Zielwerte; gilt auch
   für vergangene Tage (explizite Nutzerentscheidung ist der einzige Weg, einen eingefrorenen Tag zu ändern).
@@ -86,7 +86,7 @@ Verbrauchte Summen werden **nie** gespeichert, sondern immer aus `meal_entries` 
 
 ## 5. API-Referenz
 
-### Domain – `@/domain/nutrition`
+### Domain: `@/domain/nutrition`
 
 ```ts
 // Typen
@@ -110,7 +110,7 @@ sodiumMgFromSaltG(saltG: number): number          // SALT_PER_SODIUM = 2.5
 // totals.ts
 sumTotals(list: readonly NutrientTotals[]): NutrientTotals
 kcalFromMacros(macros: Macros & { alcoholG?: number | null }): number
-macroEnergySplit(totals: Macros): { protein: number; carbs: number; fat: number }   // Verhältnisse 0–1
+macroEnergySplit(totals: Macros): { protein: number; carbs: number; fat: number }   // Verhältnisse 0-1
 
 // targets.ts
 STATUS_THRESHOLDS = { near: 0.9, reached: 1, over: 1.05 }
@@ -128,9 +128,9 @@ roundMg(mg: number): number
 ```
 
 `scaleNutrients`/`computeEntryNutrients` werfen `RangeError` bei negativen/nicht-endlichen Mengen bzw.
-`quantity ≤ 0` – Nutzereingaben vorher mit Zod validieren.
+`quantity ≤ 0`: Nutzereingaben vorher mit Zod validieren.
 
-### Services – `@/server/services/nutrition`
+### Services: `@/server/services/nutrition`
 
 Alle Datumswerte sind `IsoDate` (`"YYYY-MM-DD"`, lokaler Tag); ungültige Daten → `AppError("VALIDATION")`.
 
@@ -175,7 +175,7 @@ interface DailyTotalsRow { date: IsoDate; totals: NutrientTotals; entryCount: nu
 ## 6. Beispiele
 
 ```ts
-// Meal Logging – Eintrag anlegen
+// Meal Logging: Eintrag anlegen
 const { grams, totals } = computeEntryNutrients({ per100: food, servingGrams: serving.grams, quantity });
 await inTransaction(ctx, async (tx) => {
   await tx.db.insert(mealEntries).values({ …, grams, kcal: totals.kcal, proteinG: totals.proteinG, … });

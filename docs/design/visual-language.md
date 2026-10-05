@@ -22,7 +22,7 @@ The hero of the app. It answers "Wie stehe ich heute da?" in under a second.
 │                 ╱    680     ╲         Aktivität     + 240   ← text-activity-strong  │
 │                │  kcal übrig  │        Ziel          2.300                            │
 │                 ╲            ╱                                                        │
-│                   ╰──────────╯   ← ring 176–200 px, stroke 9–10 % of size              │
+│                   ╰──────────╯   ← ring 176-200 px, stroke 9-10 % of size              │
 └───────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -30,7 +30,7 @@ The hero of the app. It answers "Wie stehe ich heute da?" in under a second.
   is `stroke-kcal`. Size is 176 px on mobile and 200 px at ≥ md. The stroke is about 10 % of the diameter.
 - **Center:** the remaining kcal in `text-display numeric`, with "kcal übrig" below in `text-caption text-muted-foreground`.
   Only one big number, and "gegessen · Ziel" stays small (UX principle 1).
-- **Over target:** the arc completes, and a second lap in `stroke-over` (1–2 px thinner, starting at 12 o'clock with
+- **Over target:** the arc completes, and a second lap in `stroke-over` (1-2 px thinner, starting at 12 o'clock with
   a 2° gap) shows the surplus proportionally. The center reads "120" + "kcal drüber" in `text-over-strong`.
   No red, no icon, and no shake.
 - **Motion:** animate `pathLength` from the previous value to the new one with `spring.ring` (motion). On first
@@ -141,7 +141,7 @@ Used for portion pickers, quick add, meal select and filters.
 - **Headline number first:** the current value in `text-stat numeric` with its delta as a chip
   (`bg-primary-soft text-primary-strong` or neutral `bg-muted text-muted-foreground`; never red for gains or losses).
 - Grid lines are horizontal only, `stroke="var(--chart-grid)"` 1 px. There are no vertical grid lines and no chart border.
-- Axes: `var(--chart-axis)` ticks in 12 px tabular type, 3–5 y-ticks, and German short dates ("Mo", "24.9.").
+- Axes: `var(--chart-axis)` ticks in 12 px tabular type, 3-5 y-ticks, and German short dates ("Mo", "24.9.").
 - **Target line:** `var(--chart-target)` dashed `4 4` with an inline label "Ziel 2.300" at the right end.
 - **kcal bars:** `var(--chart-1)` with rounded top 4 px. Days over the target keep the series color, and the part above the
   target line uses `var(--over)`. Today's bar is at full opacity and past days at 85 %.
@@ -165,7 +165,7 @@ Used for portion pickers, quick add, meal select and filters.
 
 ## 9. Milo placement
 
-- Milo appears **at most once per screen**, in a card corner or an empty state, at 48–72 px. Speech is a small
+- Milo appears **at most once per screen**, in a card corner or an empty state, at 48-72 px. Speech is a small
   `bg-primary-soft text-foreground rounded-lg` bubble with one sentence.
 - Milo never covers numbers, never animates in a loop (brand rule), and stays static under reduced motion.
 

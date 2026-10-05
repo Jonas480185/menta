@@ -1,4 +1,4 @@
-# Technische Architektur – Referenz
+# Technische Architektur: Referenz für alle Agents
 
 > Owner: Technical Architecture. Ergänzt die verbindlichen Architekturentscheidungen in
 > [`docs/ARCHITECTURE.md`](../ARCHITECTURE.md), widerspricht ihnen nicht. Bei Konflikten gilt ARCHITECTURE.md.
@@ -112,7 +112,7 @@ isPending=false nach Action + RSC-Refresh; bei Fehler toast.error(message)
 ### 2.3 Client-Fetch: Suche und Barcode
 
 ```
-<FoodSearch> (Client) ─ debounce 150–250 ms ─ AbortController ─► GET /api/foods/search?q=…
+<FoodSearch> (Client) ─ debounce 150-250 ms ─ AbortController ─► GET /api/foods/search?q=…
      ▲  In-Memory-LRU (Query → Ergebnisse)                          │ route.ts (Node runtime)
      │                                                              │ ctx = await getServiceContext()
      └──────────────── JSON (klein, paginiert) ◄────────────────────┤ Zod(searchParams) → searchFoods(ctx, q)
@@ -241,7 +241,7 @@ Gecacht wird in der DB, nicht im Next-Fetch-Cache.
 
 ---
 
-## 8. Datenbank im Next.js-Runtime (PGlite) – Fallstricke
+## 8. Datenbank im Next.js-Runtime (PGlite): Fallstricke
 
 Empirisch verifiziert mit Next 16.3.6 (Turbopack) und `@electric-sql/pglite` 0.5.8, in `pnpm dev` **und**
 `pnpm build && pnpm start`, per `curl /api/health`:
@@ -263,7 +263,7 @@ Arbeitsregeln:
 - Korruptes Verzeichnis: `pnpm db:reset` (löscht `.data/pglite`, migriert, seedet neu).
 - Ein Crash (SIGKILL) nach einem Commit ist unkritisch. Verifiziert: Daten bleiben erhalten (Postgres-WAL).
 - Parallele Worktrees haben je eigenes `.data/`. Tests nutzen `memory://` und sind unabhängig vom Dev-Server.
-- Migrationen laufen beim ersten `getDb()` automatisch (`migrate: true`). Kaltstart ~0,9–1,3 s, danach ~0,5 ms/Query.
+- Migrationen laufen beim ersten `getDb()` automatisch (`migrate: true`). Kaltstart ~0,9-1,3 s, danach ~0,5 ms/Query.
 - Produktion: `DATABASE_URL=postgres://…` → node-postgres-Pool, gleiche Migrationen und Queries.
 - `GET /api/health` → `200 { ok: true, db: "pglite" | "postgres", latencyMs }` bzw. `503 { ok: false, db, error }`.
 
@@ -320,7 +320,7 @@ log.error("provider failed", { err });           // Error wird inkl. code/cause/
 | CLS | < 0,1 | Skeletons mit fixen Höhen |
 | Lokale Food-Suche p95 (Server, lokal) | **< 150 ms** | Log `ms` im Route Handler, Test mit Seed-Daten |
 | Barcode lokal (Cache-Hit) | < 50 ms | |
-| Externer Lookup (OFF/USDA) | Timeout 3–5 s, nie blockierend für lokale Treffer | |
+| Externer Lookup (OFF/USDA) | Timeout 3-5 s, nie blockierend für lokale Treffer | |
 | Server Action „Eintrag loggen“ inkl. Revalidate | < 300 ms | |
 | Tagesaggregat-Query | < 5 ms | `EXPLAIN ANALYZE`, Index `(user_id, date)` |
 | Client-JS pro Route (gzip) | < 180 KB First Load | `next build` Ausgabe |

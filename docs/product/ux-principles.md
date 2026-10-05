@@ -31,53 +31,53 @@
 8. **Über-Ziel ist ein Zustand, kein Alarm.** Token `over` statt `destructive`; kein Warn-Icon, kein Rot-Blinken.
    Protein über Ziel gilt als neutral/positiv.
 
-## 3. Ton – freundlich, nie Schuld
+## 3. Ton: freundlich, nie Schuld
 
 Grundhaltung: Milo und die App sind ein ruhiger, kompetenter Begleiter. Wir beschreiben, wir bewerten nicht.
 Essen ist nie „gut“ oder „schlecht“, der Nutzer auch nicht. Anrede: **du**. Kurze Sätze. Keine Ausrufezeichen-Ketten, keine Emojis in UI-Texten.
 
 | Verboten | Stattdessen |
 |---|---|
-| „Du warst heute schlecht.“ | „Heute war etwas mehr – kein Problem. Morgen ist ein neuer Tag.“ |
+| „Du warst heute schlecht.“ | „Heute war etwas mehr: kein Problem. Morgen ist ein neuer Tag.“ |
 | „Du hast dein Ziel verfehlt.“ | „310 kcal über Ziel. Über die Woche gleicht sich das oft aus.“ |
 | „Zu viel gegessen!“ / „Achtung: Limit überschritten!“ | „Über deinem Tagesziel“ |
 | „Du hast versagt / aufgegeben.“ | „Schön, dass du wieder da bist. Weiter geht’s.“ |
 | „Deine Serie ist verloren!“ | „Neue Serie, neuer Start. Deine Bestmarke: 12 Tage.“ |
 | „Sündigen“, „Cheat Day“, „Schummeln“, „böse Lebensmittel“ | Neutral benennen: „Pizza“, „freier Tag“ |
-| „Das musst du wieder abtrainieren.“ / „Verbrenne X kcal, um das auszugleichen.“ | Kein Zusammenhang zwischen Essen und Sport als Strafe – nie formulieren. |
+| „Das musst du wieder abtrainieren.“ / „Verbrenne X kcal, um das auszugleichen.“ | Kein Zusammenhang zwischen Essen und Sport als Strafe: nie formulieren. |
 | „Du musst mehr Protein essen.“ | „Protein ist heute noch ausbaufähig. Skyr oder Linsen passen gut.“ |
 | „Nur noch 200 kcal!“ (Knappheit) | „Noch 200 kcal übrig.“ |
 | „Keine Einträge. Du hast nichts getrackt.“ | „Für diesen Tag ist noch nichts eingetragen.“ |
-| „Fehler 500“ / „Ungültige Eingabe“ | „Das hat nicht geklappt. Deine Daten sind sicher – versuch es gleich noch mal.“ / „Bitte eine Zahl zwischen 35 und 300 eingeben.“ |
+| „Fehler 500“ / „Ungültige Eingabe“ | „Das hat nicht geklappt. Deine Daten sind sicher: versuch es gleich noch mal.“ / „Bitte eine Zahl zwischen 35 und 300 eingeben.“ |
 
 Zusatzregeln: Keine Körperbewertungen („zu dick“, „Problemzonen“). BMI wird nicht prominent gezeigt. Gewichtszunahme
-bei Ziel „Abnehmen“ wird sachlich als Trend beschrieben („Trend +0,3 kg in 7 Tagen – Tagesschwankungen sind normal“).
+bei Ziel „Abnehmen“ wird sachlich als Trend beschrieben („Trend +0,3 kg in 7 Tagen: Tagesschwankungen sind normal“).
 
-## 4. Gamification – dezent
+## 4. Gamification: dezent
 
 - **Ziel ist Gewohnheit, nicht Spielsucht.** Keine Punkte-Währung, keine Level-Ups, keine Lootboxen, keine Konfetti-Explosionen, keine Leaderboards.
 - **Serie** = Tage in Folge mit ≥ 1 Eintrag. Ein Tag ohne Eintrag beendet die Serie; die Bestmarke bleibt sichtbar.
 - **Achievements** sind sachliche Meilensteine („7 Tage in Folge“, „Erstes Rezept“, „30 Tage Protein-Ziel erreicht“, „Erstes Kilo Trend“)
-  mit schlichtem Icon – keine Pokal-Grafiken im Casino-Stil. Gesperrte Achievements zeigen den Fortschritt („4 / 7 Tage“).
+  mit schlichtem Icon: keine Pokal-Grafiken im Casino-Stil. Gesperrte Achievements zeigen den Fortschritt („4 / 7 Tage“).
 - **Feiern mit Maß:** Meilensteine erzeugen einen einmaligen Milo-Moment (`celebrating`/`streak`, ≤ 1,2 s Animation) und einen Toast.
   Maximal eine Feier pro Session-Screen; nie ein blockierendes Modal.
 - **Keine negativen Streak-Mechaniken:** keine Warnung „Deine Serie endet heute!“ als Druckmittel; höchstens abends ein neutraler Hinweis
-  „Heute noch nichts eingetragen – möchtest du kurz nachtragen?“, einmal, ausblendbar.
+  „Heute noch nichts eingetragen: möchtest du kurz nachtragen?“, einmal, ausblendbar.
 
-## 5. Milo – Funktion vor Dekoration
+## 5. Milo: Funktion vor Dekoration
 
-1. Milo erscheint nur, wenn er **informiert, anleitet oder feiert** – nie als reine Verzierung von Header oder Rand.
+1. Milo erscheint nur, wenn er **informiert, anleitet oder feiert**: nie als reine Verzierung von Header oder Rand.
 2. **Einsatzorte:** Onboarding (Anleitung), Empty States (nächster Schritt mit CTA), Daily Insight auf `/today`, Meilensteine, Fehlerseiten.
 3. **Pro Screen max. eine** Milo-Instanz mit Nachricht; **max. 3 proaktive Nachrichten pro Tag**; dieselbe Nachricht nicht innerhalb von 3 Tagen.
 4. Jede Nachricht hat **höchstens eine Aktion** und ist **ausblendbar** („Ausblenden“ → `mascot_interactions`).
 5. **Stimmung passt zum Inhalt** (`MiloMood`): `neutral` Normalfall · `happy` im Plan · `thinking` Hinweis/Fehler · `encouraging` nach
    Über-Ziel oder Pause · `celebrating`/`streak`/`goal_reached` Meilensteine · `sleepy` leere/vergangene Tage.
-6. Größen: 96–128 px in Onboarding/Empty States, 48–64 px in Insight-Karten, ≤ 32 px als Icon.
+6. Größen: 96-128 px in Onboarding/Empty States, 48-64 px in Insight-Karten, ≤ 32 px als Icon.
 7. Milo spricht in der Ich-Form nur im Onboarding; sonst sind Texte direkt an den Nutzer gerichtet („Noch 54 g Protein …“).
 
 ## 6. Barrierefreiheit (WCAG 2.2 AA)
 
-- Kontrast Text ≥ 4,5:1, große Zahlen/Icons ≥ 3:1 – in Hell **und** Dunkel.
+- Kontrast Text ≥ 4,5:1, große Zahlen/Icons ≥ 3:1, in Hell **und** Dunkel.
 - Touch-Ziele ≥ 44 × 44 px, Abstand ≥ 8 px; Quick-Add-„+“ ebenfalls 44 px (visuell kleiner, Trefferfläche groß).
 - Vollständige Tastaturbedienung, sichtbarer Fokusring, logische Tab-Reihenfolge; Sheets/Dialoge fangen den Fokus und geben ihn zurück.
 - Kalorien-Ring: `role="img"` + `aria-label="1.620 von 2.300 Kilokalorien gegessen, 680 übrig"`; Makrobalken als `progressbar` mit `aria-valuetext`.
@@ -90,9 +90,9 @@ bei Ziel „Abnehmen“ wird sachlich als Trend beschrieben („Trend +0,3 kg in
 ## 7. Motion
 
 - **Motion erklärt, sie dekoriert nicht:** Ring füllt sich zum neuen Wert, neuer Eintrag gleitet in die Liste, gelöschter Eintrag klappt zusammen.
-- Dauer 150–250 ms für Zustandswechsel, 300–500 ms für Ring/Balken, ≤ 1,2 s für Milo-Feiern. Ease-out beim Eintreten, ease-in beim Verlassen,
+- Dauer 150-250 ms für Zustandswechsel, 300-500 ms für Ring/Balken, ≤ 1,2 s für Milo-Feiern. Ease-out beim Eintreten, ease-in beim Verlassen,
   Verlassen schneller als Eintreten.
-- Max. 1–2 animierte Elemente gleichzeitig pro View. Nur `transform`/`opacity` animieren.
+- Max. 1-2 animierte Elemente gleichzeitig pro View. Nur `transform`/`opacity` animieren.
 - Druck-Feedback auf Buttons (Scale 0,97, sofort). Haptik (`navigator.vibrate`) nur bei Barcode-Erkennung.
 - `prefers-reduced-motion: reduce` → keine Bewegung, nur Überblendungen ≤ 150 ms; Milo statisch.
 - Nie Animation, die das Speichern verzögert oder eine Eingabe blockiert.
@@ -105,7 +105,7 @@ bei Ziel „Abnehmen“ wird sachlich als Trend beschrieben („Trend +0,3 kg in
 - Sinnvolle Vorbelegung (letzter Wert, berechneter Vorschlag); nie leere Pflicht-Zahlenfelder, wenn ein guter Default existiert.
 - Plausibilitäts-Warnungen sind nicht blockierend (kcal vs. Makros, Gewichtssprung); harte Fehler nur bei Unmöglichem (negative Werte, Makros > 100 g/100 g).
 
-## 9. Zustände – jede Ansicht hat vier
+## 9. Zustände: jede Ansicht hat vier
 
 | Zustand | Regel |
 |---|---|
