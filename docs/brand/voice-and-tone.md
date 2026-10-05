@@ -45,7 +45,8 @@ Zurückhaltend ●●○○○ Expressiv  → zurückhaltend; Emotion zeigt Milo
 - **Punkt** am Ende vollständiger Sätze, auch in Toasts („Eintrag gelöscht.“). Keine Punkte in Buttons, Labels, Tabs.
 - **Ausrufezeichen:** höchstens eines pro Screen, nur bei echten Erfolgen. Standard ist der Punkt.
 - **Keine Emojis** in UI-Texten. Emotion transportiert Milo.
-- **Keine Gedankenstriche** im Fließtext. Lieber zwei kurze Sätze, ein Komma oder einen Doppelpunkt. Bereiche mit „bis“ („2 bis 3 Wochen“).
+- **Keine Gedankenstriche als Satzverbindung** („Text – Einschub“). Lieber zwei kurze Sätze, ein Komma oder einen Doppelpunkt.
+  Bindestriche in zusammengesetzten Wörtern („Makro-Tracker“, „E-Mail“) und bei Bereichen („2-3 Wochen“) sind ausdrücklich in Ordnung.
 - **Anführungszeichen** „deutsch“, nicht "englisch".
 
 ### Zahlen & Einheiten
