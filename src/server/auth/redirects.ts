@@ -59,6 +59,15 @@ export function safeNextPath(raw: string | null | undefined): string | null {
   return `${parsed.pathname}${parsed.search}${parsed.hash}`;
 }
 
+/** Route handler that signs visitors in to the shared demo account (DEMO_MODE only). */
+export const DEMO_LOGIN_PATH = "/api/demo";
+
+/** "/api/demo" or "/api/demo?next=%2Fdiary" */
+export function demoLoginPath(next?: string | null): string {
+  const safe = safeNextPath(next);
+  return safe && safe !== "/" ? `${DEMO_LOGIN_PATH}?next=${encodeURIComponent(safe)}` : DEMO_LOGIN_PATH;
+}
+
 /** "/login" or "/login?next=%2Fdiary" */
 export function loginPath(next?: string | null): string {
   const safe = safeNextPath(next);

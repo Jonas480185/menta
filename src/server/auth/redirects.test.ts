@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isAuthPage, isProtectedPath, loginPath, safeNextPath } from "./redirects";
+import { demoLoginPath, isAuthPage, isProtectedPath, loginPath, safeNextPath } from "./redirects";
 
 describe("safeNextPath", () => {
   it.each([
@@ -46,5 +46,14 @@ describe("route classification", () => {
     expect(loginPath()).toBe("/login");
     expect(loginPath("/diary?d=1")).toBe("/login?next=%2Fdiary%3Fd%3D1");
     expect(loginPath("//evil.com")).toBe("/login");
+  });
+});
+
+describe("demoLoginPath", () => {
+  it("keeps safe next paths and drops unsafe ones", () => {
+    expect(demoLoginPath("/diary/2026-10-05")).toBe("/api/demo?next=%2Fdiary%2F2026-10-05");
+    expect(demoLoginPath("/")).toBe("/api/demo");
+    expect(demoLoginPath("//evil.com")).toBe("/api/demo");
+    expect(demoLoginPath(null)).toBe("/api/demo");
   });
 });

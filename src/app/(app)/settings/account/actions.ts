@@ -5,6 +5,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getServiceContext, requireUser } from "@/server/auth/context";
 import { clearAuthCookies } from "@/server/auth/cookies";
+import { assertNotDemo } from "@/server/auth/demo";
 import { callAuthApi } from "@/server/auth/errors";
 import { LOGIN_PATH } from "@/server/auth/redirects";
 import {
@@ -25,6 +26,7 @@ export async function changeNameAction(input: ChangeNameInput): Promise<ActionRe
   return runAction(async () => {
     const { name } = changeNameSchema.parse(input);
     await requireUser();
+    assertNotDemo();
     const auth = await getAuth();
     const requestHeaders = await headers();
     await callAuthApi(() => auth.api.updateUser({ body: { name }, headers: requestHeaders }));
@@ -38,6 +40,7 @@ export async function changePasswordAction(input: ChangePasswordInput): Promise<
   return runAction(async () => {
     const { currentPassword, newPassword } = changePasswordSchema.parse(input);
     await requireUser();
+    assertNotDemo();
     const auth = await getAuth();
     const requestHeaders = await headers();
     // Signs out all other devices; nextCookies() stores the fresh session cookie for this one.
@@ -70,6 +73,7 @@ export async function deleteAccountAction(input: DeleteAccountInput): Promise<Ac
   return runAction(async () => {
     const { password } = deleteAccountSchema.parse(input);
     const ctx = await getServiceContext();
+    assertNotDemo();
     const auth = await getAuth();
     const requestHeaders = await headers();
     await callAuthApi(() => auth.api.verifyPassword({ body: { password }, headers: requestHeaders }), {

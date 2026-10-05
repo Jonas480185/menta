@@ -10,7 +10,7 @@
 Kalorien und Nährstoffe im Tagebuch festhalten.<br>
 Ziele festlegen und Veränderungen über mehrere Wochen auswerten.
 
-**[Live-Demo ansehen](https://menta-jonas.vercel.app)** · Login: `demo@menta.app` / `menta-demo-2026`
+**[Live-Demo ansehen](https://menta-jonas.vercel.app)**, ohne Anmeldung direkt im Demo-Konto
 
 ![Next.js](https://img.shields.io/badge/Next.js_16-000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React_19-149ECA?logo=react&logoColor=white)
@@ -125,6 +125,7 @@ Die Beispielkonfiguration reicht für den lokalen Start. PGlite speichert die Da
 | `USDA_API_KEY` | `DEMO_KEY` | USDA FoodData Central |
 | `OFF_USER_AGENT` | App-Name | User-Agent für Open Food Facts |
 | `FOOD_EXTERNAL_PROVIDERS_ENABLED` | `true` | `false` deaktiviert externe Lebensmittelabfragen; die Suche nutzt dann nur die lokale Datenbank |
+| `DEMO_MODE` | `false` | `true` öffnet die App ohne Anmeldung im gemeinsamen Demo-Konto; Name, Passwort, Abmelden und Löschen sind gesperrt |
 
 </details>
 

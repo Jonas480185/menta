@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Download, LogOut } from "lucide-react";
 import { requireUser } from "@/server/auth/context";
+import { isDemoMode } from "@/server/auth/demo";
 import { buttonClass } from "@/app/(auth)/_components/button-styles";
 import { signOutAction } from "./actions";
 import { DeleteAccount } from "./_components/delete-account";
@@ -42,6 +43,7 @@ function Section({
 
 export default async function AccountSettingsPage() {
   const user = await requireUser();
+  const demo = isDemoMode();
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-6 px-4 py-6 sm:py-10">
@@ -61,12 +63,21 @@ export default async function AccountSettingsPage() {
           <dt className="text-sm font-medium text-foreground">E-Mail</dt>
           <dd className="break-all text-base text-muted-foreground">{user.email}</dd>
         </dl>
-        <NameForm defaultName={user.name} />
+        {demo ? null : <NameForm defaultName={user.name} />}
       </Section>
 
-      <Section title="Passwort" description="Nach der Änderung wirst du auf allen anderen Geräten abgemeldet.">
-        <PasswordForm email={user.email} />
-      </Section>
+      {demo ? (
+        <Section title="Demo-Konto">
+          <p className="text-sm text-muted-foreground">
+            Du bist im gemeinsamen Demo-Konto angemeldet. Einträge, Ziele und Rezepte kannst du frei ausprobieren,
+            Name, Passwort und Abmelden sind hier deaktiviert, damit die Demo für alle funktioniert.
+          </p>
+        </Section>
+      ) : (
+        <Section title="Passwort" description="Nach der Änderung wirst du auf allen anderen Geräten abgemeldet.">
+          <PasswordForm email={user.email} />
+        </Section>
+      )}
 
       <Section
         title="Deine Daten"
@@ -78,22 +89,26 @@ export default async function AccountSettingsPage() {
         </a>
       </Section>
 
-      <Section title="Abmelden" description="Du kannst dich jederzeit wieder anmelden.">
-        <form action={signOutAction}>
-          <button type="submit" className={buttonClass("secondary", "w-full sm:w-auto")}>
-            <LogOut aria-hidden className="size-5" />
-            Abmelden
-          </button>
-        </form>
-      </Section>
+      {demo ? null : (
+        <>
+          <Section title="Abmelden" description="Du kannst dich jederzeit wieder anmelden.">
+            <form action={signOutAction}>
+              <button type="submit" className={buttonClass("secondary", "w-full sm:w-auto")}>
+                <LogOut aria-hidden className="size-5" />
+                Abmelden
+              </button>
+            </form>
+          </Section>
 
-      <Section
-        title="Konto löschen"
-        tone="danger"
-        description="Löscht dein Konto und alle zugehörigen Daten dauerhaft. Das kann nicht rückgängig gemacht werden."
-      >
-        <DeleteAccount />
-      </Section>
+          <Section
+            title="Konto löschen"
+            tone="danger"
+            description="Löscht dein Konto und alle zugehörigen Daten dauerhaft. Das kann nicht rückgängig gemacht werden."
+          >
+            <DeleteAccount />
+          </Section>
+        </>
+      )}
     </div>
   );
 }

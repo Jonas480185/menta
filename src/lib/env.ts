@@ -90,6 +90,13 @@ const envSchema = z
     OFF_USER_AGENT: z.string().default("NutritionApp/0.1 (dev@example.com)"),
     FOOD_EXTERNAL_PROVIDERS_ENABLED: booleanString.default(true),
 
+    // ── Public demo ─────────────────────────────────────────────────────
+    /** Visitors are signed in to the shared demo account automatically; account changes are blocked. */
+    DEMO_MODE: booleanString.default(false),
+    /** Demo account credentials (created by `pnpm db:seed`, step demo-data). */
+    DEMO_EMAIL: z.email().default("demo@menta.app"),
+    DEMO_PASSWORD: z.string().default("menta-demo-2026"),
+
     // ── Logging ─────────────────────────────────────────────────────────
     LOG_LEVEL: z.enum(LOG_LEVELS).optional(),
   })

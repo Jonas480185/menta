@@ -44,6 +44,12 @@ describe("parseEnv", () => {
     expect(() => parseEnv({ DATABASE_SSL_CA: "nope" })).toThrow(/DATABASE_SSL_CA/);
   });
 
+  it("keeps the public demo off unless DEMO_MODE is set", () => {
+    expect(parseEnv({}).DEMO_MODE).toBe(false);
+    expect(parseEnv({}).DEMO_EMAIL).toBe("demo@menta.app");
+    expect(parseEnv({ DEMO_MODE: "true" }).DEMO_MODE).toBe(true);
+  });
+
   it("rejects non-postgres DATABASE_URLs with a clear message", () => {
     expect(() => parseEnv({ DATABASE_URL: "mysql://localhost/db" })).toThrow(
       /DATABASE_URL: must start with postgres/,

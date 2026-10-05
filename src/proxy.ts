@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 import {
+  demoLoginPath,
   isAuthPage,
   isProtectedPath,
   loginPath,
@@ -14,9 +15,20 @@ import { buildCsp, createNonce, NONCE_HEADER } from "@/server/security/csp";
  * NOT a security boundary: every protected page/action still calls requireUser() /
  * getServiceContext(), which validate the session against the database.
  */
+/** Read directly (not via @/lib/env) to keep the proxy free of the full env schema. */
+function isDemoMode(): boolean {
+  return ["true", "1", "yes", "on"].includes((process.env.DEMO_MODE ?? "").trim().toLowerCase());
+}
+
 export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const hasSessionCookie = getSessionCookie(request) !== null;
+
+  // Public demo: no login screen, signed-out visitors land in the shared demo account.
+  if (!hasSessionCookie && isDemoMode() && (pathname === "/" || isProtectedPath(pathname) || isAuthPage(pathname))) {
+    const next = isAuthPage(pathname) ? null : `${pathname}${search}`;
+    return NextResponse.redirect(new URL(demoLoginPath(next), request.url));
+  }
 
   if (!hasSessionCookie && isProtectedPath(pathname)) {
     return NextResponse.redirect(new URL(loginPath(`${pathname}${search}`), request.url));
