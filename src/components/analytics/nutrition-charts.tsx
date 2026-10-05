@@ -21,6 +21,22 @@ function tip(unit: string) {
   };
 }
 
+/**
+ * Dashed goal line. `extendDomain` stretches the y-axis up to the goal – without it Recharts silently
+ * drops the line whenever every logged day stays below the goal.
+ */
+function TargetLine({ y }: { y: number }) {
+  return (
+    <ReferenceLine
+      y={y}
+      ifOverflow="extendDomain"
+      stroke="var(--color-chart-target, var(--foreground))"
+      strokeDasharray="4 4"
+      label={{ value: "Ziel", position: "insideTopRight", fill: "var(--color-chart-axis, var(--muted-foreground))", fontSize: 12 }}
+    />
+  );
+}
+
 /** Calories per day as bars with the (latest) target as reference line. */
 export function CaloriesChart({ data, target }: { data: DayPoint[]; target: number | null }) {
   return (
@@ -31,7 +47,7 @@ export function CaloriesChart({ data, target }: { data: DayPoint[]; target: numb
           <XAxis dataKey="date" {...axis} tickFormatter={(d: string) => formatDateShort(d)} minTickGap={24} />
           <YAxis {...axis} width={44} tickFormatter={(v: number) => formatNumber(v)} />
           <Tooltip {...tip("kcal")} cursor={{ fill: "var(--accent)" }} />
-          {target && <ReferenceLine y={target} stroke="var(--color-chart-target, var(--foreground))" strokeDasharray="4 4" />}
+          {target && <TargetLine y={target} />}
           <Bar dataKey="kcal" fill="var(--kcal)" radius={[6, 6, 0, 0]} maxBarSize={24} />
         </BarChart>
       </ResponsiveContainer>
@@ -48,7 +64,7 @@ export function ProteinChart({ data, target }: { data: DayPoint[]; target: numbe
           <XAxis dataKey="date" {...axis} tickFormatter={(d: string) => formatDateShort(d)} minTickGap={24} />
           <YAxis {...axis} width={44} tickFormatter={(v: number) => formatNumber(v)} />
           <Tooltip {...tip("g")} />
-          {target && <ReferenceLine y={target} stroke="var(--color-chart-target, var(--foreground))" strokeDasharray="4 4" />}
+          {target && <TargetLine y={target} />}
           <Line dataKey="proteinG" stroke="var(--protein)" strokeWidth={2.5} dot={false} connectNulls />
         </LineChart>
       </ResponsiveContainer>
