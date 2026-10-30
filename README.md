@@ -10,8 +10,6 @@
 Kalorien und Nährstoffe im Tagebuch festhalten.<br>
 Ziele festlegen und Veränderungen über mehrere Wochen auswerten.
 
-**[Live-Demo ansehen](https://menta-jonas.vercel.app)**, ohne Anmeldung direkt im Demo-Konto
-
 ![Next.js](https://img.shields.io/badge/Next.js_16-000?logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React_19-149ECA?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript_strict-3178C6?logo=typescript&logoColor=white)
